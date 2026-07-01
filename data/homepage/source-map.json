@@ -1,0 +1,62 @@
+{
+  "7-leaves": {
+    "name": "7 Leaves Cafe",
+    "sources": [
+      {
+        "url": "https://7leavescafe.com/menu/",
+        "type": "official_site"
+      },
+      {
+        "url": "https://7leavescafe.com/",
+        "type": "official_site"
+      }
+    ],
+    "checked_at": "2026-07-01",
+    "confidence": "high"
+  },
+  "sharetea": {
+    "name": "Sharetea",
+    "sources": [
+      {
+        "url": "https://www.1992sharetea.com/drinks-menu-2024",
+        "type": "official_site"
+      },
+      {
+        "url": "https://www.doordash.com/business/sharetea-5207/menu/",
+        "type": "first_party_ordering"
+      }
+    ],
+    "checked_at": "2026-07-01",
+    "confidence": "high"
+  },
+  "kung-fu-tea": {
+    "name": "Kung Fu Tea",
+    "sources": [
+      {
+        "url": "https://www.kungfutea.com/faq/",
+        "type": "official_site"
+      },
+      {
+        "url": "https://www.doordash.com/business/kung-fu-tea-56674/menu/",
+        "type": "first_party_ordering"
+      }
+    ],
+    "checked_at": "2026-07-01",
+    "confidence": "high"
+  },
+  "tastea": {
+    "name": "Tastea",
+    "sources": [
+      {
+        "url": "https://gotastea.com/menu",
+        "type": "official_site"
+      },
+      {
+        "url": "https://gotastea.com/",
+        "type": "official_site"
+      }
+    ],
+    "checked_at": "2026-07-01",
+    "confidence": "medium"
+  }
+}

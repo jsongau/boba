@@ -1,0 +1,8 @@
+asset_id,usage,type,source,license,status,alt_text_provided,notes
+hero-macro,Arrival hero,art-directed CSS/SVG,original (CapyBoba),owned,placeholder,yes,Editorial tea rendering; not a photo of a real menu item. Swap per 09-IMAGE-PRODUCTION-BRIEF.
+concierge-texture,Tea Concierge panels,CSS gradient/texture,original,owned,placeholder,n/a,"Ingredient-texture fields, not photography."
+city-sgv,City After Dark: The 626,art-directed CSS field,original,owned,placeholder,yes,Editorial mood field labelled as such.
+city-oc,City After Dark: Orange County,art-directed CSS field,original,owned,placeholder,yes,Editorial mood field.
+city-sd,City After Dark: San Diego,art-directed CSS field,original,owned,placeholder,yes,Editorial mood field.
+newpour-texture,The New Pour,art-directed CSS field,original,owned,placeholder,yes,Seasonal pour visual; item availability from official menus only.
+route-map,An Evening In,SVG route line,original,owned,final,yes,"Abstract route line, not a real map tile."

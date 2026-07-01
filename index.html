@@ -1,1140 +1,440 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CapyBoba | Boba in Southern California, Sorted by What You Want</title>
-<meta name="description" content="Find boba across Southern California by city or vibe: date night, study, open late, brown sugar. Real hours, no fake reviews, new openings tracked. The 626 to Convoy.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CapyBoba Society | A Modern Guide to Southern California Boba</title>
+<meta name="description" content="A modern tea salon and guide to Southern California boba. A concierge that suggests a real drink and shop, tasting flights, evening routes, and 321 rooms across five regions. Menus checked, sources shown.">
 <link rel="canonical" href="https://capyboba.com/">
-
-<!-- Locked Capy type stack: Fraunces (display) + Inter Tight (body). Matches CoverCapy. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="CapyBoba Society">
+<meta property="og:description" content="A more considered way to choose boba in Southern California.">
+<meta property="og:url" content="https://capyboba.com/">
+<meta name="theme-color" content="#0B0C0E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-/* ============================================================
-   CAPYBOBA — LOCKED DESIGN TOKENS (SITE-SPEC §4)
-   ============================================================ */
-:root{
-  /* Liquid Night Market (rebuild pack file 03). Token names kept from the cream
-     build; values remapped so existing rules re-skin. Reading text stays dark on
-     cream surfaces; the dark frame (header, hero, footer) is set in overrides below. */
-  --ink:#151218;          /* reading text on cream */
-  --brown-sugar:#21142B;  /* headings + dark accents on cream (ink plum) */
-  --syrup:#FF4F87;        /* guava pop: eyebrows, links, hovers, focus */
-  --milk:#FFF3E6;         /* lychee cream reading surface */
-  --paper:#FFFCF8;        /* coconut surface */
-  --matcha:#6F8F4E;       /* fresh / open-now / verifying green */
-  --taro:#9A7BFF;         /* taro electric: featured placement */
-  --line:#EADFCE;         /* hairline on cream */
-  --ink-60:rgba(21,18,24,.62);
-  --plum:#21142B; --deep:#151218; --cream:#FFF3E6; --coconut:#FFFCF8;
-  --guava:#FF4F87; --mango:#FFC83D; --tea-brown:#7B3F25;
-  --line-d:rgba(255,243,230,.16); --fig:#756A79; --ink60:rgba(21,18,24,.62);
-  --maxw:1200px;
-  --read:760px;
-  --ease:cubic-bezier(.22,.61,.36,1);
-}
-
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{
-  margin:0;
-  background:var(--milk);
-  color:var(--ink);
-  font-family:"Inter Tight",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-  font-size:17px;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:clip;
-}
-h1,h2,h3,.brand,.display{
-  font-family:"Fraunces",Georgia,"Times New Roman",serif;
-  font-optical-sizing:auto;
-  color:var(--brown-sugar);
-  font-weight:600;
-  letter-spacing:-.01em;
-  line-height:1.08;
-}
-a{color:var(--brown-sugar);text-decoration:none}
-ul{margin:0;padding:0;list-style:none}
-img{max-width:100%;display:block}
-
-/* Pearl motif: the one signature device. A small filled tapioca pearl. */
-.eyebrow{
-  font-family:"Inter Tight",sans-serif;
-  font-weight:600;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--syrup);
-  display:inline-flex;align-items:center;gap:.5em;margin:0 0 .9rem;
-}
-.eyebrow::before{
-  content:"";width:.5em;height:.5em;border-radius:50%;background:var(--syrup);
-  flex:0 0 auto;
-}
-
-/* Skip link */
-.skip{position:absolute;left:-9999px;top:0;background:var(--brown-sugar);color:var(--milk);
-  padding:.7rem 1.1rem;border-radius:0 0 8px 0;z-index:200}
-.skip:focus{left:0}
-
-:focus-visible{outline:2.5px solid var(--syrup);outline-offset:3px;border-radius:3px}
-
-/* ============================================================
-   PRIMARY BUTTON / LINK STYLES
-   ============================================================ */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  font-weight:600;font-size:1rem;line-height:1;
-  padding:.95rem 1.5rem;border-radius:999px;border:1.5px solid transparent;
-  cursor:pointer;transition:transform .18s var(--ease),background .18s var(--ease),color .18s;
-  font-family:"Inter Tight",sans-serif;
-}
-.btn-primary{background:var(--brown-sugar);color:var(--milk)}
-.btn-primary:hover{background:#2c1c10;transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--brown-sugar);border-color:var(--line)}
-.btn-ghost:hover{border-color:var(--syrup);background:var(--paper)}
-
-.textlink{font-weight:600;color:var(--syrup);border-bottom:1.5px solid transparent;padding-bottom:1px}
-.textlink:hover{border-bottom-color:var(--syrup)}
-
-/* ============================================================
-   HEADER + MEGA NAV  (the centerpiece)
-   ============================================================ */
-.site-header{
-  position:sticky;top:0;z-index:100;
-  background:rgba(244,236,224,.86);
-  backdrop-filter:saturate(140%) blur(10px);
-  border-bottom:1px solid var(--line);
-  /* never clip the mega panel */
-}
-.header-inner{
-  max-width:var(--maxw);margin:0 auto;padding:0 clamp(1rem,4vw,2rem);
-  height:68px;display:flex;align-items:center;gap:1.5rem;
-}
-.brand{font-size:1.45rem;font-weight:700;letter-spacing:-.02em;flex:0 0 auto}
-.brand b{color:var(--syrup);font-weight:700}
-
-.primary-nav{display:none}
-.nav-list{display:flex;align-items:center;gap:.3rem}
-.nav-trigger,.nav-link{
-  font-family:"Inter Tight",sans-serif;font-weight:500;font-size:.98rem;color:var(--ink);
-  background:none;border:0;cursor:pointer;padding:.55rem .8rem;border-radius:8px;
-  display:inline-flex;align-items:center;gap:.4rem;position:relative;
-  transition:background .15s;
-}
-.nav-trigger:hover,.nav-link:hover{background:var(--paper)}
-.nav-trigger .caret{width:.62em;height:.62em;border-right:2px solid var(--syrup);
-  border-bottom:2px solid var(--syrup);transform:rotate(45deg) translateY(-1px);transition:transform .2s var(--ease)}
-.nav-trigger[aria-expanded="true"]{color:var(--brown-sugar)}
-.nav-trigger[aria-expanded="true"] .caret{transform:rotate(-135deg)}
-.nav-trigger[aria-expanded="true"]::after{
-  content:"";position:absolute;left:.8rem;right:.8rem;bottom:-1px;height:2px;background:var(--syrup);border-radius:2px}
-
-.header-actions{margin-left:auto;display:flex;align-items:center;gap:.6rem;flex:0 0 auto}
-.header-find{display:none}
-
-/* Mega panel */
-.mega{
-  position:absolute;left:0;right:0;top:100%;
-  background:var(--paper);border-bottom:1px solid var(--line);
-  box-shadow:0 26px 50px -28px rgba(61,40,23,.4);
-  opacity:0;visibility:hidden;transform:translateY(-8px);
-  transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s;
-  z-index:99;
-}
-.mega[data-open="true"]{opacity:1;visibility:visible;transform:translateY(0)}
-.mega-inner{
-  max-width:var(--maxw);margin:0 auto;padding:2rem clamp(1rem,4vw,2rem) 2.2rem;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem 2rem;
-}
-.mega-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--ink-60);margin:0 0 .9rem}
-.mega-links li{margin:0 0 .15rem}
-.mega-links a{
-  display:flex;align-items:center;gap:.5rem;padding:.42rem .55rem;margin-left:-.55rem;border-radius:7px;
-  font-weight:500;color:var(--ink);transition:background .14s,color .14s;
-}
-.mega-links a::before{content:"";width:.42em;height:.42em;border-radius:50%;background:var(--line);flex:0 0 auto;transition:background .14s}
-.mega-links a:hover{background:var(--milk);color:var(--brown-sugar)}
-.mega-links a:hover::before{background:var(--syrup)}
-.mega-links .sub{display:block;font-size:.82rem;color:var(--ink-60);font-weight:400;margin-top:1px}
-
-/* the one reserved --taro use: featured tag */
-.featured-tag{
-  font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  color:#fff;background:var(--taro);padding:.18em .5em;border-radius:4px;margin-left:.1rem;
-}
-.verifying-tag{
-  font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-  color:#3a4a26;background:rgba(111,143,78,.18);border:1px solid rgba(111,143,78,.4);
-  padding:.18em .5em;border-radius:4px;
-}
-
-.mega-feature{background:var(--milk);border-radius:12px;padding:1.3rem;display:flex;flex-direction:column;gap:.7rem;justify-content:center}
-.mega-feature .mega-note{font-size:.85rem;color:var(--ink-60);margin:0}
-
-/* vibe tiles inside mega */
-.vibe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
-.vibe-tile{
-  display:block;padding:.85rem .95rem;border:1px solid var(--line);border-radius:10px;background:var(--milk);
-  transition:border-color .15s,transform .15s var(--ease),background .15s;
-}
-.vibe-tile:hover{border-color:var(--syrup);transform:translateY(-2px);background:var(--paper)}
-.vibe-tile .vt-name{font-weight:600;color:var(--brown-sugar);display:block;font-size:.97rem}
-.vibe-tile .vt-desc{font-size:.78rem;color:var(--ink-60);display:block;margin-top:2px;line-height:1.35}
-
-/* ============================================================
-   MOBILE DRAWER
-   ============================================================ */
-.menu-toggle{
-  display:inline-flex;flex-direction:column;justify-content:center;gap:5px;
-  width:44px;height:44px;background:none;border:1px solid var(--line);border-radius:10px;cursor:pointer;
-  padding:0 11px;
-}
-.menu-toggle span{height:2px;background:var(--brown-sugar);border-radius:2px;transition:.25s var(--ease)}
-.menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
-.menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
-.drawer{
-  position:fixed;inset:0;top:0;z-index:150;background:var(--milk);
-  transform:translateX(100%);transition:transform .3s var(--ease);
-  display:flex;flex-direction:column;overflow-y:auto;
-}
-.drawer[data-open="true"]{transform:translateX(0)}
-.drawer-head{display:flex;align-items:center;justify-content:space-between;
-  padding:1rem clamp(1rem,5vw,1.5rem);border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--milk)}
-.drawer-close{background:none;border:0;font-size:1.6rem;line-height:1;color:var(--brown-sugar);cursor:pointer;width:44px;height:44px;border-radius:10px}
-.drawer-close:hover{background:var(--paper)}
-.drawer-body{padding:.5rem clamp(1rem,5vw,1.5rem) 2rem}
-.drawer-search{display:flex;gap:.5rem;margin:1rem 0 1.3rem}
-.drawer-search input{flex:1;min-width:0}
-.acc-trigger{
-  width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);
-  padding:1.05rem .2rem;font-family:"Inter Tight",sans-serif;font-weight:600;font-size:1.1rem;color:var(--brown-sugar);
-  display:flex;align-items:center;justify-content:space-between;cursor:pointer;
-}
-.acc-trigger .caret{width:.6em;height:.6em;border-right:2px solid var(--syrup);border-bottom:2px solid var(--syrup);transform:rotate(45deg);transition:transform .2s}
-.acc-trigger[aria-expanded="true"] .caret{transform:rotate(-135deg)}
-.acc-panel{display:none;padding:.3rem 0 1rem}
-.acc-panel[data-open="true"]{display:block}
-.acc-panel a{display:block;padding:.55rem .2rem;color:var(--ink);font-weight:500}
-.acc-panel a:hover{color:var(--syrup)}
-
-/* ============================================================
-   HERO
-   ============================================================ */
-.hero{padding:clamp(3rem,8vw,6rem) clamp(1rem,4vw,2rem) clamp(2.5rem,5vw,4rem)}
-.hero-inner{max-width:var(--read);margin:0 auto;text-align:center}
-.hero h1{font-size:clamp(2.4rem,6.2vw,4.3rem);margin:.4rem 0 1.1rem;font-weight:600}
-.hero h1 em{font-style:italic;color:var(--syrup);font-weight:500}
-.hero-sub{font-size:clamp(1.05rem,2.2vw,1.28rem);color:var(--ink);max-width:38ch;margin:0 auto 2rem;line-height:1.5}
-
-.search{display:flex;gap:.6rem;max-width:540px;margin:0 auto;background:var(--paper);
-  border:1.5px solid var(--line);border-radius:999px;padding:.45rem .45rem .45rem 1.3rem;
-  box-shadow:0 18px 40px -30px rgba(61,40,23,.55);transition:border-color .2s,box-shadow .2s}
-.search:focus-within{border-color:var(--syrup);box-shadow:0 22px 44px -28px rgba(61,40,23,.6)}
-.search input{flex:1;min-width:0;border:0;background:none;font-size:1.02rem;color:var(--ink);font-family:inherit}
-.search input::placeholder{color:var(--ink-60)}
-.search input:focus{outline:none}
-.search .btn{flex:0 0 auto;padding:.85rem 1.4rem}
-
-.field{border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:.8rem 1.2rem;
-  font-size:1rem;color:var(--ink);font-family:inherit;width:100%}
-.field:focus{outline:none;border-color:var(--syrup)}
-
-.chips{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.3rem auto 0;max-width:560px}
-.chips .lbl{font-size:.82rem;color:var(--ink-60);align-self:center;margin-right:.1rem}
-.chip{font-size:.9rem;font-weight:500;color:var(--brown-sugar);background:var(--paper);
-  border:1px solid var(--line);border-radius:999px;padding:.4rem .85rem;transition:.15s var(--ease)}
-.chip:hover{border-color:var(--syrup);background:#fff;transform:translateY(-1px)}
-
-.hero-stat{margin:2.2rem auto 0;font-size:.92rem;color:var(--ink-60);
-  display:inline-flex;align-items:center;gap:.6rem}
-.hero-stat b{color:var(--brown-sugar);font-weight:600}
-.dot{width:4px;height:4px;border-radius:50%;background:var(--syrup);display:inline-block}
-
-/* ============================================================
-   SECTIONS
-   ============================================================ */
-.section{padding:clamp(3rem,6vw,5rem) clamp(1rem,4vw,2rem)}
-.section-inner{max-width:var(--maxw);margin:0 auto}
-.section-head{max-width:var(--read);margin:0 0 2.2rem}
-.section-head h2{font-size:clamp(1.8rem,3.8vw,2.7rem);margin:0 0 .6rem}
-.section-head p{color:var(--ink-60);margin:0;font-size:1.05rem;max-width:54ch}
-.alt{background:var(--paper)}
-
-/* intent matrix (homepage echo of the nav signature) */
-.intent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem}
-.intent-card{
-  display:block;padding:1.15rem 1.2rem;background:var(--milk);border:1px solid var(--line);border-radius:13px;
-  transition:transform .18s var(--ease),border-color .18s,box-shadow .18s;
-}
-.alt .intent-card{background:#fff}
-.intent-card:hover{transform:translateY(-3px);border-color:var(--syrup);box-shadow:0 18px 34px -26px rgba(61,40,23,.5)}
-.intent-card .ic-name{font-family:"Fraunces",serif;font-weight:600;font-size:1.18rem;color:var(--brown-sugar);display:block}
-.intent-card .ic-desc{font-size:.86rem;color:var(--ink-60);margin-top:.3rem;display:block;line-height:1.4}
-
-/* region cards */
-.region-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.1rem}
-.region-card{
-  background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.5rem 1.5rem 1.3rem;
-  display:flex;flex-direction:column;gap:.55rem;transition:transform .18s var(--ease),box-shadow .18s}
-.alt .region-card{background:var(--milk)}
-.region-card:hover{transform:translateY(-3px);box-shadow:0 22px 40px -28px rgba(61,40,23,.45)}
-.region-card .rc-kicker{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--syrup)}
-.region-card h3{font-size:1.5rem;margin:.1rem 0}
-.region-card .rc-desc{color:var(--ink-60);font-size:.95rem;margin:0;flex:1}
-.region-card .rc-cities{font-size:.86rem;color:var(--ink);margin:.3rem 0 0}
-.region-card .rc-cities b{color:var(--brown-sugar);font-weight:600}
-.region-card .rc-link{margin-top:.7rem;font-weight:600;color:var(--syrup);font-size:.95rem;border-bottom:1.5px solid transparent;align-self:flex-start;padding-bottom:1px}
-.region-card:hover .rc-link{border-bottom-color:var(--syrup)}
-
-/* new openings */
-.new-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:1.6rem}
-.new-card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:1.2rem 1.25rem;
-  display:flex;flex-direction:column;gap:.55rem}
-.new-card .nc-city{font-size:.8rem;color:var(--ink-60);display:flex;align-items:center;gap:.4rem}
-.new-card h3{font-size:1.28rem;margin:0}
-.new-card .nc-foot{margin-top:auto;display:flex;align-items:center;gap:.5rem}
-
-/* trust */
-.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.6rem 2rem;margin-bottom:2rem}
-.trust-item h3{font-size:1.3rem;margin:0 0 .5rem;display:flex;align-items:baseline;gap:.55rem}
-.trust-item h3::before{content:"";width:.5em;height:.5em;border-radius:50%;background:var(--syrup);flex:0 0 auto;transform:translateY(-.05em)}
-.trust-item p{margin:0;color:var(--ink);font-size:.97rem;line-height:1.55}
-.revenue{border-top:1px solid var(--line);padding-top:1.6rem;max-width:var(--read);color:var(--ink)}
-.revenue b{color:var(--brown-sugar)}
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-.site-footer{background:var(--paper);border-top:1px solid var(--line);padding:clamp(2.5rem,5vw,4rem) clamp(1rem,4vw,2rem) 2rem}
-.footer-inner{max-width:var(--maxw);margin:0 auto;display:grid;
-  grid-template-columns:1.6fr repeat(4,1fr);gap:2rem}
-.footer-brand .brand{font-size:1.5rem}
-.footer-brand p{color:var(--ink-60);font-size:.92rem;margin:.7rem 0 0;max-width:30ch}
-.footer-brand .stamp{margin-top:1rem;font-size:.8rem;color:var(--ink-60);display:flex;align-items:center;gap:.5rem}
-.footer-col h4{font-family:"Inter Tight",sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--brown-sugar);margin:0 0 1rem}
-.footer-col li{margin:0 0 .55rem}
-.footer-col a{font-size:.92rem;color:var(--ink);font-weight:500}
-.footer-col a:hover{color:var(--syrup)}
-.footer-bottom{max-width:var(--maxw);margin:2.5rem auto 0;padding-top:1.4rem;border-top:1px solid var(--line);
-  display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;align-items:center;font-size:.82rem;color:var(--ink-60)}
-.footer-bottom .note{font-weight:500;color:var(--ink)}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media(min-width:1000px){
-  .primary-nav{display:block}
-  .header-find{display:inline-flex}
-  .menu-toggle{display:none}
-}
-@media(max-width:999px){
-  .mega{display:none}
-}
-@media(max-width:640px){
-  .footer-inner{grid-template-columns:1fr 1fr;gap:1.6rem}
-  .footer-brand{grid-column:1 / -1}
-  .search{flex-wrap:nowrap}
-}
-
-/* ============================================================
-   REDUCED MOTION
-   ============================================================ */
-@media(prefers-reduced-motion:reduce){
-  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
-  .mega{transition:opacity .001ms}
-}
-/* ============================================================
-   LIQUID NIGHT MARKET — dark-frame overrides
-   Plum canvas + dark chrome (header, hero, footer) around warm
-   cream reading sections. Matches the shared generated-page skin.
-   ============================================================ */
-body{background:var(--plum);
-  background-image:radial-gradient(80% 45% at 8% 0%,rgba(154,123,255,.20),transparent 55%),radial-gradient(70% 45% at 100% 6%,rgba(255,79,135,.16),transparent 52%)}
-.site-header{background:rgba(33,20,43,.86);border-bottom:1px solid var(--line-d)}
-.brand{color:var(--coconut)}
-.nav-trigger,.nav-link{color:var(--cream)}
-.nav-trigger:hover,.nav-link:hover{background:rgba(255,243,230,.10);color:#fff}
-.nav-trigger[aria-expanded="true"]{color:#fff}
-.site-header .btn-ghost{color:var(--cream);border-color:var(--line-d)}
-.site-header .btn-ghost:hover{border-color:var(--mango);color:#fff;background:rgba(255,200,61,.12)}
-.menu-toggle{border-color:var(--line-d)}
-.menu-toggle span{background:var(--cream)}
-/* hero: immersive on the plum canvas */
-.hero h1{color:var(--coconut)}
-.hero h1 em{color:var(--mango)}
-.hero-sub{color:var(--cream)}
-.hero-stat{color:rgba(255,243,230,.72)}
-.hero-stat b{color:var(--mango)}
-/* content sections = warm cream reading areas */
-.section{background:var(--cream)}
-.section.alt,.alt{background:var(--coconut)}
-/* primary action = guava */
-.btn-primary{background:var(--guava);color:#fff}
-.btn-primary:hover{background:#ff2f70}
-/* dark footer */
-.site-footer{background:var(--deep);border-top:1px solid var(--line-d)}
-.site-footer .brand{color:var(--coconut)}
-.footer-col h4{color:var(--mango)}
-.footer-col a{color:var(--cream)}
-.footer-col a:hover{color:var(--guava)}
-.footer-brand p,.footer-brand .stamp,.footer-bottom{color:rgba(255,243,230,.55)}
-.footer-bottom .note{color:var(--cream)}
-
-/* ============================================================
-   DIRECTORY HOMEPAGE (finder, decide strip, rows, shop grid)
-   Dark plum canvas, cream cards + pills, neon accents.
-   ============================================================ */
-.finder{max-width:var(--maxw);margin:0 auto;padding:clamp(1.6rem,4vw,2.8rem) clamp(1rem,4vw,2rem) 1.4rem}
-.finder-inner{display:grid;grid-template-columns:1fr;gap:1.2rem}
-@media(min-width:900px){.finder-inner{grid-template-columns:1fr 1.05fr;align-items:center;gap:2.4rem}}
-.finder-copy h1{font-size:clamp(2rem,4.6vw,3.2rem);color:var(--coconut);margin:.2rem 0 .5rem;line-height:1.04}
-.finder-sub{color:var(--cream);font-size:1.05rem;max-width:42ch;margin:0}
-.finder-sub b{color:var(--mango)}
-.searchbar{display:flex;align-items:center;gap:.6rem;background:var(--coconut);border:1.5px solid var(--line);border-radius:14px;padding:.85rem 1.05rem;color:var(--ink60);box-shadow:0 18px 40px -26px rgba(0,0,0,.6)}
-.searchbar:focus-within{border-color:var(--guava)}
-.searchbar input{flex:1;min-width:0;border:0;background:none;font-size:1.05rem;color:var(--ink);font-family:inherit}
-.searchbar input:focus{outline:none}
-.area-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
-.apill{font-family:"Inter Tight",sans-serif;font-size:.92rem;font-weight:600;color:var(--cream);background:rgba(255,252,248,.06);border:1.5px solid var(--line-d);border-radius:999px;padding:.5rem .95rem;cursor:pointer;transition:.15s}
-.apill:hover{border-color:var(--taro);color:#fff}
-.apill[aria-pressed="true"]{background:var(--guava);border-color:var(--guava);color:#fff}
-
-.decide{max-width:var(--maxw);margin:0 auto;padding:.2rem clamp(1rem,4vw,2rem) 1.4rem}
-.decide-inner{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;background:linear-gradient(100deg,rgba(154,123,255,.16),rgba(255,79,135,.14));border:1px solid var(--line-d);border-radius:16px;padding:.9rem 1.1rem}
-.decide-lbl{font-family:"Fraunces",serif;font-weight:600;color:var(--coconut);font-size:1.1rem;margin-right:.3rem}
-.dbtn{font-family:"Inter Tight",sans-serif;font-weight:600;font-size:.95rem;color:var(--cream);background:rgba(255,252,248,.08);border:1.5px solid var(--line-d);border-radius:999px;padding:.6rem 1.1rem;cursor:pointer;transition:.15s;text-decoration:none;display:inline-flex;align-items:center;gap:.4em}
-.dbtn:hover{border-color:var(--mango);color:#fff;transform:translateY(-1px)}
-.dbtn-hot{background:var(--mango);border-color:var(--mango);color:var(--deep);font-weight:700}
-.dbtn-hot:hover{background:#ffd45f;color:var(--deep)}
-
-.rows{max-width:var(--maxw);margin:0 auto;padding:.4rem clamp(1rem,4vw,2rem) .6rem}
-.brow{margin:1.4rem 0}
-.brow-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.7rem}
-.brow-head h2{font-size:1.25rem;color:var(--coconut);margin:0}
-.brow-more{font-size:.9rem;font-weight:600;color:var(--guava);white-space:nowrap}
-.brow-scroll{display:flex;gap:.6rem;overflow-x:auto;padding-bottom:.5rem;scrollbar-width:thin;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
-.brow-scroll::-webkit-scrollbar{height:6px}
-.brow-scroll::-webkit-scrollbar-thumb{background:var(--line-d);border-radius:3px}
-.rpill{flex:0 0 auto;scroll-snap-align:start;background:var(--coconut);border:1px solid var(--line);border-radius:12px;padding:.7rem 1.05rem;font-weight:600;font-size:.95rem;color:var(--ink);text-decoration:none;transition:.15s;white-space:nowrap}
-.rpill:hover{border-color:var(--taro);transform:translateY(-2px)}
-.rpill .rc{color:var(--ink60);font-weight:500;font-size:.85rem;margin-left:.35rem}
-
-.dir{max-width:var(--maxw);margin:0 auto;padding:1.2rem clamp(1rem,4vw,2rem) 3rem}
-.dir-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.5rem}
-.dir-head h2{font-size:1.6rem;color:var(--coconut);margin:0}
-.dir-filters{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
-.seg2{display:inline-flex;border:1.5px solid var(--line-d);border-radius:999px;overflow:hidden;background:rgba(255,252,248,.05)}
-.seg2 button{font-family:"Inter Tight",sans-serif;font-size:.9rem;font-weight:600;padding:.5rem .95rem;border:0;background:transparent;color:var(--cream);cursor:pointer;transition:.15s}
-.seg2 button[aria-pressed="true"]{background:var(--taro);color:#fff}
-.savedtoggle{font-family:"Inter Tight",sans-serif;font-size:.9rem;font-weight:600;color:var(--cream);background:rgba(255,252,248,.05);border:1.5px solid var(--line-d);border-radius:999px;padding:.5rem 1rem;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:.4em}
-.savedtoggle:hover{border-color:var(--guava)}
-.savedtoggle[aria-pressed="true"]{background:var(--guava);border-color:var(--guava);color:#fff}
-.savedtoggle .hs{font-size:1.05em;line-height:1}
-.sortwrap{font-size:.85rem;color:var(--fig);display:inline-flex;align-items:center;gap:.4rem}
-.sortwrap select{font-family:"Inter Tight",sans-serif;font-size:.9rem;font-weight:600;color:var(--ink);background:var(--coconut);border:1.5px solid var(--line);border-radius:10px;padding:.45rem .6rem;cursor:pointer}
-.dir-count{font-size:.9rem;color:var(--fig);margin:.2rem 0 1rem}
-
-.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.9rem}
-.scard{position:relative;display:flex;flex-direction:column;background:var(--coconut);border:1px solid var(--line);border-radius:14px;padding:.95rem;text-decoration:none;transition:transform .16s var(--ease),border-color .16s,box-shadow .16s}
-.scard:hover{transform:translateY(-3px);border-color:var(--taro);box-shadow:0 18px 34px -24px rgba(154,123,255,.6)}
-.scard-top{display:flex;gap:.75rem;align-items:center;padding-right:1.8rem}
-.mono{flex:0 0 auto;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:"Fraunces",serif;font-weight:700;font-size:1.35rem;letter-spacing:-.02em}
-.scard-id{min-width:0}
-.scard-name{font-family:"Fraunces",serif;font-weight:600;font-size:1.08rem;color:var(--deep);line-height:1.15;display:block}
-.scard-meta{font-size:.83rem;color:var(--ink60);margin-top:2px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.scard-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.75rem}
-.ptag{font-size:.66rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:.22em .55em;border-radius:6px;white-space:nowrap}
-.ptag-ind{color:#38491f;background:rgba(185,238,99,.26);border:1px solid rgba(140,180,70,.5)}
-.ptag-chain{color:#5b3a86;background:rgba(154,123,255,.18);border:1px solid rgba(154,123,255,.45)}
-.ptag-verify{color:#7a5410;background:rgba(255,200,61,.2);border:1px solid rgba(210,160,40,.45)}
-.fav{position:absolute;top:.7rem;right:.7rem;width:32px;height:32px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--fig);font-size:1.05rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;z-index:2}
-.fav:hover{border-color:var(--guava);color:var(--guava)}
-.fav[aria-pressed="true"]{background:var(--guava);border-color:var(--guava);color:#fff}
-.dir-more{text-align:center;margin:1.6rem 0 .5rem}
-.dir-empty{text-align:center;color:var(--fig);padding:2rem 1rem;font-size:1rem}
-.dir-note{font-size:.85rem;color:var(--fig);margin:1.4rem auto 0;max-width:70ch;text-align:center;line-height:1.55}
-.dir-note b{color:var(--cream)}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/luxury-homepage.css">
+<script>document.documentElement.className+=" js";</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CapyBoba Society","url":"https://capyboba.com/","description":"A modern tea salon and guide to Southern California boba.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://capyboba.com/directory/?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-
-<!-- ============================================================
-     HEADER + MEGA NAV
-     ============================================================ -->
-<header class="site-header" id="siteHeader">
-  <div class="header-inner">
-    <a class="brand" href="/">Capy<b>Boba</b></a>
-
-    <nav class="primary-nav" aria-label="Primary">
-      <ul class="nav-list">
-        <li class="nav-item">
-          <button class="nav-trigger" aria-expanded="false" aria-controls="panel-area" data-panel="panel-area">
-            Explore by area <span class="caret" aria-hidden="true"></span>
-          </button>
-        </li>
-        <li class="nav-item">
-          <button class="nav-trigger" aria-expanded="false" aria-controls="panel-vibe" data-panel="panel-vibe">
-            By vibe <span class="caret" aria-hidden="true"></span>
-          </button>
-        </li>
-        <li class="nav-item">
-          <button class="nav-trigger" aria-expanded="false" aria-controls="panel-near" data-panel="panel-near">
-            Near a landmark <span class="caret" aria-hidden="true"></span>
-          </button>
-        </li>
-        <li class="nav-item">
-          <button class="nav-trigger" aria-expanded="false" aria-controls="panel-new" data-panel="panel-new">
-            New openings <span class="caret" aria-hidden="true"></span>
-          </button>
-        </li>
-        <li class="nav-item">
-          <button class="nav-trigger" aria-expanded="false" aria-controls="panel-guides" data-panel="panel-guides">
-            Guides <span class="caret" aria-hidden="true"></span>
-          </button>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="header-actions">
-      <a class="btn btn-ghost header-find" href="#find">Find boba</a>
-      <button class="menu-toggle" aria-expanded="false" aria-controls="mobileDrawer" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-
-  <!-- PANEL: Explore by area -->
-  <div class="mega" id="panel-area" role="region" aria-label="Explore by area">
-    <div class="mega-inner">
-      <div class="mega-col">
-        <p class="mega-eyebrow">Regions</p>
-        <ul class="mega-links">
-          <!-- single reserved --taro use: Featured -->
-          <li><a href="/area/sgv/">The 626 <span class="featured-tag">Featured</span></a></li>
-          <li><a href="/area/orange-county/">Orange County</a></li>
-          <li><a href="/area/san-diego/">San Diego</a></li>
-          <li><a href="/area/greater-la/">Greater Los Angeles</a></li>
-          <li><a href="/area/inland-empire/">Inland Empire</a></li>
-        </ul>
-      </div>
-      <div class="mega-col">
-        <p class="mega-eyebrow">Top cities · the 626</p>
-        <ul class="mega-links">
-          <li><a href="/boba/ca/san-gabriel/">San Gabriel</a></li>
-          <li><a href="/boba/ca/rowland-heights/">Rowland Heights</a></li>
-          <li><a href="/boba/ca/arcadia/">Arcadia</a></li>
-          <li><a href="/boba/ca/alhambra/">Alhambra</a></li>
-          <li><a href="/boba/ca/hacienda-heights/">Hacienda Heights</a></li>
-        </ul>
-      </div>
-      <div class="mega-col">
-        <p class="mega-eyebrow">Top cities · Orange County</p>
-        <ul class="mega-links">
-          <li><a href="/boba/ca/irvine/">Irvine</a></li>
-          <li><a href="/boba/ca/westminster/">Westminster</a></li>
-          <li><a href="/boba/ca/garden-grove/">Garden Grove</a></li>
-          <li><a href="/boba/ca/fountain-valley/">Fountain Valley</a></li>
-          <li><a href="/boba/ca/fullerton/">Fullerton</a></li>
-        </ul>
-      </div>
-      <div class="mega-col mega-feature">
-        <p class="mega-eyebrow" style="margin-bottom:.2rem">Or just</p>
-        <a class="btn btn-primary" href="/cities/">Browse all 45 cities</a>
-        <p class="mega-note">Tracking 320+ shops across 5 counties.</p>
+<header class="masthead">
+  <div class="wrap masthead-row">
+    <a class="wordmark" href="/" aria-label="CapyBoba Society, home">Capy<b>Boba</b><span class="soc">Society</span></a>
+    
+<nav class="nav" aria-label="Primary">
+  <div class="nav-item"><button class="nav-link" aria-haspopup="true">Tonight</button>
+    <div class="mega" role="menu">
+      <div class="mega-grid">
+        <div class="mega-feature"><div class="plate plate--amber"><span class="grain"></span></div><p class="mega-feat-t">Tonight’s selection</p><p class="mega-feat-s">A pour chosen for the evening, from a checked menu.</p></div>
+        <div class="mega-col"><h4>Choose</h4><a href="/#tonight"><span class="mi">01</span>Tonight’s selection</a><a href="/#house-choice"><span class="mi">02</span>Leave it to the house</a><a href="/#concierge"><span class="mi">03</span>Ask the concierge</a><a href="/#flight"><span class="mi">04</span>A tasting flight</a></div><div class="mega-col"><h4>By evening</h4><a href="/best/date-night/"><span class="mi">01</span>Date night</a><a href="/best/open-late/"><span class="mi">02</span>Open late</a><a href="/best/group/"><span class="mi">03</span>With friends</a><a href="/#evening"><span class="mi">04</span>An evening in…</a></div>
       </div>
     </div>
   </div>
-
-  <!-- PANEL: By vibe (the signature) -->
-  <div class="mega" id="panel-vibe" role="region" aria-label="Boba by vibe">
-    <div class="mega-inner" style="grid-template-columns:1fr;gap:1rem">
-      <div>
-        <p class="mega-eyebrow">Start with the mood, not the shop</p>
-        <div class="vibe-grid">
-          <a class="vibe-tile" href="/best/date-night/"><span class="vt-name">Date night</span><span class="vt-desc">Seating, calmer rooms, later hours</span></a>
-          <a class="vibe-tile" href="/best/first-date/"><span class="vt-name">First date</span><span class="vt-desc">Quiet enough to actually talk</span></a>
-          <a class="vibe-tile" href="/best/study/"><span class="vt-name">Study-friendly</span><span class="vt-desc">Wifi, outlets, room to stay</span></a>
-          <a class="vibe-tile" href="/best/open-late/"><span class="vt-name">Open late</span><span class="vt-desc">Still pouring after 10</span></a>
-          <a class="vibe-tile" href="/best/brown-sugar/"><span class="vt-name">Brown sugar</span><span class="vt-desc">Done right, not just syrup</span></a>
-          <a class="vibe-tile" href="/best/fruit-tea/"><span class="vt-name">Fresh fruit tea</span><span class="vt-desc">Real fruit, not powder</span></a>
-          <a class="vibe-tile" href="/best/matcha/"><span class="vt-name">Matcha</span><span class="vt-desc">For the matcha people</span></a>
-          <a class="vibe-tile" href="/best/non-dairy/"><span class="vt-name">Non-dairy</span><span class="vt-desc">Oat and almond options that work</span></a>
-          <a class="vibe-tile" href="/best/cheap/"><span class="vt-name">Best value</span><span class="vt-desc">Most cup for the money</span></a>
-          <a class="vibe-tile" href="/best/group/"><span class="vt-name">Group hangout</span><span class="vt-desc">Room and energy for a crowd</span></a>
-          <a class="vibe-tile" href="/best/drive-thru/"><span class="vt-name">Drive-thru</span><span class="vt-desc">No parking, no line</span></a>
-          <a class="vibe-tile" href="/best/with-food/"><span class="vt-name">Boba and food</span><span class="vt-desc">Popcorn chicken, Taiwanese eats</span></a>
-        </div>
+  <div class="nav-item"><a class="nav-link" href="/#concierge">The Concierge</a></div>
+  <div class="nav-item"><button class="nav-link" aria-haspopup="true">Cities</button>
+    <div class="mega" role="menu">
+      <div class="mega-grid">
+        <div class="mega-feature"><div class="plate plate--jade"><span class="grain"></span></div><p class="mega-feat-t">The 626</p><p class="mega-feat-s">The densest tea corridor in the country.</p></div>
+        <div class="mega-col"><h4>Los Angeles County</h4><a href="/boba/ca/rowland-heights/"><span class="mi">01</span>Rowland Heights</a><a href="/boba/ca/san-gabriel/"><span class="mi">02</span>San Gabriel</a><a href="/boba/ca/arcadia/"><span class="mi">03</span>Arcadia</a><a href="/boba/ca/pasadena/"><span class="mi">04</span>Pasadena</a><a href="/boba/ca/cerritos/"><span class="mi">05</span>Cerritos</a><a href="/boba/ca/los-angeles/"><span class="mi">06</span>Los Angeles</a></div><div class="mega-col"><h4>Beyond</h4><a href="/boba/ca/irvine/"><span class="mi">01</span>Irvine</a><a href="/boba/ca/westminster/"><span class="mi">02</span>Westminster</a><a href="/boba/ca/garden-grove/"><span class="mi">03</span>Garden Grove</a><a href="/boba/ca/fullerton/"><span class="mi">04</span>Fullerton</a><a href="/boba/ca/san-diego/"><span class="mi">05</span>San Diego</a><a href="/cities/"><span class="mi">06</span>View all cities</a></div>
       </div>
     </div>
   </div>
-
-  <!-- PANEL: Near a landmark -->
-  <div class="mega" id="panel-near" role="region" aria-label="Boba near a landmark">
-    <div class="mega-inner">
-      <div class="mega-col">
-        <p class="mega-eyebrow">Campuses</p>
-        <ul class="mega-links">
-          <li><a href="/near/uc-irvine/">UC Irvine</a></li>
-          <li><a href="/near/cal-state-fullerton/">Cal State Fullerton</a></li>
-          <li><a href="/near/ucla/">UCLA</a></li>
-          <li><a href="/near/uc-san-diego/">UC San Diego</a></li>
-        </ul>
-      </div>
-      <div class="mega-col">
-        <p class="mega-eyebrow">Out and about</p>
-        <ul class="mega-links">
-          <li><a href="/near/disneyland/">Disneyland area</a></li>
-          <li><a href="/near/south-coast-plaza/">South Coast Plaza</a></li>
-          <li><a href="/near/the-americana/">The Americana</a></li>
-          <li><a href="/near/convoy-district/">Convoy District</a></li>
-        </ul>
-      </div>
-      <div class="mega-col">
-        <p class="mega-eyebrow">How it works</p>
-        <ul class="mega-links">
-          <li><a href="/near/"><span>Pick a spot</span><span class="sub">Shops sorted by distance, with the after-dinner and before-movie picks called out.</span></a></li>
-        </ul>
-      </div>
-      <div class="mega-col mega-feature">
-        <p class="mega-eyebrow" style="margin-bottom:.2rem">All landmarks</p>
-        <a class="btn btn-primary" href="/near/">Boba near a landmark</a>
-        <p class="mega-note">Walkability and parking noted where we have it.</p>
+  <div class="nav-item"><button class="nav-link" aria-haspopup="true">Tea Houses</button>
+    <div class="mega" role="menu">
+      <div class="mega-grid">
+        <div class="mega-feature"><div class="plate plate--night"><span class="grain"></span></div><p class="mega-feat-t">New to the guide</p><p class="mega-feat-s">Chatime and CoCo, freshly sourced.</p></div>
+        <div class="mega-col"><h4>Tea specialists</h4><a href="/boba/ca/irvine/7-leaves-cafe-irvine/"><span class="mi">01</span>7 Leaves Cafe, Irvine</a><a href="/boba/ca/san-gabriel/share-tea-san-gabriel/"><span class="mi">02</span>Sharetea, San Gabriel</a><a href="/boba/ca/arcadia/ten-rens-tea-time-arcadia/"><span class="mi">03</span>Ten Ren’s, Arcadia</a><a href="/boba/ca/fullerton/kung-fu-tea-fullerton/"><span class="mi">04</span>Kung Fu Tea, Fullerton</a></div><div class="mega-col"><h4>Fruit, dessert &amp; new</h4><a href="/boba/ca/rowland-heights/tastea-rowland-heights/"><span class="mi">01</span>Tastea, Rowland Heights</a><a href="/boba/ca/arcadia/coco-fresh-tea-and-juice-arcadia/"><span class="mi">02</span>CoCo, Arcadia</a><a href="/boba/ca/arcadia/chatime-arcadia/"><span class="mi">03</span>Chatime, Arcadia</a><a href="/directory/"><span class="mi">04</span>View all tea houses</a></div>
       </div>
     </div>
   </div>
-
-  <!-- PANEL: New openings -->
-  <div class="mega" id="panel-new" role="region" aria-label="New boba openings">
-    <div class="mega-inner">
-      <div class="mega-col">
-        <p class="mega-eyebrow">New openings feed</p>
-        <ul class="mega-links">
-          <li><a href="/new/orange-county/">Orange County</a></li>
-          <li><a href="/new/sgv/">The 626 and LA</a></li>
-          <li><a href="/new/san-diego/">San Diego</a></li>
-        </ul>
-      </div>
-      <div class="mega-col" style="grid-column:span 2">
-        <p class="mega-eyebrow">Verifying now</p>
-        <ul class="mega-links">
-          <li><a href="/new/orange-county/">Tea Nami, Westminster <span class="verifying-tag">Verifying</span></a></li>
-          <li><a href="/new/orange-county/">Auntea Jenny, Irvine <span class="verifying-tag">Verifying</span></a></li>
-          <li><a href="/new/orange-county/">HEYTEA, Irvine <span class="verifying-tag">Verifying</span></a></li>
-          <li><a href="/new/orange-county/">omomo, Tustin <span class="verifying-tag">Verifying</span></a></li>
-        </ul>
-      </div>
-      <div class="mega-col mega-feature">
-        <p class="mega-note" style="color:var(--ink);font-weight:500">We confirm the address and hours against each shop's own listing before a profile goes live.</p>
-        <a class="textlink" href="/new/orange-county/">See all new openings</a>
+  <div class="nav-item"><button class="nav-link" aria-haspopup="true">The Menu</button>
+    <div class="mega" role="menu">
+      <div class="mega-grid">
+        <div class="mega-feature"><div class="plate plate--amber"><span class="grain"></span></div><p class="mega-feat-t">By taste</p><p class="mega-feat-s">Milk, fruit, matcha, brown sugar · sorted.</p></div>
+        <div class="mega-col"><h4>By style</h4><a href="/best/fruit-tea/"><span class="mi">01</span>Fruit tea</a><a href="/best/matcha/"><span class="mi">02</span>Matcha</a><a href="/best/brown-sugar/"><span class="mi">03</span>Brown sugar</a><a href="/best/non-dairy/"><span class="mi">04</span>Dairy-free</a></div><div class="mega-col"><h4>Browse</h4><a href="/best/cheap/"><span class="mi">01</span>Best value</a><a href="/best/with-food/"><span class="mi">02</span>Boba and food</a><a href="/best/drive-thru/"><span class="mi">03</span>Drive-thru</a><a href="/directory/"><span class="mi">04</span>Full menu index</a></div>
       </div>
     </div>
   </div>
-
-  <!-- PANEL: Guides -->
-  <div class="mega" id="panel-guides" role="region" aria-label="Boba guides">
-    <div class="mega-inner">
-      <div class="mega-col">
-        <p class="mega-eyebrow">Know what you're ordering</p>
-        <ul class="mega-links">
-          <li><a href="/guide/brown-sugar-vs-tiger-sugar/">Brown sugar vs tiger sugar</a></li>
-          <li><a href="/guide/what-50-percent-sweet-means/">What 50% sweet really means</a></li>
-          <li><a href="/guide/loose-leaf-vs-powder/">Loose-leaf vs powder tea</a></li>
-        </ul>
+  <div class="nav-item"><button class="nav-link" aria-haspopup="true">Guides</button>
+    <div class="mega" role="menu">
+      <div class="mega-grid">
+        <div class="mega-feature"><div class="plate plate--jade"><span class="grain"></span></div><p class="mega-feat-t">The house guide</p><p class="mega-feat-s">How to order, without the guesswork.</p></div>
+        <div class="mega-col"><h4>Ordering</h4><a href="/best/non-dairy/"><span class="mi">01</span>Ordering dairy-free</a><a href="/best/open-late/"><span class="mi">02</span>A late-night tea</a><a href="/best/cheap/"><span class="mi">03</span>Best value pours</a><a href="/best/study/"><span class="mi">04</span>Study-friendly rooms</a></div><div class="mega-col"><h4>Occasions</h4><a href="/best/date-night/"><span class="mi">01</span>A date-night order</a><a href="/best/first-date/"><span class="mi">02</span>A first-date pick</a><a href="/best/matcha/"><span class="mi">03</span>Matcha worth seeking</a><a href="/best/brown-sugar/"><span class="mi">04</span>Brown sugar, done right</a></div>
       </div>
-      <div class="mega-col">
-        <p class="mega-eyebrow">The toppings, explained</p>
-        <ul class="mega-links">
-          <li><a href="/guide/what-is-cheese-foam/">What is cheese foam</a></li>
-          <li><a href="/guide/crystal-boba-vs-tapioca/">Crystal boba vs tapioca</a></li>
-          <li><a href="/guide/order-non-dairy-boba/">How to order non-dairy</a></li>
-        </ul>
-      </div>
-      <div class="mega-col mega-feature" style="grid-column:span 2">
-        <p class="mega-eyebrow" style="margin-bottom:.2rem">Guides</p>
-        <a class="btn btn-primary" href="/guide/">Read the boba guides</a>
-        <p class="mega-note">Plain explainers, no fluff, written by people who order this stuff weekly.</p>
-      </div>
+    </div>
+  </div>
+  <div class="nav-item"><a class="nav-link" href="/#new-pour">The New Pour</a></div>
+  <div class="nav-item"><a class="nav-link" href="/#blackbook">Black Book</a></div>
+</nav>
+    <div class="nav-actions">
+      <a class="btn btn-line" href="/#concierge">Ask the concierge</a>
+      <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
 
-<!-- MOBILE DRAWER -->
-<div class="drawer" id="mobileDrawer" aria-hidden="true">
-  <div class="drawer-head">
-    <a class="brand" href="/">Capy<b>Boba</b></a>
-    <button class="drawer-close" aria-label="Close menu">&times;</button>
-  </div>
-  <div class="drawer-body">
-    <form class="drawer-search" data-search>
-      <input class="field" type="text" name="q" placeholder="City or vibe" aria-label="Find boba by city or vibe">
-      <button class="btn btn-primary" type="submit">Find</button>
-    </form>
-
-    <button class="acc-trigger" aria-expanded="false" aria-controls="acc-area">Explore by area <span class="caret" aria-hidden="true"></span></button>
-    <div class="acc-panel" id="acc-area">
-      <a href="/area/sgv/">The 626</a>
-      <a href="/area/orange-county/">Orange County</a>
-      <a href="/area/san-diego/">San Diego</a>
-      <a href="/area/greater-la/">Greater Los Angeles</a>
-      <a href="/area/inland-empire/">Inland Empire</a>
-      <a href="/cities/">All 45 cities</a>
-    </div>
-
-    <button class="acc-trigger" aria-expanded="false" aria-controls="acc-vibe">By vibe <span class="caret" aria-hidden="true"></span></button>
-    <div class="acc-panel" id="acc-vibe">
-      <a href="/best/date-night/">Date night</a>
-      <a href="/best/study/">Study-friendly</a>
-      <a href="/best/open-late/">Open late</a>
-      <a href="/best/brown-sugar/">Brown sugar</a>
-      <a href="/best/fruit-tea/">Fresh fruit tea</a>
-      <a href="/best/with-food/">Boba and food</a>
-      <a href="/best/group/">Group hangout</a>
-    </div>
-
-    <button class="acc-trigger" aria-expanded="false" aria-controls="acc-near">Near a landmark <span class="caret" aria-hidden="true"></span></button>
-    <div class="acc-panel" id="acc-near">
-      <a href="/near/uc-irvine/">UC Irvine</a>
-      <a href="/near/cal-state-fullerton/">Cal State Fullerton</a>
-      <a href="/near/disneyland/">Disneyland area</a>
-      <a href="/near/convoy-district/">Convoy District</a>
-      <a href="/near/">All landmarks</a>
-    </div>
-
-    <button class="acc-trigger" aria-expanded="false" aria-controls="acc-new">New openings <span class="caret" aria-hidden="true"></span></button>
-    <div class="acc-panel" id="acc-new">
-      <a href="/new/orange-county/">Orange County</a>
-      <a href="/new/sgv/">The 626 and LA</a>
-      <a href="/new/san-diego/">San Diego</a>
-    </div>
-
-    <button class="acc-trigger" aria-expanded="false" aria-controls="acc-guides">Guides <span class="caret" aria-hidden="true"></span></button>
-    <div class="acc-panel" id="acc-guides">
-      <a href="/guide/brown-sugar-vs-tiger-sugar/">Brown sugar vs tiger sugar</a>
-      <a href="/guide/what-50-percent-sweet-means/">What 50% sweet means</a>
-      <a href="/guide/what-is-cheese-foam/">What is cheese foam</a>
-      <a href="/guide/">All guides</a>
-    </div>
-  </div>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer-top"><span class="wordmark">Capy<b>Boba</b><span class="soc">Society</span></span><button class="drawer-close" aria-label="Close menu">&times;</button></div>
+  <div class="drawer-search"><label class="sr-only" for="drawerQ">Search shops or cities</label><input id="drawerQ" type="search" placeholder="Search a shop or city" autocomplete="off"></div>
+  <nav class="drawer-nav" aria-label="Mobile">
+    <details open><summary>Tonight</summary><div class="drawer-sub"><a href="/#tonight">Tonight’s selection</a><a href="/#house-choice">Leave it to the house</a><a href="/#concierge">Ask the concierge</a><a href="/#flight">A tasting flight</a><a href="/#evening">An evening in…</a></div></details>
+    <details><summary>Cities</summary><div class="drawer-sub"><a href="/boba/ca/rowland-heights/">Rowland Heights</a><a href="/boba/ca/san-gabriel/">San Gabriel</a><a href="/boba/ca/arcadia/">Arcadia</a><a href="/boba/ca/irvine/">Irvine</a><a href="/boba/ca/los-angeles/">Los Angeles</a><a href="/boba/ca/san-diego/">San Diego</a><a href="/cities/">View all cities</a></div></details>
+    <details><summary>Tea Houses</summary><div class="drawer-sub"><a href="/boba/ca/irvine/7-leaves-cafe-irvine/">7 Leaves, Irvine</a><a href="/boba/ca/san-gabriel/share-tea-san-gabriel/">Sharetea, San Gabriel</a><a href="/boba/ca/fullerton/kung-fu-tea-fullerton/">Kung Fu Tea, Fullerton</a><a href="/boba/ca/rowland-heights/tastea-rowland-heights/">Tastea, Rowland Heights</a><a href="/directory/">All tea houses</a></div></details>
+    <details><summary>The Menu</summary><div class="drawer-sub"><a href="/best/fruit-tea/">Fruit tea</a><a href="/best/matcha/">Matcha</a><a href="/best/brown-sugar/">Brown sugar</a><a href="/best/non-dairy/">Dairy-free</a><a href="/directory/">Full menu index</a></div></details>
+    <details><summary>Guides</summary><div class="drawer-sub"><a href="/best/date-night/">A date-night order</a><a href="/best/non-dairy/">Ordering dairy-free</a><a href="/best/open-late/">A late-night tea</a><a href="/best/cheap/">Best value pours</a></div></details>
+    <details><summary>More</summary><div class="drawer-sub"><a href="/#new-pour">The New Pour</a><a href="/#blackbook">Black Book</a><a href="/directory/">The directory</a></div></details>
+  </nav>
+  <div class="drawer-recent"><h4>Recent selections</h4><div data-recent></div></div>
 </div>
 
-<!-- ============================================================
-     MAIN
-     ============================================================ -->
 <main id="main">
-  <!-- FINDER (compact, not a tall hero) -->
-  <section class="finder" id="find">
-    <div class="finder-inner">
-      <div class="finder-copy">
-        <p class="eyebrow" style="color:var(--mango)">Southern California boba</p>
-        <h1>Find your boba, fast.</h1>
-        <p class="finder-sub">Browse <b>321</b> shops across <b>45</b> cities and <b>5</b> areas. Filter, save a list, or let us pick for you.</p>
-      </div>
-      <div class="finder-controls">
-        <div class="searchbar">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-          <input id="q" type="search" placeholder="Search a shop or city" aria-label="Search shops or cities" autocomplete="off">
+
+  <!-- 1. ARRIVAL -->
+  <section class="sx arrival" id="tonight" aria-label="Arrival">
+    <div class="wrap">
+      <div class="arrival-grid">
+        <div class="arrival-copy reveal">
+          <p class="eyebrow">CapyBoba Society · Southern California</p>
+          <h1>Something exquisite for <span class="serif-hi">tonight.</span></h1>
+          <p class="sub">A more considered way to choose boba. Tell the concierge the evening you’re having, and leave with one drink, one shop, and a checked menu.</p>
+          <div class="arrival-cta">
+            <a class="btn btn-primary" href="#concierge">Ask the concierge</a>
+            <a class="link-quiet" href="#tonight-note">See tonight’s selection</a>
+          </div>
         </div>
-        <div class="area-pills" id="areaPills"></div>
+        <div class="arrival-media reveal">
+          <div class="plate"><span class="grain"></span><svg class="pour" viewBox="0 0 400 500" role="img" aria-label="An editorial rendering of a tea being poured over pearls">
+  <defs>
+    <linearGradient id="tea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7c5a34"/><stop offset=".45" stop-color="#4d3117"/><stop offset="1" stop-color="#241505"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="rgba(244,239,231,.06)"/><stop offset=".5" stop-color="rgba(244,239,231,.16)"/><stop offset="1" stop-color="rgba(244,239,231,.04)"/>
+    </linearGradient>
+    <clipPath id="cup"><path d="M126 150 h148 l-16 250 a26 26 0 0 1 -26 22 H168 a26 26 0 0 1 -26 -22 Z"/></clipPath>
+  </defs>
+  <g clip-path="url(#cup)">
+    <rect x="120" y="150" width="160" height="292" fill="url(#glass)"/>
+    <rect x="120" y="214" width="160" height="228" fill="url(#tea)"/>
+    <path d="M120 214 q80 -34 160 0 v40 q-80 30 -160 0 Z" fill="rgba(247,242,234,.14)"/>
+    <path d="M150 214 C182 300 150 360 205 360 C250 360 232 300 264 226" fill="none" stroke="rgba(247,242,234,.5)" stroke-width="10" stroke-linecap="round"/>
+    <g fill="#1c120a">
+      <circle cx="160" cy="416" r="13"/><circle cx="188" cy="424" r="13"/><circle cx="216" cy="416" r="13"/><circle cx="244" cy="424" r="13"/><circle cx="174" cy="404" r="12"/><circle cx="232" cy="404" r="12"/><circle cx="202" cy="416" r="13"/>
+    </g>
+    <g fill="rgba(247,242,234,.28)"><circle cx="156" cy="412" r="3.4"/><circle cx="212" cy="412" r="3.4"/><circle cx="240" cy="420" r="3.4"/></g>
+    <rect x="130" y="150" width="10" height="292" fill="rgba(247,242,234,.14)"/>
+  </g>
+  <path d="M126 150 h148 l-16 250 a26 26 0 0 1 -26 22 H168 a26 26 0 0 1 -26 -22 Z" fill="none" stroke="rgba(244,239,231,.55)" stroke-width="2.4"/>
+  <path d="M118 150 q82 -30 164 0" fill="none" stroke="rgba(244,239,231,.5)" stroke-width="2.4"/>
+  <rect x="116" y="139" width="168" height="14" rx="7" fill="rgba(244,239,231,.10)" stroke="rgba(244,239,231,.5)" stroke-width="2"/>
+  <path d="M150 120 C150 90 250 92 250 60" fill="none" stroke="rgba(247,242,234,.4)" stroke-width="2" stroke-dasharray="1 9" stroke-linecap="round"/>
+  <rect x="238" y="40" width="12" height="112" rx="6" transform="rotate(9 244 96)" fill="#7A2433"/>
+  <g stroke="rgba(244,239,231,.22)" stroke-width="2" fill="none"><path d="M96 300 q-8 20 0 40"/><path d="M304 320 q8 18 0 36"/></g>
+</svg><span class="plate-cap">The pour · editorial rendering</span></div>
+          <span id="tonight-note"></span>
+          <div class="note note--float reveal">
+      <p class="note-kick">Tonight’s selection</p>
+      <h2 class="note-drink" style="font-size:1.6rem">Oolong Milk Tea</h2>
+      <p class="note-where">at 7 Leaves Cafe <a href="/boba/ca/irvine/7-leaves-cafe-irvine/">Irvine</a></p>
+      <p class="note-why">Silky and tea-forward. Real loose-leaf oolong with milk and cane sugar; toasted and smooth.</p>
+      <div class="chiprow"><span class="tag">Caffeine</span><span class="tag">Contains dairy</span></div>
+      <div class="note-actions" style="margin-top:1rem">
+        <a class="btn-mini btn-mini--solid" href="https://7leavescafe.com/menu/" target="_blank" rel="noopener">The menu</a>
+        <a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=7%20Leaves%20Cafe%20Irvine%20CA" target="_blank" rel="noopener">Directions</a>
+        <button class="btn-mini" type="button" data-save='{&quot;id&quot;: &quot;7-leaves-oolong-milk-tea&quot;, &quot;name&quot;: &quot;Oolong Milk Tea \u00b7 7 Leaves Cafe&quot;, &quot;where&quot;: &quot;Irvine&quot;, &quot;url&quot;: &quot;/boba/ca/irvine/7-leaves-cafe-irvine/&quot;}'>Keep it</button>
+        <button class="btn-mini" type="button" data-send="Oolong Milk Tea at 7 Leaves Cafe (Irvine)">Send</button>
       </div>
+      <p class="note-src">7 Leaves Cafe’s menu, checked July 1, 2026. We show only what the official menu states.</p>
     </div>
-  </section>
-
-  <!-- DECIDE FOR ME (tools) -->
-  <section class="decide">
-    <div class="decide-inner">
-      <span class="decide-lbl">Can't decide?</span>
-      <button class="dbtn dbtn-hot" id="surprise" type="button">Surprise me</button>
-      <a class="dbtn" href="/tools/roulette/">Spin roulette</a>
-      <a class="dbtn" href="/tools/drink-matcher/">Match my taste</a>
-      <a class="dbtn" href="/tools/build-your-sip/">Build a sip</a>
-    </div>
-  </section>
-
-  <!-- BROWSE ROWS -->
-  <section class="rows">
-    <div class="brow">
-      <div class="brow-head"><h2>Browse by vibe</h2><a class="brow-more" href="/best/">See all</a></div>
-      <div class="brow-scroll"><a class="rpill" href="/best/date-night/">Date night</a><a class="rpill" href="/best/first-date/">First date</a><a class="rpill" href="/best/study/">Study-friendly</a><a class="rpill" href="/best/open-late/">Open late</a><a class="rpill" href="/best/brown-sugar/">Brown sugar</a><a class="rpill" href="/best/fruit-tea/">Fresh fruit tea</a><a class="rpill" href="/best/matcha/">Matcha</a><a class="rpill" href="/best/non-dairy/">Non-dairy</a><a class="rpill" href="/best/cheap/">Best value</a><a class="rpill" href="/best/group/">Group hangout</a><a class="rpill" href="/best/drive-thru/">Drive-thru</a><a class="rpill" href="/best/with-food/">Boba and food</a></div>
-    </div>
-    <div class="brow">
-      <div class="brow-head"><h2>Near a landmark</h2><a class="brow-more" href="/near/">See all</a></div>
-      <div class="brow-scroll"><a class="rpill" href="/near/disneyland/">Disneyland</a><a class="rpill" href="/near/uc-irvine/">UC Irvine</a><a class="rpill" href="/near/ucla/">UCLA</a><a class="rpill" href="/near/uc-san-diego/">UC San Diego</a><a class="rpill" href="/near/cal-state-fullerton/">Cal State Fullerton</a><a class="rpill" href="/near/south-coast-plaza/">South Coast Plaza</a><a class="rpill" href="/near/the-americana/">The Americana</a><a class="rpill" href="/near/convoy-district/">Convoy District</a></div>
-    </div>
-    <div class="brow">
-      <div class="brow-head"><h2>Popular cities</h2><a class="brow-more" href="/cities/">All 45 cities</a></div>
-      <div class="brow-scroll" id="cityRow"></div>
-    </div>
-  </section>
-
-  <!-- DIRECTORY GRID -->
-  <section class="dir" id="directory">
-    <div class="dir-head">
-      <h2>All shops</h2>
-      <div class="dir-filters">
-        <div class="seg2" id="typeSeg" role="group" aria-label="Shop type">
-          <button data-type="all" aria-pressed="true" type="button">All</button>
-          <button data-type="ind" aria-pressed="false" type="button">Independent</button>
-          <button data-type="chain" aria-pressed="false" type="button">Chains</button>
         </div>
-        <button class="savedtoggle" id="savedToggle" aria-pressed="false" type="button"><span class="hs">&#9825;</span> Saved <span id="savedCount">0</span></button>
-        <label class="sortwrap">Sort
-          <select id="sortSel" aria-label="Sort shops"><option value="az">A to Z</option><option value="city">By city</option></select>
-        </label>
       </div>
     </div>
-    <p class="dir-count" id="count">Showing 321 shops</p>
-    <div class="sgrid" id="grid" aria-live="polite"></div>
-    <div class="dir-more"><button class="btn btn-ghost" id="loadMore" type="button">Show more shops</button></div>
-    <p class="dir-note">Every shop here is a real place we track. <b>Hours, open-now, and distance show as "Verifying"</b> until we confirm each shop, then they fill in automatically. We never invent ratings, menus, or photos.</p>
   </section>
+
+  <!-- 2. TEA CONCIERGE -->
+  <section class="sx sx--jade" id="concierge" aria-label="The Tea Concierge">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">The Tea Concierge</p><h2>Four questions. One selection.</h2><p class="lede">A short conversation, not a quiz. Every suggestion is a real drink at a real shop, from a menu we’ve checked.</p></div>
+      <div data-concierge>
+        <div class="concierge-shell"><p class="lede" style="text-align:center">The concierge needs JavaScript. Meanwhile, tonight’s selection is above and the house edit is just below. Both are real and sourced.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. THE HOUSE EDIT -->
+  <section class="sx sx--light" aria-label="The House Edit">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">The House Edit</p><h2>Three we’d order first.</h2><p class="lede">One classic, one modern turn, one that rewards a little nerve. No more than three, chosen on flavor, not popularity.</p></div>
+      <div class="sheet"><div class="sheet-row reveal">
+          <span class="idx">01</span>
+          <div class="sheet-main">
+            <p class="sheet-kind">A classic</p>
+            <h3 class="sheet-drink"><a href="/boba/ca/san-gabriel/share-tea-san-gabriel/">Pearl Milk Tea</a></h3>
+            <p class="sheet-where">Sharetea · San Gabriel</p>
+            <p class="sheet-note">The classic: black milk tea with chewy tapioca pearls.</p>
+          </div>
+          <p class="sheet-side">Milk tea<br>Caffeine</p>
+          <div class="sheet-actions">
+            <a class="btn-mini" href="https://www.1992sharetea.com/drinks-menu-2024" target="_blank" rel="noopener">Menu</a>
+            <button class="btn-mini" type="button" data-save='{&quot;id&quot;: &quot;sharetea-pearl-milk-tea&quot;, &quot;name&quot;: &quot;Pearl Milk Tea \u00b7 Sharetea&quot;, &quot;where&quot;: &quot;San Gabriel&quot;, &quot;url&quot;: &quot;/boba/ca/san-gabriel/share-tea-san-gabriel/&quot;}'>Keep it</button>
+          </div>
+        </div><div class="sheet-row reveal">
+          <span class="idx">02</span>
+          <div class="sheet-main">
+            <p class="sheet-kind">A modern turn</p>
+            <h3 class="sheet-drink"><a href="/boba/ca/rowland-heights/tastea-rowland-heights/">Rose Matcha Milk Tea</a></h3>
+            <p class="sheet-where">Tastea · Rowland Heights</p>
+            <p class="sheet-note">Rose and matcha with milk; floral, grassy, and distinctive.</p>
+          </div>
+          <p class="sheet-side">Matcha<br>Caffeine</p>
+          <div class="sheet-actions">
+            <a class="btn-mini" href="https://gotastea.com/menu" target="_blank" rel="noopener">Menu</a>
+            <button class="btn-mini" type="button" data-save='{&quot;id&quot;: &quot;tastea-rose-matcha-milk-tea&quot;, &quot;name&quot;: &quot;Rose Matcha Milk Tea \u00b7 Tastea&quot;, &quot;where&quot;: &quot;Rowland Heights&quot;, &quot;url&quot;: &quot;/boba/ca/rowland-heights/tastea-rowland-heights/&quot;}'>Keep it</button>
+          </div>
+        </div><div class="sheet-row reveal">
+          <span class="idx">03</span>
+          <div class="sheet-main">
+            <p class="sheet-kind">Something unexpected</p>
+            <h3 class="sheet-drink"><a href="/boba/ca/garden-grove/7-leaves-cafe-garden-grove/">Mung Bean Milk Tea</a></h3>
+            <p class="sheet-where">7 Leaves Cafe · Garden Grove</p>
+            <p class="sheet-note">Real cooked mung bean in milk tea; earthy-sweet and unusual.</p>
+          </div>
+          <p class="sheet-side">Milk tea<br></p>
+          <div class="sheet-actions">
+            <a class="btn-mini" href="https://7leavescafe.com/menu/" target="_blank" rel="noopener">Menu</a>
+            <button class="btn-mini" type="button" data-save='{&quot;id&quot;: &quot;7-leaves-mung-bean-milk-tea&quot;, &quot;name&quot;: &quot;Mung Bean Milk Tea \u00b7 7 Leaves Cafe&quot;, &quot;where&quot;: &quot;Garden Grove&quot;, &quot;url&quot;: &quot;/boba/ca/garden-grove/7-leaves-cafe-garden-grove/&quot;}'>Keep it</button>
+          </div>
+        </div></div>
+    </div>
+  </section>
+
+  <!-- 4. LEAVE IT TO THE HOUSE -->
+  <section class="sx sx--smoked" id="house-choice" aria-label="House Choice">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">House Choice</p><h2>Leave it to the house.</h2><p class="lede">Set as little or as much as you like. The house returns one selection, revealed like a turned card, never a spinning wheel.</p></div>
+      <div data-house><p class="lede" style="text-align:center">House Choice needs JavaScript. The tasting flight below works either way.</p></div>
+    </div>
+  </section>
+
+  <!-- 5. THE TASTING FLIGHT -->
+  <section class="sx sx--aubergine" id="flight" aria-label="The Tasting Flight">
+    <div class="wrap">
+      <div class="section-head section-head--split reveal"><div><p class="eyebrow">The Tasting Flight</p><h2>Three pours, side by side.</h2><p class="lede">A classic, something bright, and a wildcard, compared on tea base, texture, caffeine and dairy. Keep any of them, or send the flight.</p></div><div><div class="flight-actions" style="display:flex;gap:.5rem;flex-wrap:wrap"><button class="btn btn-line" type="button" data-tf-shuffle>Compose another flight</button><button class="btn btn-primary" type="button" data-tf-send>Send the flight</button></div></div></div>
+      <div data-flight>
+        <div class="flight" data-flight-grid><div class="pour-col">
+          <span class="pc-kind">A classic</span>
+          <h3 class="pc-name">Kung Fu Milk Tea</h3>
+          <p class="pc-where">Kung Fu Tea · <a href="/boba/ca/fullerton/kung-fu-tea-fullerton/">Fullerton</a></p>
+          <p class="pc-note">The signature: creamy black milk tea with a strong tea base.</p>
+          <dl class="pc-spec"><dt>Style</dt><dd>Milk tea</dd><dt>Tea base</dt><dd>·</dd><dt>Caffeine</dt><dd>Yes</dd><dt>Dairy</dt><dd>Yes</dd></dl>
+          <div class="pc-actions"><button class="btn-mini" type="button" data-tf-save='{&quot;id&quot;: &quot;kung-fu-tea-kung-fu-milk-tea&quot;, &quot;name&quot;: &quot;Kung Fu Milk Tea \u00b7 Kung Fu Tea&quot;, &quot;where&quot;: &quot;Fullerton&quot;, &quot;url&quot;: &quot;/boba/ca/fullerton/kung-fu-tea-fullerton/&quot;}'>Keep it</button><a class="btn-mini" href="https://www.kungfutea.com/faq/" target="_blank" rel="noopener">Menu</a></div>
+        </div><div class="pour-col">
+          <span class="pc-kind">Something bright</span>
+          <h3 class="pc-name">Mango Green Tea</h3>
+          <p class="pc-where">Sharetea · <a href="/boba/ca/san-gabriel/share-tea-san-gabriel/">San Gabriel</a></p>
+          <p class="pc-note">Green tea infused with sweet mango; ice-cold and refreshing.</p>
+          <dl class="pc-spec"><dt>Style</dt><dd>Fruit tea</dd><dt>Tea base</dt><dd>·</dd><dt>Caffeine</dt><dd>Yes</dd><dt>Dairy</dt><dd>No</dd></dl>
+          <div class="pc-actions"><button class="btn-mini" type="button" data-tf-save='{&quot;id&quot;: &quot;sharetea-mango-green-tea&quot;, &quot;name&quot;: &quot;Mango Green Tea \u00b7 Sharetea&quot;, &quot;where&quot;: &quot;San Gabriel&quot;, &quot;url&quot;: &quot;/boba/ca/san-gabriel/share-tea-san-gabriel/&quot;}'>Keep it</button><a class="btn-mini" href="https://www.1992sharetea.com/drinks-menu-2024" target="_blank" rel="noopener">Menu</a></div>
+        </div><div class="pour-col">
+          <span class="pc-kind">The wildcard</span>
+          <h3 class="pc-name">Cheese Foam Fresh Tea</h3>
+          <p class="pc-where">CoCo Fresh Tea &amp; Juice · <a href="/boba/ca/arcadia/coco-fresh-tea-and-juice-arcadia/">Arcadia</a></p>
+          <p class="pc-note">Fresh-brewed tea under a salted Himalayan cheese foam.</p>
+          <dl class="pc-spec"><dt>Style</dt><dd>Cheese foam</dd><dt>Tea base</dt><dd>Green Tea</dd><dt>Caffeine</dt><dd>Yes</dd><dt>Dairy</dt><dd>Yes</dd></dl>
+          <div class="pc-actions"><button class="btn-mini" type="button" data-tf-save='{&quot;id&quot;: &quot;coco-cheese-foam-fresh-tea&quot;, &quot;name&quot;: &quot;Cheese Foam Fresh Tea \u00b7 CoCo Fresh Tea &amp; Juice&quot;, &quot;where&quot;: &quot;Arcadia&quot;, &quot;url&quot;: &quot;/boba/ca/arcadia/coco-fresh-tea-and-juice-arcadia/&quot;}'>Keep it</button><a class="btn-mini" href="https://cocobubbletea.com/menu" target="_blank" rel="noopener">Menu</a></div>
+        </div></div>
+      </div>
+      <div class="flight-bar"><p class="flight-note">Caffeine and dairy shown only where the official menu states them. Prices are not shown unless verified.</p></div>
+    </div>
+  </section>
+
+  <!-- 6. CITY AFTER DARK -->
+  <section class="sx" aria-label="City After Dark">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">City After Dark</p><h2>Where the good rooms are.</h2><p class="lede">Three corners of Southern California, and one pour to look for in each.</p></div>
+      <div class="city"><div class="city-row reveal">
+          <div class="city-media"><div class="plate plate--jade"><span class="grain"></span><span class="plate-cap">The 626 · editorial</span></div></div>
+          <div class="city-body">
+            <p class="ceye">San Gabriel Valley</p>
+            <h3>The 626</h3>
+            <p>The densest tea corridor in the country. Valley boulevards where oolong is taken seriously and the good rooms fill after nine.</p>
+            <div class="city-pick">
+              <p class="cp-l">A pour to look for</p>
+              <p class="cp-d">Tiger Milk Tea</p>
+              <p class="cp-w">at Tastea · <a href="/boba/ca/rowland-heights/tastea-rowland-heights/" style="color:var(--champagne)">Rowland Heights</a></p>
+            </div>
+            <a class="link-quiet" href="/area/sgv/">The 626 →</a>
+          </div>
+        </div><div class="city-row reveal">
+          <div class="city-media"><div class="plate plate--amber"><span class="grain"></span><span class="plate-cap">Orange County · editorial</span></div></div>
+          <div class="city-body">
+            <p class="ceye">Irvine to Little Saigon</p>
+            <h3>Orange County</h3>
+            <p>Diamond Jamboree parking lots and Bolsa strip malls. This is where the modern chains sharpened the craft.</p>
+            <div class="city-pick">
+              <p class="cp-l">A pour to look for</p>
+              <p class="cp-d">Oolong Milk Tea</p>
+              <p class="cp-w">at 7 Leaves Cafe · <a href="/boba/ca/irvine/7-leaves-cafe-irvine/" style="color:var(--champagne)">Irvine</a></p>
+            </div>
+            <a class="link-quiet" href="/area/orange-county/">Orange County →</a>
+          </div>
+        </div><div class="city-row reveal">
+          <div class="city-media"><div class="plate plate--night"><span class="grain"></span><span class="plate-cap">San Diego · editorial</span></div></div>
+          <div class="city-body">
+            <p class="ceye">Convoy after dark</p>
+            <h3>San Diego</h3>
+            <p>Convoy Street stays open late by design. Brown sugar, snow, and a drive worth making for the last pour.</p>
+            <div class="city-pick">
+              <p class="cp-l">A pour to look for</p>
+              <p class="cp-d">Wow Milk (Brown Sugar)</p>
+              <p class="cp-w">at Kung Fu Tea · <a href="/boba/ca/san-diego/kung-fu-tea-san-diego/" style="color:var(--champagne)">San Diego</a></p>
+            </div>
+            <a class="link-quiet" href="/area/san-diego/">San Diego →</a>
+          </div>
+        </div></div>
+    </div>
+  </section>
+
+  <!-- 7. THE NEW POUR -->
+  <section class="sx sx--light" id="new-pour" aria-label="The New Pour">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">The New Pour</p><h2>Freshly checked.</h2><p class="lede">Seasonal releases and newly sourced menus, dated, not “trending,” just checked.</p></div>
+      <div class="pour-list"><div class="pour-item reveal">
+          <p class="pi-date">Seasonal</p>
+          <div class="pi-body"><p class="pi-tag">New · seasonal</p><h3>On the seasonal menu</h3><p>Watermelon Jasmine Green Tea at Tastea (Rowland Heights) · watermelon with jasmine green tea and fruit, a summer pour on the official menu now.</p></div>
+          <a class="pi-link link-quiet" href="https://gotastea.com/menu" target="_blank" rel="noopener">The pour</a>
+        </div><div class="pour-item reveal">
+          <p class="pi-date">Jul 1</p>
+          <div class="pi-body"><p class="pi-tag">Menu checked</p><h3>Chatime, added to the guide</h3><p>Twelve signatures from Chatime’s official U.S. menu · taste, caffeine, and dairy recorded where the menu states them.</p></div>
+          <a class="pi-link link-quiet" href="https://chatime.com/drinks/" target="_blank" rel="noopener">Official menu</a>
+        </div><div class="pour-item reveal">
+          <p class="pi-date">Jul 1</p>
+          <div class="pi-body"><p class="pi-tag">Menu checked</p><h3>CoCo Fresh Tea &amp; Juice, added</h3><p>Twelve drinks from CoCo’s official menu, including the fresh-fruit teas and the fresh-milk taro series.</p></div>
+          <a class="pi-link link-quiet" href="https://cocobubbletea.com/menu" target="_blank" rel="noopener">Official menu</a>
+        </div></div>
+    </div>
+  </section>
+
+  <!-- 8. AN EVENING IN -->
+  <section class="sx sx--smoked" id="evening" aria-label="An Evening In">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">An Evening In…</p><h2>Two stops and a backup.</h2><p class="lede">Short, sendable tea routes through the neighborhoods that reward a night out.</p></div>
+      <div class="routes" data-routes><article class="route reveal">
+          <div class="plate plate--jade"><span class="grain"></span><svg class="route-line" viewBox="0 0 400 225" preserveAspectRatio="none" aria-hidden="true"><path d="M40 170 C120 120 150 90 210 90 C270 90 300 60 360 44" fill="none" stroke="rgba(197,164,109,.6)" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round"/><circle cx="40" cy="170" r="5" fill="#C5A46D"/><circle cx="210" cy="90" r="5" fill="#C5A46D"/><circle cx="360" cy="44" r="5" fill="#F4EFE7"/></svg><span class="plate-cap">The 626</span></div>
+          <div class="route-body">
+            <span class="route-city">The 626</span>
+            <h3 class="route-t">An evening in the 626</h3>
+            <ul class="route-stops"><li><span class="st">01</span><span><b>Tiger Milk Tea</b> <span class="rd">· Tastea, <a href="/boba/ca/rowland-heights/tastea-rowland-heights/" style="color:var(--silver)">Rowland Heights</a> · Start sweet</span></span></li><li><span class="st">02</span><span><b>Classic Oolong Tea</b> <span class="rd">· Sharetea, <a href="/boba/ca/san-gabriel/share-tea-san-gabriel/" style="color:var(--silver)">San Gabriel</a> · End clean</span></span></li></ul>
+            <p class="route-stops" id="r626b" hidden style="margin:0"><span class="st">★</span><span><b>Taro Milk Tea</b> <span class="rd">· Chatime, <a href="/boba/ca/arcadia/chatime-arcadia/" style="color:var(--silver)">Arcadia</a></span></span></p>
+            <div class="route-actions">
+              <button class="btn-mini" type="button" data-backup="r626b">Reveal the backup</button>
+              <button class="btn-mini btn-mini--solid" type="button" data-route-send="An evening in the 626
+01. Tiger Milk Tea · Tastea (Rowland Heights)
+02. Classic Oolong Tea · Sharetea (San Gabriel)
+Backup: Taro Milk Tea · Chatime (Arcadia)">Send the evening</button>
+            </div>
+          </div>
+        </article><article class="route reveal">
+          <div class="plate plate--amber"><span class="grain"></span><svg class="route-line" viewBox="0 0 400 225" preserveAspectRatio="none" aria-hidden="true"><path d="M40 170 C120 120 150 90 210 90 C270 90 300 60 360 44" fill="none" stroke="rgba(197,164,109,.6)" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round"/><circle cx="40" cy="170" r="5" fill="#C5A46D"/><circle cx="210" cy="90" r="5" fill="#C5A46D"/><circle cx="360" cy="44" r="5" fill="#F4EFE7"/></svg><span class="plate-cap">Orange County</span></div>
+          <div class="route-body">
+            <span class="route-city">Orange County</span>
+            <h3 class="route-t">Tea after dinner in Irvine</h3>
+            <ul class="route-stops"><li><span class="st">01</span><span><b>Sea Cream Jasmine</b> <span class="rd">· 7 Leaves Cafe, <a href="/boba/ca/irvine/7-leaves-cafe-irvine/" style="color:var(--silver)">Irvine</a> · A cream cap</span></span></li><li><span class="st">02</span><span><b>Jasmine Milk Tea</b> <span class="rd">· Tastea, <a href="/boba/ca/costa-mesa/tastea-costa-mesa/" style="color:var(--silver)">Costa Mesa</a> · A quiet second</span></span></li></ul>
+            <p class="route-stops" id="rocb" hidden style="margin:0"><span class="st">★</span><span><b>Matcha Milk Cap</b> <span class="rd">· Kung Fu Tea, <a href="/boba/ca/fullerton/kung-fu-tea-fullerton/" style="color:var(--silver)">Fullerton</a></span></span></p>
+            <div class="route-actions">
+              <button class="btn-mini" type="button" data-backup="rocb">Reveal the backup</button>
+              <button class="btn-mini btn-mini--solid" type="button" data-route-send="Tea after dinner in Irvine
+01. Sea Cream Jasmine · 7 Leaves Cafe (Irvine)
+02. Jasmine Milk Tea · Tastea (Costa Mesa)
+Backup: Matcha Milk Cap · Kung Fu Tea (Fullerton)">Send the evening</button>
+            </div>
+          </div>
+        </article><article class="route reveal">
+          <div class="plate plate--night"><span class="grain"></span><svg class="route-line" viewBox="0 0 400 225" preserveAspectRatio="none" aria-hidden="true"><path d="M40 170 C120 120 150 90 210 90 C270 90 300 60 360 44" fill="none" stroke="rgba(197,164,109,.6)" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round"/><circle cx="40" cy="170" r="5" fill="#C5A46D"/><circle cx="210" cy="90" r="5" fill="#C5A46D"/><circle cx="360" cy="44" r="5" fill="#F4EFE7"/></svg><span class="plate-cap">San Diego</span></div>
+          <div class="route-body">
+            <span class="route-city">San Diego</span>
+            <h3 class="route-t">A Convoy dessert night</h3>
+            <ul class="route-stops"><li><span class="st">01</span><span><b>Wow Milk (Brown Sugar)</b> <span class="rd">· Kung Fu Tea, <a href="/boba/ca/san-diego/kung-fu-tea-san-diego/" style="color:var(--silver)">San Diego</a> · Brown sugar first</span></span></li><li><span class="st">02</span><span><b>Matcha Red Bean Milk Tea</b> <span class="rd">· Sharetea, <a href="/boba/ca/san-diego/share-tea-san-diego/" style="color:var(--silver)">San Diego</a> · Then matcha</span></span></li></ul>
+            <p class="route-stops" id="rsdb" hidden style="margin:0"><span class="st">★</span><span><b>Avocado Avalanche</b> <span class="rd">· Tastea, <a href="/boba/ca/san-diego/tastea-grill-san-diego/" style="color:var(--silver)">San Diego</a></span></span></p>
+            <div class="route-actions">
+              <button class="btn-mini" type="button" data-backup="rsdb">Reveal the backup</button>
+              <button class="btn-mini btn-mini--solid" type="button" data-route-send="A Convoy dessert night
+01. Wow Milk (Brown Sugar) · Kung Fu Tea (San Diego)
+02. Matcha Red Bean Milk Tea · Sharetea (San Diego)
+Backup: Avocado Avalanche · Tastea (San Diego)">Send the evening</button>
+            </div>
+          </div>
+        </article></div>
+    </div>
+  </section>
+
+  <!-- 9. THE BLACK BOOK -->
+  <section class="sx sx--light" id="blackbook" aria-label="The Black Book">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">The Black Book</p><h2>Kept for later.</h2><p class="lede">A private notebook on this device. Save a drink from any selection, add the shop, and send the list when you’re ready.</p></div>
+      <div class="blackbook">
+        <div class="bb-head"><h3>Your Black Book</h3></div>
+        <div data-bb-body><div class="bb-empty"><span class="serif-hi">Nothing kept yet.</span>Save a drink from any selection and it will wait for you here, with the shop and the checked menu.</div></div>
+        <div class="bb-foot" data-bb-foot style="display:none"><button class="btn-mini btn-mini--solid" type="button" data-bb-send>Send my Black Book</button><button class="btn-mini" type="button" data-bb-clear>Clear</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. THE HOUSE GUIDE -->
+  <section class="sx" aria-label="The House Guide">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">The House Guide</p><h2>How to order, without the guesswork.</h2><p class="lede">Short, practical reads on sweetness, dairy, caffeine and the pours worth seeking.</p></div>
+      <div class="guide-list"><a class="guide-row reveal" href="/best/date-night/"><span class="idx">01</span><span class="gt">A date-night order</span><span class="gd">What to get when it matters a little.</span><span class="arrow">→</span></a><a class="guide-row reveal" href="/best/non-dairy/"><span class="idx">02</span><span class="gt">Ordering dairy-free</span><span class="gd">Which pours skip the milk, from official menus.</span><span class="arrow">→</span></a><a class="guide-row reveal" href="/best/brown-sugar/"><span class="idx">03</span><span class="gt">Brown sugar, done right</span><span class="gd">The chains that pull it off.</span><span class="arrow">→</span></a><a class="guide-row reveal" href="/best/matcha/"><span class="idx">04</span><span class="gt">Matcha worth seeking</span><span class="gd">Grassy, rich, and stone-ground.</span><span class="arrow">→</span></a><a class="guide-row reveal" href="/best/open-late/"><span class="idx">05</span><span class="gt">A late-night tea</span><span class="gd">Rooms that stay open past nine.</span><span class="arrow">→</span></a><a class="guide-row reveal" href="/best/cheap/"><span class="idx">06</span><span class="gt">Best value pours</span><span class="gd">Where the ratio is generous.</span><span class="arrow">→</span></a></div>
+    </div>
+  </section>
+
+  <!-- 11. SOCIETY DIRECTORY -->
+  <section class="sx sx--light" aria-label="Society Directory">
+    <div class="wrap">
+      <div class="dir-entry">
+      <div>
+        <p class="eyebrow">The Society Directory</p>
+        <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:1rem">Three hundred and twenty-one rooms, sorted by where you are.</h2>
+        <p class="lede">The full guide lives on its own page · search by shop or city, filter chains or independents, and keep a list. The homepage stays a place to be hosted, not a spreadsheet.</p>
+        <a class="btn btn-primary" href="/directory/" style="margin-top:1.6rem">Enter the directory</a>
+      </div>
+      <div class="dir-areas"><a class="dir-area" href="/area/sgv/"><span class="da-n">119</span><span class="da-t">The 626</span><span class="da-s">San Gabriel Valley</span></a><a class="dir-area" href="/area/orange-county/"><span class="da-n">84</span><span class="da-t">Orange County</span><span class="da-s">Irvine to Westminster</span></a><a class="dir-area" href="/area/greater-la/"><span class="da-n">69</span><span class="da-t">Greater LA</span><span class="da-s">LA, Long Beach, more</span></a><a class="dir-area" href="/area/san-diego/"><span class="da-n">28</span><span class="da-t">San Diego</span><span class="da-s">Convoy and beyond</span></a><a class="dir-area" href="/area/inland-empire/"><span class="da-n">21</span><span class="da-t">Inland Empire</span><span class="da-s">Riverside to Temecula</span></a></div>
+    </div>
+    </div>
+  </section>
+
+  <!-- 12. TRUST & SOURCES -->
+  <section class="sx sx--smoked" aria-label="Trust and sources">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">The house rules</p><h2>What we will and won’t show.</h2></div>
+      <div class="trust reveal">
+        <div class="trust-item"><h4>Checked menus</h4><p>Every drink is drawn from an official menu, with the date we checked it. Recipes vary by location.</p></div>
+        <div class="trust-item"><h4>No invented facts</h4><p>No ratings, reviews, wait times, or prices we haven’t verified. Unknown stays unknown.</p></div>
+        <div class="trust-item"><h4>Editorial, not paid</h4><p>Our selections are opinions, not placements. Any sponsored item would be labelled plainly.</p></div>
+        <div class="trust-item"><h4>Corrections welcome</h4><p>Menus change. If a shop or drink is wrong, tell us and we’ll fix the record.</p></div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
 <footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a class="brand" href="/">Capy<b>Boba</b></a>
-      <p>The Southern California boba directory. Real hours, honest rankings, new openings tracked.</p>
-      <p class="stamp"><span class="dot"></span>Updated regularly. Boba Passport coming soon.</p>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <span class="wordmark" style="font-size:1.5rem">Capy<b>Boba</b><span class="soc">Society</span></span>
+        <p style="margin:1rem 0 0;max-width:34ch;color:var(--muted-dk);font-size:.9rem">A modern tea salon and guide to Southern California boba. Menus checked, sources shown, nothing invented.</p>
+      </div>
+      <div class="foot-col"><h5>Tonight</h5><a href="/#concierge">The Concierge</a><a href="/#house-choice">House Choice</a><a href="/#flight">The Tasting Flight</a><a href="/#evening">An Evening In</a></div>
+      <div class="foot-col"><h5>Explore</h5><a href="/cities/">Cities</a><a href="/area/sgv/">The 626</a><a href="/area/orange-county/">Orange County</a><a href="/directory/">The directory</a></div>
+      <div class="foot-col"><h5>The Menu</h5><a href="/best/matcha/">Matcha</a><a href="/best/fruit-tea/">Fruit tea</a><a href="/best/brown-sugar/">Brown sugar</a><a href="/best/non-dairy/">Dairy-free</a></div>
     </div>
-    <div class="footer-col">
-      <h4>By area</h4>
-      <ul>
-        <li><a href="/area/sgv/">The 626</a></li>
-        <li><a href="/area/orange-county/">Orange County</a></li>
-        <li><a href="/area/san-diego/">San Diego</a></li>
-        <li><a href="/area/greater-la/">Greater LA</a></li>
-        <li><a href="/area/inland-empire/">Inland Empire</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>By vibe</h4>
-      <ul>
-        <li><a href="/best/date-night/">Date night</a></li>
-        <li><a href="/best/study/">Study-friendly</a></li>
-        <li><a href="/best/open-late/">Open late</a></li>
-        <li><a href="/best/brown-sugar/">Brown sugar</a></li>
-        <li><a href="/best/with-food/">Boba and food</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Cities</h4>
-      <ul>
-        <li><a href="/boba/ca/irvine/">Irvine</a></li>
-        <li><a href="/boba/ca/rowland-heights/">Rowland Heights</a></li>
-        <li><a href="/boba/ca/san-gabriel/">San Gabriel</a></li>
-        <li><a href="/boba/ca/westminster/">Westminster</a></li>
-        <li><a href="/cities/">All 45 cities</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>About</h4>
-      <ul>
-        <li><a href="/how-we-rank/">How we rank</a></li>
-        <li><a href="/how-we-make-money/">How we make money</a></li>
-        <li><a href="/report/">Report a correction</a></li>
-        <li><a href="/about/">About CapyBoba</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>&copy; 2026 CapyBoba</span>
-    <span class="note">We don't take payment for placement on our best-for lists.</span>
-    <a href="/privacy/">Privacy</a>
-    <a href="/terms/">Terms</a>
+    <div class="foot-bottom"><span>&copy; 2026 CapyBoba Society · Southern California</span><span>Menus checked July 1, 2026 · No paid rankings · <a href="/directory/" style="color:var(--silver)">Corrections welcome</a></span></div>
   </div>
 </footer>
-
-<!-- ============================================================
-     JSON-LD  (WebSite + SearchAction + Organization)
-     No aggregateRating anywhere — no first-party ratings until Phase 3.
-     ============================================================ -->
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebSite",
-  "name":"CapyBoba",
-  "url":"https://capyboba.com/",
-  "description":"The Southern California boba directory: find boba by city or vibe with verified hours and tracked new openings.",
-  "potentialAction":{
-    "@type":"SearchAction",
-    "target":{"@type":"EntryPoint","urlTemplate":"https://capyboba.com/search?q={search_term_string}"},
-    "query-input":"required name=search_term_string"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Organization",
-  "name":"CapyBoba",
-  "url":"https://capyboba.com/",
-  "areaServed":"Southern California"
-}
-</script>
-
-<!-- ============================================================
-     BEHAVIOR  (vanilla, no dependencies)
-     ============================================================ -->
-<script>
-(function(){
-  "use strict";
-  var header   = document.getElementById('siteHeader');
-  var triggers = Array.prototype.slice.call(document.querySelectorAll('.nav-trigger'));
-  var panels   = Array.prototype.slice.call(document.querySelectorAll('.mega'));
-  var closeTimer = null;
-
-  function panelFor(id){ return document.getElementById(id); }
-
-  function closeAll(except){
-    triggers.forEach(function(t){
-      var id = t.getAttribute('data-panel');
-      if(id === except) return;
-      t.setAttribute('aria-expanded','false');
-      var p = panelFor(id);
-      if(p) p.setAttribute('data-open','false');
-    });
-  }
-
-  function openPanel(id){
-    closeAll(id);
-    var t = triggers.filter(function(x){return x.getAttribute('data-panel')===id;})[0];
-    var p = panelFor(id);
-    if(t) t.setAttribute('aria-expanded','true');
-    if(p) p.setAttribute('data-open','true');
-  }
-
-  function togglePanel(id){
-    var t = triggers.filter(function(x){return x.getAttribute('data-panel')===id;})[0];
-    if(t && t.getAttribute('aria-expanded')==='true'){ closeAll(); }
-    else { openPanel(id); }
-  }
-
-  triggers.forEach(function(t){
-    var id = t.getAttribute('data-panel');
-    // click / keyboard activation
-    t.addEventListener('click', function(e){ e.preventDefault(); togglePanel(id); });
-    // hover (pointer devices) — open on enter, cancel pending close
-    t.parentNode.addEventListener('mouseenter', function(){
-      if(window.matchMedia('(min-width:1000px)').matches){ clearTimeout(closeTimer); openPanel(id); }
-    });
-  });
-
-  // leaving the whole header closes (panels are children, so moving into them keeps it open)
-  header.addEventListener('mouseleave', function(){
-    if(window.matchMedia('(min-width:1000px)').matches){
-      closeTimer = setTimeout(closeAll, 140);
-    }
-  });
-  header.addEventListener('mouseenter', function(){ clearTimeout(closeTimer); });
-
-  // Escape closes and returns focus to the open trigger
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape'){
-      var open = triggers.filter(function(t){return t.getAttribute('aria-expanded')==='true';})[0];
-      closeAll();
-      if(open) open.focus();
-      closeDrawer();
-    }
-  });
-
-  // click outside header closes
-  document.addEventListener('click', function(e){
-    if(!header.contains(e.target)) closeAll();
-  });
-
-  /* ---------- Mobile drawer ---------- */
-  var drawer = document.getElementById('mobileDrawer');
-  var menuBtn = document.querySelector('.menu-toggle');
-  var closeBtn = document.querySelector('.drawer-close');
-
-  function openDrawer(){
-    drawer.setAttribute('data-open','true');
-    drawer.setAttribute('aria-hidden','false');
-    menuBtn.setAttribute('aria-expanded','true');
-    document.body.style.overflow='hidden';
-    var first = drawer.querySelector('input,button,a');
-    if(first) first.focus();
-  }
-  function closeDrawer(){
-    if(!drawer.getAttribute('data-open')) return;
-    drawer.removeAttribute('data-open');
-    drawer.setAttribute('aria-hidden','true');
-    menuBtn.setAttribute('aria-expanded','false');
-    document.body.style.overflow='';
-  }
-  if(menuBtn) menuBtn.addEventListener('click', openDrawer);
-  if(closeBtn) closeBtn.addEventListener('click', function(){ closeDrawer(); menuBtn.focus(); });
-
-  // accordions
-  document.querySelectorAll('.acc-trigger').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var panel = document.getElementById(btn.getAttribute('aria-controls'));
-      var open = btn.getAttribute('aria-expanded')==='true';
-      btn.setAttribute('aria-expanded', String(!open));
-      if(panel) panel.setAttribute('data-open', String(!open));
-    });
-  });
-
-  /* ---------- Search routing ---------- */
-  // City-like queries route to the city directory; anything else to search results.
-  // (Both are real planned routes; SearchAction schema points at /search.)
-  document.querySelectorAll('[data-search]').forEach(function(form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      var input = form.querySelector('input');
-      var q = (input && input.value || '').trim();
-      if(!q){ if(input) input.focus(); return; }
-      window.location.href = '/search?q=' + encodeURIComponent(q);
-    });
-  });
-})();
-</script>
-
-<script>
-(function(){
-  var SHOPS = [{"n":"Pearl's Finest Teas","c":"Los Angeles","cs":"los-angeles","s":"pearls-finest-teas-los-angeles","ar":"Greater LA","ch":1},{"n":"It's Boba Time","c":"Los Angeles","cs":"los-angeles","s":"its-boba-time-los-angeles","ar":"Greater LA","ch":1},{"n":"Four Leaf","c":"Los Angeles","cs":"los-angeles","s":"four-leaf-los-angeles","ar":"Greater LA","ch":0},{"n":"House of Boba","c":"Los Angeles","cs":"los-angeles","s":"house-of-boba-los-angeles","ar":"Greater LA","ch":0},{"n":"Quickly","c":"Los Angeles","cs":"los-angeles","s":"quickly-los-angeles","ar":"Greater LA","ch":1},{"n":"T - Tea Shoppe","c":"Los Angeles","cs":"los-angeles","s":"t-tea-shoppe-los-angeles","ar":"Greater LA","ch":0},{"n":"Yo! Boba","c":"Los Angeles","cs":"los-angeles","s":"yo-boba-los-angeles","ar":"Greater LA","ch":0},{"n":"Ten Ren's Tea Time","c":"Los Angeles","cs":"los-angeles","s":"ten-rens-tea-time-los-angeles","ar":"Greater LA","ch":1},{"n":"Lollicup","c":"Los Angeles","cs":"los-angeles","s":"lollicup-los-angeles","ar":"Greater LA","ch":1},{"n":"Boba Time","c":"Los Angeles","cs":"los-angeles","s":"boba-time-los-angeles","ar":"Greater LA","ch":1},{"n":"Formosa Boba Men","c":"Los Angeles","cs":"los-angeles","s":"formosa-boba-men-los-angeles","ar":"Greater LA","ch":0},{"n":"Volcano Tea House","c":"Los Angeles","cs":"los-angeles","s":"volcano-tea-house-los-angeles","ar":"Greater LA","ch":0},{"n":"Boba Bear","c":"Los Angeles","cs":"los-angeles","s":"boba-bear-los-angeles","ar":"Greater LA","ch":1},{"n":"Boba Loca","c":"Los Angeles","cs":"los-angeles","s":"boba-loca-los-angeles","ar":"Greater LA","ch":1},{"n":"MJ Cafe Express","c":"Los Angeles","cs":"los-angeles","s":"mj-cafe-express-los-angeles","ar":"Greater LA","ch":0},{"n":"Cafe Latte","c":"Los Angeles","cs":"los-angeles","s":"cafe-latte-los-angeles","ar":"Greater LA","ch":0},{"n":"Bon Bon Tea House","c":"Los Angeles","cs":"los-angeles","s":"bon-bon-tea-house-los-angeles","ar":"Greater LA","ch":0},{"n":"Cafe Home","c":"Los Angeles","cs":"los-angeles","s":"cafe-home-los-angeles","ar":"Greater LA","ch":0},{"n":"Bubble U","c":"Los Angeles","cs":"los-angeles","s":"bubble-u-los-angeles","ar":"Greater LA","ch":0},{"n":"CoCo Fresh Tea & Juice","c":"Los Angeles","cs":"los-angeles","s":"coco-fresh-tea-and-juice-los-angeles","ar":"Greater LA","ch":1},{"n":"Honeyboba","c":"Los Angeles","cs":"los-angeles","s":"honeyboba-los-angeles","ar":"Greater LA","ch":1},{"n":"Twinkle Brown Sugar","c":"Los Angeles","cs":"los-angeles","s":"twinkle-brown-sugar-los-angeles","ar":"Greater LA","ch":0},{"n":"I Love Boba","c":"Los Angeles","cs":"los-angeles","s":"i-love-boba-los-angeles","ar":"Greater LA","ch":0},{"n":"I Love Sweetea","c":"Los Angeles","cs":"los-angeles","s":"i-love-sweetea-los-angeles","ar":"Greater LA","ch":0},{"n":"Kukui Hut Cafe","c":"Los Angeles","cs":"los-angeles","s":"kukui-hut-cafe-los-angeles","ar":"Greater LA","ch":0},{"n":"Berlins","c":"Los Angeles","cs":"los-angeles","s":"berlins-los-angeles","ar":"Greater LA","ch":0},{"n":"Hashtag Coffee & Tea","c":"Los Angeles","cs":"los-angeles","s":"hashtag-coffee-and-tea-los-angeles","ar":"Greater LA","ch":0},{"n":"Cantaloop","c":"Los Angeles","cs":"los-angeles","s":"cantaloop-los-angeles","ar":"Greater LA","ch":1},{"n":"Boba Story","c":"Los Angeles","cs":"los-angeles","s":"boba-story-los-angeles","ar":"Greater LA","ch":0},{"n":"Mr. Boba","c":"Los Angeles","cs":"los-angeles","s":"mr-boba-los-angeles","ar":"Greater LA","ch":0},{"n":"Zero Express","c":"Long Beach","cs":"long-beach","s":"zero-express-long-beach","ar":"Greater LA","ch":1},{"n":"Honeybee's","c":"Long Beach","cs":"long-beach","s":"honeybees-long-beach","ar":"Greater LA","ch":0},{"n":"Hiccups","c":"Long Beach","cs":"long-beach","s":"hiccups-long-beach","ar":"Greater LA","ch":0},{"n":"Cha For Tea","c":"Long Beach","cs":"long-beach","s":"cha-for-tea-long-beach","ar":"Greater LA","ch":1},{"n":"Roasting Water","c":"Long Beach","cs":"long-beach","s":"roasting-water-long-beach","ar":"Greater LA","ch":1},{"n":"Boba Tea House","c":"Long Beach","cs":"long-beach","s":"boba-tea-house-long-beach","ar":"Greater LA","ch":1},{"n":"Snow Monster","c":"Long Beach","cs":"long-beach","s":"snow-monster-long-beach","ar":"Greater LA","ch":1},{"n":"Boba Loca","c":"Long Beach","cs":"long-beach","s":"boba-loca-long-beach","ar":"Greater LA","ch":1},{"n":"Boba Lab","c":"Santa Monica","cs":"santa-monica","s":"boba-lab-santa-monica","ar":"Greater LA","ch":0},{"n":"Bubble Boba","c":"Santa Monica","cs":"santa-monica","s":"bubble-boba-santa-monica","ar":"Greater LA","ch":0},{"n":"TLight Boba","c":"Santa Monica","cs":"santa-monica","s":"tlight-boba-santa-monica","ar":"Greater LA","ch":0},{"n":"The Boba Promenade Cafe","c":"Santa Monica","cs":"santa-monica","s":"the-boba-promenade-cafe-santa-monica","ar":"Greater LA","ch":0},{"n":"Boba Tea & Me Truck","c":"Santa Monica","cs":"santa-monica","s":"boba-tea-and-me-truck-santa-monica","ar":"Greater LA","ch":0},{"n":"Nest Tea House","c":"Arcadia","cs":"arcadia","s":"nest-tea-house-arcadia","ar":"The 626","ch":0},{"n":"Half And Half Tea Express","c":"Arcadia","cs":"arcadia","s":"half-and-half-tea-express-arcadia","ar":"The 626","ch":0},{"n":"CoCo Fresh Tea & Juice","c":"Arcadia","cs":"arcadia","s":"coco-fresh-tea-and-juice-arcadia","ar":"The 626","ch":1},{"n":"Honeyboba","c":"Arcadia","cs":"arcadia","s":"honeyboba-arcadia","ar":"The 626","ch":1},{"n":"Yoshantea Tea House","c":"Arcadia","cs":"arcadia","s":"yoshantea-tea-house-arcadia","ar":"The 626","ch":0},{"n":"AU79 Tea House","c":"Arcadia","cs":"arcadia","s":"au79-tea-house-arcadia","ar":"The 626","ch":0},{"n":"Bearology","c":"Arcadia","cs":"arcadia","s":"bearology-arcadia","ar":"The 626","ch":0},{"n":"BAMBU","c":"Arcadia","cs":"arcadia","s":"bambu-arcadia","ar":"The 626","ch":1},{"n":"Chatime","c":"Arcadia","cs":"arcadia","s":"chatime-arcadia","ar":"The 626","ch":1},{"n":"Tea Bar Starry","c":"Arcadia","cs":"arcadia","s":"tea-bar-starry-arcadia","ar":"The 626","ch":0},{"n":"Ten Ren's Tea Time","c":"Arcadia","cs":"arcadia","s":"ten-rens-tea-time-arcadia","ar":"The 626","ch":1},{"n":"Tapioca Express","c":"Arcadia","cs":"arcadia","s":"tapioca-express-arcadia","ar":"The 626","ch":1},{"n":"Boba Ave Express","c":"Arcadia","cs":"arcadia","s":"boba-ave-express-arcadia","ar":"The 626","ch":0},{"n":"Quickly","c":"Arcadia","cs":"arcadia","s":"quickly-arcadia","ar":"The 626","ch":1},{"n":"Spiceology","c":"Arcadia","cs":"arcadia","s":"spiceology-arcadia","ar":"The 626","ch":0},{"n":"Bird Pick Tea & Herb","c":"Arcadia","cs":"arcadia","s":"bird-pick-tea-and-herb-arcadia","ar":"The 626","ch":1},{"n":"BYOB A Boba Company","c":"Covina","cs":"covina","s":"byob-a-boba-company-covina","ar":"The 626","ch":0},{"n":"The Ice Bar","c":"Covina","cs":"covina","s":"the-ice-bar-covina","ar":"The 626","ch":0},{"n":"Black & White","c":"Covina","cs":"covina","s":"black-and-white-covina","ar":"The 626","ch":0},{"n":"Factory Tea Bar","c":"Covina","cs":"covina","s":"factory-tea-bar-covina","ar":"The 626","ch":1},{"n":"Jin Teahouse","c":"Covina","cs":"covina","s":"jin-teahouse-covina","ar":"The 626","ch":0},{"n":"Cha2o","c":"Covina","cs":"covina","s":"cha2o-covina","ar":"The 626","ch":1},{"n":"Tapioca Express","c":"Covina","cs":"covina","s":"tapioca-express-covina","ar":"The 626","ch":1},{"n":"Lollicup","c":"Covina","cs":"covina","s":"lollicup-covina","ar":"The 626","ch":1},{"n":"Boba Tea Lounge","c":"Covina","cs":"covina","s":"boba-tea-lounge-covina","ar":"The 626","ch":0},{"n":"Home Brewed Bar","c":"Pasadena","cs":"pasadena","s":"home-brewed-bar-pasadena","ar":"The 626","ch":0},{"n":"AU79 Tea Express","c":"Pasadena","cs":"pasadena","s":"au79-tea-express-pasadena","ar":"The 626","ch":0},{"n":"Cafe 86","c":"Pasadena","cs":"pasadena","s":"cafe-86-pasadena","ar":"The 626","ch":0},{"n":"T Pumps","c":"Pasadena","cs":"pasadena","s":"t-pumps-pasadena","ar":"The 626","ch":0},{"n":"Tea Spots","c":"Pasadena","cs":"pasadena","s":"tea-spots-pasadena","ar":"The 626","ch":0},{"n":"Bird Pick Tea & Herb","c":"Pasadena","cs":"pasadena","s":"bird-pick-tea-and-herb-pasadena","ar":"The 626","ch":1},{"n":"Half and Half Tea Express","c":"Pasadena","cs":"pasadena","s":"half-and-half-tea-express-pasadena","ar":"The 626","ch":0},{"n":"Jin Tea Shop","c":"Pasadena","cs":"pasadena","s":"jin-tea-shop-pasadena","ar":"The 626","ch":0},{"n":"Boba Time","c":"Walnut","cs":"walnut","s":"boba-time-walnut","ar":"The 626","ch":1},{"n":"Freshia Tea Time","c":"Walnut","cs":"walnut","s":"freshia-tea-time-walnut","ar":"The 626","ch":0},{"n":"Teaology","c":"Walnut","cs":"walnut","s":"teaology-walnut","ar":"The 626","ch":0},{"n":"$1 Drink","c":"Walnut","cs":"walnut","s":"1-drink-walnut","ar":"The 626","ch":0},{"n":"Lollicup","c":"Walnut","cs":"walnut","s":"lollicup-walnut","ar":"The 626","ch":1},{"n":"Boba V Cafe","c":"Walnut","cs":"walnut","s":"boba-v-cafe-walnut","ar":"The 626","ch":0},{"n":"Ten Ren's Tea Time","c":"Walnut","cs":"walnut","s":"ten-rens-tea-time-walnut","ar":"The 626","ch":1},{"n":"MJ Cafe & Teahouse","c":"Walnut","cs":"walnut","s":"mj-cafe-and-teahouse-walnut","ar":"The 626","ch":1},{"n":"Tea Block","c":"Rowland Heights","cs":"rowland-heights","s":"tea-block-rowland-heights","ar":"The 626","ch":0},{"n":"Dragonfly Tea Bar","c":"Rowland Heights","cs":"rowland-heights","s":"dragonfly-tea-bar-rowland-heights","ar":"The 626","ch":1},{"n":"Tastea","c":"Rowland Heights","cs":"rowland-heights","s":"tastea-rowland-heights","ar":"The 626","ch":1},{"n":"Boba Bear","c":"Rowland Heights","cs":"rowland-heights","s":"boba-bear-rowland-heights","ar":"The 626","ch":1},{"n":"Half & Half Tea Express","c":"Rowland Heights","cs":"rowland-heights","s":"half-and-half-tea-express-rowland-heights","ar":"The 626","ch":1},{"n":"I Heart Boba","c":"Rowland Heights","cs":"rowland-heights","s":"i-heart-boba-rowland-heights","ar":"The 626","ch":0},{"n":"BAMBU","c":"Rowland Heights","cs":"rowland-heights","s":"bambu-rowland-heights","ar":"The 626","ch":1},{"n":"Ten Ren's Tea Time","c":"Rowland Heights","cs":"rowland-heights","s":"ten-rens-tea-time-rowland-heights","ar":"The 626","ch":1},{"n":"Tea Bar","c":"Rowland Heights","cs":"rowland-heights","s":"tea-bar-rowland-heights","ar":"The 626","ch":0},{"n":"Boba Gogo","c":"Rowland Heights","cs":"rowland-heights","s":"boba-gogo-rowland-heights","ar":"The 626","ch":0},{"n":"Lollicup Fresh","c":"Rowland Heights","cs":"rowland-heights","s":"lollicup-fresh-rowland-heights","ar":"The 626","ch":1},{"n":"MJ Cafe & Teahouse","c":"Rowland Heights","cs":"rowland-heights","s":"mj-cafe-and-teahouse-rowland-heights","ar":"The 626","ch":1},{"n":"Little Bean","c":"Rowland Heights","cs":"rowland-heights","s":"little-bean-rowland-heights","ar":"The 626","ch":0},{"n":"Tea Station","c":"Rowland Heights","cs":"rowland-heights","s":"tea-station-rowland-heights","ar":"The 626","ch":1},{"n":"Tea Time Express","c":"Rowland Heights","cs":"rowland-heights","s":"tea-time-express-rowland-heights","ar":"The 626","ch":1},{"n":"Quickly","c":"Rowland Heights","cs":"rowland-heights","s":"quickly-rowland-heights","ar":"The 626","ch":1},{"n":"Bobee 5","c":"Rowland Heights","cs":"rowland-heights","s":"bobee-5-rowland-heights","ar":"The 626","ch":0},{"n":"Zero Degrees","c":"Rowland Heights","cs":"rowland-heights","s":"zero-degrees-rowland-heights","ar":"The 626","ch":1},{"n":"Blackball Taiwanese Dessert","c":"Rowland Heights","cs":"rowland-heights","s":"blackball-taiwanese-dessert-rowland-heights","ar":"The 626","ch":1},{"n":"Honeymee","c":"Rowland Heights","cs":"rowland-heights","s":"honeymee-rowland-heights","ar":"The 626","ch":0},{"n":"Tea Brick","c":"Monterey Park","cs":"monterey-park","s":"tea-brick-monterey-park","ar":"The 626","ch":0},{"n":"Boba Ave","c":"Monterey Park","cs":"monterey-park","s":"boba-ave-monterey-park","ar":"The 626","ch":0},{"n":"Half & Half Tea Express","c":"Monterey Park","cs":"monterey-park","s":"half-and-half-tea-express-monterey-park","ar":"The 626","ch":1},{"n":"Honeyboba","c":"Monterey Park","cs":"monterey-park","s":"honeyboba-monterey-park","ar":"The 626","ch":1},{"n":"Got Boba?!","c":"Monterey Park","cs":"monterey-park","s":"got-boba-monterey-park","ar":"The 626","ch":0},{"n":"Ten Ren's Tea Time","c":"Monterey Park","cs":"monterey-park","s":"ten-rens-tea-time-monterey-park","ar":"The 626","ch":1},{"n":"CoCo Fresh Tea & Juice","c":"Monterey Park","cs":"monterey-park","s":"coco-fresh-tea-and-juice-monterey-park","ar":"The 626","ch":1},{"n":"Quickly","c":"Monterey Park","cs":"monterey-park","s":"quickly-monterey-park","ar":"The 626","ch":1},{"n":"Zero X","c":"Pomona","cs":"pomona","s":"zero-x-pomona","ar":"Greater LA","ch":0},{"n":"Boba Tea Zone","c":"Pomona","cs":"pomona","s":"boba-tea-zone-pomona","ar":"Greater LA","ch":0},{"n":"Cha For Tea","c":"Pomona","cs":"pomona","s":"cha-for-tea-pomona","ar":"Greater LA","ch":1},{"n":"Mana Tea House","c":"El Monte","cs":"el-monte","s":"mana-tea-house-el-monte","ar":"The 626","ch":0},{"n":"Cha Cafe","c":"El Monte","cs":"el-monte","s":"cha-cafe-el-monte","ar":"The 626","ch":0},{"n":"Boba Bear","c":"El Monte","cs":"el-monte","s":"boba-bear-el-monte","ar":"The 626","ch":1},{"n":"Tea Republic","c":"El Monte","cs":"el-monte","s":"tea-republic-el-monte","ar":"The 626","ch":1},{"n":"The Vounge","c":"El Monte","cs":"el-monte","s":"the-vounge-el-monte","ar":"The 626","ch":0},{"n":"Tea Rush","c":"Diamond Bar","cs":"diamond-bar","s":"tea-rush-diamond-bar","ar":"The 626","ch":0},{"n":"Oku 1","c":"Diamond Bar","cs":"diamond-bar","s":"oku-1-diamond-bar","ar":"The 626","ch":0},{"n":"Tea Garden Cafe","c":"Diamond Bar","cs":"diamond-bar","s":"tea-garden-cafe-diamond-bar","ar":"The 626","ch":0},{"n":"Tealicious","c":"Diamond Bar","cs":"diamond-bar","s":"tealicious-diamond-bar","ar":"The 626","ch":0},{"n":"Cafe Haus","c":"Diamond Bar","cs":"diamond-bar","s":"cafe-haus-diamond-bar","ar":"The 626","ch":0},{"n":"Lollicup","c":"Diamond Bar","cs":"diamond-bar","s":"lollicup-diamond-bar","ar":"The 626","ch":1},{"n":"Health Station","c":"Diamond Bar","cs":"diamond-bar","s":"health-station-diamond-bar","ar":"The 626","ch":0},{"n":"Mimi 5 Bobee","c":"Diamond Bar","cs":"diamond-bar","s":"mimi-5-bobee-diamond-bar","ar":"The 626","ch":0},{"n":"You & Me Cafe","c":"Diamond Bar","cs":"diamond-bar","s":"you-and-me-cafe-diamond-bar","ar":"The 626","ch":0},{"n":"Tea Station","c":"Gardena","cs":"gardena","s":"tea-station-gardena","ar":"Greater LA","ch":1},{"n":"Dingle Berries Coffee & Tea","c":"Rosemead","cs":"rosemead","s":"dingle-berries-coffee-and-tea-rosemead","ar":"The 626","ch":0},{"n":"Neighbors Tea House","c":"Rosemead","cs":"rosemead","s":"neighbors-tea-house-rosemead","ar":"The 626","ch":0},{"n":"Honeyboba","c":"Rosemead","cs":"rosemead","s":"honeyboba-rosemead","ar":"The 626","ch":1},{"n":"Le Arbre Tea House","c":"Rosemead","cs":"rosemead","s":"le-arbre-tea-house-rosemead","ar":"The 626","ch":0},{"n":"Quickly","c":"Rosemead","cs":"rosemead","s":"quickly-rosemead","ar":"The 626","ch":1},{"n":"Boba Corner","c":"Rosemead","cs":"rosemead","s":"boba-corner-rosemead","ar":"The 626","ch":0},{"n":"Cha Bei Bei Tea House","c":"Rosemead","cs":"rosemead","s":"cha-bei-bei-tea-house-rosemead","ar":"The 626","ch":0},{"n":"Tea Republic","c":"San Gabriel","cs":"san-gabriel","s":"tea-republic-san-gabriel","ar":"The 626","ch":1},{"n":"Factory Tea Bar","c":"San Gabriel","cs":"san-gabriel","s":"factory-tea-bar-san-gabriel","ar":"The 626","ch":1},{"n":"T4U Cafe","c":"San Gabriel","cs":"san-gabriel","s":"t4u-cafe-san-gabriel","ar":"The 626","ch":0},{"n":"Half & Half Tea House","c":"San Gabriel","cs":"san-gabriel","s":"half-and-half-tea-house-san-gabriel","ar":"The 626","ch":0},{"n":"BAMBU","c":"San Gabriel","cs":"san-gabriel","s":"bambu-san-gabriel","ar":"The 626","ch":1},{"n":"A Plus Tea House","c":"San Gabriel","cs":"san-gabriel","s":"a-plus-tea-house-san-gabriel","ar":"The 626","ch":0},{"n":"Fresh Roast","c":"San Gabriel","cs":"san-gabriel","s":"fresh-roast-san-gabriel","ar":"The 626","ch":0},{"n":"Half & Half Good Old Time","c":"San Gabriel","cs":"san-gabriel","s":"half-and-half-good-old-time-san-gabriel","ar":"The 626","ch":0},{"n":"Share Tea","c":"San Gabriel","cs":"san-gabriel","s":"share-tea-san-gabriel","ar":"The 626","ch":1},{"n":"Bubble Republic","c":"San Gabriel","cs":"san-gabriel","s":"bubble-republic-san-gabriel","ar":"The 626","ch":0},{"n":"Milk & Honey","c":"San Gabriel","cs":"san-gabriel","s":"milk-and-honey-san-gabriel","ar":"The 626","ch":0},{"n":"Oh My Pan Bakery & Tea","c":"San Gabriel","cs":"san-gabriel","s":"oh-my-pan-bakery-and-tea-san-gabriel","ar":"The 626","ch":0},{"n":"Snow House Tea Bar","c":"San Gabriel","cs":"san-gabriel","s":"snow-house-tea-bar-san-gabriel","ar":"The 626","ch":0},{"n":"Tapioca Express","c":"San Gabriel","cs":"san-gabriel","s":"tapioca-express-san-gabriel","ar":"The 626","ch":1},{"n":"Ten Ren","c":"San Gabriel","cs":"san-gabriel","s":"ten-ren-san-gabriel","ar":"The 626","ch":0},{"n":"ID Cha House","c":"San Gabriel","cs":"san-gabriel","s":"id-cha-house-san-gabriel","ar":"The 626","ch":0},{"n":"Tea Station","c":"San Gabriel","cs":"san-gabriel","s":"tea-station-san-gabriel","ar":"The 626","ch":1},{"n":"Blackball Taiwanese Dessert","c":"San Gabriel","cs":"san-gabriel","s":"blackball-taiwanese-dessert-san-gabriel","ar":"The 626","ch":1},{"n":"Boba Ave 8090","c":"San Gabriel","cs":"san-gabriel","s":"boba-ave-8090-san-gabriel","ar":"The 626","ch":0},{"n":"Quickly","c":"San Gabriel","cs":"san-gabriel","s":"quickly-san-gabriel","ar":"The 626","ch":1},{"n":"Labobatory","c":"San Gabriel","cs":"san-gabriel","s":"labobatory-san-gabriel","ar":"The 626","ch":0},{"n":"Miss Tea","c":"Baldwin Park","cs":"baldwin-park","s":"miss-tea-baldwin-park","ar":"The 626","ch":0},{"n":"Bobana","c":"Huntington Park","cs":"huntington-park","s":"bobana-huntington-park","ar":"Greater LA","ch":0},{"n":"Hola Coffee & Boba","c":"Huntington Park","cs":"huntington-park","s":"hola-coffee-and-boba-huntington-park","ar":"Greater LA","ch":0},{"n":"Boba Express","c":"Temple City","cs":"temple-city","s":"boba-express-temple-city","ar":"The 626","ch":1},{"n":"Quickly","c":"Temple City","cs":"temple-city","s":"quickly-temple-city","ar":"The 626","ch":1},{"n":"Tea Station Express","c":"Temple City","cs":"temple-city","s":"tea-station-express-temple-city","ar":"The 626","ch":0},{"n":"Rendezvous Cafe","c":"Temple City","cs":"temple-city","s":"rendezvous-cafe-temple-city","ar":"The 626","ch":0},{"n":"Meet Fresh","c":"Temple City","cs":"temple-city","s":"meet-fresh-temple-city","ar":"The 626","ch":0},{"n":"Tea Station","c":"Temple City","cs":"temple-city","s":"tea-station-temple-city","ar":"The 626","ch":1},{"n":"Boba Loca","c":"Burbank","cs":"burbank","s":"boba-loca-burbank","ar":"Greater LA","ch":1},{"n":"Tea Pop","c":"Burbank","cs":"burbank","s":"tea-pop-burbank","ar":"Greater LA","ch":0},{"n":"It's Boba Time","c":"Hollywood","cs":"hollywood","s":"its-boba-time-hollywood","ar":"Greater LA","ch":1},{"n":"Cantaloop","c":"Hollywood","cs":"hollywood","s":"cantaloop-hollywood","ar":"Greater LA","ch":1},{"n":"Hollywood Rock Cafe","c":"Hollywood","cs":"hollywood","s":"hollywood-rock-cafe-hollywood","ar":"Greater LA","ch":0},{"n":"Pearl's Finest Teas","c":"Hollywood","cs":"hollywood","s":"pearls-finest-teas-hollywood","ar":"Greater LA","ch":1},{"n":"Hart's Cafe","c":"Hollywood","cs":"hollywood","s":"harts-cafe-hollywood","ar":"Greater LA","ch":0},{"n":"Alfred Tea","c":"Hollywood","cs":"hollywood","s":"alfred-tea-hollywood","ar":"Greater LA","ch":0},{"n":"Share Tea","c":"Cerritos","cs":"cerritos","s":"share-tea-cerritos","ar":"Greater LA","ch":1},{"n":"Fusion Tea Bar","c":"Cerritos","cs":"cerritos","s":"fusion-tea-bar-cerritos","ar":"Greater LA","ch":0},{"n":"BAMBU","c":"Cerritos","cs":"cerritos","s":"bambu-cerritos","ar":"Greater LA","ch":1},{"n":"Kape Republik","c":"Cerritos","cs":"cerritos","s":"kape-republik-cerritos","ar":"Greater LA","ch":0},{"n":"Tapioca Express","c":"Cerritos","cs":"cerritos","s":"tapioca-express-cerritos","ar":"Greater LA","ch":1},{"n":"Guppy Teahouse","c":"Cerritos","cs":"cerritos","s":"guppy-teahouse-cerritos","ar":"Greater LA","ch":0},{"n":"Class 302","c":"Cerritos","cs":"cerritos","s":"class-302-cerritos","ar":"Greater LA","ch":1},{"n":"Cha2O","c":"Cerritos","cs":"cerritos","s":"cha2o-cerritos","ar":"Greater LA","ch":1},{"n":"Tea Station","c":"Cerritos","cs":"cerritos","s":"tea-station-cerritos","ar":"Greater LA","ch":1},{"n":"It's Boba Time","c":"Artesia","cs":"artesia","s":"its-boba-time-artesia","ar":"Greater LA","ch":1},{"n":"Dolphin Bay","c":"Artesia","cs":"artesia","s":"dolphin-bay-artesia","ar":"Greater LA","ch":0},{"n":"Lollicup","c":"Artesia","cs":"artesia","s":"lollicup-artesia","ar":"Greater LA","ch":1},{"n":"The Loose Teas","c":"Monrovia","cs":"monrovia","s":"the-loose-teas-monrovia","ar":"The 626","ch":0},{"n":"Roasting Water","c":"Westminster","cs":"westminster","s":"roasting-water-westminster","ar":"Orange County","ch":1},{"n":"4 Seasons Tea","c":"Westminster","cs":"westminster","s":"4-seasons-tea-westminster","ar":"Orange County","ch":0},{"n":"Bloomz Tea","c":"Westminster","cs":"westminster","s":"bloomz-tea-westminster","ar":"Orange County","ch":0},{"n":"3 Blossoms Cafe","c":"Westminster","cs":"westminster","s":"3-blossoms-cafe-westminster","ar":"Orange County","ch":0},{"n":"Dingtea Bolsa","c":"Westminster","cs":"westminster","s":"dingtea-bolsa-westminster","ar":"Orange County","ch":0},{"n":"Zero Degrees","c":"Westminster","cs":"westminster","s":"zero-degrees-westminster","ar":"Orange County","ch":1},{"n":"Lollicup","c":"Westminster","cs":"westminster","s":"lollicup-westminster","ar":"Orange County","ch":1},{"n":"Boba Corner 2","c":"Westminster","cs":"westminster","s":"boba-corner-2-westminster","ar":"Orange County","ch":0},{"n":"Snow Monster","c":"Westminster","cs":"westminster","s":"snow-monster-westminster","ar":"Orange County","ch":1},{"n":"Kung Fu Tea","c":"Westminster","cs":"westminster","s":"kung-fu-tea-westminster","ar":"Orange County","ch":1},{"n":"Tapioca Express","c":"Westminster","cs":"westminster","s":"tapioca-express-westminster","ar":"Orange County","ch":1},{"n":"Tebo Tebo Tea Lounge","c":"Westminster","cs":"westminster","s":"tebo-tebo-tea-lounge-westminster","ar":"Orange County","ch":1},{"n":"Tebo Tebo Tea Express","c":"Westminster","cs":"westminster","s":"tebo-tebo-tea-express-westminster","ar":"Orange County","ch":1},{"n":"Turtle Tea","c":"Westminster","cs":"westminster","s":"turtle-tea-westminster","ar":"Orange County","ch":0},{"n":"Pick Me Up Teahouse","c":"Garden Grove","cs":"garden-grove","s":"pick-me-up-teahouse-garden-grove","ar":"Orange County","ch":0},{"n":"Almond Haus","c":"Garden Grove","cs":"garden-grove","s":"almond-haus-garden-grove","ar":"Orange County","ch":0},{"n":"7 Leaves Cafe","c":"Garden Grove","cs":"garden-grove","s":"7-leaves-cafe-garden-grove","ar":"Orange County","ch":1},{"n":"Gotcha Cafe","c":"Garden Grove","cs":"garden-grove","s":"gotcha-cafe-garden-grove","ar":"Orange County","ch":0},{"n":"Tastea","c":"Garden Grove","cs":"garden-grove","s":"tastea-garden-grove","ar":"Orange County","ch":1},{"n":"Roasting Water","c":"Garden Grove","cs":"garden-grove","s":"roasting-water-garden-grove","ar":"Orange County","ch":1},{"n":"Boba Loca","c":"Garden Grove","cs":"garden-grove","s":"boba-loca-garden-grove","ar":"Orange County","ch":1},{"n":"Crave","c":"Garden Grove","cs":"garden-grove","s":"crave-garden-grove","ar":"Orange County","ch":0},{"n":"Mio Tea House","c":"Garden Grove","cs":"garden-grove","s":"mio-tea-house-garden-grove","ar":"Orange County","ch":0},{"n":"Urban Location","c":"Garden Grove","cs":"garden-grove","s":"urban-location-garden-grove","ar":"Orange County","ch":0},{"n":"Tebo Tebo Tea Express","c":"Garden Grove","cs":"garden-grove","s":"tebo-tebo-tea-express-garden-grove","ar":"Orange County","ch":1},{"n":"Ten Ren Tea","c":"Anaheim","cs":"anaheim","s":"ten-ren-tea-anaheim","ar":"Orange County","ch":0},{"n":"Mini Monster","c":"Anaheim","cs":"anaheim","s":"mini-monster-anaheim","ar":"Orange County","ch":0},{"n":"Formosa Tea Time","c":"Anaheim","cs":"anaheim","s":"formosa-tea-time-anaheim","ar":"Orange County","ch":0},{"n":"OMG! Dessert Lounge","c":"Anaheim","cs":"anaheim","s":"omg-dessert-lounge-anaheim","ar":"Orange County","ch":0},{"n":"Monkey Tea","c":"Huntington Beach","cs":"huntington-beach","s":"monkey-tea-huntington-beach","ar":"Orange County","ch":0},{"n":"TeaArias","c":"Huntington Beach","cs":"huntington-beach","s":"teaarias-huntington-beach","ar":"Orange County","ch":0},{"n":"7 Leaves Cafe","c":"Huntington Beach","cs":"huntington-beach","s":"7-leaves-cafe-huntington-beach","ar":"Orange County","ch":1},{"n":"Snow Monster","c":"Huntington Beach","cs":"huntington-beach","s":"snow-monster-huntington-beach","ar":"Orange County","ch":1},{"n":"Share Tea","c":"Fullerton","cs":"fullerton","s":"share-tea-fullerton","ar":"Orange County","ch":1},{"n":"Zero Express","c":"Fullerton","cs":"fullerton","s":"zero-express-fullerton","ar":"Orange County","ch":1},{"n":"Ice Bomb","c":"Fullerton","cs":"fullerton","s":"ice-bomb-fullerton","ar":"Orange County","ch":0},{"n":"Cafe Bing","c":"Fullerton","cs":"fullerton","s":"cafe-bing-fullerton","ar":"Orange County","ch":0},{"n":"Ten Ren's Tea Time","c":"Fullerton","cs":"fullerton","s":"ten-rens-tea-time-fullerton","ar":"Orange County","ch":1},{"n":"Cha2o","c":"Fullerton","cs":"fullerton","s":"cha2o-fullerton","ar":"Orange County","ch":1},{"n":"Pink Boba","c":"Fullerton","cs":"fullerton","s":"pink-boba-fullerton","ar":"Orange County","ch":0},{"n":"Quickly","c":"Fullerton","cs":"fullerton","s":"quickly-fullerton","ar":"Orange County","ch":1},{"n":"Kung Fu Tea","c":"Fullerton","cs":"fullerton","s":"kung-fu-tea-fullerton","ar":"Orange County","ch":1},{"n":"BAMBU","c":"Irvine","cs":"irvine","s":"bambu-irvine","ar":"Orange County","ch":1},{"n":"7 Leaves Cafe","c":"Irvine","cs":"irvine","s":"7-leaves-cafe-irvine","ar":"Orange County","ch":1},{"n":"Honeyberry","c":"Irvine","cs":"irvine","s":"honeyberry-irvine","ar":"Orange County","ch":0},{"n":"Lollicup","c":"Irvine","cs":"irvine","s":"lollicup-irvine","ar":"Orange County","ch":1},{"n":"Quickly","c":"Irvine","cs":"irvine","s":"quickly-irvine","ar":"Orange County","ch":1},{"n":"Tapioca Express","c":"Irvine","cs":"irvine","s":"tapioca-express-irvine","ar":"Orange County","ch":1},{"n":"i-Tea Cafe","c":"Irvine","cs":"irvine","s":"i-tea-cafe-irvine","ar":"Orange County","ch":0},{"n":"Tea Station","c":"Irvine","cs":"irvine","s":"tea-station-irvine","ar":"Orange County","ch":1},{"n":"Snow Monster","c":"Irvine","cs":"irvine","s":"snow-monster-irvine","ar":"Orange County","ch":1},{"n":"E + Boba","c":"Irvine","cs":"irvine","s":"e-boba-irvine","ar":"Orange County","ch":0},{"n":"Cha For Tea","c":"Irvine","cs":"irvine","s":"cha-for-tea-irvine","ar":"Orange County","ch":1},{"n":"Class 302","c":"Irvine","cs":"irvine","s":"class-302-irvine","ar":"Orange County","ch":1},{"n":"Tebo Tebo Tea Lounge","c":"Irvine","cs":"irvine","s":"tebo-tebo-tea-lounge-irvine","ar":"Orange County","ch":1},{"n":"85C Bakery Cafe","c":"Irvine","cs":"irvine","s":"85c-bakery-cafe-irvine","ar":"Orange County","ch":0},{"n":"Champion Food","c":"Irvine","cs":"irvine","s":"champion-food-irvine","ar":"Orange County","ch":0},{"n":"Shaved N Boba","c":"Irvine","cs":"irvine","s":"shaved-n-boba-irvine","ar":"Orange County","ch":0},{"n":"85C Bakery Cafe (Diamond Jamboree)","c":"Irvine","cs":"irvine","s":"85c-bakery-cafe-diamond-jamboree-irvine","ar":"Orange County","ch":0},{"n":"Midastee Tea House","c":"Brea","cs":"brea","s":"midastee-tea-house-brea","ar":"Orange County","ch":0},{"n":"iTea","c":"Yorba Linda","cs":"yorba-linda","s":"itea-yorba-linda","ar":"Orange County","ch":0},{"n":"Harmony Tea Bar","c":"Mission Viejo","cs":"mission-viejo","s":"harmony-tea-bar-mission-viejo","ar":"Orange County","ch":0},{"n":"Milk Box","c":"Mission Viejo","cs":"mission-viejo","s":"milk-box-mission-viejo","ar":"Orange County","ch":0},{"n":"Chatime","c":"Mission Viejo","cs":"mission-viejo","s":"chatime-mission-viejo","ar":"Orange County","ch":1},{"n":"Tastea","c":"Costa Mesa","cs":"costa-mesa","s":"tastea-costa-mesa","ar":"Orange County","ch":1},{"n":"Tapioca Express","c":"Costa Mesa","cs":"costa-mesa","s":"tapioca-express-costa-mesa","ar":"Orange County","ch":1},{"n":"That Boba Place","c":"Costa Mesa","cs":"costa-mesa","s":"that-boba-place-costa-mesa","ar":"Orange County","ch":0},{"n":"7 Leaves Cafe","c":"Costa Mesa","cs":"costa-mesa","s":"7-leaves-cafe-costa-mesa","ar":"Orange County","ch":1},{"n":"Sweetea Cafe","c":"Costa Mesa","cs":"costa-mesa","s":"sweetea-cafe-costa-mesa","ar":"Orange County","ch":0},{"n":"Dragonfly Tea Bar","c":"Orange","cs":"orange","s":"dragonfly-tea-bar-orange","ar":"Orange County","ch":1},{"n":"H2SNOW","c":"Orange","cs":"orange","s":"h2snow-orange","ar":"Orange County","ch":0},{"n":"It's Boba Time","c":"Tustin","cs":"tustin","s":"its-boba-time-tustin","ar":"Orange County","ch":1},{"n":"7 Leaves","c":"Tustin","cs":"tustin","s":"7-leaves-tustin","ar":"Orange County","ch":0},{"n":"Leaf N Cream","c":"Tustin","cs":"tustin","s":"leaf-n-cream-tustin","ar":"Orange County","ch":0},{"n":"Sharetea","c":"Santa Ana","cs":"santa-ana","s":"sharetea-santa-ana","ar":"Orange County","ch":0},{"n":"Class 302","c":"Santa Ana","cs":"santa-ana","s":"class-302-santa-ana","ar":"Orange County","ch":1},{"n":"Lantern Grill","c":"Santa Ana","cs":"santa-ana","s":"lantern-grill-santa-ana","ar":"Orange County","ch":0},{"n":"Sweet Boba","c":"Santa Ana","cs":"santa-ana","s":"sweet-boba-santa-ana","ar":"Orange County","ch":0},{"n":"Tapioca Express","c":"Santa Ana","cs":"santa-ana","s":"tapioca-express-santa-ana","ar":"Orange County","ch":1},{"n":"Milk Bar","c":"Fountain Valley","cs":"fountain-valley","s":"milk-bar-fountain-valley","ar":"Orange County","ch":0},{"n":"Craved Tea House","c":"Fountain Valley","cs":"fountain-valley","s":"craved-tea-house-fountain-valley","ar":"Orange County","ch":0},{"n":"T Cup Coffee & Tea","c":"Fountain Valley","cs":"fountain-valley","s":"t-cup-coffee-and-tea-fountain-valley","ar":"Orange County","ch":0},{"n":"7 Leaves Cafe","c":"Fountain Valley","cs":"fountain-valley","s":"7-leaves-cafe-fountain-valley","ar":"Orange County","ch":1},{"n":"7 Leaves Cafe","c":"Cypress","cs":"cypress","s":"7-leaves-cafe-cypress","ar":"Orange County","ch":1},{"n":"Boba Tea House","c":"Riverside","cs":"riverside","s":"boba-tea-house-riverside","ar":"Inland Empire","ch":1},{"n":"Boba Fiend Tea House","c":"Riverside","cs":"riverside","s":"boba-fiend-tea-house-riverside","ar":"Inland Empire","ch":1},{"n":"O' Tea Time","c":"Riverside","cs":"riverside","s":"o-tea-time-riverside","ar":"Inland Empire","ch":0},{"n":"5s' Teas","c":"Riverside","cs":"riverside","s":"5s-teas-riverside","ar":"Inland Empire","ch":0},{"n":"Bobaloca","c":"Riverside","cs":"riverside","s":"bobaloca-riverside","ar":"Inland Empire","ch":0},{"n":"Lollicup Fresh","c":"Riverside","cs":"riverside","s":"lollicup-fresh-riverside","ar":"Inland Empire","ch":1},{"n":"Ten Ren's Tea Time","c":"Riverside","cs":"riverside","s":"ten-rens-tea-time-riverside","ar":"Inland Empire","ch":1},{"n":"Boba Cafe","c":"Riverside","cs":"riverside","s":"boba-cafe-riverside","ar":"Inland Empire","ch":0},{"n":"Cha2O","c":"Riverside","cs":"riverside","s":"cha2o-riverside","ar":"Inland Empire","ch":1},{"n":"Tea Time Express","c":"Corona","cs":"corona","s":"tea-time-express-corona","ar":"Inland Empire","ch":1},{"n":"Tea Time","c":"Temecula","cs":"temecula","s":"tea-time-temecula","ar":"Inland Empire","ch":0},{"n":"Chill Zone","c":"Temecula","cs":"temecula","s":"chill-zone-temecula","ar":"Inland Empire","ch":0},{"n":"Triple Beverage","c":"Temecula","cs":"temecula","s":"triple-beverage-temecula","ar":"Inland Empire","ch":0},{"n":"Snow & Crab","c":"Temecula","cs":"temecula","s":"snow-and-crab-temecula","ar":"Inland Empire","ch":0},{"n":"Juice Bar","c":"Temecula","cs":"temecula","s":"juice-bar-temecula","ar":"Inland Empire","ch":0},{"n":"Cafe Gossip","c":"Moreno Valley","cs":"moreno-valley","s":"cafe-gossip-moreno-valley","ar":"Inland Empire","ch":0},{"n":"Better Be Donuts","c":"Moreno Valley","cs":"moreno-valley","s":"better-be-donuts-moreno-valley","ar":"Inland Empire","ch":0},{"n":"Boba Express","c":"Moreno Valley","cs":"moreno-valley","s":"boba-express-moreno-valley","ar":"Inland Empire","ch":1},{"n":"7 Leaves Cafe","c":"Chino","cs":"chino","s":"7-leaves-cafe-chino","ar":"Inland Empire","ch":1},{"n":"Boba Fiend Tea House","c":"Rancho Cucamonga","cs":"rancho-cucamonga","s":"boba-fiend-tea-house-rancho-cucamonga","ar":"Inland Empire","ch":1},{"n":"BOBA PLANET & Sandwiches","c":"Rancho Cucamonga","cs":"rancho-cucamonga","s":"boba-planet-and-sandwiches-rancho-cucamonga","ar":"Inland Empire","ch":0},{"n":"Square Bar Cafe","c":"San Diego","cs":"san-diego","s":"square-bar-cafe-san-diego","ar":"San Diego","ch":0},{"n":"Tapioca Express","c":"San Diego","cs":"san-diego","s":"tapioca-express-san-diego","ar":"San Diego","ch":1},{"n":"Tapioca Heaven","c":"San Diego","cs":"san-diego","s":"tapioca-heaven-san-diego","ar":"San Diego","ch":0},{"n":"Bobalicious","c":"San Diego","cs":"san-diego","s":"bobalicious-san-diego","ar":"San Diego","ch":0},{"n":"Cafe Hue","c":"San Diego","cs":"san-diego","s":"cafe-hue-san-diego","ar":"San Diego","ch":0},{"n":"Trinitea","c":"San Diego","cs":"san-diego","s":"trinitea-san-diego","ar":"San Diego","ch":0},{"n":"Lollicup Tea Zone","c":"San Diego","cs":"san-diego","s":"lollicup-tea-zone-san-diego","ar":"San Diego","ch":0},{"n":"VaniTea Cafe","c":"San Diego","cs":"san-diego","s":"vanitea-cafe-san-diego","ar":"San Diego","ch":0},{"n":"Tastea Grill","c":"San Diego","cs":"san-diego","s":"tastea-grill-san-diego","ar":"San Diego","ch":0},{"n":"M.I. Tea Express","c":"San Diego","cs":"san-diego","s":"mi-tea-express-san-diego","ar":"San Diego","ch":0},{"n":"Tea Station","c":"San Diego","cs":"san-diego","s":"tea-station-san-diego","ar":"San Diego","ch":1},{"n":"It's Boba Time","c":"San Diego","cs":"san-diego","s":"its-boba-time-san-diego","ar":"San Diego","ch":1},{"n":"Tea N More","c":"San Diego","cs":"san-diego","s":"tea-n-more-san-diego","ar":"San Diego","ch":0},{"n":"Up2you Cafe","c":"San Diego","cs":"san-diego","s":"up2you-cafe-san-diego","ar":"San Diego","ch":0},{"n":"Ice Box","c":"San Diego","cs":"san-diego","s":"ice-box-san-diego","ar":"San Diego","ch":0},{"n":"SD Boba Tea","c":"San Diego","cs":"san-diego","s":"sd-boba-tea-san-diego","ar":"San Diego","ch":0},{"n":"Share Tea","c":"San Diego","cs":"san-diego","s":"share-tea-san-diego","ar":"San Diego","ch":1},{"n":"85 C Bakery","c":"San Diego","cs":"san-diego","s":"85-c-bakery-san-diego","ar":"San Diego","ch":0},{"n":"Kung Fu Tea","c":"San Diego","cs":"san-diego","s":"kung-fu-tea-san-diego","ar":"San Diego","ch":1},{"n":"OO Tea","c":"San Diego","cs":"san-diego","s":"oo-tea-san-diego","ar":"San Diego","ch":0},{"n":"Guiltea Cravings","c":"San Diego","cs":"san-diego","s":"guiltea-cravings-san-diego","ar":"San Diego","ch":0},{"n":"Boba Bar (OG Location)","c":"San Diego","cs":"san-diego","s":"boba-bar-og-location-san-diego","ar":"San Diego","ch":0},{"n":"Snoice","c":"San Diego","cs":"san-diego","s":"snoice-san-diego","ar":"San Diego","ch":0},{"n":"Boba Bar and Desserts","c":"San Diego","cs":"san-diego","s":"boba-bar-and-desserts-san-diego","ar":"San Diego","ch":0},{"n":"Infini Tea","c":"San Diego","cs":"san-diego","s":"infini-tea-san-diego","ar":"San Diego","ch":0},{"n":"Camellia Rd. Tea Bar","c":"San Diego","cs":"san-diego","s":"camellia-rd-tea-bar-san-diego","ar":"San Diego","ch":0},{"n":"Serenitea","c":"San Diego","cs":"san-diego","s":"serenitea-san-diego","ar":"San Diego","ch":0},{"n":"Tea Republic","c":"San Diego","cs":"san-diego","s":"tea-republic-san-diego","ar":"San Diego","ch":1}];
-  var AREAS = [["All","All"],["The 626","The 626"],["Orange County","Orange County"],["San Diego","San Diego"],["Greater LA","Greater LA"],["Inland Empire","Inland Empire"]];
-  var MONO = [["#FF4F87","#fff"],["#9A7BFF","#fff"],["#FFC83D","#3a2a00"],["#B9EE63","#26340a"],["#7B3F25","#fff"],["#3FB0C8","#fff"],["#F2749E","#fff"],["#6FB0FF","#08243f"]];
-  var PAGE = 48;
-  var KEY = "capyboba_saved_v1";
-  var saved = new Set();
-  try { var raw = localStorage.getItem(KEY); if(raw) JSON.parse(raw).forEach(function(k){saved.add(k);}); } catch(e){}
-  var state = { area:"All", type:"all", q:"", sort:"az", savedOnly:false, shown:PAGE };
-  var $ = function(id){ return document.getElementById(id); };
-  var esc = function(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); };
-  var keyOf = function(s){ return s.cs + "/" + s.s; };
-
-  function persist(){ try { localStorage.setItem(KEY, JSON.stringify(Array.from(saved))); } catch(e){} }
-  function initial(name){ var m = String(name).match(/[A-Za-z0-9]/); return (m ? m[0] : "?").toUpperCase(); }
-  function monoFor(name){ var h=0; for(var i=0;i<name.length;i++){ h=(h*31 + name.charCodeAt(i))>>>0; } return MONO[h % MONO.length]; }
-
-  function filtered(){
-    var q = state.q.trim().toLowerCase();
-    var out = SHOPS.filter(function(s){
-      if(state.area!=="All" && s.ar!==state.area) return false;
-      if(state.type==="ind" && s.ch) return false;
-      if(state.type==="chain" && !s.ch) return false;
-      if(state.savedOnly && !saved.has(keyOf(s))) return false;
-      if(q && (s.n.toLowerCase().indexOf(q)===-1 && s.c.toLowerCase().indexOf(q)===-1)) return false;
-      return true;
-    });
-    out.sort(function(a,b){
-      if(state.sort==="city"){ var c=a.c.localeCompare(b.c); if(c) return c; }
-      return a.n.localeCompare(b.n);
-    });
-    return out;
-  }
-
-  function cardHTML(s){
-    var mc = monoFor(s.n), k = keyOf(s), on = saved.has(k);
-    var tag = s.ch ? '<span class="ptag ptag-chain">Chain</span>' : '<span class="ptag ptag-ind">Independent</span>';
-    return '<a class="scard" href="/boba/ca/'+k+'/">'
-      + '<button class="fav" type="button" aria-pressed="'+on+'" aria-label="Save '+esc(s.n)+'" data-k="'+k+'">'+(on?"\u2665":"\u2661")+'</button>'
-      + '<div class="scard-top"><span class="mono" style="background:'+mc[0]+';color:'+mc[1]+'">'+initial(s.n)+'</span>'
-      + '<span class="scard-id"><span class="scard-name">'+esc(s.n)+'</span><span class="scard-meta">'+esc(s.c)+' \u00b7 '+esc(s.ar)+'</span></span></div>'
-      + '<div class="scard-tags">'+tag+'<span class="ptag ptag-verify">Hours verifying</span></div>'
-      + '</a>';
-  }
-
-  function render(){
-    var list = filtered();
-    var grid = $("grid");
-    if(list.length===0){
-      grid.innerHTML = '<p class="dir-empty">No shops match that. Try clearing a filter or searching a different city.</p>';
-      $("count").textContent = "Showing 0 shops";
-      $("loadMore").style.display = "none";
-      return;
-    }
-    if(state.shown > list.length) state.shown = list.length;
-    var slice = list.slice(0, state.shown);
-    grid.innerHTML = slice.map(cardHTML).join("");
-    $("count").textContent = "Showing " + slice.length + " of " + list.length + " shop" + (list.length===1?"":"s");
-    $("loadMore").style.display = (state.shown < list.length) ? "" : "none";
-  }
-
-  function updateSavedUI(){
-    $("savedCount").textContent = saved.size;
-    var t = $("savedToggle");
-    if(saved.size===0 && state.savedOnly){ state.savedOnly=false; t.setAttribute("aria-pressed","false"); }
-  }
-
-  // area pills
-  var ap = $("areaPills");
-  ap.innerHTML = AREAS.map(function(a){ return '<button class="apill" type="button" data-area="'+a[1]+'" aria-pressed="'+(a[1]===state.area)+'">'+a[0]+'</button>'; }).join("");
-  ap.addEventListener("click", function(e){
-    var b = e.target.closest(".apill"); if(!b) return;
-    state.area = b.getAttribute("data-area"); state.shown = PAGE;
-    Array.prototype.forEach.call(ap.children, function(c){ c.setAttribute("aria-pressed", c===b); });
-    render();
-  });
-
-  // type segment
-  $("typeSeg").addEventListener("click", function(e){
-    var b = e.target.closest("button"); if(!b) return;
-    state.type = b.getAttribute("data-type"); state.shown = PAGE;
-    Array.prototype.forEach.call(this.children, function(c){ c.setAttribute("aria-pressed", c===b); });
-    render();
-  });
-
-  // search
-  var qt;
-  $("q").addEventListener("input", function(e){
-    clearTimeout(qt); var v = e.target.value;
-    qt = setTimeout(function(){ state.q = v; state.shown = PAGE; render(); }, 120);
-  });
-
-  // sort
-  $("sortSel").addEventListener("change", function(e){ state.sort = e.target.value; render(); });
-
-  // saved toggle
-  $("savedToggle").addEventListener("click", function(){
-    state.savedOnly = !state.savedOnly; state.shown = PAGE;
-    this.setAttribute("aria-pressed", state.savedOnly); render();
-  });
-
-  // fav (event delegation on grid)
-  $("grid").addEventListener("click", function(e){
-    var f = e.target.closest(".fav"); if(!f) return;
-    e.preventDefault(); e.stopPropagation();
-    var k = f.getAttribute("data-k");
-    if(saved.has(k)){ saved.delete(k); f.setAttribute("aria-pressed","false"); f.textContent = "\u2661"; }
-    else { saved.add(k); f.setAttribute("aria-pressed","true"); f.textContent = "\u2665"; }
-    persist(); updateSavedUI();
-    if(state.savedOnly) render();
-  });
-
-  // load more
-  $("loadMore").addEventListener("click", function(){ state.shown += PAGE; render(); });
-
-  // surprise me -> random shop from current filter (or all), go to its profile
-  $("surprise").addEventListener("click", function(){
-    var list = filtered(); if(list.length===0) list = SHOPS;
-    var s = list[Math.floor(Math.random()*list.length)];
-    window.location.href = "/boba/ca/" + keyOf(s) + "/";
-  });
-
-  // popular cities row (data-driven)
-  var counts = {};
-  SHOPS.forEach(function(s){ if(!counts[s.c]) counts[s.c] = {n:0, cs:s.cs}; counts[s.c].n++; });
-  var top = Object.keys(counts).map(function(c){ return {c:c, n:counts[c].n, cs:counts[c].cs}; })
-    .sort(function(a,b){ return b.n - a.n || a.c.localeCompare(b.c); }).slice(0, 12);
-  $("cityRow").innerHTML = top.map(function(t){
-    return '<a class="rpill" href="/boba/ca/'+t.cs+'/">'+esc(t.c)+'<span class="rc">'+t.n+'</span></a>';
-  }).join("");
-
-  updateSavedUI();
-  render();
-})();
-</script>
+<script src="/js/homepage/society-data.js" defer></script><script src="/js/homepage/share.js" defer></script><script src="/js/homepage/black-book.js" defer></script><script src="/js/homepage/concierge.js" defer></script><script src="/js/homepage/house-choice.js" defer></script><script src="/js/homepage/tasting-flight.js" defer></script><script src="/js/homepage/evening-route.js" defer></script><script src="/js/homepage/navigation.js" defer></script>
 </body>
 </html>

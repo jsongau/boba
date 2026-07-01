@@ -1,0 +1,150 @@
+{
+  "7-leaves": [
+    {
+      "name": "7 Leaves Cafe",
+      "city": "Garden Grove",
+      "cs": "garden-grove",
+      "s": "7-leaves-cafe-garden-grove",
+      "ar_region": "orange-county"
+    },
+    {
+      "name": "7 Leaves Cafe",
+      "city": "Huntington Beach",
+      "cs": "huntington-beach",
+      "s": "7-leaves-cafe-huntington-beach",
+      "ar_region": "orange-county"
+    },
+    {
+      "name": "7 Leaves Cafe",
+      "city": "Irvine",
+      "cs": "irvine",
+      "s": "7-leaves-cafe-irvine",
+      "ar_region": "orange-county"
+    },
+    {
+      "name": "7 Leaves Cafe",
+      "city": "Costa Mesa",
+      "cs": "costa-mesa",
+      "s": "7-leaves-cafe-costa-mesa",
+      "ar_region": "orange-county"
+    },
+    {
+      "name": "7 Leaves",
+      "city": "Tustin",
+      "cs": "tustin",
+      "s": "7-leaves-tustin",
+      "ar_region": "orange-county"
+    },
+    {
+      "name": "7 Leaves Cafe",
+      "city": "Fountain Valley",
+      "cs": "fountain-valley",
+      "s": "7-leaves-cafe-fountain-valley",
+      "ar_region": "orange-county"
+    },
+    {
+      "name": "7 Leaves Cafe",
+      "city": "Cypress",
+      "cs": "cypress",
+      "s": "7-leaves-cafe-cypress",
+      "ar_region": "orange-county"
+    },
+    {
+      "name": "7 Leaves Cafe",
+      "city": "Chino",
+      "cs": "chino",
+      "s": "7-leaves-cafe-chino",
+      "ar_region": "inland-empire"
+    }
+  ],
+  "sharetea": [
+    {
+      "name": "Share Tea",
+      "city": "San Gabriel",
+      "cs": "san-gabriel",
+      "s": "share-tea-san-gabriel",
+      "ar_region": "sgv"
+    },
+    {
+      "name": "Share Tea",
+      "city": "Cerritos",
+      "cs": "cerritos",
+      "s": "share-tea-cerritos",
+      "ar_region": "greater-la"
+    },
+    {
+      "name": "Share Tea",
+      "city": "Fullerton",
+      "cs": "fullerton",
+      "s": "share-tea-fullerton",
+      "ar_region": "orange-county"
+    },
+    {
+      "name": "Sharetea",
+      "city": "Santa Ana",
+      "cs": "santa-ana",
+      "s": "sharetea-santa-ana",
+      "ar_region": "orange-county"
+    },
+    {
+      "name": "Share Tea",
+      "city": "San Diego",
+      "cs": "san-diego",
+      "s": "share-tea-san-diego",
+      "ar_region": "san-diego"
+    }
+  ],
+  "kung-fu-tea": [
+    {
+      "name": "Kung Fu Tea",
+      "city": "Westminster",
+      "cs": "westminster",
+      "s": "kung-fu-tea-westminster",
+      "ar_region": "orange-county"
+    },
+    {
+      "name": "Kung Fu Tea",
+      "city": "Fullerton",
+      "cs": "fullerton",
+      "s": "kung-fu-tea-fullerton",
+      "ar_region": "orange-county"
+    },
+    {
+      "name": "Kung Fu Tea",
+      "city": "San Diego",
+      "cs": "san-diego",
+      "s": "kung-fu-tea-san-diego",
+      "ar_region": "san-diego"
+    }
+  ],
+  "tastea": [
+    {
+      "name": "Tastea",
+      "city": "Rowland Heights",
+      "cs": "rowland-heights",
+      "s": "tastea-rowland-heights",
+      "ar_region": "sgv"
+    },
+    {
+      "name": "Tastea",
+      "city": "Garden Grove",
+      "cs": "garden-grove",
+      "s": "tastea-garden-grove",
+      "ar_region": "orange-county"
+    },
+    {
+      "name": "Tastea",
+      "city": "Costa Mesa",
+      "cs": "costa-mesa",
+      "s": "tastea-costa-mesa",
+      "ar_region": "orange-county"
+    },
+    {
+      "name": "Tastea Grill",
+      "city": "San Diego",
+      "cs": "san-diego",
+      "s": "tastea-grill-san-diego",
+      "ar_region": "san-diego"
+    }
+  ]
+}

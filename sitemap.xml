@@ -66,4 +66,5 @@
   <url><loc>https://capyboba.com/tools/roulette/</loc><lastmod>2026-07-01</lastmod></url>
   <url><loc>https://capyboba.com/tools/drink-matcher/</loc><lastmod>2026-07-01</lastmod></url>
   <url><loc>https://capyboba.com/tools/build-your-sip/</loc><lastmod>2026-07-01</lastmod></url>
+  <url><loc>https://capyboba.com/directory/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>

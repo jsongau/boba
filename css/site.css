@@ -2,11 +2,11 @@
    Plum canvas + neon accents around warm cream reading areas. Class names are
    unchanged from the cream build, so every generated page re-skins from this file. */
 :root{
-  --plum:#21142B;--deep:#151218;--cream:#FFF3E6;--coconut:#FFFCF8;
-  --guava:#FF4F87;--mango:#FFC83D;--taro:#9A7BFF;--matcha:#B9EE63;--tea-brown:#7B3F25;--fig:#756A79;
-  --line:#EADFCE;
-  --line-d:rgba(255,243,230,.16);
-  --ink60:rgba(21,18,24,.6);
+  --plum:#071623;--deep:#0a1722;--cream:#fff8e8;--coconut:#fffdf4;
+  --guava:#ff3f6f;--mango:#ff7138;--taro:#665cff;--matcha:#cfff3d;--tea-brown:#2a1812;--fig:#5c6672;
+  --line:#ece3d0;
+  --line-d:rgba(255,248,232,.16);
+  --ink60:rgba(10,23,34,.6);
   --maxw:1120px;--read:760px;--ease:cubic-bezier(.22,.61,.36,1);
 }
 *,*::before,*::after{box-sizing:border-box}
