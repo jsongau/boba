@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CapyBoba | Boba in Southern California, Sorted by What You Want</title>
+<meta name="description" content="Find boba across Southern California by city or vibe: date night, study, open late, brown sugar. Real hours, no fake reviews, new openings tracked. The 626 to Convoy.">
+<link rel="canonical" href="https://capyboba.com/">
+
+<!-- Locked Capy type stack: Fraunces (display) + Inter Tight (body). Matches CoverCapy. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   CAPYBOBA — LOCKED DESIGN TOKENS (SITE-SPEC §4)
+   ============================================================ */
+:root{
+  --ink:#1A1410;          /* body text */
+  --brown-sugar:#3D2817;  /* headings / dark accents / primary button */
+  --syrup:#A6713C;        /* mid caramel, primary accent (large text/borders/icons only) */
+  --milk:#F4ECE0;         /* page background */
+  --paper:#FBF7F0;        /* surfaces / cards */
+  --matcha:#6F8F4E;       /* secondary accent: fresh / "open now" / verifying */
+  --taro:#8E6FB0;         /* RESERVED — featured/member placement ONLY (Phase 3). One role. */
+  --line:#E4D8C7;         /* hairline dividers */
+  --ink-60:rgba(26,20,16,.62);
+  --maxw:1200px;
+  --read:760px;           /* editorial reading width */
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--milk);
+  color:var(--ink);
+  font-family:"Inter Tight",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+h1,h2,h3,.brand,.display{
+  font-family:"Fraunces",Georgia,"Times New Roman",serif;
+  font-optical-sizing:auto;
+  color:var(--brown-sugar);
+  font-weight:600;
+  letter-spacing:-.01em;
+  line-height:1.08;
+}
+a{color:var(--brown-sugar);text-decoration:none}
+ul{margin:0;padding:0;list-style:none}
+img{max-width:100%;display:block}
+
+/* Pearl motif: the one signature device. A small filled tapioca pearl. */
+.eyebrow{
+  font-family:"Inter Tight",sans-serif;
+  font-weight:600;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--syrup);
+  display:inline-flex;align-items:center;gap:.5em;margin:0 0 .9rem;
+}
+.eyebrow::before{
+  content:"";width:.5em;height:.5em;border-radius:50%;background:var(--syrup);
+  flex:0 0 auto;
+}
+
+/* Skip link */
+.skip{position:absolute;left:-9999px;top:0;background:var(--brown-sugar);color:var(--milk);
+  padding:.7rem 1.1rem;border-radius:0 0 8px 0;z-index:200}
+.skip:focus{left:0}
+
+:focus-visible{outline:2.5px solid var(--syrup);outline-offset:3px;border-radius:3px}
+
+/* ============================================================
+   PRIMARY BUTTON / LINK STYLES
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-weight:600;font-size:1rem;line-height:1;
+  padding:.95rem 1.5rem;border-radius:999px;border:1.5px solid transparent;
+  cursor:pointer;transition:transform .18s var(--ease),background .18s var(--ease),color .18s;
+  font-family:"Inter Tight",sans-serif;
+}
+.btn-primary{background:var(--brown-sugar);color:var(--milk)}
+.btn-primary:hover{background:#2c1c10;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--brown-sugar);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--syrup);background:var(--paper)}
+
+.textlink{font-weight:600;color:var(--syrup);border-bottom:1.5px solid transparent;padding-bottom:1px}
+.textlink:hover{border-bottom-color:var(--syrup)}
+
+/* ============================================================
+   HEADER + MEGA NAV  (the centerpiece)
+   ============================================================ */
+.site-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(244,236,224,.86);
+  backdrop-filter:saturate(140%) blur(10px);
+  border-bottom:1px solid var(--line);
+  /* never clip the mega panel */
+}
+.header-inner{
+  max-width:var(--maxw);margin:0 auto;padding:0 clamp(1rem,4vw,2rem);
+  height:68px;display:flex;align-items:center;gap:1.5rem;
+}
+.brand{font-size:1.45rem;font-weight:700;letter-spacing:-.02em;flex:0 0 auto}
+.brand b{color:var(--syrup);font-weight:700}
+
+.primary-nav{display:none}
+.nav-list{display:flex;align-items:center;gap:.3rem}
+.nav-trigger,.nav-link{
+  font-family:"Inter Tight",sans-serif;font-weight:500;font-size:.98rem;color:var(--ink);
+  background:none;border:0;cursor:pointer;padding:.55rem .8rem;border-radius:8px;
+  display:inline-flex;align-items:center;gap:.4rem;position:relative;
+  transition:background .15s;
+}
+.nav-trigger:hover,.nav-link:hover{background:var(--paper)}
+.nav-trigger .caret{width:.62em;height:.62em;border-right:2px solid var(--syrup);
+  border-bottom:2px solid var(--syrup);transform:rotate(45deg) translateY(-1px);transition:transform .2s var(--ease)}
+.nav-trigger[aria-expanded="true"]{color:var(--brown-sugar)}
+.nav-trigger[aria-expanded="true"] .caret{transform:rotate(-135deg)}
+.nav-trigger[aria-expanded="true"]::after{
+  content:"";position:absolute;left:.8rem;right:.8rem;bottom:-1px;height:2px;background:var(--syrup);border-radius:2px}
+
+.header-actions{margin-left:auto;display:flex;align-items:center;gap:.6rem;flex:0 0 auto}
+.header-find{display:none}
+
+/* Mega panel */
+.mega{
+  position:absolute;left:0;right:0;top:100%;
+  background:var(--paper);border-bottom:1px solid var(--line);
+  box-shadow:0 26px 50px -28px rgba(61,40,23,.4);
+  opacity:0;visibility:hidden;transform:translateY(-8px);
+  transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s;
+  z-index:99;
+}
+.mega[data-open="true"]{opacity:1;visibility:visible;transform:translateY(0)}
+.mega-inner{
+  max-width:var(--maxw);margin:0 auto;padding:2rem clamp(1rem,4vw,2rem) 2.2rem;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem 2rem;
+}
+.mega-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-60);margin:0 0 .9rem}
+.mega-links li{margin:0 0 .15rem}
+.mega-links a{
+  display:flex;align-items:center;gap:.5rem;padding:.42rem .55rem;margin-left:-.55rem;border-radius:7px;
+  font-weight:500;color:var(--ink);transition:background .14s,color .14s;
+}
+.mega-links a::before{content:"";width:.42em;height:.42em;border-radius:50%;background:var(--line);flex:0 0 auto;transition:background .14s}
+.mega-links a:hover{background:var(--milk);color:var(--brown-sugar)}
+.mega-links a:hover::before{background:var(--syrup)}
+.mega-links .sub{display:block;font-size:.82rem;color:var(--ink-60);font-weight:400;margin-top:1px}
+
+/* the one reserved --taro use: featured tag */
+.featured-tag{
+  font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:#fff;background:var(--taro);padding:.18em .5em;border-radius:4px;margin-left:.1rem;
+}
+.verifying-tag{
+  font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:#3a4a26;background:rgba(111,143,78,.18);border:1px solid rgba(111,143,78,.4);
+  padding:.18em .5em;border-radius:4px;
+}
+
+.mega-feature{background:var(--milk);border-radius:12px;padding:1.3rem;display:flex;flex-direction:column;gap:.7rem;justify-content:center}
+.mega-feature .mega-note{font-size:.85rem;color:var(--ink-60);margin:0}
+
+/* vibe tiles inside mega */
+.vibe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+.vibe-tile{
+  display:block;padding:.85rem .95rem;border:1px solid var(--line);border-radius:10px;background:var(--milk);
+  transition:border-color .15s,transform .15s var(--ease),background .15s;
+}
+.vibe-tile:hover{border-color:var(--syrup);transform:translateY(-2px);background:var(--paper)}
+.vibe-tile .vt-name{font-weight:600;color:var(--brown-sugar);display:block;font-size:.97rem}
+.vibe-tile .vt-desc{font-size:.78rem;color:var(--ink-60);display:block;margin-top:2px;line-height:1.35}
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+.menu-toggle{
+  display:inline-flex;flex-direction:column;justify-content:center;gap:5px;
+  width:44px;height:44px;background:none;border:1px solid var(--line);border-radius:10px;cursor:pointer;
+  padding:0 11px;
+}
+.menu-toggle span{height:2px;background:var(--brown-sugar);border-radius:2px;transition:.25s var(--ease)}
+.menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.drawer{
+  position:fixed;inset:0;top:0;z-index:150;background:var(--milk);
+  transform:translateX(100%);transition:transform .3s var(--ease);
+  display:flex;flex-direction:column;overflow-y:auto;
+}
+.drawer[data-open="true"]{transform:translateX(0)}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;
+  padding:1rem clamp(1rem,5vw,1.5rem);border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--milk)}
+.drawer-close{background:none;border:0;font-size:1.6rem;line-height:1;color:var(--brown-sugar);cursor:pointer;width:44px;height:44px;border-radius:10px}
+.drawer-close:hover{background:var(--paper)}
+.drawer-body{padding:.5rem clamp(1rem,5vw,1.5rem) 2rem}
+.drawer-search{display:flex;gap:.5rem;margin:1rem 0 1.3rem}
+.drawer-search input{flex:1;min-width:0}
+.acc-trigger{
+  width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);
+  padding:1.05rem .2rem;font-family:"Inter Tight",sans-serif;font-weight:600;font-size:1.1rem;color:var(--brown-sugar);
+  display:flex;align-items:center;justify-content:space-between;cursor:pointer;
+}
+.acc-trigger .caret{width:.6em;height:.6em;border-right:2px solid var(--syrup);border-bottom:2px solid var(--syrup);transform:rotate(45deg);transition:transform .2s}
+.acc-trigger[aria-expanded="true"] .caret{transform:rotate(-135deg)}
+.acc-panel{display:none;padding:.3rem 0 1rem}
+.acc-panel[data-open="true"]{display:block}
+.acc-panel a{display:block;padding:.55rem .2rem;color:var(--ink);font-weight:500}
+.acc-panel a:hover{color:var(--syrup)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding:clamp(3rem,8vw,6rem) clamp(1rem,4vw,2rem) clamp(2.5rem,5vw,4rem)}
+.hero-inner{max-width:var(--read);margin:0 auto;text-align:center}
+.hero h1{font-size:clamp(2.4rem,6.2vw,4.3rem);margin:.4rem 0 1.1rem;font-weight:600}
+.hero h1 em{font-style:italic;color:var(--syrup);font-weight:500}
+.hero-sub{font-size:clamp(1.05rem,2.2vw,1.28rem);color:var(--ink);max-width:38ch;margin:0 auto 2rem;line-height:1.5}
+
+.search{display:flex;gap:.6rem;max-width:540px;margin:0 auto;background:var(--paper);
+  border:1.5px solid var(--line);border-radius:999px;padding:.45rem .45rem .45rem 1.3rem;
+  box-shadow:0 18px 40px -30px rgba(61,40,23,.55);transition:border-color .2s,box-shadow .2s}
+.search:focus-within{border-color:var(--syrup);box-shadow:0 22px 44px -28px rgba(61,40,23,.6)}
+.search input{flex:1;min-width:0;border:0;background:none;font-size:1.02rem;color:var(--ink);font-family:inherit}
+.search input::placeholder{color:var(--ink-60)}
+.search input:focus{outline:none}
+.search .btn{flex:0 0 auto;padding:.85rem 1.4rem}
+
+.field{border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:.8rem 1.2rem;
+  font-size:1rem;color:var(--ink);font-family:inherit;width:100%}
+.field:focus{outline:none;border-color:var(--syrup)}
+
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.3rem auto 0;max-width:560px}
+.chips .lbl{font-size:.82rem;color:var(--ink-60);align-self:center;margin-right:.1rem}
+.chip{font-size:.9rem;font-weight:500;color:var(--brown-sugar);background:var(--paper);
+  border:1px solid var(--line);border-radius:999px;padding:.4rem .85rem;transition:.15s var(--ease)}
+.chip:hover{border-color:var(--syrup);background:#fff;transform:translateY(-1px)}
+
+.hero-stat{margin:2.2rem auto 0;font-size:.92rem;color:var(--ink-60);
+  display:inline-flex;align-items:center;gap:.6rem}
+.hero-stat b{color:var(--brown-sugar);font-weight:600}
+.dot{width:4px;height:4px;border-radius:50%;background:var(--syrup);display:inline-block}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section{padding:clamp(3rem,6vw,5rem) clamp(1rem,4vw,2rem)}
+.section-inner{max-width:var(--maxw);margin:0 auto}
+.section-head{max-width:var(--read);margin:0 0 2.2rem}
+.section-head h2{font-size:clamp(1.8rem,3.8vw,2.7rem);margin:0 0 .6rem}
+.section-head p{color:var(--ink-60);margin:0;font-size:1.05rem;max-width:54ch}
+.alt{background:var(--paper)}
+
+/* intent matrix (homepage echo of the nav signature) */
+.intent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem}
+.intent-card{
+  display:block;padding:1.15rem 1.2rem;background:var(--milk);border:1px solid var(--line);border-radius:13px;
+  transition:transform .18s var(--ease),border-color .18s,box-shadow .18s;
+}
+.alt .intent-card{background:#fff}
+.intent-card:hover{transform:translateY(-3px);border-color:var(--syrup);box-shadow:0 18px 34px -26px rgba(61,40,23,.5)}
+.intent-card .ic-name{font-family:"Fraunces",serif;font-weight:600;font-size:1.18rem;color:var(--brown-sugar);display:block}
+.intent-card .ic-desc{font-size:.86rem;color:var(--ink-60);margin-top:.3rem;display:block;line-height:1.4}
+
+/* region cards */
+.region-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.1rem}
+.region-card{
+  background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.5rem 1.5rem 1.3rem;
+  display:flex;flex-direction:column;gap:.55rem;transition:transform .18s var(--ease),box-shadow .18s}
+.alt .region-card{background:var(--milk)}
+.region-card:hover{transform:translateY(-3px);box-shadow:0 22px 40px -28px rgba(61,40,23,.45)}
+.region-card .rc-kicker{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--syrup)}
+.region-card h3{font-size:1.5rem;margin:.1rem 0}
+.region-card .rc-desc{color:var(--ink-60);font-size:.95rem;margin:0;flex:1}
+.region-card .rc-cities{font-size:.86rem;color:var(--ink);margin:.3rem 0 0}
+.region-card .rc-cities b{color:var(--brown-sugar);font-weight:600}
+.region-card .rc-link{margin-top:.7rem;font-weight:600;color:var(--syrup);font-size:.95rem;border-bottom:1.5px solid transparent;align-self:flex-start;padding-bottom:1px}
+.region-card:hover .rc-link{border-bottom-color:var(--syrup)}
+
+/* new openings */
+.new-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:1.6rem}
+.new-card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:1.2rem 1.25rem;
+  display:flex;flex-direction:column;gap:.55rem}
+.new-card .nc-city{font-size:.8rem;color:var(--ink-60);display:flex;align-items:center;gap:.4rem}
+.new-card h3{font-size:1.28rem;margin:0}
+.new-card .nc-foot{margin-top:auto;display:flex;align-items:center;gap:.5rem}
+
+/* trust */
+.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.6rem 2rem;margin-bottom:2rem}
+.trust-item h3{font-size:1.3rem;margin:0 0 .5rem;display:flex;align-items:baseline;gap:.55rem}
+.trust-item h3::before{content:"";width:.5em;height:.5em;border-radius:50%;background:var(--syrup);flex:0 0 auto;transform:translateY(-.05em)}
+.trust-item p{margin:0;color:var(--ink);font-size:.97rem;line-height:1.55}
+.revenue{border-top:1px solid var(--line);padding-top:1.6rem;max-width:var(--read);color:var(--ink)}
+.revenue b{color:var(--brown-sugar)}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer{background:var(--paper);border-top:1px solid var(--line);padding:clamp(2.5rem,5vw,4rem) clamp(1rem,4vw,2rem) 2rem}
+.footer-inner{max-width:var(--maxw);margin:0 auto;display:grid;
+  grid-template-columns:1.6fr repeat(4,1fr);gap:2rem}
+.footer-brand .brand{font-size:1.5rem}
+.footer-brand p{color:var(--ink-60);font-size:.92rem;margin:.7rem 0 0;max-width:30ch}
+.footer-brand .stamp{margin-top:1rem;font-size:.8rem;color:var(--ink-60);display:flex;align-items:center;gap:.5rem}
+.footer-col h4{font-family:"Inter Tight",sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--brown-sugar);margin:0 0 1rem}
+.footer-col li{margin:0 0 .55rem}
+.footer-col a{font-size:.92rem;color:var(--ink);font-weight:500}
+.footer-col a:hover{color:var(--syrup)}
+.footer-bottom{max-width:var(--maxw);margin:2.5rem auto 0;padding-top:1.4rem;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;align-items:center;font-size:.82rem;color:var(--ink-60)}
+.footer-bottom .note{font-weight:500;color:var(--ink)}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(min-width:1000px){
+  .primary-nav{display:block}
+  .header-find{display:inline-flex}
+  .menu-toggle{display:none}
+}
+@media(max-width:999px){
+  .mega{display:none}
+}
+@media(max-width:640px){
+  .footer-inner{grid-template-columns:1fr 1fr;gap:1.6rem}
+  .footer-brand{grid-column:1 / -1}
+  .search{flex-wrap:nowrap}
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .mega{transition:opacity .001ms}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============================================================
+     HEADER + MEGA NAV
+     ============================================================ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="brand" href="/">Capy<b>Boba</b></a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <button class="nav-trigger" aria-expanded="false" aria-controls="panel-area" data-panel="panel-area">
+            Explore by area <span class="caret" aria-hidden="true"></span>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-trigger" aria-expanded="false" aria-controls="panel-vibe" data-panel="panel-vibe">
+            By vibe <span class="caret" aria-hidden="true"></span>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-trigger" aria-expanded="false" aria-controls="panel-near" data-panel="panel-near">
+            Near a landmark <span class="caret" aria-hidden="true"></span>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-trigger" aria-expanded="false" aria-controls="panel-new" data-panel="panel-new">
+            New openings <span class="caret" aria-hidden="true"></span>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-trigger" aria-expanded="false" aria-controls="panel-guides" data-panel="panel-guides">
+            Guides <span class="caret" aria-hidden="true"></span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-ghost header-find" href="#find">Find boba</a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="mobileDrawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PANEL: Explore by area -->
+  <div class="mega" id="panel-area" role="region" aria-label="Explore by area">
+    <div class="mega-inner">
+      <div class="mega-col">
+        <p class="mega-eyebrow">Regions</p>
+        <ul class="mega-links">
+          <!-- single reserved --taro use: Featured -->
+          <li><a href="/area/sgv/">The 626 <span class="featured-tag">Featured</span></a></li>
+          <li><a href="/area/orange-county/">Orange County</a></li>
+          <li><a href="/area/san-diego/">San Diego</a></li>
+          <li><a href="/area/greater-la/">Greater Los Angeles</a></li>
+          <li><a href="/area/inland-empire/">Inland Empire</a></li>
+        </ul>
+      </div>
+      <div class="mega-col">
+        <p class="mega-eyebrow">Top cities · the 626</p>
+        <ul class="mega-links">
+          <li><a href="/boba/ca/san-gabriel/">San Gabriel</a></li>
+          <li><a href="/boba/ca/rowland-heights/">Rowland Heights</a></li>
+          <li><a href="/boba/ca/arcadia/">Arcadia</a></li>
+          <li><a href="/boba/ca/alhambra/">Alhambra</a></li>
+          <li><a href="/boba/ca/hacienda-heights/">Hacienda Heights</a></li>
+        </ul>
+      </div>
+      <div class="mega-col">
+        <p class="mega-eyebrow">Top cities · Orange County</p>
+        <ul class="mega-links">
+          <li><a href="/boba/ca/irvine/">Irvine</a></li>
+          <li><a href="/boba/ca/westminster/">Westminster</a></li>
+          <li><a href="/boba/ca/garden-grove/">Garden Grove</a></li>
+          <li><a href="/boba/ca/fountain-valley/">Fountain Valley</a></li>
+          <li><a href="/boba/ca/fullerton/">Fullerton</a></li>
+        </ul>
+      </div>
+      <div class="mega-col mega-feature">
+        <p class="mega-eyebrow" style="margin-bottom:.2rem">Or just</p>
+        <a class="btn btn-primary" href="/cities/">Browse all 45 cities</a>
+        <p class="mega-note">Tracking 320+ shops across 5 counties.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: By vibe (the signature) -->
+  <div class="mega" id="panel-vibe" role="region" aria-label="Boba by vibe">
+    <div class="mega-inner" style="grid-template-columns:1fr;gap:1rem">
+      <div>
+        <p class="mega-eyebrow">Start with the mood, not the shop</p>
+        <div class="vibe-grid">
+          <a class="vibe-tile" href="/best/date-night/"><span class="vt-name">Date night</span><span class="vt-desc">Seating, calmer rooms, later hours</span></a>
+          <a class="vibe-tile" href="/best/first-date/"><span class="vt-name">First date</span><span class="vt-desc">Quiet enough to actually talk</span></a>
+          <a class="vibe-tile" href="/best/study/"><span class="vt-name">Study-friendly</span><span class="vt-desc">Wifi, outlets, room to stay</span></a>
+          <a class="vibe-tile" href="/best/open-late/"><span class="vt-name">Open late</span><span class="vt-desc">Still pouring after 10</span></a>
+          <a class="vibe-tile" href="/best/brown-sugar/"><span class="vt-name">Brown sugar</span><span class="vt-desc">Done right, not just syrup</span></a>
+          <a class="vibe-tile" href="/best/fruit-tea/"><span class="vt-name">Fresh fruit tea</span><span class="vt-desc">Real fruit, not powder</span></a>
+          <a class="vibe-tile" href="/best/matcha/"><span class="vt-name">Matcha</span><span class="vt-desc">For the matcha people</span></a>
+          <a class="vibe-tile" href="/best/non-dairy/"><span class="vt-name">Non-dairy</span><span class="vt-desc">Oat and almond options that work</span></a>
+          <a class="vibe-tile" href="/best/cheap/"><span class="vt-name">Best value</span><span class="vt-desc">Most cup for the money</span></a>
+          <a class="vibe-tile" href="/best/group/"><span class="vt-name">Group hangout</span><span class="vt-desc">Room and energy for a crowd</span></a>
+          <a class="vibe-tile" href="/best/drive-thru/"><span class="vt-name">Drive-thru</span><span class="vt-desc">No parking, no line</span></a>
+          <a class="vibe-tile" href="/best/with-food/"><span class="vt-name">Boba and food</span><span class="vt-desc">Popcorn chicken, Taiwanese eats</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: Near a landmark -->
+  <div class="mega" id="panel-near" role="region" aria-label="Boba near a landmark">
+    <div class="mega-inner">
+      <div class="mega-col">
+        <p class="mega-eyebrow">Campuses</p>
+        <ul class="mega-links">
+          <li><a href="/near/uc-irvine/">UC Irvine</a></li>
+          <li><a href="/near/cal-state-fullerton/">Cal State Fullerton</a></li>
+          <li><a href="/near/ucla/">UCLA</a></li>
+          <li><a href="/near/uc-san-diego/">UC San Diego</a></li>
+        </ul>
+      </div>
+      <div class="mega-col">
+        <p class="mega-eyebrow">Out and about</p>
+        <ul class="mega-links">
+          <li><a href="/near/disneyland/">Disneyland area</a></li>
+          <li><a href="/near/south-coast-plaza/">South Coast Plaza</a></li>
+          <li><a href="/near/the-americana/">The Americana</a></li>
+          <li><a href="/near/convoy-district/">Convoy District</a></li>
+        </ul>
+      </div>
+      <div class="mega-col">
+        <p class="mega-eyebrow">How it works</p>
+        <ul class="mega-links">
+          <li><a href="/near/"><span>Pick a spot</span><span class="sub">Shops sorted by distance, with the after-dinner and before-movie picks called out.</span></a></li>
+        </ul>
+      </div>
+      <div class="mega-col mega-feature">
+        <p class="mega-eyebrow" style="margin-bottom:.2rem">All landmarks</p>
+        <a class="btn btn-primary" href="/near/">Boba near a landmark</a>
+        <p class="mega-note">Walkability and parking noted where we have it.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: New openings -->
+  <div class="mega" id="panel-new" role="region" aria-label="New boba openings">
+    <div class="mega-inner">
+      <div class="mega-col">
+        <p class="mega-eyebrow">New openings feed</p>
+        <ul class="mega-links">
+          <li><a href="/new/orange-county/">Orange County</a></li>
+          <li><a href="/new/sgv/">The 626 and LA</a></li>
+          <li><a href="/new/san-diego/">San Diego</a></li>
+        </ul>
+      </div>
+      <div class="mega-col" style="grid-column:span 2">
+        <p class="mega-eyebrow">Verifying now</p>
+        <ul class="mega-links">
+          <li><a href="/new/orange-county/">Tea Nami, Westminster <span class="verifying-tag">Verifying</span></a></li>
+          <li><a href="/new/orange-county/">Auntea Jenny, Irvine <span class="verifying-tag">Verifying</span></a></li>
+          <li><a href="/new/orange-county/">HEYTEA, Irvine <span class="verifying-tag">Verifying</span></a></li>
+          <li><a href="/new/orange-county/">omomo, Tustin <span class="verifying-tag">Verifying</span></a></li>
+        </ul>
+      </div>
+      <div class="mega-col mega-feature">
+        <p class="mega-note" style="color:var(--ink);font-weight:500">We confirm the address and hours against each shop's own listing before a profile goes live.</p>
+        <a class="textlink" href="/new/orange-county/">See all new openings</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: Guides -->
+  <div class="mega" id="panel-guides" role="region" aria-label="Boba guides">
+    <div class="mega-inner">
+      <div class="mega-col">
+        <p class="mega-eyebrow">Know what you're ordering</p>
+        <ul class="mega-links">
+          <li><a href="/guide/brown-sugar-vs-tiger-sugar/">Brown sugar vs tiger sugar</a></li>
+          <li><a href="/guide/what-50-percent-sweet-means/">What 50% sweet really means</a></li>
+          <li><a href="/guide/loose-leaf-vs-powder/">Loose-leaf vs powder tea</a></li>
+        </ul>
+      </div>
+      <div class="mega-col">
+        <p class="mega-eyebrow">The toppings, explained</p>
+        <ul class="mega-links">
+          <li><a href="/guide/what-is-cheese-foam/">What is cheese foam</a></li>
+          <li><a href="/guide/crystal-boba-vs-tapioca/">Crystal boba vs tapioca</a></li>
+          <li><a href="/guide/order-non-dairy-boba/">How to order non-dairy</a></li>
+        </ul>
+      </div>
+      <div class="mega-col mega-feature" style="grid-column:span 2">
+        <p class="mega-eyebrow" style="margin-bottom:.2rem">Guides</p>
+        <a class="btn btn-primary" href="/guide/">Read the boba guides</a>
+        <p class="mega-note">Plain explainers, no fluff, written by people who order this stuff weekly.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE DRAWER -->
+<div class="drawer" id="mobileDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <a class="brand" href="/">Capy<b>Boba</b></a>
+    <button class="drawer-close" aria-label="Close menu">&times;</button>
+  </div>
+  <div class="drawer-body">
+    <form class="drawer-search" data-search>
+      <input class="field" type="text" name="q" placeholder="City or vibe" aria-label="Find boba by city or vibe">
+      <button class="btn btn-primary" type="submit">Find</button>
+    </form>
+
+    <button class="acc-trigger" aria-expanded="false" aria-controls="acc-area">Explore by area <span class="caret" aria-hidden="true"></span></button>
+    <div class="acc-panel" id="acc-area">
+      <a href="/area/sgv/">The 626</a>
+      <a href="/area/orange-county/">Orange County</a>
+      <a href="/area/san-diego/">San Diego</a>
+      <a href="/area/greater-la/">Greater Los Angeles</a>
+      <a href="/area/inland-empire/">Inland Empire</a>
+      <a href="/cities/">All 45 cities</a>
+    </div>
+
+    <button class="acc-trigger" aria-expanded="false" aria-controls="acc-vibe">By vibe <span class="caret" aria-hidden="true"></span></button>
+    <div class="acc-panel" id="acc-vibe">
+      <a href="/best/date-night/">Date night</a>
+      <a href="/best/study/">Study-friendly</a>
+      <a href="/best/open-late/">Open late</a>
+      <a href="/best/brown-sugar/">Brown sugar</a>
+      <a href="/best/fruit-tea/">Fresh fruit tea</a>
+      <a href="/best/with-food/">Boba and food</a>
+      <a href="/best/group/">Group hangout</a>
+    </div>
+
+    <button class="acc-trigger" aria-expanded="false" aria-controls="acc-near">Near a landmark <span class="caret" aria-hidden="true"></span></button>
+    <div class="acc-panel" id="acc-near">
+      <a href="/near/uc-irvine/">UC Irvine</a>
+      <a href="/near/cal-state-fullerton/">Cal State Fullerton</a>
+      <a href="/near/disneyland/">Disneyland area</a>
+      <a href="/near/convoy-district/">Convoy District</a>
+      <a href="/near/">All landmarks</a>
+    </div>
+
+    <button class="acc-trigger" aria-expanded="false" aria-controls="acc-new">New openings <span class="caret" aria-hidden="true"></span></button>
+    <div class="acc-panel" id="acc-new">
+      <a href="/new/orange-county/">Orange County</a>
+      <a href="/new/sgv/">The 626 and LA</a>
+      <a href="/new/san-diego/">San Diego</a>
+    </div>
+
+    <button class="acc-trigger" aria-expanded="false" aria-controls="acc-guides">Guides <span class="caret" aria-hidden="true"></span></button>
+    <div class="acc-panel" id="acc-guides">
+      <a href="/guide/brown-sugar-vs-tiger-sugar/">Brown sugar vs tiger sugar</a>
+      <a href="/guide/what-50-percent-sweet-means/">What 50% sweet means</a>
+      <a href="/guide/what-is-cheese-foam/">What is cheese foam</a>
+      <a href="/guide/">All guides</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MAIN
+     ============================================================ -->
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="find">
+    <div class="hero-inner">
+      <p class="eyebrow" style="justify-content:center">Southern California</p>
+      <h1>Boba, sorted by <em>what you actually want.</em></h1>
+      <p class="hero-sub">Date night, study session, open late, brown sugar done right. We track every shop from the 626 to Convoy and tell you which one fits, with real hours and no fake reviews.</p>
+
+      <form class="search" data-search role="search">
+        <input type="text" name="q" placeholder="Try a city like Irvine, or a vibe like open late" aria-label="Find boba by city or vibe">
+        <button class="btn btn-primary" type="submit">Find boba</button>
+      </form>
+
+      <div class="chips">
+        <span class="lbl">Popular:</span>
+        <a class="chip" href="/boba/ca/irvine/">Irvine</a>
+        <a class="chip" href="/boba/ca/rowland-heights/">Rowland Heights</a>
+        <a class="chip" href="/area/sgv/">The 626</a>
+        <a class="chip" href="/best/date-night/">Date night</a>
+        <a class="chip" href="/best/open-late/">Open late</a>
+        <a class="chip" href="/best/brown-sugar/">Brown sugar</a>
+      </div>
+
+      <!-- Counts are seed/tracking totals; they bind to verified counts at build time. -->
+      <p class="hero-stat"><b>Tracking 320+ shops</b><span class="dot"></span>45 cities<span class="dot"></span>5 counties</p>
+    </div>
+  </section>
+
+  <!-- INTENT MATRIX -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="eyebrow">Start with the mood</p>
+        <h2>What are you in the mood for?</h2>
+        <p>Most boba searches aren't about a brand. They're about a moment. Pick the one that fits and we'll show the shops that actually deliver it, with the method we used to rank them.</p>
+      </div>
+      <div class="intent-grid">
+        <a class="intent-card" href="/best/date-night/"><span class="ic-name">Date night</span><span class="ic-desc">Seating, calmer rooms, later hours, walkable to dinner.</span></a>
+        <a class="intent-card" href="/best/first-date/"><span class="ic-name">First date</span><span class="ic-desc">Quiet enough to talk, not a two-hour line.</span></a>
+        <a class="intent-card" href="/best/study/"><span class="ic-name">Study-friendly</span><span class="ic-desc">Wifi, outlets, and room to stay a while.</span></a>
+        <a class="intent-card" href="/best/open-late/"><span class="ic-name">Open late</span><span class="ic-desc">Shops still pouring well after dinner.</span></a>
+        <a class="intent-card" href="/best/brown-sugar/"><span class="ic-name">Brown sugar</span><span class="ic-desc">The ones cooking it, not just drizzling syrup.</span></a>
+        <a class="intent-card" href="/best/fruit-tea/"><span class="ic-name">Fresh fruit tea</span><span class="ic-desc">Real fruit programs, not powder packets.</span></a>
+        <a class="intent-card" href="/best/with-food/"><span class="ic-name">Boba and food</span><span class="ic-desc">Popcorn chicken and Taiwanese eats on site.</span></a>
+        <a class="intent-card" href="/best/group/"><span class="ic-name">Group hangout</span><span class="ic-desc">Capacity and energy for a crowd.</span></a>
+      </div>
+      <p style="margin:1.6rem 0 0"><a class="textlink" href="/best/">See every vibe, all 13</a></p>
+    </div>
+  </section>
+
+  <!-- REGIONS -->
+  <section class="section alt">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="eyebrow">By area</p>
+        <h2>Where the boba is</h2>
+        <p>Southern California has a few real boba meccas and a long tail of good shops in between. Start with your stretch of the map.</p>
+      </div>
+      <div class="region-grid">
+        <a class="region-card" href="/area/sgv/">
+          <span class="rc-kicker">The 626</span>
+          <h3>San Gabriel Valley</h3>
+          <p class="rc-desc">The densest boba in SoCal, full stop. Brown sugar, fruit tea, Taiwanese dessert houses, blocks of it.</p>
+          <p class="rc-cities"><b>San Gabriel</b>, Rowland Heights, Arcadia, Alhambra</p>
+          <span class="rc-link">Explore the 626</span>
+        </a>
+        <a class="region-card" href="/area/orange-county/">
+          <span class="rc-kicker">OC</span>
+          <h3>Orange County</h3>
+          <p class="rc-desc">The Irvine clusters plus Little Saigon. Strong for date night, study spots near UCI, and new openings.</p>
+          <p class="rc-cities"><b>Irvine</b>, Westminster, Garden Grove, Fullerton</p>
+          <span class="rc-link">Explore Orange County</span>
+        </a>
+        <a class="region-card" href="/area/san-diego/">
+          <span class="rc-kicker">SD</span>
+          <h3>San Diego</h3>
+          <p class="rc-desc">Convoy and Mira Mesa anchor it. Late-night options and a deep bench of Taiwanese and Vietnamese shops.</p>
+          <p class="rc-cities"><b>Convoy District</b>, Kearny Mesa, Mira Mesa</p>
+          <span class="rc-link">Explore San Diego</span>
+        </a>
+        <a class="region-card" href="/area/greater-la/">
+          <span class="rc-kicker">LA</span>
+          <h3>Greater Los Angeles</h3>
+          <p class="rc-desc">Koreatown, DTLA, the Westside. Everything from aesthetic cafes to grab-and-go counters.</p>
+          <p class="rc-cities"><b>Koreatown</b>, Downtown, West LA</p>
+          <span class="rc-link">Explore Greater LA</span>
+        </a>
+        <a class="region-card" href="/area/inland-empire/">
+          <span class="rc-kicker">IE</span>
+          <h3>Inland Empire</h3>
+          <p class="rc-desc">Riverside and San Bernardino. Fewer shops, less competition, easier to find the good ones.</p>
+          <p class="rc-cities"><b>Riverside</b>, San Bernardino</p>
+          <span class="rc-link">Explore the Inland Empire</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW OPENINGS (honest freshness) -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="eyebrow">Freshness, not a 2019 list</p>
+        <h2>Recently opened, verifying now</h2>
+        <p>New shops we're tracking across SoCal. We confirm the address and current hours against each shop's own listing before a profile goes live, so these read as verifying until they're checked.</p>
+      </div>
+      <div class="new-grid">
+        <div class="new-card">
+          <span class="nc-city"><span class="dot"></span>Westminster, OC</span>
+          <h3>Tea Nami</h3>
+          <div class="nc-foot"><span class="verifying-tag">Verifying</span></div>
+        </div>
+        <div class="new-card">
+          <span class="nc-city"><span class="dot"></span>Irvine, OC</span>
+          <h3>Auntea Jenny</h3>
+          <div class="nc-foot"><span class="verifying-tag">Verifying</span></div>
+        </div>
+        <div class="new-card">
+          <span class="nc-city"><span class="dot"></span>Irvine, OC</span>
+          <h3>HEYTEA</h3>
+          <div class="nc-foot"><span class="verifying-tag">Verifying</span></div>
+        </div>
+        <div class="new-card">
+          <span class="nc-city"><span class="dot"></span>Tustin, OC</span>
+          <h3>omomo</h3>
+          <div class="nc-foot"><span class="verifying-tag">Verifying</span></div>
+        </div>
+      </div>
+      <a class="btn btn-ghost" href="/new/orange-county/">See all new openings</a>
+    </div>
+  </section>
+
+  <!-- TRUST + REVENUE -->
+  <section class="section alt">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="eyebrow">Why trust this</p>
+        <h2>How CapyBoba stays right</h2>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-item">
+          <h3>Verified, and dated</h3>
+          <p>Hours and open-or-closed status come from each shop's own listing, with the date we checked shown on the page. A wrong hour that sends you to a closed shop is the one thing we will not do.</p>
+        </div>
+        <div class="trust-item">
+          <h3>Ranked by fit, not a fake score</h3>
+          <p>Our best-for lists are opinions with the method shown. We rank on fit for the moment, date night, study, late night, never a made-up quality rating, and never a paid one.</p>
+        </div>
+        <div class="trust-item">
+          <h3>Openings and closures, tracked</h3>
+          <p>We watch for new shops and closures every few weeks, so the list keeps up instead of rotting into an old screenshot you can't trust.</p>
+        </div>
+      </div>
+      <p class="revenue"><b>How we make money:</b> shops can pay for a membership and featured placement, and that funds the directory that sends them customers. It never buys a better ranking on a best-for list, and it never buys a review.</p>
+    </div>
+  </section>
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="/">Capy<b>Boba</b></a>
+      <p>The Southern California boba directory. Real hours, honest rankings, new openings tracked.</p>
+      <p class="stamp"><span class="dot"></span>Updated regularly. Boba Passport coming soon.</p>
+    </div>
+    <div class="footer-col">
+      <h4>By area</h4>
+      <ul>
+        <li><a href="/area/sgv/">The 626</a></li>
+        <li><a href="/area/orange-county/">Orange County</a></li>
+        <li><a href="/area/san-diego/">San Diego</a></li>
+        <li><a href="/area/greater-la/">Greater LA</a></li>
+        <li><a href="/area/inland-empire/">Inland Empire</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>By vibe</h4>
+      <ul>
+        <li><a href="/best/date-night/">Date night</a></li>
+        <li><a href="/best/study/">Study-friendly</a></li>
+        <li><a href="/best/open-late/">Open late</a></li>
+        <li><a href="/best/brown-sugar/">Brown sugar</a></li>
+        <li><a href="/best/with-food/">Boba and food</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Cities</h4>
+      <ul>
+        <li><a href="/boba/ca/irvine/">Irvine</a></li>
+        <li><a href="/boba/ca/rowland-heights/">Rowland Heights</a></li>
+        <li><a href="/boba/ca/san-gabriel/">San Gabriel</a></li>
+        <li><a href="/boba/ca/westminster/">Westminster</a></li>
+        <li><a href="/cities/">All 45 cities</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <ul>
+        <li><a href="/how-we-rank/">How we rank</a></li>
+        <li><a href="/how-we-make-money/">How we make money</a></li>
+        <li><a href="/report/">Report a correction</a></li>
+        <li><a href="/about/">About CapyBoba</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 CapyBoba</span>
+    <span class="note">We don't take payment for placement on our best-for lists.</span>
+    <a href="/privacy/">Privacy</a>
+    <a href="/terms/">Terms</a>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JSON-LD  (WebSite + SearchAction + Organization)
+     No aggregateRating anywhere — no first-party ratings until Phase 3.
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"CapyBoba",
+  "url":"https://capyboba.com/",
+  "description":"The Southern California boba directory: find boba by city or vibe with verified hours and tracked new openings.",
+  "potentialAction":{
+    "@type":"SearchAction",
+    "target":{"@type":"EntryPoint","urlTemplate":"https://capyboba.com/search?q={search_term_string}"},
+    "query-input":"required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"CapyBoba",
+  "url":"https://capyboba.com/",
+  "areaServed":"Southern California"
+}
+</script>
+
+<!-- ============================================================
+     BEHAVIOR  (vanilla, no dependencies)
+     ============================================================ -->
+<script>
+(function(){
+  "use strict";
+  var header   = document.getElementById('siteHeader');
+  var triggers = Array.prototype.slice.call(document.querySelectorAll('.nav-trigger'));
+  var panels   = Array.prototype.slice.call(document.querySelectorAll('.mega'));
+  var closeTimer = null;
+
+  function panelFor(id){ return document.getElementById(id); }
+
+  function closeAll(except){
+    triggers.forEach(function(t){
+      var id = t.getAttribute('data-panel');
+      if(id === except) return;
+      t.setAttribute('aria-expanded','false');
+      var p = panelFor(id);
+      if(p) p.setAttribute('data-open','false');
+    });
+  }
+
+  function openPanel(id){
+    closeAll(id);
+    var t = triggers.filter(function(x){return x.getAttribute('data-panel')===id;})[0];
+    var p = panelFor(id);
+    if(t) t.setAttribute('aria-expanded','true');
+    if(p) p.setAttribute('data-open','true');
+  }
+
+  function togglePanel(id){
+    var t = triggers.filter(function(x){return x.getAttribute('data-panel')===id;})[0];
+    if(t && t.getAttribute('aria-expanded')==='true'){ closeAll(); }
+    else { openPanel(id); }
+  }
+
+  triggers.forEach(function(t){
+    var id = t.getAttribute('data-panel');
+    // click / keyboard activation
+    t.addEventListener('click', function(e){ e.preventDefault(); togglePanel(id); });
+    // hover (pointer devices) — open on enter, cancel pending close
+    t.parentNode.addEventListener('mouseenter', function(){
+      if(window.matchMedia('(min-width:1000px)').matches){ clearTimeout(closeTimer); openPanel(id); }
+    });
+  });
+
+  // leaving the whole header closes (panels are children, so moving into them keeps it open)
+  header.addEventListener('mouseleave', function(){
+    if(window.matchMedia('(min-width:1000px)').matches){
+      closeTimer = setTimeout(closeAll, 140);
+    }
+  });
+  header.addEventListener('mouseenter', function(){ clearTimeout(closeTimer); });
+
+  // Escape closes and returns focus to the open trigger
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      var open = triggers.filter(function(t){return t.getAttribute('aria-expanded')==='true';})[0];
+      closeAll();
+      if(open) open.focus();
+      closeDrawer();
+    }
+  });
+
+  // click outside header closes
+  document.addEventListener('click', function(e){
+    if(!header.contains(e.target)) closeAll();
+  });
+
+  /* ---------- Mobile drawer ---------- */
+  var drawer = document.getElementById('mobileDrawer');
+  var menuBtn = document.querySelector('.menu-toggle');
+  var closeBtn = document.querySelector('.drawer-close');
+
+  function openDrawer(){
+    drawer.setAttribute('data-open','true');
+    drawer.setAttribute('aria-hidden','false');
+    menuBtn.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+    var first = drawer.querySelector('input,button,a');
+    if(first) first.focus();
+  }
+  function closeDrawer(){
+    if(!drawer.getAttribute('data-open')) return;
+    drawer.removeAttribute('data-open');
+    drawer.setAttribute('aria-hidden','true');
+    menuBtn.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+  }
+  if(menuBtn) menuBtn.addEventListener('click', openDrawer);
+  if(closeBtn) closeBtn.addEventListener('click', function(){ closeDrawer(); menuBtn.focus(); });
+
+  // accordions
+  document.querySelectorAll('.acc-trigger').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      var open = btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded', String(!open));
+      if(panel) panel.setAttribute('data-open', String(!open));
+    });
+  });
+
+  /* ---------- Search routing ---------- */
+  // City-like queries route to the city directory; anything else to search results.
+  // (Both are real planned routes; SearchAction schema points at /search.)
+  document.querySelectorAll('[data-search]').forEach(function(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var input = form.querySelector('input');
+      var q = (input && input.value || '').trim();
+      if(!q){ if(input) input.focus(); return; }
+      window.location.href = '/search?q=' + encodeURIComponent(q);
+    });
+  });
+})();
+</script>
+</body>
+</html>

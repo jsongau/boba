@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ============================================================
+     INDIVIDUAL SHOP PROFILE  ·  /boba/ca/irvine/7-leaves-cafe-jeffrey/
+     Rendered from templates/TEMPLATE-shop-profile.md.
+     REAL: shop name + street address (from the SCBD seed).
+     SAMPLE: everything else, marked "Sample", shown only to demonstrate layout.
+     Live values come from the DATA-SCHEMA enrichment pipeline before publish.
+     ============================================================ -->
+<title>7 Leaves Cafe, Irvine: Hours, Menu &amp; What to Order (2026) | CapyBoba</title>
+<meta name="description" content="7 Leaves Cafe on Jeffrey Rd, Irvine: hours, address, what to order, and what it's good for. Verified profile with real hours and no fake reviews.">
+<link rel="canonical" href="https://capyboba.com/boba/ca/irvine/7-leaves-cafe-jeffrey/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ---- Locked Capy tokens (SITE-SPEC §4) ---- */
+:root{
+  --ink:#1A1410;--brown-sugar:#3D2817;--syrup:#A6713C;--milk:#F4ECE0;--paper:#FBF7F0;
+  --matcha:#6F8F4E;--taro:#8E6FB0;--line:#E4D8C7;--ink-60:rgba(26,20,16,.62);
+  --maxw:1120px;--ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--milk);color:var(--ink);
+  font-family:"Inter Tight",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+h1,h2,h3,.brand{font-family:"Fraunces",Georgia,serif;font-optical-sizing:auto;color:var(--brown-sugar);font-weight:600;letter-spacing:-.01em;line-height:1.12}
+a{color:var(--brown-sugar);text-decoration:none}
+ul{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2.5px solid var(--syrup);outline-offset:3px;border-radius:3px}
+.skip{position:absolute;left:-9999px;top:0;background:var(--brown-sugar);color:var(--milk);padding:.7rem 1.1rem;z-index:200}
+.skip:focus{left:0}
+
+.eyebrow{font-weight:600;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--syrup);display:inline-flex;align-items:center;gap:.5em;margin:0 0 .8rem}
+.eyebrow::before{content:"";width:.5em;height:.5em;border-radius:50%;background:var(--syrup);flex:0 0 auto}
+.dot{width:4px;height:4px;border-radius:50%;background:var(--syrup);display:inline-block}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;font-weight:600;font-size:.98rem;line-height:1;
+  padding:.85rem 1.35rem;border-radius:999px;border:1.5px solid transparent;cursor:pointer;font-family:"Inter Tight",sans-serif;
+  transition:transform .18s var(--ease),background .18s,border-color .18s}
+.btn-primary{background:var(--brown-sugar);color:var(--milk)}
+.btn-primary:hover{background:#2c1c10;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--brown-sugar);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--syrup);background:var(--paper)}
+.textlink{font-weight:600;color:var(--syrup);border-bottom:1.5px solid transparent;padding-bottom:1px}
+.textlink:hover{border-bottom-color:var(--syrup)}
+
+/* the sample / pending markers (reused site component) */
+.tag{font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.2em .55em;border-radius:4px;white-space:nowrap;display:inline-block}
+.tag-sample{color:#7a5a2e;background:rgba(166,113,60,.14);border:1px solid rgba(166,113,60,.4)}
+.tag-verifying{color:#3a4a26;background:rgba(111,143,78,.16);border:1px solid rgba(111,143,78,.42)}
+.is-sample{color:var(--ink-60)}
+
+/* ---- Header (streamlined; full mega-nav lives on the homepage) ---- */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(244,236,224,.9);
+  backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line)}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1rem,4vw,2rem);height:64px;display:flex;align-items:center;gap:1.4rem}
+.brand{font-size:1.4rem;font-weight:700;letter-spacing:-.02em}
+.brand b{color:var(--syrup)}
+.head-nav{display:none;gap:.2rem;margin-left:.5rem}
+.head-nav a{font-weight:500;font-size:.95rem;color:var(--ink);padding:.5rem .7rem;border-radius:8px}
+.head-nav a:hover{background:var(--paper)}
+.head-actions{margin-left:auto}
+@media(min-width:860px){.head-nav{display:flex}}
+
+/* ---- Preview banner (loud + honest) ---- */
+.preview-note{background:#2c1c10;color:var(--milk)}
+.preview-inner{max-width:var(--maxw);margin:0 auto;padding:.85rem clamp(1rem,4vw,2rem);
+  display:flex;gap:.8rem;align-items:flex-start;font-size:.9rem;line-height:1.45}
+.preview-inner b{color:#fff}
+.preview-inner .pill{flex:0 0 auto;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--syrup);color:#fff;padding:.3em .6em;border-radius:5px;margin-top:.1rem}
+.preview-inner span{color:rgba(244,236,224,.82)}
+
+/* ---- Layout ---- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:clamp(1.4rem,3vw,2.4rem) clamp(1rem,4vw,2rem) 4rem}
+.crumb{font-size:.84rem;color:var(--ink-60);margin:0 0 1.4rem;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.crumb a{color:var(--ink-60)}
+.crumb a:hover{color:var(--syrup)}
+.crumb .sep{opacity:.5}
+
+.p-head{margin:0 0 1.6rem}
+.p-head h1{font-size:clamp(2.1rem,5vw,3.2rem);margin:.2rem 0 .5rem}
+.p-sub{color:var(--ink-60);font-size:1.02rem;margin:0}
+.p-sub a{color:var(--syrup);font-weight:600}
+.p-summary{font-size:1.15rem;line-height:1.5;color:var(--ink);max-width:60ch;margin:1.1rem 0 0;
+  padding-left:1rem;border-left:3px solid var(--syrup)}
+.p-summary .lbl{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--syrup);display:block;margin-bottom:.3rem}
+
+.grid{display:grid;grid-template-columns:1fr;gap:1.8rem 2.4rem;margin-top:2rem}
+@media(min-width:900px){.grid{grid-template-columns:1.7fr 1fr}
+  .g-main{grid-column:1;grid-row:1}.g-aside{grid-column:2;grid-row:1}}
+
+/* main sections */
+.sec{padding:1.7rem 0;border-top:1px solid var(--line)}
+.sec:first-child{border-top:0;padding-top:0}
+.sec h2{font-size:1.5rem;margin:0 0 1rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.chips{display:flex;flex-wrap:wrap;gap:.55rem}
+.chip{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:.5rem .95rem;font-size:.92rem;font-weight:500;color:var(--ink);display:inline-flex;align-items:center;gap:.5rem}
+.chip .tag{margin-left:.1rem}
+.attr-list{display:flex;flex-wrap:wrap;gap:.55rem}
+.attr{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.55rem .9rem;font-size:.92rem;font-weight:500;display:inline-flex;align-items:center;gap:.5rem}
+.attr::before{content:"";width:.45em;height:.45em;border-radius:50%;background:var(--matcha)}
+.bestfor{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.3rem}
+.bestfor a{background:var(--milk);border:1px solid var(--line);border-radius:999px;padding:.5rem 1rem;font-weight:600;font-size:.92rem;color:var(--brown-sugar);transition:.15s var(--ease)}
+.bestfor a:hover{border-color:var(--syrup);transform:translateY(-1px)}
+.note-line{font-size:.9rem;color:var(--ink-60);margin:.9rem 0 0}
+
+/* ratings-ref (honest, third-party only) */
+.ratings{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.2rem;margin-top:.4rem}
+.ratings p{margin:0;font-size:.94rem;color:var(--ink)}
+.ratings .src{font-weight:600;color:var(--brown-sugar)}
+.ratings .why{font-size:.84rem;color:var(--ink-60);margin-top:.5rem}
+
+/* nearby */
+.nearby-list li{display:flex;justify-content:space-between;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--line)}
+.nearby-list li:last-child{border-bottom:0}
+.nearby-list a{font-weight:600}
+.nearby-list .meta{font-size:.85rem;color:var(--ink-60);white-space:nowrap}
+
+/* faq */
+.faq h3{font-size:1.08rem;margin:1.1rem 0 .35rem}
+.faq p{margin:0;color:var(--ink)}
+
+/* aside facts card */
+.facts-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:1.3rem 1.4rem;position:sticky;top:84px}
+.status-row{display:flex;align-items:center;gap:.6rem;margin:0 0 1rem;font-weight:600;color:var(--brown-sugar)}
+.dl{margin:0}
+.dl div{padding:.7rem 0;border-top:1px solid var(--line);display:grid;grid-template-columns:6.5rem 1fr;gap:.6rem;align-items:baseline}
+.dl div:first-child{border-top:0;padding-top:0}
+.dl dt{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60)}
+.dl dd{margin:0;font-size:.95rem}
+.dl dd a{color:var(--syrup);font-weight:600}
+.hours-table{width:100%;border-collapse:collapse;margin:.2rem 0 0}
+.hours-table th,.hours-table td{text-align:left;padding:.32rem 0;font-size:.9rem;font-weight:400}
+.hours-table th{font-weight:500;color:var(--ink-60);width:6.5rem}
+.hours-table tr.today th,.hours-table tr.today td{font-weight:700;color:var(--brown-sugar)}
+.map-box{margin:1rem 0 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--milk)}
+.map-face{height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
+  background:
+    radial-gradient(circle at 30% 40%,rgba(166,113,60,.07),transparent 40%),
+    repeating-linear-gradient(0deg,transparent 0 22px,rgba(228,216,199,.6) 22px 23px),
+    repeating-linear-gradient(90deg,transparent 0 22px,rgba(228,216,199,.6) 22px 23px)}
+.pin{width:20px;height:20px;border-radius:50% 50% 50% 0;background:var(--syrup);transform:rotate(-45deg);position:relative}
+.pin::after{content:"";position:absolute;inset:5px;background:var(--paper);border-radius:50%}
+.map-face small{color:var(--ink-60);font-size:.78rem}
+.map-cta{padding:.75rem 1rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:.5rem}
+.map-cta .addr{font-size:.82rem;color:var(--ink-60);line-height:1.35}
+.card-footer{margin-top:1rem;font-size:.78rem;color:var(--ink-60);display:flex;align-items:center;gap:.5rem}
+
+/* footer */
+.site-footer{background:var(--paper);border-top:1px solid var(--line);padding:clamp(2.2rem,5vw,3.4rem) clamp(1rem,4vw,2rem) 2rem;margin-top:2rem}
+.footer-inner{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:1.8rem}
+.footer-brand p{color:var(--ink-60);font-size:.9rem;margin:.6rem 0 0;max-width:30ch}
+.footer-col h4{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-sugar);margin:0 0 .9rem}
+.footer-col li{margin:0 0 .5rem}
+.footer-col a{font-size:.9rem;color:var(--ink);font-weight:500}
+.footer-col a:hover{color:var(--syrup)}
+.footer-bottom{max-width:var(--maxw);margin:2.2rem auto 0;padding-top:1.3rem;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;font-size:.82rem;color:var(--ink-60)}
+.footer-bottom .note{color:var(--ink);font-weight:500}
+@media(max-width:640px){.footer-inner{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}}
+
+@media(prefers-reduced-motion:reduce){*{transition-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/">Capy<b>Boba</b></a>
+    <nav class="head-nav" aria-label="Primary">
+      <a href="/area/orange-county/">By area</a>
+      <a href="/best/">By vibe</a>
+      <a href="/new/orange-county/">New</a>
+      <a href="/guide/">Guides</a>
+    </nav>
+    <div class="head-actions"><a class="btn btn-ghost" href="/">Find boba</a></div>
+  </div>
+</header>
+
+<!-- HONEST PREVIEW BANNER -->
+<div class="preview-note">
+  <div class="preview-inner">
+    <span class="pill">Design preview</span>
+    <span><b>7 Leaves Cafe on Jeffrey Rd is a real Irvine shop from our seed list, so the name and street address are real.</b> Every other value on this page is sample placeholder, marked <b>Sample</b>, shown only to demonstrate the layout. Real hours, drinks, and details come from the verification pipeline before any profile goes live.</span>
+  </div>
+</div>
+
+<main id="main" class="wrap">
+
+  <!-- BREADCRUMB (mirrors the BreadcrumbList schema below) -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span>
+    <a href="/area/orange-county/">Orange County</a><span class="sep">/</span>
+    <a href="/boba/ca/irvine/">Irvine</a><span class="sep">/</span>
+    <span aria-current="page">7 Leaves Cafe</span>
+  </nav>
+
+  <!-- H1 = the entity (the shop) -->
+  <header class="p-head">
+    <h1>7 Leaves Cafe</h1>
+    <p class="p-sub">Boba on the Jeffrey Rd corridor, Irvine · part of <a href="/brand/7-leaves/">7 Leaves</a></p>
+
+    <!-- ONE-LINE SUMMARY — MODEL-written editorial, constrained to real attributes. Sample here. -->
+    <p class="p-summary">
+      <span class="lbl">In one line <span class="tag tag-sample">Sample</span></span>
+      A dependable Jeffrey Rd stop for a quick milk tea near Northwood, better for grab-and-go than a long sit. <span class="is-sample">(Replaced with a verified one-liner once we've confirmed seating and menu.)</span>
+    </p>
+  </header>
+
+  <div class="grid">
+
+    <!-- ============ MAIN COLUMN ============ -->
+    <div class="g-main">
+
+      <!-- WHAT TO ORDER — verified/observed signatures only. Sample chips here. -->
+      <section class="sec">
+        <h2>What to order <span class="tag tag-sample">Sample</span></h2>
+        <div class="chips">
+          <span class="chip">House milk tea</span>
+          <span class="chip">Sea cream oolong</span>
+          <span class="chip">Fresh-brewed jasmine green</span>
+        </div>
+        <p class="note-line">Signature drinks get pulled from the official menu or consistent first-party mentions. Nothing invented, nothing guessed.</p>
+      </section>
+
+      <!-- GOOD TO KNOW — attribute chips; only substantiated attrs render on the live page. -->
+      <section class="sec">
+        <h2>Good to know <span class="tag tag-sample">Sample</span></h2>
+        <div class="attr-list">
+          <span class="attr">Seating: limited</span>
+          <span class="attr">Loose-leaf tea</span>
+          <span class="attr">Non-dairy options</span>
+          <span class="attr">Parking lot</span>
+        </div>
+        <p class="note-line">On the live page an attribute only shows when a primary source backs it. Anything we can't substantiate is left off, never shown as "unknown" and never guessed.</p>
+      </section>
+
+      <!-- GOOD FOR — links ONLY to intents this shop qualifies for (fit score >= 2). Sample fits here. -->
+      <section class="sec">
+        <h2>Good for <span class="tag tag-sample">Sample</span></h2>
+        <p class="note-line" style="margin-top:0">Based on our verification, this shop fits:</p>
+        <div class="bestfor">
+          <a href="/best/study/irvine/">Study-friendly in Irvine</a>
+          <a href="/best/non-dairy/irvine/">Non-dairy in Irvine</a>
+          <a href="/best/cheap/irvine/">Best value in Irvine</a>
+        </div>
+        <p class="note-line">These are the intent pages the shop earns a spot on. It won't be listed for a vibe it didn't score for, so a grab-and-go counter won't show up under date night.</p>
+      </section>
+
+      <!-- RATINGS ELSEWHERE — reference only, attributed + dated + linked. NEVER a first-party star. -->
+      <section class="sec">
+        <h2>Ratings elsewhere <span class="tag tag-sample">Sample</span></h2>
+        <div class="ratings">
+          <p><span class="src">Google</span> 4.3 as of a checked date, and <span class="src">Yelp</span> 4.0 as of a checked date, both linked to the source. <span class="is-sample">(Sample figures for layout.)</span></p>
+          <p class="why">We show other sites' ratings for reference, with the date and a link, and we don't compute our own star rating. First-party ratings only arrive with Boba Passport, once real check-ins exist.</p>
+        </div>
+      </section>
+
+      <!-- NEARBY — real seed neighbors in Irvine (names + addresses real; distances sample). -->
+      <section class="sec">
+        <h2>Other boba nearby</h2>
+        <ul class="nearby-list">
+          <li><a href="/boba/ca/irvine/i-tea-cafe-jeffrey/">i-Tea Cafe</a><span class="meta">Jeffrey Rd · dist. <span class="tag tag-sample">Sample</span></span></li>
+          <li><a href="/boba/ca/irvine/tea-station-culver/">Tea Station</a><span class="meta">Culver Dr · dist. <span class="tag tag-sample">Sample</span></span></li>
+          <li><a href="/boba/ca/irvine/class-302-university-center/">Class 302</a><span class="meta">University Center · dist. <span class="tag tag-sample">Sample</span></span></li>
+          <li><a href="/boba/ca/irvine/85c-bakery-cafe-diamond-jamboree/">85°C Bakery Cafe</a><span class="meta">Diamond Jamboree · dist. <span class="tag tag-sample">Sample</span></span></li>
+        </ul>
+        <p class="note-line">Neighbors are real shops from the Irvine seed. Distances fill in from geocoded coordinates.</p>
+      </section>
+
+      <!-- FAQ — real per-shop long-tail questions; answers MODEL-written from verified data. Sample answers here. -->
+      <section class="sec faq">
+        <h2>FAQ <span class="tag tag-sample">Sample answers</span></h2>
+        <h3>What should I order at 7 Leaves Cafe?</h3>
+        <p>The house milk tea is the usual pick, with the sea cream oolong close behind. <span class="is-sample">(Confirmed against the menu before publish.)</span></p>
+        <h3>Does 7 Leaves on Jeffrey Rd have seating?</h3>
+        <p>Limited seating, better suited to grabbing a drink than settling in for a while. <span class="is-sample">(Verified on site.)</span></p>
+        <h3>Is there non-dairy boba at this location?</h3>
+        <p>Non-dairy options are available for most drinks. <span class="is-sample">(Verified against the menu.)</span></p>
+      </section>
+
+    </div>
+
+    <!-- ============ ASIDE: FACTS CARD ============ -->
+    <aside class="g-aside" aria-label="Shop facts">
+      <div class="facts-card">
+        <p class="status-row"><span class="tag tag-verifying">Verifying</span> Status pending a primary-source check</p>
+
+        <dl class="dl">
+          <div><dt>Address</dt><dd>14845 Jeffrey Rd, Irvine, CA</dd></div>
+          <div><dt>Area</dt><dd>Jeffrey Rd corridor <span class="tag tag-sample">Sample</span></dd></div>
+          <div><dt>Phone</dt><dd class="is-sample">Sample, pending</dd></div>
+          <div><dt>Price</dt><dd>$ <span class="tag tag-sample">Sample</span></dd></div>
+          <div><dt>Brand</dt><dd><a href="/brand/7-leaves/">7 Leaves</a></dd></div>
+        </dl>
+
+        <!-- HOURS — verbatim from verified data on the live page. Sample rows here. -->
+        <h3 style="font-size:.95rem;margin:1.2rem 0 .4rem;display:flex;gap:.5rem;align-items:center">Hours <span class="tag tag-sample">Sample</span></h3>
+        <table class="hours-table">
+          <tbody>
+            <tr><th>Mon</th><td>11:00 AM to 9:00 PM</td></tr>
+            <tr><th>Tue</th><td>11:00 AM to 9:00 PM</td></tr>
+            <tr><th>Wed</th><td>11:00 AM to 9:00 PM</td></tr>
+            <tr><th>Thu</th><td>11:00 AM to 9:00 PM</td></tr>
+            <tr class="today"><th>Fri</th><td>11:00 AM to 10:00 PM</td></tr>
+            <tr><th>Sat</th><td>11:00 AM to 10:00 PM</td></tr>
+            <tr><th>Sun</th><td>11:00 AM to 9:00 PM</td></tr>
+          </tbody>
+        </table>
+        <p class="card-footer"><span class="dot"></span>Hours show the date we checked them once verified. Holiday hours may differ.</p>
+
+        <!-- MAP — live map binds to verified coordinates. Directions link searches the real address (honest + useful). -->
+        <div class="map-box">
+          <div class="map-face">
+            <span class="pin" aria-hidden="true"></span>
+            <small>Live map loads from verified coordinates</small>
+          </div>
+          <div class="map-cta">
+            <span class="addr">14845 Jeffrey Rd<br>Irvine, CA</span>
+            <a class="btn btn-ghost" style="padding:.6rem 1rem" href="https://www.google.com/maps/search/?api=1&amp;query=7%20Leaves%20Cafe%2014845%20Jeffrey%20Rd%20Irvine%20CA" rel="nofollow noopener" target="_blank">Directions</a>
+          </div>
+        </div>
+
+        <p class="card-footer"><span class="dot"></span>Something wrong? <a class="textlink" href="/report/">Report it.</a></p>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<!-- FOOTER (shared with the homepage) -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="/">Capy<b>Boba</b></a>
+      <p>The Southern California boba directory. Real hours, honest rankings, new openings tracked.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Irvine</h4>
+      <ul>
+        <li><a href="/boba/ca/irvine/">All Irvine boba</a></li>
+        <li><a href="/best/study/irvine/">Study-friendly</a></li>
+        <li><a href="/best/date-night/irvine/">Date night</a></li>
+        <li><a href="/best/with-food/irvine/">Boba and food</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Nearby areas</h4>
+      <ul>
+        <li><a href="/boba/ca/tustin/">Tustin</a></li>
+        <li><a href="/boba/ca/costa-mesa/">Costa Mesa</a></li>
+        <li><a href="/area/orange-county/">Orange County</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <ul>
+        <li><a href="/how-we-rank/">How we rank</a></li>
+        <li><a href="/report/">Report a correction</a></li>
+        <li><a href="/about/">About CapyBoba</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 CapyBoba</span>
+    <span class="note">We don't take payment for placement on our best-for lists.</span>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JSON-LD  —  CafeOrCoffeeShop + BreadcrumbList + FAQPage
+     Real: name, address. NO aggregateRating (no first-party ratings until Phase 3).
+     geo / telephone / openingHoursSpecification are emitted from VERIFIED data only,
+     so they're left as bind-points here rather than seeded with sample values that a
+     crawler would read as fact.
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"CafeOrCoffeeShop",
+  "name":"7 Leaves Cafe",
+  "@id":"https://capyboba.com/boba/ca/irvine/7-leaves-cafe-jeffrey/#shop",
+  "url":"https://capyboba.com/boba/ca/irvine/7-leaves-cafe-jeffrey/",
+  "servesCuisine":"Bubble Tea",
+  "address":{
+    "@type":"PostalAddress",
+    "streetAddress":"14845 Jeffrey Rd",
+    "addressLocality":"Irvine",
+    "addressRegion":"CA",
+    "addressCountry":"US"
+  }
+  /* On publish, add from verified data:
+     "geo":{"@type":"GeoCoordinates","latitude":<verified>,"longitude":<verified>},
+     "telephone":"<verified>",
+     "openingHoursSpecification":[ …from verified hours… ]
+     Never add "aggregateRating" until first-party (Boba Passport) ratings exist. */
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://capyboba.com/"},
+    {"@type":"ListItem","position":2,"name":"Orange County","item":"https://capyboba.com/area/orange-county/"},
+    {"@type":"ListItem","position":3,"name":"Irvine","item":"https://capyboba.com/boba/ca/irvine/"},
+    {"@type":"ListItem","position":4,"name":"7 Leaves Cafe","item":"https://capyboba.com/boba/ca/irvine/7-leaves-cafe-jeffrey/"}
+  ]
+}
+</script>
+<!-- FAQPage JSON-LD is emitted only from verified FAQ answers on publish (sample answers above are not schema-marked). -->
+</body>
+</html>

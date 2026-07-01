@@ -1,0 +1,327 @@
+county,city,name,address,source,status,verify_needed
+# NOTE: This is a PARTIAL seed extracted by hand from the SCBD screenshots (named rows only;
+# address-only rows from the source were dropped pending verification). It is a LEAD LIST,
+# not ground truth. Every row must pass the verification pipeline in DATA-SCHEMA.md before
+# any of it is published. Coordinates, hours, phone, GBP URL, and signature drinks are added
+# in enrichment. Completing the full extraction (all sheets, all rows) is Workstream A1.
+Los Angeles,Los Angeles,Pearl's Finest Teas,523 N Fairfax Ave,SCBD,seed,yes
+Los Angeles,Los Angeles,It's Boba Time,6660 Sunset Blvd,SCBD,seed,yes
+Los Angeles,Los Angeles,Four Leaf,318 E 2nd St,SCBD,seed,yes
+Los Angeles,Los Angeles,House of Boba,5930 S Main St,SCBD,seed,yes
+Los Angeles,Los Angeles,Quickly,2717 W Olympic Blvd,SCBD,seed,yes
+Los Angeles,Los Angeles,T - Tea Shoppe,6333 W 3rd St,SCBD,seed,yes
+Los Angeles,Los Angeles,Yo! Boba,3525 W 3rd St,SCBD,seed,yes
+Los Angeles,Los Angeles,Ten Ren's Tea Time,726 N Hill St,SCBD,seed,yes
+Los Angeles,Los Angeles,Lollicup,988 N Hill St,SCBD,seed,yes
+Los Angeles,Los Angeles,Boba Time,11207 National Blvd,SCBD,seed,yes
+Los Angeles,Los Angeles,Formosa Boba Men,7000 W Manchester Ave,SCBD,seed,yes
+Los Angeles,Los Angeles,Volcano Tea House,3019 S Figueroa St,SCBD,seed,yes
+Los Angeles,Los Angeles,Boba Bear,414 S Western Ave,SCBD,seed,yes
+Los Angeles,Los Angeles,Boba Loca,10946 Weyburn Ave,SCBD,seed,yes
+Los Angeles,Los Angeles,MJ Cafe Express,11307 Mississippi Ave,SCBD,seed,yes
+Los Angeles,Los Angeles,Cafe Latte,3130 W Olympic Blvd,SCBD,seed,yes
+Los Angeles,Los Angeles,Bon Bon Tea House,9663 Reseda Blvd,SCBD,seed,yes
+Los Angeles,Los Angeles,Cafe Home,3377 Wilshire Blvd,SCBD,seed,yes
+Los Angeles,Los Angeles,Bubble U,843 N Broadway,SCBD,seed,yes
+Los Angeles,Los Angeles,CoCo Fresh Tea & Juice,11301 W Olympic Blvd,SCBD,seed,yes
+Los Angeles,Los Angeles,Honeyboba,11573 Santa Monica Blvd,SCBD,seed,yes
+Los Angeles,Los Angeles,Twinkle Brown Sugar,131 S Central Ave,SCBD,seed,yes
+Los Angeles,Los Angeles,I Love Boba,3512 W 8th St,SCBD,seed,yes
+Los Angeles,Los Angeles,I Love Sweetea,318 S La Brea Ave,SCBD,seed,yes
+Los Angeles,Los Angeles,Kukui Hut Cafe,1308 N Edgemont St,SCBD,seed,yes
+Los Angeles,Los Angeles,Berlins,8474 W 3rd St,SCBD,seed,yes
+Los Angeles,Los Angeles,Hashtag Coffee & Tea,2321 S Hoover St,SCBD,seed,yes
+Los Angeles,Los Angeles,Cantaloop,7095 Hollywood Blvd,SCBD,seed,yes
+Los Angeles,Los Angeles,Boba Story,701 S Western Ave,SCBD,seed,yes
+Los Angeles,Los Angeles,Mr. Boba,3805 W 6th St,SCBD,seed,yes
+Los Angeles,Long Beach,Zero Express,1785 Palo Verde Ave,SCBD,seed,yes
+Los Angeles,Long Beach,Honeybee's,301 Loma Ave,SCBD,seed,yes
+Los Angeles,Long Beach,Hiccups,1946 N Lakewood Blvd,SCBD,seed,yes
+Los Angeles,Long Beach,Cha For Tea,5720 E 7th St,SCBD,seed,yes
+Los Angeles,Long Beach,Roasting Water,7561 Carson Blvd,SCBD,seed,yes
+Los Angeles,Long Beach,Boba Tea House,1336 W Willow St,SCBD,seed,yes
+Los Angeles,Long Beach,Snow Monster,5211 E 2nd St,SCBD,seed,yes
+Los Angeles,Long Beach,Boba Loca,3600 Long Beach Blvd,SCBD,seed,yes
+Los Angeles,Santa Monica,Boba Lab,711 Pico Blvd,SCBD,seed,yes
+Los Angeles,Santa Monica,Bubble Boba,2829 Ocean Park Blvd,SCBD,seed,yes
+Los Angeles,Santa Monica,TLight Boba,1709 Pico Blvd,SCBD,seed,yes
+Los Angeles,Santa Monica,The Boba Promenade Cafe,321 Santa Monica Blvd,SCBD,seed,yes
+Los Angeles,Santa Monica,Boba Tea & Me Truck,1300 Ocean Ave,SCBD,seed,yes
+Los Angeles,Arcadia,Nest Tea House,556 Las Tunas Dr,SCBD,seed,yes
+Los Angeles,Arcadia,Half And Half Tea Express,145 E Foothill Blvd,SCBD,seed,yes
+Los Angeles,Arcadia,CoCo Fresh Tea & Juice,1019 S Baldwin Ave,SCBD,seed,yes
+Los Angeles,Arcadia,Honeyboba,1 W Duarte Rd,SCBD,seed,yes
+Los Angeles,Arcadia,Yoshantea Tea House,30 E Duarte Rd,SCBD,seed,yes
+Los Angeles,Arcadia,AU79 Tea House,815 W Naomi Ave,SCBD,seed,yes
+Los Angeles,Arcadia,Bearology,400 S Baldwin Ave,SCBD,seed,yes
+Los Angeles,Arcadia,BAMBU,651 W Duarte Rd,SCBD,seed,yes
+Los Angeles,Arcadia,Chatime,168 Las Tunas Dr,SCBD,seed,yes
+Los Angeles,Arcadia,Tea Bar Starry,1108 S Baldwin Ave,SCBD,seed,yes
+Los Angeles,Arcadia,Ten Ren's Tea Time,846 W Duarte Rd,SCBD,seed,yes
+Los Angeles,Arcadia,Tapioca Express,160 E Duarte Rd,SCBD,seed,yes
+Los Angeles,Arcadia,Boba Ave Express,1437 S Baldwin Ave,SCBD,seed,yes
+Los Angeles,Arcadia,Quickly,171 E Live Oak Ave,SCBD,seed,yes
+Los Angeles,Arcadia,Spiceology,142 E Duarte Rd,SCBD,seed,yes
+Los Angeles,Arcadia,Bird Pick Tea & Herb,400 S Baldwin Ave #231,SCBD,seed,yes
+Los Angeles,Covina,BYOB A Boba Company,963 S Glendora Ave,SCBD,seed,yes
+Los Angeles,Covina,The Ice Bar,550 S Glendora Ave,SCBD,seed,yes
+Los Angeles,Covina,Black & White,2550 E Amar Rd,SCBD,seed,yes
+Los Angeles,Covina,Factory Tea Bar,969 S Glendora Ave,SCBD,seed,yes
+Los Angeles,Covina,Jin Teahouse,3648 Nogales St,SCBD,seed,yes
+Los Angeles,Covina,Cha2o,1525 E Amar Rd,SCBD,seed,yes
+Los Angeles,Covina,Tapioca Express,1019 S Glendora Ave,SCBD,seed,yes
+Los Angeles,Covina,Lollicup,9108 Plaza Drive,SCBD,seed,yes
+Los Angeles,Covina,Boba Tea Lounge,453 S Citrus Ave,SCBD,seed,yes
+Los Angeles,Pasadena,Home Brewed Bar,39 N Arroyo Pkwy,SCBD,seed,yes
+Los Angeles,Pasadena,AU79 Tea Express,1671 E Colorado Blvd,SCBD,seed,yes
+Los Angeles,Pasadena,Cafe 86,36 W Colorado Blvd,SCBD,seed,yes
+Los Angeles,Pasadena,T Pumps,524 S Lake Ave,SCBD,seed,yes
+Los Angeles,Pasadena,Tea Spots,1443 E Colorado Blvd,SCBD,seed,yes
+Los Angeles,Pasadena,Bird Pick Tea & Herb,10 S De Lacey Ave,SCBD,seed,yes
+Los Angeles,Pasadena,Half and Half Tea Express,3007 Huntington Dr,SCBD,seed,yes
+Los Angeles,Pasadena,Jin Tea Shop,18 W Green St,SCBD,seed,yes
+Los Angeles,Walnut,Boba Time,19820 E Colima Rd,SCBD,seed,yes
+Los Angeles,Walnut,Freshia Tea Time,368 N Lemon Ave,SCBD,seed,yes
+Los Angeles,Walnut,Teaology,20747 Amar Rd,SCBD,seed,yes
+Los Angeles,Walnut,$1 Drink,20747-8C Amar Rd,SCBD,seed,yes
+Los Angeles,Walnut,Lollicup,1223 N Grand Ave,SCBD,seed,yes
+Los Angeles,Walnut,Boba V Cafe,376 N Lemon Ave,SCBD,seed,yes
+Los Angeles,Walnut,Ten Ren's Tea Time,515 Grand Ave,SCBD,seed,yes
+Los Angeles,Walnut,MJ Cafe & Teahouse,20747 Amar Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,Tea Block,18311 Colima Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,Dragonfly Tea Bar,19208 Colima Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,Tastea,1737 Fullerton Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,Boba Bear,18414 E Colima Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,Half & Half Tea Express,17575 Colima Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,I Heart Boba,17418 Colima Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,BAMBU,1606 Fullerton Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,Ten Ren's Tea Time,18912-A East Gale Ave,SCBD,seed,yes
+Los Angeles,Rowland Heights,Tea Bar,18178 Colima Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,Boba Gogo,18414 Colima Road,SCBD,seed,yes
+Los Angeles,Rowland Heights,Lollicup Fresh,1380 S. Fullerton Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,MJ Cafe & Teahouse,17521 Colima Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,Little Bean,18415 E Colima Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,Tea Station,18558 Gale Ave,SCBD,seed,yes
+Los Angeles,Rowland Heights,Tea Time Express,19725 E. Colima Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,Quickly,18353 E Colima Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,Bobee 5,1756 S Nogales St,SCBD,seed,yes
+Los Angeles,Rowland Heights,Zero Degrees,17575 Colima Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,Blackball Taiwanese Dessert,1380 Fullerton Rd,SCBD,seed,yes
+Los Angeles,Rowland Heights,Honeymee,18180 Colima Rd,SCBD,seed,yes
+Los Angeles,Monterey Park,Tea Brick,501 W Garvey Ave,SCBD,seed,yes
+Los Angeles,Monterey Park,Boba Ave,2089 S Atlantic Blvd,SCBD,seed,yes
+Los Angeles,Monterey Park,Half & Half Tea Express,141 N Atlantic Blvd,SCBD,seed,yes
+Los Angeles,Monterey Park,Honeyboba,428 S Atlantic Blvd,SCBD,seed,yes
+Los Angeles,Monterey Park,Got Boba?!,421 N Atlantic Blvd,SCBD,seed,yes
+Los Angeles,Monterey Park,Ten Ren's Tea Time,500 N. Atlantic Blvd,SCBD,seed,yes
+Los Angeles,Monterey Park,CoCo Fresh Tea & Juice,728 S Atlantic Blvd,SCBD,seed,yes
+Los Angeles,Monterey Park,Quickly,2095 S Atlantic Blvd,SCBD,seed,yes
+Los Angeles,Pomona,Zero X,3560 W Temple Ave,SCBD,seed,yes
+Los Angeles,Pomona,Boba Tea Zone,961 E Mission Blvd,SCBD,seed,yes
+Los Angeles,Pomona,Cha For Tea,3560 W Temple Ave,SCBD,seed,yes
+Los Angeles,El Monte,Mana Tea House,3944 N Peck Rd,SCBD,seed,yes
+Los Angeles,El Monte,Cha Cafe,10308 Lower Azusa Rd,SCBD,seed,yes
+Los Angeles,El Monte,Boba Bear,9216 Flair Dr,SCBD,seed,yes
+Los Angeles,El Monte,Tea Republic,923 E Las Tunas Dr,SCBD,seed,yes
+Los Angeles,El Monte,The Vounge,10602 Lower Azusa Rd,SCBD,seed,yes
+Los Angeles,Diamond Bar,Tea Rush,2759 S Diamond Bar Blvd,SCBD,seed,yes
+Los Angeles,Diamond Bar,Oku 1,20657 Golden Springs Dr,SCBD,seed,yes
+Los Angeles,Diamond Bar,Tea Garden Cafe,1395 S Diamond Bar Blvd,SCBD,seed,yes
+Los Angeles,Diamond Bar,Tealicious,1155 S Diamond Bar Blvd,SCBD,seed,yes
+Los Angeles,Diamond Bar,Cafe Haus,20627 Golden Springs Dr,SCBD,seed,yes
+Los Angeles,Diamond Bar,Lollicup,1122 South Diamond Bar Blvd,SCBD,seed,yes
+Los Angeles,Diamond Bar,Health Station,20657 Golden Spring Dr,SCBD,seed,yes
+Los Angeles,Diamond Bar,Mimi 5 Bobee,333 S Diamond Bar Blvd,SCBD,seed,yes
+Los Angeles,Diamond Bar,You & Me Cafe,1241 S Diamond Bar Blvd,SCBD,seed,yes
+Los Angeles,Gardena,Tea Station,1610 W Redondo Beach Blvd # 3,SCBD,seed,yes
+Los Angeles,Rosemead,Dingle Berries Coffee & Tea,9711 Valley Blvd,SCBD,seed,yes
+Los Angeles,Rosemead,Neighbors Tea House,4213 Rosemead Blvd,SCBD,seed,yes
+Los Angeles,Rosemead,Honeyboba,1717 Walnut Grove Ave,SCBD,seed,yes
+Los Angeles,Rosemead,Le Arbre Tea House,8508 E Valley Blvd,SCBD,seed,yes
+Los Angeles,Rosemead,Quickly,8930 Mission Dr,SCBD,seed,yes
+Los Angeles,Rosemead,Boba Corner,8150 Garvey Ave,SCBD,seed,yes
+Los Angeles,Rosemead,Cha Bei Bei Tea House,7637 Garvey Ave,SCBD,seed,yes
+Los Angeles,San Gabriel,Tea Republic,923 E Las Tunas Dr,SCBD,seed,yes
+Los Angeles,San Gabriel,Factory Tea Bar,323 S Mission Dr,SCBD,seed,yes
+Los Angeles,San Gabriel,T4U Cafe,417 S San Gabriel,SCBD,seed,yes
+Los Angeles,San Gabriel,Half & Half Tea House,120 N San Gabriel Blvd,SCBD,seed,yes
+Los Angeles,San Gabriel,BAMBU,432 East Valley Blvd,SCBD,seed,yes
+Los Angeles,San Gabriel,A Plus Tea House,315 S San Gabriel Blvd,SCBD,seed,yes
+Los Angeles,San Gabriel,Fresh Roast,308 S San Gabriel Blvd,SCBD,seed,yes
+Los Angeles,San Gabriel,Half & Half Good Old Time,704 W Las Tunas Dr,SCBD,seed,yes
+Los Angeles,San Gabriel,Share Tea,709 W Las Tunas Dr,SCBD,seed,yes
+Los Angeles,San Gabriel,Bubble Republic,800 W Las Tunas Dr,SCBD,seed,yes
+Los Angeles,San Gabriel,Milk & Honey,534 E Valley Blvd,SCBD,seed,yes
+Los Angeles,San Gabriel,Oh My Pan Bakery & Tea,801 E Valley Blvd,SCBD,seed,yes
+Los Angeles,San Gabriel,Snow House Tea Bar,123 E Valley Blvd,SCBD,seed,yes
+Los Angeles,San Gabriel,Tapioca Express,980 E Las Tunas Dr,SCBD,seed,yes
+Los Angeles,San Gabriel,Ten Ren,154 W Valley Blvd,SCBD,seed,yes
+Los Angeles,San Gabriel,ID Cha House,425 W Valley Blvd,SCBD,seed,yes
+Los Angeles,San Gabriel,Tea Station,158 W Valley Blvd,SCBD,seed,yes
+Los Angeles,San Gabriel,Blackball Taiwanese Dessert,250 W Valley Blvd,SCBD,seed,yes
+Los Angeles,San Gabriel,Boba Ave 8090,140 W Valley Blvd,SCBD,seed,yes
+Los Angeles,San Gabriel,Quickly,119 S Gabriel Blvd,SCBD,seed,yes
+Los Angeles,San Gabriel,Labobatory,819 W Las Tunas Dr,SCBD,seed,yes
+Los Angeles,Baldwin Park,Miss Tea,14317 Ramona Blvd,SCBD,seed,yes
+Los Angeles,Huntington Park,Bobana,2667 E Florence Ave,SCBD,seed,yes
+Los Angeles,Huntington Park,Hola Coffee & Boba,3047 E Gage Ave,SCBD,seed,yes
+Los Angeles,Temple City,Boba Express,9653 Las Tunas Dr,SCBD,seed,yes
+Los Angeles,Temple City,Quickly,9445 Las Tunas Dr,SCBD,seed,yes
+Los Angeles,Temple City,Tea Station Express,5700 Las Tunas Dr,SCBD,seed,yes
+Los Angeles,Temple City,Rendezvous Cafe,9566 Las Tunas Dr,SCBD,seed,yes
+Los Angeles,Temple City,Meet Fresh,9055 Las Tunas Dr,SCBD,seed,yes
+Los Angeles,Temple City,Tea Station,9578 Las Tunas Dr,SCBD,seed,yes
+Los Angeles,Burbank,Boba Loca,148 N San Fernando Blvd,SCBD,seed,yes
+Los Angeles,Burbank,Tea Pop,5050 Vineland Ave,SCBD,seed,yes
+Los Angeles,Hollywood,It's Boba Time,6660 Sunset Blvd,SCBD,seed,yes
+Los Angeles,Hollywood,Cantaloop,7095 Hollywood Blvd,SCBD,seed,yes
+Los Angeles,Hollywood,Hollywood Rock Cafe,6511 Hollywood Blvd,SCBD,seed,yes
+Los Angeles,Hollywood,Pearl's Finest Teas,523 N Fairfax Ave,SCBD,seed,yes
+Los Angeles,Hollywood,Hart's Cafe,6655 Hollywood Blvd,SCBD,seed,yes
+Los Angeles,Hollywood,Alfred Tea,705 N Alfred St,SCBD,seed,yes
+Los Angeles,Cerritos,Share Tea,11900 South St,SCBD,seed,yes
+Los Angeles,Cerritos,Fusion Tea Bar,11312 South St,SCBD,seed,yes
+Los Angeles,Cerritos,BAMBU,11408 South St,SCBD,seed,yes
+Los Angeles,Cerritos,Kape Republik,17206 Norwalk Blvd,SCBD,seed,yes
+Los Angeles,Cerritos,Tapioca Express,12751 Towne Center Dr,SCBD,seed,yes
+Los Angeles,Cerritos,Guppy Teahouse,11803 South Street,SCBD,seed,yes
+Los Angeles,Cerritos,Class 302,11446 South St,SCBD,seed,yes
+Los Angeles,Cerritos,Cha2O,11688 South St #104,SCBD,seed,yes
+Los Angeles,Cerritos,Tea Station,11688 South St #101,SCBD,seed,yes
+Los Angeles,Artesia,It's Boba Time,17901 Pioneer Blvd,SCBD,seed,yes
+Los Angeles,Artesia,Dolphin Bay,17806 Pioneer Blvd,SCBD,seed,yes
+Los Angeles,Artesia,Lollicup,17901 Pioneer Blvd,SCBD,seed,yes
+Los Angeles,Monrovia,The Loose Teas,666 W Huntington Dr,SCBD,seed,yes
+Orange,Westminster,Roasting Water,7925 Westminster Blvd,SCBD,seed,yes
+Orange,Westminster,4 Seasons Tea,9950 Bolsa Ave,SCBD,seed,yes
+Orange,Westminster,Bloomz Tea,8532 Westminster Blvd,SCBD,seed,yes
+Orange,Westminster,3 Blossoms Cafe,10495 Bolsa Ave,SCBD,seed,yes
+Orange,Westminster,Dingtea Bolsa,9615 Bolsa Ave,SCBD,seed,yes
+Orange,Westminster,Zero Degrees,9822 Bolsa Ave,SCBD,seed,yes
+Orange,Westminster,Lollicup,9550 Bolsa Avenue,SCBD,seed,yes
+Orange,Westminster,Boba Corner 2,15440 Beach Blvd,SCBD,seed,yes
+Orange,Westminster,Snow Monster,9600 Bolsa Ave,SCBD,seed,yes
+Orange,Westminster,Kung Fu Tea,9709 Bolsa Ave,SCBD,seed,yes
+Orange,Westminster,Tapioca Express,9922 Bolsa Ave,SCBD,seed,yes
+Orange,Westminster,Tebo Tebo Tea Lounge,15556 Brookhurst St,SCBD,seed,yes
+Orange,Westminster,Tebo Tebo Tea Express,13916 Brookhurst St,SCBD,seed,yes
+Orange,Westminster,Turtle Tea,14100 Brookhurst St,SCBD,seed,yes
+Orange,Garden Grove,Pick Me Up Teahouse,9240 Garden Grove Blvd,SCBD,seed,yes
+Orange,Garden Grove,Almond Haus,12549 Harbor Blvd,SCBD,seed,yes
+Orange,Garden Grove,7 Leaves Cafe,13481 Euclid St,SCBD,seed,yes
+Orange,Garden Grove,Gotcha Cafe,9757 Garden Grove Blvd,SCBD,seed,yes
+Orange,Garden Grove,Tastea,10189 Westminster Ave,SCBD,seed,yes
+Orange,Garden Grove,Roasting Water,9783 Chapman Ave,SCBD,seed,yes
+Orange,Garden Grove,Boba Loca,9520 Garden Grove Blvd,SCBD,seed,yes
+Orange,Garden Grove,Crave,8939 W Garden Grove Blvd,SCBD,seed,yes
+Orange,Garden Grove,Mio Tea House,13281 Brookhurst St,SCBD,seed,yes
+Orange,Garden Grove,Urban Location,10872 Westminster Ave,SCBD,seed,yes
+Orange,Garden Grove,Tebo Tebo Tea Express,13916 Brookhurst St,SCBD,seed,yes
+Orange,Anaheim,Ten Ren Tea,665 N Euclid St,SCBD,seed,yes
+Orange,Anaheim,Mini Monster,440 S Anaheim Blvd,SCBD,seed,yes
+Orange,Anaheim,Formosa Tea Time,263 S Euclid St,SCBD,seed,yes
+Orange,Anaheim,OMG! Dessert Lounge,301 S Anaheim Blvd,SCBD,seed,yes
+Orange,Huntington Beach,Monkey Tea,19072 Beach Blvd,SCBD,seed,yes
+Orange,Huntington Beach,TeaArias,7184 Edinger Ave,SCBD,seed,yes
+Orange,Huntington Beach,7 Leaves Cafe,7225 Edinger Ave,SCBD,seed,yes
+Orange,Huntington Beach,Snow Monster,17406 Beach Blvd,SCBD,seed,yes
+Orange,Fullerton,Share Tea,2445 E Chapman Ave,SCBD,seed,yes
+Orange,Fullerton,Zero Express,2323 E Chapman Ave,SCBD,seed,yes
+Orange,Fullerton,Ice Bomb,107 W Amerige Ave,SCBD,seed,yes
+Orange,Fullerton,Cafe Bing,124 W Wilshire Ave,SCBD,seed,yes
+Orange,Fullerton,Ten Ren's Tea Time,1327 S Harbor Blvd,SCBD,seed,yes
+Orange,Fullerton,Cha2o,100 S Harbor Blvd,SCBD,seed,yes
+Orange,Fullerton,Pink Boba,109 W Orangethorpe Ave,SCBD,seed,yes
+Orange,Fullerton,Quickly,2510 E Chapman Ave,SCBD,seed,yes
+Orange,Fullerton,Kung Fu Tea,729 N Placentia Ave,SCBD,seed,yes
+Orange,Irvine,BAMBU,14775 Jeffrey Rd,SCBD,seed,yes
+Orange,Irvine,7 Leaves Cafe,14845 Jeffrey Road,SCBD,seed,yes
+Orange,Irvine,Honeyberry,14775 Jeffrey Rd,SCBD,seed,yes
+Orange,Irvine,Lollicup,2700 Alton Pkwy,SCBD,seed,yes
+Orange,Irvine,Quickly,16277 Laguna Canyon Rd,SCBD,seed,yes
+Orange,Irvine,Tapioca Express,5408 Walnut Ave,SCBD,seed,yes
+Orange,Irvine,i-Tea Cafe,15435 Jeffrey Rd,SCBD,seed,yes
+Orange,Irvine,Tea Station,15333 Culver Dr,SCBD,seed,yes
+Orange,Irvine,Snow Monster,4255 Campus Dr,SCBD,seed,yes
+Orange,Irvine,E + Boba,18040 Culver Dr,SCBD,seed,yes
+Orange,Irvine,Cha For Tea,4187 Campus Dr,SCBD,seed,yes
+Orange,Irvine,Class 302,18090 Culver Dr,SCBD,seed,yes
+Orange,Irvine,Tebo Tebo Tea Lounge,14120 Culver Dr,SCBD,seed,yes
+Orange,Irvine,85C Bakery Cafe,2700 Alton Pkwy #123 (Diamond Jamboree),SCBD,seed,yes
+Orange,Irvine,Champion Food,14775 Jeffrey Rd,SCBD,seed,yes
+Orange,Irvine,Shaved N Boba,14250 Culver Dr,SCBD,seed,yes
+Orange,Irvine,85C Bakery Cafe (Diamond Jamboree),2700 Alton Pkwy #123,SCBD,seed,yes
+Orange,Brea,Midastee Tea House,912 E Imperial Hwy,SCBD,seed,yes
+Orange,Yorba Linda,iTea,23621 La Palma Ave,SCBD,seed,yes
+Orange,Mission Viejo,Harmony Tea Bar,25380 Marguerite Pkwy,SCBD,seed,yes
+Orange,Mission Viejo,Milk Box,27741 Crown Valley Pkwy,SCBD,seed,yes
+Orange,Mission Viejo,Chatime,555 The Shops Blvd,SCBD,seed,yes
+Orange,Costa Mesa,Tastea,1175 Baker St,SCBD,seed,yes
+Orange,Costa Mesa,Tapioca Express,3033 Bristol St,SCBD,seed,yes
+Orange,Costa Mesa,That Boba Place,1534 Adams Ave,SCBD,seed,yes
+Orange,Costa Mesa,7 Leaves Cafe,2800 Harbor Blvd,SCBD,seed,yes
+Orange,Costa Mesa,Sweetea Cafe,1460 Baker St,SCBD,seed,yes
+Orange,Orange,Dragonfly Tea Bar,3533 E Chapman Ave,SCBD,seed,yes
+Orange,Orange,H2SNOW,1315 E Katella Ave,SCBD,seed,yes
+Orange,Tustin,It's Boba Time,2481 Park Ave (The District),SCBD,seed,yes
+Orange,Tustin,7 Leaves,13771 Newport Ave,SCBD,seed,yes
+Orange,Tustin,Leaf N Cream,14089 Newport Ave,SCBD,seed,yes
+Orange,Santa Ana,Sharetea,3940 S Bristol St,SCBD,seed,yes
+Orange,Santa Ana,Class 302,1945 E 17th St,SCBD,seed,yes
+Orange,Santa Ana,Lantern Grill,1722 W 1st St,SCBD,seed,yes
+Orange,Santa Ana,Sweet Boba,2800 N Main St,SCBD,seed,yes
+Orange,Santa Ana,Tapioca Express,1441 W MacArthur Blvd,SCBD,seed,yes
+Orange,Fountain Valley,Milk Bar,16051 Brookhurst St. Ste D,SCBD,seed,yes
+Orange,Fountain Valley,Craved Tea House,16501 Brookhurst St,SCBD,seed,yes
+Orange,Fountain Valley,T Cup Coffee & Tea,9110 Edinger Ave,SCBD,seed,yes
+Orange,Fountain Valley,7 Leaves Cafe,9475 Warner Ave,SCBD,seed,yes
+Orange,Cypress,7 Leaves Cafe,9111 Valley View St Suite 101,SCBD,seed,yes
+Riverside,Riverside,Boba Tea House,767 W Blaine St,SCBD,seed,yes
+Riverside,Riverside,Boba Fiend Tea House,3375 Iowa Ave,SCBD,seed,yes
+Riverside,Riverside,O' Tea Time,4270 Riverwalk Pkwy,SCBD,seed,yes
+Riverside,Riverside,5s' Teas,6930 Indiana Ave,SCBD,seed,yes
+Riverside,Riverside,Bobaloca,19009 Van Buren Blvd,SCBD,seed,yes
+Riverside,Riverside,Lollicup Fresh,3740 Iowa Ave,SCBD,seed,yes
+Riverside,Riverside,Ten Ren's Tea Time,1400 University Ave,SCBD,seed,yes
+Riverside,Riverside,Boba Cafe,1223 University Ave,SCBD,seed,yes
+Riverside,Riverside,Cha2O,1400 University Ave,SCBD,seed,yes
+Riverside,Corona,Tea Time Express,99 Ranch Market,SCBD,seed,yes
+Riverside,Temecula,Tea Time,31333 Temecula Pkwy,SCBD,seed,yes
+Riverside,Temecula,Chill Zone,40315 Winchester Rd,SCBD,seed,yes
+Riverside,Temecula,Triple Beverage,26479 Ynez Rd a,SCBD,seed,yes
+Riverside,Temecula,Snow & Crab,32965 Temecula Pkwy #100,SCBD,seed,yes
+Riverside,Temecula,Juice Bar,27520 Ynez Rd D1,SCBD,seed,yes
+Riverside,Moreno Valley,Cafe Gossip,23663 Sunnymead Blvd,SCBD,seed,yes
+Riverside,Moreno Valley,Better Be Donuts,25960 Iris Ave,SCBD,seed,yes
+Riverside,Moreno Valley,Boba Express,22500 Town Cir,SCBD,seed,yes
+San Bernardino,Chino,7 Leaves Cafe,13920 City Center Dr #4015,SCBD,seed,yes
+San Bernardino,Rancho Cucamonga,Boba Fiend Tea House,10590 Base Line Rd,SCBD,seed,yes
+San Bernardino,Rancho Cucamonga,BOBA PLANET & Sandwiches,9309 E Foothill Blvd b,SCBD,seed,yes
+San Diego,San Diego,Square Bar Cafe,4488 Convoy Street # H,SCBD,seed,yes
+San Diego,San Diego,Tapioca Express,4646 Convoy St #106B,SCBD,seed,yes
+San Diego,San Diego,Tapioca Heaven,9225 Mira Mesa Blvd #115,SCBD,seed,yes
+San Diego,San Diego,Bobalicious,8155 Mira Mesa Blvd #4,SCBD,seed,yes
+San Diego,San Diego,Cafe Hue,3860 Convoy St,SCBD,seed,yes
+San Diego,San Diego,Trinitea,8680 Navajo Rd #109,SCBD,seed,yes
+San Diego,San Diego,Lollicup Tea Zone,1550 E H St,SCBD,seed,yes
+San Diego,San Diego,VaniTea Cafe,525 Telegraph Canyon Rd,SCBD,seed,yes
+San Diego,San Diego,Tastea Grill,1392 E Palomar St #305,SCBD,seed,yes
+San Diego,San Diego,M.I. Tea Express,7655 Clairemont Mesa Blvd,SCBD,seed,yes
+San Diego,San Diego,Tea Station,7315 Clairemont Mesa Blvd,SCBD,seed,yes
+San Diego,San Diego,It's Boba Time,"Suite A, 4344 Convoy St",SCBD,seed,yes
+San Diego,San Diego,Tea N More,7380 Clairemont Mesa Blvd #111,SCBD,seed,yes
+San Diego,San Diego,Up2you Cafe,7770 Vickers St #101,SCBD,seed,yes
+San Diego,San Diego,Ice Box,1430 E Plaza Blvd,SCBD,seed,yes
+San Diego,San Diego,SD Boba Tea,1105 E Plaza Blvd,SCBD,seed,yes
+San Diego,San Diego,Share Tea,4917 Convoy St,SCBD,seed,yes
+San Diego,San Diego,85 C Bakery,5575 Balboa Ave,SCBD,seed,yes
+San Diego,San Diego,Kung Fu Tea,4869 Convoy St,SCBD,seed,yes
+San Diego,San Diego,OO Tea,7330 Clairemont Mesa Blvd #106,SCBD,seed,yes
+San Diego,San Diego,Guiltea Cravings,7330 Clairemont Mesa Blvd #106,SCBD,seed,yes
+San Diego,San Diego,Boba Bar (OG Location),7655 Clairemont Mesa Blvd,SCBD,seed,yes
+San Diego,San Diego,Snoice,8423 Paradise Valley Rd B,SCBD,seed,yes
+San Diego,San Diego,Boba Bar and Desserts,4619 Convoy St f,SCBD,seed,yes
+San Diego,San Diego,Infini Tea,4690 Convoy St #111,SCBD,seed,yes
+San Diego,San Diego,Camellia Rd. Tea Bar,8199 Clairemont Mesa Blvd Suite H,SCBD,seed,yes
+San Diego,San Diego,Serenitea,940 W San Marcos Blvd,SCBD,seed,yes
+San Diego,San Diego,Tea Republic,923 E Las Tunas Dr,SCBD,seed,yes
