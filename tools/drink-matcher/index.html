@@ -1,0 +1,207 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CapyBoba Drink Matcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#151218;--brown:#21142B;--syrup:#FF4F87;--milk:#FFF3E6;--paper:#FFFCF8;--matcha:#6F8F4E;--taro:#9A7BFF;--line:#EADFCE;--ink60:rgba(21,18,24,.6)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--milk);color:var(--ink);font-family:"Inter Tight",system-ui,sans-serif;line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(120% 90% at 12% 0%,rgba(142,111,176,.10),transparent 55%),radial-gradient(90% 80% at 100% 4%,rgba(166,113,60,.10),transparent 52%)}
+.wrap{max-width:600px;margin:0 auto;padding:24px 18px 60px}
+h1,h2,.match{font-family:"Fraunces",Georgia,serif;color:var(--brown);letter-spacing:-.01em}
+.brand{font-family:"Fraunces",serif;font-weight:700;font-size:1.5rem;color:var(--brown)}
+.brand b{color:var(--syrup)}
+.kicker{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--taro);display:inline-flex;align-items:center;gap:.5em;margin-top:14px}
+.kicker::before{content:"";width:.5em;height:.5em;border-radius:50%;background:var(--taro)}
+h1{font-size:clamp(2rem,7vw,2.9rem);font-weight:700;margin:.2rem 0 .3rem;line-height:1.05}
+.sub{color:var(--ink);font-size:1.02rem;max-width:42ch}
+.honesty{font-size:.82rem;color:var(--ink60);margin-top:.6rem}
+.honesty b{color:var(--brown)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:20px}
+.startbtn,.optbtn,.btn{font-family:"Inter Tight",sans-serif;cursor:pointer;transition:.15s}
+.startbtn{font-family:"Fraunces",serif;font-weight:700;font-size:1.2rem;color:var(--milk);background:var(--brown);border:0;border-radius:999px;padding:.8rem 2.2rem;box-shadow:0 14px 26px -12px rgba(61,40,23,.5)}
+.startbtn:hover{transform:translateY(-2px)}
+.dots{display:flex;gap:6px;margin-bottom:16px}
+.dots span{width:22px;height:5px;border-radius:3px;background:var(--line)}
+.dots span.on{background:var(--taro)}
+.qnum{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink60)}
+.q{font-family:"Fraunces",serif;font-weight:600;font-size:1.5rem;color:var(--brown);margin:.2rem 0 16px;line-height:1.15}
+.opts{display:flex;flex-direction:column;gap:10px}
+.optbtn{text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:.9rem 1.1rem;font-size:1.02rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:.7em}
+.optbtn:hover{border-color:var(--taro);transform:translateX(3px)}
+.optbtn .emj{font-size:1.3rem}
+.optbtn .desc{display:block;font-weight:400;font-size:.82rem;color:var(--ink60);margin-top:1px}
+.back{background:none;border:0;color:var(--ink60);font-size:.86rem;cursor:pointer;margin-top:14px;padding:.3rem 0}
+.back:hover{color:var(--syrup)}
+.match-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:20px;position:relative;overflow:hidden}
+.match-card::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--taro),var(--syrup))}
+.mk{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--taro)}
+.match{font-size:clamp(1.6rem,5.5vw,2.2rem);font-weight:700;margin:.2rem 0 .4rem;line-height:1.1}
+.blurb{font-size:1.02rem;color:var(--ink)}
+.section{margin-top:16px}
+.section .h{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink60);margin-bottom:5px}
+.order{font-size:.98rem;color:var(--ink);border-left:3px solid var(--syrup);padding-left:.8rem}
+.note{background:#fff;border:1px dashed var(--line);border-radius:12px;padding:11px 13px;margin-top:14px;font-size:.86rem;color:var(--ink60);display:flex;gap:9px;align-items:flex-start}
+.note b{color:var(--brown)}
+.guide{background:rgba(111,143,78,.1);border:1px solid rgba(111,143,78,.3);border-radius:12px;padding:11px 13px;margin-top:12px;font-size:.9rem;color:var(--ink)}
+.guide b{color:var(--matcha)}
+.alsotry{margin-top:14px;font-size:.9rem;color:var(--ink60)}
+.alsotry b{color:var(--brown);font-family:"Fraunces",serif}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.btn{font-weight:600;font-size:.92rem;padding:.6rem 1.1rem;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--brown);display:inline-flex;align-items:center;gap:.4em}
+.btn:hover{border-color:var(--syrup)}
+.btn-p{background:var(--brown);color:var(--milk);border-color:var(--brown)}
+.btn-p:hover{background:#2c1c10}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--brown);color:var(--milk);padding:.6rem 1.1rem;border-radius:999px;font-size:.9rem;font-weight:600;opacity:0;transition:.25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:.78rem;color:var(--ink60);margin-top:22px}
+
+/* Liquid Night Market dark-frame overrides */
+body{background:#21142B;background-image:radial-gradient(80% 45% at 8% 0%,rgba(154,123,255,.20),transparent 55%),radial-gradient(70% 45% at 100% 6%,rgba(255,79,135,.16),transparent 52%)}
+.brand{color:#FFFCF8}.brand b{color:#FF4F87}
+h1{color:#FFFCF8}
+.sub{color:#FFF3E6}
+.honesty{color:rgba(255,243,230,.62)}.honesty b{color:#FFC83D}
+.spinbtn{background:#FF4F87;color:#fff}
+.chip[aria-pressed="true"]{background:#FF4F87;color:#fff;border-color:#FF4F87}
+.seg button[aria-pressed="true"]{background:#B9EE63;color:#151218}
+.startbtn{background:#FF4F87;color:#fff}
+.btn-p{background:#FF4F87;color:#fff;border-color:#FF4F87}.btn-p:hover{background:#ff2f70}
+</style></head>
+<body><div class="wrap">
+<a href="/tools/" style="display:inline-block;color:#FFF3E6;font-size:.82rem;font-weight:600;margin-bottom:8px;text-decoration:none">&lsaquo; All CapyBoba tools</a>
+
+<span class="brand">Capy<b>Boba</b></span>
+<div id="app"></div>
+<p class="foot">A CapyBoba prototype · matches you to a real boba style · exact shop menus are being verified</p>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const ARCH = {
+  brown_sugar:{name:"Brown Sugar Boba Milk",emj:"🟤",
+    blurb:"Rich and dessert-like: chewy tapioca cooked in caramelized brown sugar, poured with milk, often with no tea at all. The syrup streaks the cup. Heavier and on the sweeter side.",
+    order:"Ask if the syrup is cooked fresh. It is usually dairy milk, so ask for oat if you need non-dairy. Drink it soon so the pearls stay soft.",
+    guide:["Brown sugar vs Tiger Sugar","brown-sugar-vs-tiger-sugar"]},
+  classic_milk_tea:{name:"Classic Milk Tea",emj:"🧋",
+    blurb:"The all-rounder: brewed black or oolong tea with milk and chewy pearls, balanced between tea and sweetness. A safe, satisfying default anywhere.",
+    order:"Ask whether the tea is brewed from leaves or a mix. Start at 50% sweet and adjust from there.",
+    guide:["Loose-leaf vs powder","loose-leaf-vs-powder"]},
+  fruit_tea:{name:"Fresh Fruit Tea",emj:"🍓",
+    blurb:"Bright and refreshing: real fruit shaken with tea, no milk, usually lighter on caffeine. Great when you want something less heavy.",
+    order:"Ask for real fruit rather than a powder base. Fruit adds sweetness, so try 25 to 50% sugar. Crystal boba pairs well here.",
+    guide:["Crystal boba vs tapioca","crystal-boba-vs-tapioca"]},
+  matcha:{name:"Matcha Milk",emj:"🍵",
+    blurb:"Earthy and creamy: whisked green matcha with milk, gently sweet with a grassy depth. For the matcha people.",
+    order:"Ask whether the matcha is real or a sweet powder. Real matcha tastes green and slightly bitter; the powder version is flatter.",
+    guide:["Loose-leaf vs powder","loose-leaf-vs-powder"]},
+  taro:{name:"Taro Milk Tea",emj:"🟣",
+    blurb:"Creamy, mild, and lightly sweet, with a soft nutty-vanilla flavor and a purple color. Easy to like, and often gentle on caffeine.",
+    order:"Ask if the taro is made from real taro or a powder. Real taro is more grey; bright purple usually means powder.",
+    guide:["Loose-leaf vs powder","loose-leaf-vs-powder"]},
+  cheese_foam:{name:"Cheese Foam Tea",emj:"🧀",
+    blurb:"Sweet meets salty: a whipped salted-cream cap floated over tea. The foam cuts the sweetness of the drink below.",
+    order:"Sip from the rim first so the foam mixes with the tea, or stir it in. It is dairy, so ask before ordering if that matters.",
+    guide:["What is cheese foam","what-is-cheese-foam"]},
+  caffeine_free:{name:"Caffeine-Free Sip",emj:"🌙",
+    blurb:"No caffeine: think wintermelon, herbal infusions, or a milk-and-fruit base without tea. Same fun, no buzz.",
+    order:"Ask which drinks are truly caffeine-free, since some fruit teas still use green tea. Add pearls or jelly for texture.",
+    guide:["How to order non-dairy boba","order-non-dairy-boba"]},
+  lighter_tea:{name:"Oolong or Jasmine with Pearls",emj:"🍃",
+    blurb:"Tea-forward and lighter: a good brewed oolong or jasmine green, lightly sweet, letting the tea lead instead of the sugar.",
+    order:"Ask for it less sweet, around 25 to 50%, so the tea comes through. Best from a shop that brews loose leaf.",
+    guide:["Loose-leaf vs powder","loose-leaf-vs-powder"]}
+};
+
+const QS = [
+  {q:"What are you in the mood for?",o:[
+    {t:"Refreshing and light",d:"something you could sip in the sun",e:"🍧",s:{fruit_tea:2,lighter_tea:1,caffeine_free:1}},
+    {t:"Rich and dessert-like",d:"basically a treat in a cup",e:"🍮",s:{brown_sugar:2,taro:1,cheese_foam:1}},
+    {t:"Somewhere in between",d:"the reliable middle",e:"⚖️",s:{classic_milk_tea:2,matcha:1}}]},
+  {q:"How do you feel about tea flavor?",o:[
+    {t:"Love a strong tea taste",d:"let the tea lead",e:"🍵",s:{classic_milk_tea:2,lighter_tea:2,matcha:1}},
+    {t:"Prefer it mild or fruity",d:"tea in the background",e:"🍑",s:{fruit_tea:2,taro:1,brown_sugar:1}},
+    {t:"Caffeine-free, please",d:"no buzz for me",e:"🌙",s:{caffeine_free:3,fruit_tea:1}}]},
+  {q:"Sweetness?",o:[
+    {t:"Full sweet",d:"go all in",e:"🍯",s:{brown_sugar:2,taro:1}},
+    {t:"Balanced, around half",d:"the popular 50%",e:"🙂",s:{classic_milk_tea:1,matcha:1,cheese_foam:1}},
+    {t:"Just a little",d:"barely sweet",e:"🌿",s:{lighter_tea:2,fruit_tea:1}}]},
+  {q:"Pick a texture.",o:[
+    {t:"Chewy tapioca pearls",d:"the classic bounce",e:"⚫",s:{brown_sugar:2,classic_milk_tea:1}},
+    {t:"Something softer",d:"crystal boba or jelly",e:"💧",s:{fruit_tea:2,lighter_tea:1}},
+    {t:"A creamy foam on top",d:"a cap to sip through",e:"☁️",s:{cheese_foam:3,matcha:1}}]},
+  {q:"Milk situation?",o:[
+    {t:"Regular milk is fine",d:"bring on the creamy",e:"🥛",s:{brown_sugar:1,taro:1,matcha:1},dairy:"ok"},
+    {t:"Non-dairy for me",d:"oat, almond, or soy",e:"🌱",s:{classic_milk_tea:1,matcha:1},dairy:"nd"},
+    {t:"No milk at all",d:"keep it clean",e:"🚫",s:{fruit_tea:2,lighter_tea:2,caffeine_free:1},dairy:"no"}]},
+  {q:"Classic or adventurous?",o:[
+    {t:"Give me a classic",d:"the tried and true",e:"🏆",s:{classic_milk_tea:2,brown_sugar:1}},
+    {t:"Surprise me",d:"something less common",e:"✨",s:{cheese_foam:2,taro:1,matcha:1,lighter_tea:1}}]}
+];
+
+let step=-1, scores={}, dairy=null;
+const app=document.getElementById("app");
+
+function reset(){step=-1;scores={};dairy=null;Object.keys(ARCH).forEach(k=>scores[k]=0);render();}
+function intro(){
+  app.innerHTML=`
+  <div class="kicker">What should I drink?</div>
+  <h1>Drink Matcher</h1>
+  <p class="sub">Six quick taps and we match you to a boba style that fits how you actually like your drink.</p>
+  <p class="honesty">We match you to a real drink <b>style</b>, not a made-up menu item at a specific shop. Then we tell you how to order it your way, anywhere.</p>
+  <div class="card" style="text-align:center"><button class="startbtn" id="go">Start</button></div>`;
+  document.getElementById("go").onclick=()=>{step=0;render();};
+}
+function question(){
+  const item=QS[step];
+  const dots=QS.map((_,i)=>`<span class="${i<=step?'on':''}"></span>`).join("");
+  app.innerHTML=`
+  <div class="card">
+    <div class="dots">${dots}</div>
+    <div class="qnum">Question ${step+1} of ${QS.length}</div>
+    <div class="q">${item.q}</div>
+    <div class="opts">${item.o.map((o,i)=>`
+      <button class="optbtn" data-i="${i}"><span class="emj">${o.e}</span><span>${o.t}<span class="desc">${o.d}</span></span></button>`).join("")}</div>
+    ${step>0?`<button class="back" id="back">‹ Back</button>`:``}
+  </div>`;
+  app.querySelectorAll(".optbtn").forEach(b=>b.onclick=()=>{
+    const o=item.o[+b.dataset.i];
+    for(const k in o.s) scores[k]+=o.s[k];
+    if(o.dairy) dairy=o.dairy;
+    step++; render();
+  });
+  const back=document.getElementById("back");
+  if(back) back.onclick=()=>{step--; render();}; // note: does not unwind score; simple prototype
+}
+function result(){
+  const ranked=Object.keys(scores).sort((a,b)=>scores[b]-scores[a]);
+  const top=ARCH[ranked[0]], second=ARCH[ranked[1]];
+  let dairyNote="";
+  if(dairy==="nd") dairyNote=`<div class="note"><span>🌱</span><span>You picked <b>non-dairy</b>. Most shops carry oat, almond, or soy, but watch for hidden dairy in milk foams and some powders. Our guide <b>How to order non-dairy boba</b> covers where it hides.</span></div>`;
+  if(dairy==="no") dairyNote=`<div class="note"><span>🚫</span><span>You picked <b>no milk</b>, so we leaned toward tea-forward and fruit styles that skip the milk entirely.</span></div>`;
+  app.innerHTML=`
+  <div class="kicker">Your match</div>
+  <div class="match-card">
+    <div class="mk">You are a</div>
+    <div class="match">${top.emj} ${top.name}</div>
+    <div class="blurb">${top.blurb}</div>
+    <div class="section"><div class="h">How to order it</div><div class="order">${top.order}</div></div>
+    ${dairyNote}
+    <div class="guide">📖 Want the details? On CapyBoba: <b>${top.guide[0]}</b></div>
+    <div class="alsotry">Also worth a try: <b>${second.emj} ${second.name}</b></div>
+    <div class="note"><span>🧋</span><span>Most SoCal boba shops make a version of this. Ask for it your way. Which shops carry it exactly is something we verify per shop, so we will not guess a menu for you.</span></div>
+    <div class="acts">
+      <button class="btn btn-p" id="share">Share my match</button>
+      <button class="btn" id="again">Start over</button>
+    </div>
+  </div>`;
+  document.getElementById("again").onclick=reset;
+  document.getElementById("share").onclick=()=>{
+    const txt="🧋 CapyBoba matched me to: "+top.name+". "+top.blurb.split(":")[0]+".";
+    if(navigator.share){navigator.share({title:"CapyBoba Drink Matcher",text:txt}).catch(()=>{});}
+    else{navigator.clipboard.writeText(txt).then(()=>toast("Match copied to clipboard")).catch(()=>toast("Could not copy"));}
+  };
+}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}
+function render(){ if(step<0) intro(); else if(step<QS.length) question(); else result(); }
+reset();
+</script></body></html>

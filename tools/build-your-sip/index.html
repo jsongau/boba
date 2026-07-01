@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CapyBoba Build Your Sip</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink-plum:#21142B;--deep-ink:#151218;--lychee:#FFF3E6;--coconut:#FFFCF8;
+  --guava:#FF4F87;--mango:#FFC83D;--taro:#9A7BFF;--matcha:#B9EE63;--tea-brown:#7B3F25;--fig:#756A79;
+  --line:rgba(255,243,230,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink-plum);color:var(--lychee);font-family:"Inter Tight",system-ui,sans-serif;line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(90% 60% at 12% 0%,rgba(154,123,255,.22),transparent 55%),radial-gradient(80% 55% at 100% 8%,rgba(255,79,135,.18),transparent 52%),radial-gradient(70% 50% at 50% 100%,rgba(185,238,99,.10),transparent 60%)}
+.wrap{max-width:660px;margin:0 auto;padding:22px 18px 70px}
+h1,.brand,.order-name{font-family:"Fraunces",Georgia,serif;letter-spacing:-.01em}
+.brand{font-weight:700;font-size:1.45rem;color:var(--coconut)}
+.brand b{color:var(--guava)}
+.kicker{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--taro);display:inline-flex;align-items:center;gap:.5em;margin-top:14px}
+.kicker::before{content:"";width:.5em;height:.5em;border-radius:50%;background:var(--taro);box-shadow:0 0 10px var(--taro)}
+h1{font-size:clamp(2rem,7vw,3rem);font-weight:700;color:var(--coconut);margin:.2rem 0 .3rem;line-height:1.02}
+.sub{color:var(--lychee);opacity:.9;font-size:1.02rem;max-width:44ch}
+.honesty{font-size:.82rem;color:var(--fig);margin-top:.55rem}
+.honesty b{color:var(--mango)}
+.layout{display:grid;grid-template-columns:1fr;gap:18px;margin-top:20px}
+@media(min-width:620px){.layout{grid-template-columns:240px 1fr;align-items:start}}
+.cupbox{background:rgba(255,252,248,.05);border:1px solid var(--line);border-radius:20px;padding:16px;text-align:center;position:sticky;top:14px}
+.cup-svg{width:170px;height:230px;display:block;margin:0 auto}
+.order-name{font-size:1.05rem;color:var(--coconut);margin-top:10px;min-height:2.4em;line-height:1.25}
+.caf{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--matcha);margin-top:6px}
+.panel .grp{margin-bottom:16px}
+.grp h2{font-family:"Inter Tight",sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--mango);margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-family:"Inter Tight",sans-serif;font-size:.9rem;font-weight:600;padding:.48rem .8rem;border-radius:999px;border:1.5px solid var(--line);background:rgba(255,252,248,.04);color:var(--lychee);cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:.4em}
+.chip:hover{border-color:var(--taro)}
+.chip[aria-pressed="true"]{background:var(--guava);border-color:var(--guava);color:#fff;box-shadow:0 6px 16px -6px rgba(255,79,135,.6)}
+.chip .sw{width:12px;height:12px;border-radius:50%;border:1px solid rgba(0,0,0,.2)}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.btn{font-family:"Inter Tight",sans-serif;font-weight:600;font-size:.94rem;padding:.62rem 1.15rem;border-radius:999px;border:1.5px solid var(--line);background:rgba(255,252,248,.05);color:var(--lychee);cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:.4em}
+.btn:hover{border-color:var(--mango)}
+.btn-p{background:var(--mango);color:var(--deep-ink);border-color:var(--mango);font-weight:700}
+.btn-p:hover{background:#ffd45f}
+.note{background:rgba(255,252,248,.05);border:1px dashed var(--line);border-radius:12px;padding:11px 13px;margin-top:16px;font-size:.85rem;color:var(--fig);display:flex;gap:9px;align-items:flex-start}
+.note b{color:var(--lychee)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--guava);color:#fff;padding:.6rem 1.15rem;border-radius:999px;font-size:.9rem;font-weight:700;opacity:0;transition:.25s;pointer-events:none;box-shadow:0 10px 24px -8px rgba(255,79,135,.6)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:.78rem;color:var(--fig);margin-top:24px}
+.drop{position:absolute;width:12px;height:12px;border-radius:50%;pointer-events:none}
+@keyframes fall{0%{transform:translateY(-40px);opacity:0}25%{opacity:1}100%{transform:translateY(0);opacity:1}}
+</style></head>
+<body><div class="wrap">
+<a href="/tools/" style="display:inline-block;color:#FFF3E6;font-size:.82rem;font-weight:600;margin-bottom:8px;text-decoration:none">&lsaquo; All CapyBoba tools</a>
+
+<span class="brand">Capy<b>Boba</b></span>
+<div class="kicker">Make it exactly yours</div>
+<h1>Build Your Sip</h1>
+<p class="sub">Compose your drink layer by layer and watch the cup fill. Then carry the order to any shop.</p>
+<p class="honesty">This cup is a sketch of <b>your</b> order, not a photo of a real menu item. Matching your sip to real shop menus turns on once we verify each shop.</p>
+
+<div class="layout">
+  <div class="cupbox">
+    <svg class="cup-svg" id="cup" viewBox="0 0 170 230" aria-label="Your drink">
+      <defs>
+        <clipPath id="cupClip"><path d="M40 60 h90 l-9 150 a10 10 0 0 1 -10 9 H59 a10 10 0 0 1 -10 -9 Z"/></clipPath>
+      </defs>
+      <!-- liquid -->
+      <g clip-path="url(#cupClip)">
+        <rect id="liquid" x="30" y="70" width="110" height="150" fill="#8A5A34"/>
+        <rect id="fruitBand" x="30" y="120" width="110" height="100" fill="none" opacity="0"/>
+        <g id="iceG"></g>
+        <g id="topG"></g>
+        <rect id="foam" x="30" y="60" width="110" height="26" fill="#FFF3E6" opacity="0"/>
+      </g>
+      <!-- cup outline -->
+      <path d="M40 60 h90 l-9 150 a10 10 0 0 1 -10 9 H59 a10 10 0 0 1 -10 -9 Z" fill="none" stroke="rgba(255,243,230,.55)" stroke-width="2.4"/>
+      <!-- dome lid + straw -->
+      <path d="M36 60 q49 -30 98 0 Z" fill="rgba(255,252,248,.12)" stroke="rgba(255,243,230,.55)" stroke-width="2.2"/>
+      <rect x="34" y="52" width="102" height="10" rx="5" fill="rgba(255,243,230,.22)" stroke="rgba(255,243,230,.5)" stroke-width="1.6"/>
+      <rect x="96" y="20" width="10" height="60" rx="5" transform="rotate(10 101 50)" fill="var(--guava)"/>
+    </svg>
+    <div class="order-name" id="orderName">Start building</div>
+    <div class="caf" id="caf"></div>
+  </div>
+
+  <div class="panel" id="panel"></div>
+</div>
+
+<div class="note"><span>🧋</span><span>Your custom sip is a plan you can hand to any shop. Whether a given shop can make it exactly is something we confirm per shop, so we will not fake a match.</span></div>
+<p class="foot">A CapyBoba prototype · your order, your way · shop-menu matching unlocks after verification</p>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const GROUPS=[
+ {key:"base",label:"Tea base",multi:false,opts:[
+   {v:"Black tea",c:"#6B4A2E",caf:1},{v:"Oolong",c:"#8A5A34",caf:1},{v:"Jasmine green",c:"#A7B36A",caf:1},
+   {v:"Matcha",c:"#8FB04E",caf:1},{v:"Taro",c:"#B79BE0",caf:0},{v:"Thai tea",c:"#D98A3D",caf:1},{v:"No tea (fruit base)",c:"#F2D48A",caf:0}]},
+ {key:"milk",label:"Milk",multi:false,opts:[
+   {v:"No milk",c:null},{v:"Whole milk",c:"#FFF3E6"},{v:"Oat milk",c:"#F3E7CE"},{v:"Almond milk",c:"#F6ECD8"},
+   {v:"Creamer",c:"#FBEFD9"},{v:"Condensed milk",c:"#F7E4B8"}]},
+ {key:"fruit",label:"Fruit",multi:false,opts:[
+   {v:"No fruit",c:null},{v:"Strawberry",c:"#E86A82"},{v:"Mango",c:"#F6A93B"},{v:"Peach",c:"#F3B27A"},
+   {v:"Passionfruit",c:"#F2C94C"},{v:"Lychee",c:"#EFD9E4"}]},
+ {key:"sweet",label:"Sweetness",multi:false,opts:[
+   {v:"0%"},{v:"25%"},{v:"50%"},{v:"75%"},{v:"100%"}]},
+ {key:"ice",label:"Ice",multi:false,opts:[
+   {v:"No ice",n:0},{v:"Less ice",n:2},{v:"Regular ice",n:4},{v:"Extra ice",n:6}]},
+ {key:"topping",label:"Topping",multi:false,opts:[
+   {v:"Tapioca pearls",c:"#2A1B12",kind:"pearl"},{v:"Brown sugar boba",c:"#3D2412",kind:"pearl"},
+   {v:"Crystal boba",c:"#E9E3D6",kind:"pearl"},{v:"Grass jelly",c:"#2F2A1E",kind:"cube"},
+   {v:"Pudding",c:"#F2D06B",kind:"cube"},{v:"Aiyu jelly",c:"#E7C15A",kind:"cube"},
+   {v:"Cheese foam",c:"#FFF3E6",kind:"foam"},{v:"Popping boba",c:"#FF7FA5",kind:"pearl"}]}
+];
+const state={base:"Oolong",milk:"No milk",fruit:"No fruit",sweet:"50%",ice:"Regular ice",topping:"Tapioca pearls"};
+
+function hx(h){h=h.replace('#','');return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
+function toHex(a){return '#'+a.map(x=>Math.max(0,Math.min(255,Math.round(x))).toString(16).padStart(2,'0')).join('');}
+function mix(c1,c2,t){const a=hx(c1),b=hx(c2);return toHex(a.map((x,i)=>x+(b[i]-x)*t));}
+
+function opt(key,v){return GROUPS.find(g=>g.key===key).opts.find(o=>o.v===v);}
+
+function fillColor(){
+  let base=opt("base",state.base).c || "#F2D48A";
+  let col=base;
+  const m=opt("milk",state.milk); if(m.c) col=mix(col,m.c,0.5);
+  const f=opt("fruit",state.fruit); if(f.c) col=mix(col,f.c,0.34);
+  return col;
+}
+function updateCup(){
+  document.getElementById("liquid").setAttribute("fill",fillColor());
+  // ice
+  const iceG=document.getElementById("iceG");iceG.innerHTML="";
+  const n=opt("ice",state.ice).n;
+  const spots=[[52,96],[86,86],[70,120],[100,110],[58,74],[94,132]];
+  for(let i=0;i<n;i++){const [x,y]=spots[i];iceG.innerHTML+=`<rect x="${x}" y="${y}" width="17" height="15" rx="3" fill="rgba(255,255,255,.5)" transform="rotate(${(i*17)%40-20} ${x+8} ${y+7})"/>`;}
+  // foam
+  const foam=document.getElementById("foam");
+  foam.setAttribute("opacity", state.topping==="Cheese foam"?"1":"0");
+  // topping
+  const topG=document.getElementById("topG");topG.innerHTML="";
+  const tp=opt("topping",state.topping);
+  if(tp.kind==="pearl"){const pos=[[58,196],[72,201],[86,197],[100,201],[65,205],[93,205],[79,207]];pos.forEach(([x,y])=>topG.innerHTML+=`<circle cx="${x}" cy="${y}" r="6" fill="${tp.c}"/>`);}
+  else if(tp.kind==="cube"){const pos=[[56,195],[78,199],[100,195],[67,203],[90,203]];pos.forEach(([x,y])=>topG.innerHTML+=`<rect x="${x}" y="${y}" width="12" height="10" rx="2" fill="${tp.c}"/>`);}
+  // order string
+  const parts=[state.base];
+  if(state.milk!=="No milk")parts.push(state.milk.toLowerCase());
+  if(state.fruit!=="No fruit")parts.push(state.fruit.toLowerCase());
+  parts.push(state.sweet+" sweet");
+  parts.push(state.ice.toLowerCase());
+  if(state.topping!=="Cheese foam")parts.push(state.topping.toLowerCase());
+  else parts.push("cheese foam on top");
+  document.getElementById("orderName").textContent=parts.join(", ");
+  const caf=opt("base",state.base).caf;
+  document.getElementById("caf").textContent = caf ? "Contains caffeine" : "Caffeine-free base";
+  document.getElementById("caf").style.color = caf ? "var(--mango)" : "var(--matcha)";
+}
+function dropAnim(color){
+  const box=document.querySelector(".cupbox");
+  const d=document.createElement("div");d.className="drop";d.style.background=color||"#3D2412";
+  d.style.left="calc(50% - 6px)";d.style.top="150px";d.style.animation="fall .45s ease-out";
+  box.appendChild(d);setTimeout(()=>d.remove(),460);
+}
+function buildPanel(){
+  const p=document.getElementById("panel");p.innerHTML="";
+  GROUPS.forEach(g=>{
+    const wrap=document.createElement("div");wrap.className="grp";
+    wrap.innerHTML=`<h2>${g.label}</h2>`;
+    const chips=document.createElement("div");chips.className="chips";
+    g.opts.forEach(o=>{
+      const b=document.createElement("button");b.className="chip";
+      b.setAttribute("aria-pressed", state[g.key]===o.v);
+      b.innerHTML=(o.c?`<span class="sw" style="background:${o.c}"></span>`:"")+o.v;
+      b.onclick=()=>{
+        state[g.key]=o.v;
+        [...chips.children].forEach((c,i)=>c.setAttribute("aria-pressed", g.opts[i].v===o.v));
+        if(g.key==="topping" && o.kind!=="foam") dropAnim(o.c);
+        updateCup();
+      };
+      chips.appendChild(b);
+    });
+    wrap.appendChild(chips);p.appendChild(wrap);
+  });
+  const acts=document.createElement("div");acts.className="acts";
+  acts.innerHTML=`<button class="btn btn-p" id="copyBtn">Copy my order</button><button class="btn" id="shareBtn">Share</button><button class="btn" id="resetBtn">Reset</button>`;
+  p.appendChild(acts);
+  document.getElementById("copyBtn").onclick=copyOrder;
+  document.getElementById("shareBtn").onclick=shareOrder;
+  document.getElementById("resetBtn").onclick=()=>{Object.assign(state,{base:"Oolong",milk:"No milk",fruit:"No fruit",sweet:"50%",ice:"Regular ice",topping:"Tapioca pearls"});buildPanel();updateCup();};
+}
+function orderText(){return "🧋 My CapyBoba sip: "+document.getElementById("orderName").textContent+". (Show this to any shop.)";}
+function copyOrder(){navigator.clipboard.writeText(orderText()).then(()=>toast("Order copied")).catch(()=>toast("Could not copy"));}
+function shareOrder(){const t=orderText();if(navigator.share){navigator.share({title:"My CapyBoba sip",text:t}).catch(()=>{});}else copyOrder();}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1700);}
+buildPanel();updateCup();
+</script></body></html>
