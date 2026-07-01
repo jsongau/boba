@@ -1,0 +1,7 @@
+# CapyBoba
+
+The Southern California boba directory. Real hours, honest rankings, new openings tracked. No fabricated stats or reviews; third-party ratings are shown live and attributed, never cached. Individual shop profiles are noindex until their hours and coordinates are verified.
+
+- Directory by area: https://capyboba.com/area/
+- Cities: https://capyboba.com/boba/ca/
+- By vibe: https://capyboba.com/best/
