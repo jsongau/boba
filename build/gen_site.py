@@ -20,7 +20,7 @@ TODAY = datetime.date.today().isoformat()
 SITE = "https://capyboba.com"
 
 # ---- region mapping (editorial; adjustable) ----
-SGV_CITIES = {"Arcadia","Covina","Pasadena","Walnut","Rowland Heights","Monterey Park",
+SGV_CITIES = {"Arcadia","Covina","Pasadena","Walnut","Rowland Heights","Monterey Park","City of Industry",
               "El Monte","Diamond Bar","Rosemead","San Gabriel","Baldwin Park","Temple City","Monrovia"}
 REGIONS = {
   "sgv":           {"label":"San Gabriel Valley","kicker":"The 626",
