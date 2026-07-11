@@ -4,7 +4,7 @@
 
 Placeholders: `{{x}}` = data field · `{{VERIFY: ...}}` = unverified, blocks publish · `[opinion]` = labeled editorial.
 
-**Honesty spine for this page:** every fact is dated and sourced. Hours and open/closed come from a primary source. Ratings (if shown at all) are third-party, attributed, dated, linked — never first-party schema, never a CapyBoba star. Attributes are only shown when substantiated; unknown ⇒ omitted, never guessed.
+**Honesty spine for this page:** every fact is dated and sourced. Hours and open/closed come from a primary source. Ratings (if shown at all) are third-party, attributed, dated, linked — never first-party schema, never a NiteBoba star. Attributes are only shown when substantiated; unknown ⇒ omitted, never guessed.
 
 ---
 
@@ -16,9 +16,9 @@ Placeholders: `{{x}}` = data field · `{{VERIFY: ...}}` = unverified, blocks pub
 {{#if status_temporarily_closed}}<p class="status-banner closed">Reported temporarily closed as of {{verified_at}}. We'll re-check.</p>{{/if}}
 
 <!-- META (head) -->
-<title>{{name}} — {{city}} Boba: Hours, Menu &amp; What to Order ({{year}}) | CapyBoba</title>
+<title>{{name}} — {{city}} Boba: Hours, Menu &amp; What to Order ({{year}}) | NiteBoba</title>
 <meta name="description" content="{{name}} in {{neighborhood}}, {{city}}: hours, address, what to order{{#if signature_drinks}} ({{signature_drinks.0}}){{/if}}, and what it's good for. Verified {{verified_at}}.">
-<link rel="canonical" href="https://capyboba.com/boba/{{state_slug}}/{{city_slug}}/{{slug}}/">
+<link rel="canonical" href="https://niteboba.vercel.app/boba/{{state_slug}}/{{city_slug}}/{{slug}}/">
 
 <!-- ONE-LINE SUMMARY (liftable, ≤30 words). MODEL writes this from real attributes — the single most useful true sentence about this shop. -->
 <p class="lede">[opinion] {{summary}}</p>
@@ -83,7 +83,7 @@ Placeholders: `{{x}}` = data field · `{{VERIFY: ...}}` = unverified, blocks pub
 </section>
 {{/if}}
 
-<!-- THIRD-PARTY RATINGS (REFERENCE ONLY — optional. Attributed, dated, linked. NOT schema. NOT a CapyBoba score.) -->
+<!-- THIRD-PARTY RATINGS (REFERENCE ONLY — optional. Attributed, dated, linked. NOT schema. NOT a NiteBoba score.) -->
 {{#if external_ratings}}
 <section class="ratings-ref">
   <h2>Ratings elsewhere</h2>
@@ -122,8 +122,8 @@ Placeholders: `{{x}}` = data field · `{{VERIFY: ...}}` = unverified, blocks pub
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"CafeOrCoffeeShop",
  "name":"{{name}}",
- "@id":"https://capyboba.com/boba/{{state_slug}}/{{city_slug}}/{{slug}}/#shop",
- "url":"https://capyboba.com/boba/{{state_slug}}/{{city_slug}}/{{slug}}/",
+ "@id":"https://niteboba.vercel.app/boba/{{state_slug}}/{{city_slug}}/{{slug}}/#shop",
+ "url":"https://niteboba.vercel.app/boba/{{state_slug}}/{{city_slug}}/{{slug}}/",
  "address":{"@type":"PostalAddress","streetAddress":"{{street}}","addressLocality":"{{city}}","addressRegion":"{{state}}","postalCode":"{{postal_code}}","addressCountry":"US"},
  "geo":{"@type":"GeoCoordinates","latitude":{{lat}},"longitude":{{lng}}},
  {{#if phone}}"telephone":"{{phone_e164}}",{{/if}}
@@ -136,10 +136,10 @@ Placeholders: `{{x}}` = data field · `{{VERIFY: ...}}` = unverified, blocks pub
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-  {"@type":"ListItem","position":1,"name":"Home","item":"https://capyboba.com/"},
-  {"@type":"ListItem","position":2,"name":"{{region_label}}","item":"https://capyboba.com/area/{{region_slug}}/"},
-  {"@type":"ListItem","position":3,"name":"{{city}}","item":"https://capyboba.com/boba/{{state_slug}}/{{city_slug}}/"},
-  {"@type":"ListItem","position":4,"name":"{{name}}","item":"https://capyboba.com/boba/{{state_slug}}/{{city_slug}}/{{slug}}/"}
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://niteboba.vercel.app/"},
+  {"@type":"ListItem","position":2,"name":"{{region_label}}","item":"https://niteboba.vercel.app/area/{{region_slug}}/"},
+  {"@type":"ListItem","position":3,"name":"{{city}}","item":"https://niteboba.vercel.app/boba/{{state_slug}}/{{city_slug}}/"},
+  {"@type":"ListItem","position":4,"name":"{{name}}","item":"https://niteboba.vercel.app/boba/{{state_slug}}/{{city_slug}}/{{slug}}/"}
 ]}
 </script>
 <script type="application/ld+json">
@@ -155,6 +155,6 @@ Placeholders: `{{x}}` = data field · `{{VERIFY: ...}}` = unverified, blocks pub
 - `summary` and every `faq.a` are `[opinion]`/editorial → real attributes only; no clichés; no banned words (SITE-SPEC §5).
 - **Attributes:** render only what's substantiated. Unknown attribute ⇒ omit the `<li>`. Never output "wifi: unknown" and never guess.
 - **Hours:** verbatim + dated. `openingHoursSpecification` is generated from the same verified hours object — schema and visible table can never disagree.
-- **No first-party rating of any kind.** No `aggregateRating`, no stars, no CapyBoba score. Third-party ratings only as attributed reference text in the optional ratings block.
+- **No first-party rating of any kind.** No `aggregateRating`, no stars, no NiteBoba score. Third-party ratings only as attributed reference text in the optional ratings block.
 - `qualifying_intents` lists an intent ONLY if `fit_{intent} ≥ 2` per the documented rubric. The profile must not claim a fit the shop didn't earn.
 - All outbound links to GBP/website/IG carry `rel="nofollow"`.

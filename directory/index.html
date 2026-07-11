@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Boba Shops in Southern California | CapyBoba Directory</title>
+<title>All Boba Shops in Southern California | NiteBoba Directory</title>
 <meta name="description" content="Find boba across Southern California by city or vibe: date night, study, open late, brown sugar. Real hours, no fake reviews, new openings tracked. The 626 to Convoy.">
-<link rel="canonical" href="https://capyboba.com/directory/">
+<link rel="canonical" href="https://niteboba.vercel.app/directory/">
 
 <!-- Locked Capy type stack: Fraunces (display) + Inter Tight (body). Matches CoverCapy. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
 
 <style>
 /* ============================================================
-   CAPYBOBA — LOCKED DESIGN TOKENS (SITE-SPEC §4)
+   NITEBOBA — LOCKED DESIGN TOKENS (SITE-SPEC §4)
    ============================================================ */
 :root{
   /* Liquid Night Market (rebuild pack file 03). Token names kept from the cream
@@ -593,7 +593,7 @@ body{background:var(--plum);
      ============================================================ -->
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
-    <a class="brand" href="/">Capy<b>Boba</b></a>
+    <a class="brand" href="/">Nite<b>Boba</b></a>
 
     <nav class="primary-nav" aria-label="Primary">
       <ul class="nav-list">
@@ -791,7 +791,7 @@ body{background:var(--plum);
 <!-- MOBILE DRAWER -->
 <div class="drawer" id="mobileDrawer" aria-hidden="true">
   <div class="drawer-head">
-    <a class="brand" href="/">Capy<b>Boba</b></a>
+    <a class="brand" href="/">Nite<b>Boba</b></a>
     <button class="drawer-close" aria-label="Close menu">&times;</button>
   </div>
   <div class="drawer-body">
@@ -851,14 +851,14 @@ body{background:var(--plum);
      MAIN
      ============================================================ -->
 <main id="main">
-<p style="max-width:1120px;margin:1.1rem auto 0;padding:0 clamp(1rem,4vw,2rem);font-size:.86rem"><a href="/" style="color:var(--syrup);text-decoration:none">← CapyBoba home</a></p>
+<p style="max-width:1120px;margin:1.1rem auto 0;padding:0 clamp(1rem,4vw,2rem);font-size:.86rem"><a href="/" style="color:var(--syrup);text-decoration:none">← NiteBoba home</a></p>
   <!-- FINDER (compact, not a tall hero) -->
   <section class="finder" id="find">
     <div class="finder-inner">
       <div class="finder-copy">
         <p class="eyebrow" style="color:var(--mango)">The full directory</p>
         <h1>Every boba shop we track in Southern California</h1>
-        <p class="finder-sub">Browse <b>322</b> shops across <b>46</b> cities and <b>5</b> areas. Filter by chain or independent, save a list, or let CapyBoba pick.</p>
+        <p class="finder-sub">Browse <b>322</b> shops across <b>46</b> cities and <b>5</b> areas. Filter by chain or independent, save a list, or let NiteBoba pick.</p>
       </div>
       <div class="finder-controls">
         <div class="searchbar">
@@ -922,7 +922,7 @@ body{background:var(--plum);
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <a class="brand" href="/">Capy<b>Boba</b></a>
+      <a class="brand" href="/">Nite<b>Boba</b></a>
       <p>The Southern California boba directory. Real hours, honest rankings, new openings tracked.</p>
       <p class="stamp"><span class="dot"></span>Updated regularly. Boba Passport coming soon.</p>
     </div>
@@ -962,12 +962,12 @@ body{background:var(--plum);
         <li><a href="/how-we-rank/">How we rank</a></li>
         <li><a href="/how-we-make-money/">How we make money</a></li>
         <li><a href="/report/">Report a correction</a></li>
-        <li><a href="/about/">About CapyBoba</a></li>
+        <li><a href="/about/">About NiteBoba</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>&copy; 2026 CapyBoba</span>
+    <span>&copy; 2026 NiteBoba</span>
     <span class="note">We don't take payment for placement on our best-for lists.</span>
     <a href="/privacy/">Privacy</a>
     <a href="/terms/">Terms</a>
@@ -1093,7 +1093,7 @@ body{background:var(--plum);
   var AREAS = [["All","All"],["The 626","The 626"],["Orange County","Orange County"],["San Diego","San Diego"],["Greater LA","Greater LA"],["Inland Empire","Inland Empire"]];
   var MONO = [["#FF3F6F","#fff"],["#665CFF","#fff"],["#FF7138","#3a2a00"],["#CFFF3D","#26340a"],["#2A1812","#fff"],["#3FB0C8","#fff"],["#F2749E","#fff"],["#6FB0FF","#08243f"]];
   var PAGE = 48;
-  var KEY = "capyboba_saved_v1";
+  var KEY = "niteboba_saved_v1";
   var saved = new Set();
   try { var raw = localStorage.getItem(KEY); if(raw) JSON.parse(raw).forEach(function(k){saved.add(k);}); } catch(e){}
   var state = { area:"All", type:"all", q:"", sort:"az", savedOnly:false, shown:PAGE };

@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CapyBoba Roulette</title>
+<title>NiteBoba Roulette</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#151218;--brown:#21142B;--syrup:#FF4F87;--milk:#FFF3E6;--paper:#FFFCF8;--matcha:#6F8F4E;--taro:#9A7BFF;--line:#EADFCE;--ink60:rgba(21,18,24,.6)}
@@ -85,9 +85,9 @@ h1{color:#FFFCF8}
 .btn-p{background:#FF4F87;color:#fff;border-color:#FF4F87}.btn-p:hover{background:#ff2f70}
 </style></head>
 <body><div class="wrap">
-<a href="/tools/" style="display:inline-block;color:#FFF3E6;font-size:.82rem;font-weight:600;margin-bottom:8px;text-decoration:none">&lsaquo; All CapyBoba tools</a>
+<a href="/tools/" style="display:inline-block;color:#FFF3E6;font-size:.82rem;font-weight:600;margin-bottom:8px;text-decoration:none">&lsaquo; All NiteBoba tools</a>
 
-<div class="top"><span class="brand">Capy<b>Boba</b></span></div>
+<div class="top"><span class="brand">Nite<b>Boba</b></span></div>
 <div class="kicker">Can''t decide?</div>
 <h1>Boba Roulette</h1>
 <p class="sub">Set the area, hit spin, and let it choose a real boba shop for you. Reroll until it feels right.</p>
@@ -134,7 +134,7 @@ h1{color:#FFFCF8}
 
 <div id="resultSlot"></div>
 
-<p class="foot">A CapyBoba prototype · real shops, honest gaps · the fun part fills in after verification</p>
+<p class="foot">A NiteBoba prototype · real shops, honest gaps · the fun part fills in after verification</p>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -214,8 +214,8 @@ function spin(){
   },1150);
 }
 function share(s){
-  const txt="🧋 CapyBoba roulette picked: "+s.n+" at "+s.c+", "+s.ar+"\n"+mapsUrl(s);
-  if(navigator.share){navigator.share({title:"CapyBoba",text:txt}).catch(()=>{});}
+  const txt="🧋 NiteBoba roulette picked: "+s.n+" at "+s.c+", "+s.ar+"\n"+mapsUrl(s);
+  if(navigator.share){navigator.share({title:"NiteBoba",text:txt}).catch(()=>{});}
   else{navigator.clipboard.writeText(txt).then(()=>toast("Plan copied to clipboard")).catch(()=>toast("Couldn''t copy"));}
 }
 function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}

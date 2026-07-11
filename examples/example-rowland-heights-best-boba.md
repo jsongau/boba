@@ -10,9 +10,9 @@ Why Rowland Heights is a flagship: it's a dense node of the 626 / SGV boba mecca
 ```html
 <h1>Boba in Rowland Heights, San Gabriel Valley</h1>
 
-<title>Boba in Rowland Heights — 20 Shops, Hours & Map (2026) | CapyBoba</title>
+<title>Boba in Rowland Heights — 20 Shops, Hours & Map (2026) | NiteBoba</title>
 <meta name="description" content="Every boba shop in Rowland Heights: 20 verified spots on the Colima Rd and Fullerton Rd corridors with addresses and hours. Names like Half & Half, Tastea, Ten Ren's, Honeymee. Updated 2026-06-26.">
-<link rel="canonical" href="https://capyboba.com/boba/ca/rowland-heights/">
+<link rel="canonical" href="https://niteboba.vercel.app/boba/ca/rowland-heights/">
 
 <p class="lede">
 Rowland Heights has <strong>20 boba shops</strong> we've verified, packed almost entirely onto the <strong>Colima Rd</strong> and <strong>Fullerton Rd</strong> corridors — one of the densest boba stretches in the 626. Names you'll see a lot here: <strong>Half &amp; Half Tea Express</strong>, <strong>Tastea</strong>, <strong>Ten Ren's Tea Time</strong>, and <strong>Honeymee</strong>. Full list below with addresses and hours; for a specific vibe, jump to the filtered picks. Updated 2026-06-26.
@@ -109,17 +109,17 @@ Rowland Heights has <strong>20 boba shops</strong> we've verified, packed almost
  "name":"Boba shops in Rowland Heights, San Gabriel Valley",
  "numberOfItems":20,
  "itemListElement":[
-   {"@type":"ListItem","position":1,"url":"https://capyboba.com/boba/ca/rowland-heights/half-and-half-tea-express-colima/","name":"Half & Half Tea Express"},
-   {"@type":"ListItem","position":2,"url":"https://capyboba.com/boba/ca/rowland-heights/zero-degrees-colima/","name":"Zero Degrees"},
-   {"@type":"ListItem","position":3,"url":"https://capyboba.com/boba/ca/rowland-heights/i-heart-boba-colima/","name":"I Heart Boba"}
+   {"@type":"ListItem","position":1,"url":"https://niteboba.vercel.app/boba/ca/rowland-heights/half-and-half-tea-express-colima/","name":"Half & Half Tea Express"},
+   {"@type":"ListItem","position":2,"url":"https://niteboba.vercel.app/boba/ca/rowland-heights/zero-degrees-colima/","name":"Zero Degrees"},
+   {"@type":"ListItem","position":3,"url":"https://niteboba.vercel.app/boba/ca/rowland-heights/i-heart-boba-colima/","name":"I Heart Boba"}
    /* …positions 4–20 for the remaining shops, same shape… */
  ]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-  {"@type":"ListItem","position":1,"name":"Home","item":"https://capyboba.com/"},
-  {"@type":"ListItem","position":2,"name":"San Gabriel Valley","item":"https://capyboba.com/area/sgv/"},
-  {"@type":"ListItem","position":3,"name":"Rowland Heights","item":"https://capyboba.com/boba/ca/rowland-heights/"}
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://niteboba.vercel.app/"},
+  {"@type":"ListItem","position":2,"name":"San Gabriel Valley","item":"https://niteboba.vercel.app/area/sgv/"},
+  {"@type":"ListItem","position":3,"name":"Rowland Heights","item":"https://niteboba.vercel.app/boba/ca/rowland-heights/"}
 ]}
 </script>
 <script type="application/ld+json">

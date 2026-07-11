@@ -10,9 +10,9 @@ Placeholders: `{{x}}` = data field · `{{VERIFY: ...}}` = unverified, blocks pub
 <h1>Best Boba for {{intent.label}} in {{place.name}}</h1>
 
 <!-- META (head) -->
-<title>Best Boba for {{intent.label}} in {{place.name}} ({{year}}) | CapyBoba</title>
+<title>Best Boba for {{intent.label}} in {{place.name}} ({{year}}) | NiteBoba</title>
 <meta name="description" content="Our picks for {{intent.label}} boba in {{place.name}}: {{pick1.name}}, {{pick2.name}}, {{pick3.name}}. Why each fits, what to order, current hours. Verified {{verified_at}}.">
-<link rel="canonical" href="https://capyboba.com/best/{{intent.slug}}/{{place.slug}}/">
+<link rel="canonical" href="https://niteboba.vercel.app/best/{{intent.slug}}/{{place.slug}}/">
 
 <!-- ANSWER LEDE (40–60 words, liftable, names the picks) -->
 <p class="lede">
@@ -71,7 +71,7 @@ Here's how each fits the night, what to order, and current hours. Last verified 
  "name":"Best Boba for {{intent.label}} in {{place.name}}",
  "numberOfItems":{{picks.length}},
  "itemListElement":[
-   {{#each picks}}{"@type":"ListItem","position":{{position}},"name":"{{name}}","url":"https://capyboba.com/boba/ca/{{place.slug}}/{{slug}}/"}{{,}}{{/each}}
+   {{#each picks}}{"@type":"ListItem","position":{{position}},"name":"{{name}}","url":"https://niteboba.vercel.app/boba/ca/{{place.slug}}/{{slug}}/"}{{,}}{{/each}}
  ]}
 </script>
 <script type="application/ld+json">

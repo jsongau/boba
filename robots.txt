@@ -11,4 +11,4 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-Sitemap: https://capyboba.com/sitemap.xml
+Sitemap: https://niteboba.vercel.app/sitemap.xml

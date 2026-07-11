@@ -2,7 +2,7 @@
    Exposes CBS.bb for other modules; renders the #blackbook section. */
 (function () {
   var CBS = (window.CBS = window.CBS || {});
-  var KEY = "capyboba_blackbook_v1";
+  var KEY = "niteboba_blackbook_v1";
   var listeners = [];
 
   function read() { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } }
@@ -48,7 +48,7 @@
       if (ev.target.closest("[data-bb-send]")) {
         var a = CBS.bb.all(); if (!a.length) return;
         var lines = a.slice(0, 12).map(function (e) { return "\u2022 " + e.name + (e.where ? " \u00b7 " + e.where : ""); });
-        CBS.share("My Black Book \u00b7 CapyBoba Society", "My Black Book:\n" + lines.join("\n") + "\n\nvia CapyBoba Society");
+        CBS.share("My Black Book \u00b7 NiteBoba Society", "My Black Book:\n" + lines.join("\n") + "\n\nvia NiteBoba Society");
       }
       if (ev.target.closest("[data-bb-clear]")) { if (confirm("Clear your Black Book on this device?")) CBS.bb.clear(); }
     });

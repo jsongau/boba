@@ -1,4 +1,4 @@
-# SITE-SPEC — CAPYBOBA (LOCKED)
+# SITE-SPEC — NITEBOBA (LOCKED)
 > Architecture, URL structure, page types, design system, and voice. Lock this before building. Changing URL structure or design tokens after pages exist is expensive — decide now.
 
 ---
@@ -27,7 +27,7 @@ Clean, lowercase, hyphenated, trailing slash, no query params for content.
 ## 2. PAGE TYPES (what each one is for)
 | Type | Primary query it wins | Core blocks |
 |---|---|---|
-| **Homepage** | brand / "capyboba" | search, map entry, top regions, new-openings strip, featured intents |
+| **Homepage** | brand / "niteboba" | search, map entry, top regions, new-openings strip, featured intents |
 | **City directory** | "boba in {city}", "{city} boba shops" | answer lede, filterable shop list, map, intent links, FAQ |
 | **Shop profile** | "{shop name} {city}", "{shop} hours/menu" | facts block, signature drinks, attributes, hours, map, nearby, FAQ |
 | **Intent page** (money) | "best boba for {intent} in {place}" | answer-first ranked list (editorial, labeled), per-pick reasons, FAQ, schema |
@@ -102,7 +102,7 @@ Capy-family ban list (carried from CoverCapy for consistency):
 `premium`, `curated`, `discover`, `transform`, `seamless`, `modern`, `innovative`, `empower`, `elevate`, `navigate`.
 
 ### Typographic house style (optional port from CoverCapy)
-CoverCapy bans em/en dashes as punctuation and arrow glyphs on buttons. CapyBoba is a different brand so it's your call, but porting these keeps the "Capy" family visually consistent. **Decide and lock here:** ☐ port dash/arrow rules ☐ relax for CapyBoba.
+CoverCapy bans em/en dashes as punctuation and arrow glyphs on buttons. NiteBoba is a different brand so it's your call, but porting these keeps the "Capy" family visually consistent. **Decide and lock here:** ☐ port dash/arrow rules ☐ relax for NiteBoba.
 
 ---
 

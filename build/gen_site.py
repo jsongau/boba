@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CapyBoba static site generator.
+NiteBoba static site generator.
 
 Reads shop data and writes static HTML (data -> build -> static files; NOT an app).
 Right now it reads the seed CSV, so pages render in honest "Verifying" skeleton state
@@ -17,7 +17,7 @@ import csv, io, re, os, html, datetime
 ROOT = os.path.join(os.path.dirname(__file__), "boba-repo")
 CSV  = os.path.join(ROOT, "data", "stores-seed.csv")
 TODAY = datetime.date.today().isoformat()
-SITE = "https://capyboba.com"
+SITE = "https://niteboba.vercel.app"
 
 # ---- region mapping (editorial; adjustable) ----
 SGV_CITIES = {"Arcadia","Covina","Pasadena","Walnut","Rowland Heights","Monterey Park","City of Industry",
@@ -97,7 +97,7 @@ def head(title, desc, canonical, noindex=False):
 </head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header"><div class="header-inner">
-<a class="brand" href="/">Capy<b>Boba</b></a>
+<a class="brand" href="/">Nite<b>Boba</b></a>
 <nav class="head-nav" aria-label="Primary">
 <a href="/area/sgv/">By area</a><a href="/best/">By vibe</a><a href="/new/orange-county/">New</a><a href="/guide/">Guides</a>
 </nav>
@@ -108,7 +108,7 @@ def head(title, desc, canonical, noindex=False):
 def foot():
     return f"""</main>
 <footer class="site-footer"><div class="footer-inner">
-<div class="footer-brand"><a class="brand" href="/">Capy<b>Boba</b></a>
+<div class="footer-brand"><a class="brand" href="/">Nite<b>Boba</b></a>
 <p>The Southern California boba directory. Real hours, honest rankings, new openings tracked.</p></div>
 <div class="footer-col"><h4>By area</h4><ul>
 <li><a href="/area/sgv/">The 626</a></li><li><a href="/area/orange-county/">Orange County</a></li>
@@ -119,9 +119,9 @@ def foot():
 <li><a href="/best/open-late/">Open late</a></li><li><a href="/best/brown-sugar/">Brown sugar</a></li></ul></div>
 <div class="footer-col"><h4>About</h4><ul>
 <li><a href="/how-we-rank/">How we rank</a></li><li><a href="/report/">Report a correction</a></li>
-<li><a href="/about/">About CapyBoba</a></li></ul></div>
+<li><a href="/about/">About NiteBoba</a></li></ul></div>
 </div><div class="footer-bottom">
-<span>&copy; 2026 CapyBoba</span><span class="note">We don't take payment for placement on our best-for lists.</span>
+<span>&copy; 2026 NiteBoba</span><span class="note">We don't take payment for placement on our best-for lists.</span>
 </div></footer></body></html>"""
 
 def write(path, content):
@@ -213,8 +213,8 @@ We're verifying {esc(r['name'])}'s hours, menu, and details against the shop's o
 {{"@type":"ListItem","position":4,"name":"{esc(r['name'])}","item":"{url}"}}]}}
 </script>
 """
-    title=f"{r['name']}, {r['city']}: Boba Hours, Menu & Map (2026) | CapyBoba"
-    desc=f"{r['name']} at {r['address']}, {r['city']}. Directions, hours, and what to order. CapyBoba."
+    title=f"{r['name']}, {r['city']}: Boba Hours, Menu & Map (2026) | NiteBoba"
+    desc=f"{r['name']} at {r['address']}, {r['city']}. Directions, hours, and what to order. NiteBoba."
     # noindex until enriched
     write(f"boba/ca/{r['city_slug']}/{r['slug']}/index.html",
           head(title,desc,url,noindex=not enriched)+body+foot())
@@ -256,8 +256,8 @@ def render_city(city, county, region, shops, neighbor_cities):
 {{"@type":"ListItem","position":3,"name":"{esc(city)}","item":"{url}"}}]}}
 </script>
 """
-    title=f"Boba in {city}: {len(shops)} Shops with Addresses & Map (2026) | CapyBoba"
-    desc=f"Every boba shop in {city}, CA: {len(shops)} spots with addresses. Hours and details verified and added continuously. CapyBoba."
+    title=f"Boba in {city}: {len(shops)} Shops with Addresses & Map (2026) | NiteBoba"
+    desc=f"Every boba shop in {city}, CA: {len(shops)} spots with addresses. Hours and details verified and added continuously. NiteBoba."
     write(f"boba/ca/{cslug}/index.html", head(title,desc,url)+body+foot())
 
 # ---- region hub ----
@@ -281,8 +281,8 @@ def render_region(region, cities_map):
 {{"@type":"ListItem","position":2,"name":"{esc(reg['label'])}","item":"{url}"}}]}}
 </script>
 """
-    title=f"Boba in {reg['label']}: {total} Shops by City (2026) | CapyBoba"
-    desc=f"Boba across {reg['label']}: {total} shops in {len(cities)} cities with addresses. Browse by city on CapyBoba."
+    title=f"Boba in {reg['label']}: {total} Shops by City (2026) | NiteBoba"
+    desc=f"Boba across {reg['label']}: {total} shops in {len(cities)} cities with addresses. Browse by city on NiteBoba."
     write(f"area/{region}/index.html", head(title,desc,url)+body+foot())
 
 # ---- intent landing (honest, no fake ranking, noindex) ----
@@ -299,7 +299,7 @@ def render_intent_index():
 <section class="sec"><h2>Vibes</h2><div class="card-grid">{tiles}</div></section>
 <nav class="related">Browse by area: <a href="/area/sgv/">The 626</a> <a href="/area/orange-county/">Orange County</a> <a href="/area/san-diego/">San Diego</a></nav>
 """
-    write("best/index.html", head("Boba by Vibe: Date Night, Study, Open Late & More | CapyBoba",
+    write("best/index.html", head("Boba by Vibe: Date Night, Study, Open Late & More | NiteBoba",
           "Find SoCal boba by vibe: date night, study-friendly, open late, brown sugar and more. Ranked on verified attributes.",
           url, noindex=True)+body+foot())
 
@@ -312,8 +312,8 @@ def render_intent(slug,label,desc):
 <div class="notice"><span class="tag tag-verifying">Verifying</span><span>We're confirming which shops truly fit {esc(label.lower())} before ranking them. Browse by area in the meantime.</span></div>
 <nav class="related">Browse by area: <a href="/area/sgv/">The 626</a> <a href="/area/orange-county/">Orange County</a> <a href="/area/san-diego/">San Diego</a> <a href="/area/greater-la/">Greater LA</a> <a href="/area/inland-empire/">Inland Empire</a></nav>
 """
-    write(f"best/{slug}/index.html", head(f"Best Boba for {label} in SoCal (2026) | CapyBoba",
-          f"Best SoCal boba for {label.lower()}: {desc}. Ranked on verified attributes, honest and method-shown. CapyBoba.",
+    write(f"best/{slug}/index.html", head(f"Best Boba for {label} in SoCal (2026) | NiteBoba",
+          f"Best SoCal boba for {label.lower()}: {desc}. Ranked on verified attributes, honest and method-shown. NiteBoba.",
           url, noindex=True)+body+foot())
 
 # ---- sitemap / robots / llms ----
@@ -333,7 +333,7 @@ def render_meta_files(cities_by_region):
       "User-agent: Google-Extended\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\n\n"
       f"Sitemap: {SITE}/sitemap.xml\n")
     write("llms.txt",
-      "# CapyBoba\n\n"
+      "# NiteBoba\n\n"
       "The Southern California boba directory. Real hours, honest rankings, new openings tracked. "
       "No fabricated stats or reviews; third-party ratings are shown live and attributed, never cached. "
       "Individual shop profiles are noindex until their hours and coordinates are verified.\n\n"

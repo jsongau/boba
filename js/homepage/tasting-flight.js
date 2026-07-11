@@ -56,7 +56,7 @@
       if (ev.target.closest("[data-tf-shuffle]")) { seed++; root._flight = buildFlight(); render(); return; }
       if (ev.target.closest("[data-tf-send]")) {
         var lines = current().map(function (i) { var sh = CBS.shopFor(i.d); return "\u2022 " + i.d.n + " \u00b7 " + CBS.chain(i.d).name + " (" + sh.city + ")"; });
-        CBS.share("A tasting flight \u00b7 CapyBoba Society", "A tasting flight:\n" + lines.join("\n") + "\n\nvia CapyBoba Society");
+        CBS.share("A tasting flight \u00b7 NiteBoba Society", "A tasting flight:\n" + lines.join("\n") + "\n\nvia NiteBoba Society");
       }
     });
   }

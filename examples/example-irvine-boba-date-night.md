@@ -8,9 +8,9 @@
 ```html
 <h1>Best Boba for Date Night in Irvine</h1>
 
-<title>Best Boba for Date Night in Irvine (2026) | CapyBoba</title>
+<title>Best Boba for Date Night in Irvine (2026) | NiteBoba</title>
 <meta name="description" content="Our picks for a boba date night in Irvine: Cha for Tea, Class 302, 85°C, and more — which are quiet enough to talk, which have food, and what to order. Verified 2026-06-26.">
-<link rel="canonical" href="https://capyboba.com/best/date-night/irvine/">
+<link rel="canonical" href="https://niteboba.vercel.app/best/date-night/irvine/">
 
 <p class="lede">
 For a boba date night in Irvine, the two clusters that matter are <strong>University Center</strong> (by UCI) and <strong>Diamond Jamboree</strong>. The strongest picks are <strong>Cha for Tea</strong>, <strong>Class 302</strong>, and <strong>85°C Bakery Cafe</strong> — one quiet enough for a first date, one with real food, one with a whole plaza to walk after. Here's how each fits the night and what to order. Last verified 2026-06-26.
@@ -102,11 +102,11 @@ For a boba date night in Irvine, the two clusters that matter are <strong>Univer
  "name":"Best Boba for Date Night in Irvine",
  "numberOfItems":5,
  "itemListElement":[
-   {"@type":"ListItem","position":1,"name":"Cha for Tea","url":"https://capyboba.com/boba/ca/irvine/cha-for-tea-university-center/"},
-   {"@type":"ListItem","position":2,"name":"Class 302","url":"https://capyboba.com/boba/ca/irvine/class-302-university-center/"},
-   {"@type":"ListItem","position":3,"name":"85°C Bakery Cafe","url":"https://capyboba.com/boba/ca/irvine/85c-bakery-cafe-diamond-jamboree/"},
-   {"@type":"ListItem","position":4,"name":"Tebo Tebo Tea Lounge","url":"https://capyboba.com/boba/ca/irvine/tebo-tebo-tea-lounge-culver/"},
-   {"@type":"ListItem","position":5,"name":"i-Tea Cafe","url":"https://capyboba.com/boba/ca/irvine/i-tea-cafe-jeffrey/"}
+   {"@type":"ListItem","position":1,"name":"Cha for Tea","url":"https://niteboba.vercel.app/boba/ca/irvine/cha-for-tea-university-center/"},
+   {"@type":"ListItem","position":2,"name":"Class 302","url":"https://niteboba.vercel.app/boba/ca/irvine/class-302-university-center/"},
+   {"@type":"ListItem","position":3,"name":"85°C Bakery Cafe","url":"https://niteboba.vercel.app/boba/ca/irvine/85c-bakery-cafe-diamond-jamboree/"},
+   {"@type":"ListItem","position":4,"name":"Tebo Tebo Tea Lounge","url":"https://niteboba.vercel.app/boba/ca/irvine/tebo-tebo-tea-lounge-culver/"},
+   {"@type":"ListItem","position":5,"name":"i-Tea Cafe","url":"https://niteboba.vercel.app/boba/ca/irvine/i-tea-cafe-jeffrey/"}
  ]}
 </script>
 <script type="application/ld+json">

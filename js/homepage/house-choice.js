@@ -76,7 +76,7 @@
       if (sg) { var k = sg.getAttribute("data-seg"); root.querySelectorAll('[data-seg="' + k + '"]').forEach(function (b) { b.setAttribute("aria-pressed", "false"); b.style.background = "transparent"; }); sg.setAttribute("aria-pressed", "true"); sg.style.background = "rgba(197,164,109,.14)"; return; }
       if (ev.target.closest("[data-hc-reveal]") || ev.target.closest("[data-hc-again]")) { seed++; reveal(state()); return; }
       var sv = ev.target.closest("[data-hc-save]"); if (sv) { try { CBS.bb.add(JSON.parse(sv.getAttribute("data-hc-save"))); } catch (e) {} return; }
-      var sd = ev.target.closest("[data-hc-send]"); if (sd) { CBS.share("Tonight, from CapyBoba Society", sd.getAttribute("data-hc-send") + " \u00b7 the house choice at CapyBoba Society"); return; }
+      var sd = ev.target.closest("[data-hc-send]"); if (sd) { CBS.share("Tonight, from NiteBoba Society", sd.getAttribute("data-hc-send") + " \u00b7 the house choice at NiteBoba Society"); return; }
     });
   }
   if (document.readyState !== "loading") wire(); else document.addEventListener("DOMContentLoaded", wire);

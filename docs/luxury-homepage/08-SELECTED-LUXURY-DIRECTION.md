@@ -1,4 +1,4 @@
-# 08 - Selected Direction: CapyBoba Society, The Pearl Room
+# 08 - Selected Direction: NiteBoba Society, The Pearl Room
 
 ## Why this direction
 It reaches the required quality bar while staying feasible and honest: the signature is an owned art-directed render, the palette avoids the black+gold cliché through porcelain relief and jade/garnet/aubergine moments, and every recommendation is real and sourced.

@@ -1,7 +1,7 @@
 # 12 - Implementation Summary
 
 ## What shipped
-The actual `/` homepage was replaced with CapyBoba Society (The Pearl Room): a server-rendered, mobile-first luxury experience built on the verified data and reused interaction logic, with the arcade visual language, typography, composition, naming, and positioning removed.
+The actual `/` homepage was replaced with NiteBoba Society (The Pearl Room): a server-rendered, mobile-first luxury experience built on the verified data and reused interaction logic, with the arcade visual language, typography, composition, naming, and positioning removed.
 
 ## Files created
 - css/luxury-homepage.css - the Pearl Room design system.
@@ -19,7 +19,7 @@ The actual `/` homepage was replaced with CapyBoba Society (The Pearl Room): a s
 - Builders (repo tooling, not shipped to the page): build_society_data.py, build_society_home.py.
 
 ## Files changed
-- index.html - fully regenerated as the CapyBoba Society homepage.
+- index.html - fully regenerated as the NiteBoba Society homepage.
 - data/research/source-ledger.csv - added Chatime and CoCo.
 - /directory/ - retained (full 321-shop grid lives here).
 

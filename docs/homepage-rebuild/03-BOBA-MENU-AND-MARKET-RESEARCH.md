@@ -3,7 +3,7 @@
 _Researched 2026-07-01 from official chain sites and first-party ordering pages. Facts only (drink names, categories, and caffeine/dairy where a source states them). Flavor summaries are original, written from listed ingredients. No marketing copy copied, no photography rehosted, no prices invented. Full provenance in `data/research/source-ledger.csv`; machine-readable menus in `data/menus/chains/*.json`._
 
 ## Scope of this pass
-This is a **starter dataset of four chains** chosen because (a) they have findable official menus and (b) they are already represented in the CapyBoba directory, so every drink maps to a real location we list. It is not the full 25-chain sweep the brief asks for; the remaining chains are the next data pass. What exists now is enough to power a real Craving Cup and Spin the Straw.
+This is a **starter dataset of four chains** chosen because (a) they have findable official menus and (b) they are already represented in the NiteBoba directory, so every drink maps to a real location we list. It is not the full 25-chain sweep the brief asks for; the remaining chains are the next data pass. What exists now is enough to power a real Craving Cup and Spin the Straw.
 
 | Chain | Directory locations | Primary source | Confidence |
 |---|---:|---|---|

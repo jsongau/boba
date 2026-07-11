@@ -151,7 +151,7 @@
       if (ev.target.closest("[data-back]")) { if (step > 0) { step--; renderStep(); } return; }
       if (ev.target.closest("[data-again]")) { showResult(); return; }
       var sv = ev.target.closest("[data-save]"); if (sv) { try { CBS.bb.add(JSON.parse(sv.getAttribute("data-save"))); } catch (e) {} return; }
-      var sd = ev.target.closest("[data-send]"); if (sd) { CBS.share("A selection from CapyBoba Society", sd.getAttribute("data-send") + " \u00b7 chosen at CapyBoba Society"); return; }
+      var sd = ev.target.closest("[data-send]"); if (sd) { CBS.share("A selection from NiteBoba Society", sd.getAttribute("data-send") + " \u00b7 chosen at NiteBoba Society"); return; }
     });
     renderStep();
   }

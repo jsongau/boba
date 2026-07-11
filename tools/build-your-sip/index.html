@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CapyBoba Build Your Sip</title>
+<title>NiteBoba Build Your Sip</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -48,9 +48,9 @@ h1{font-size:clamp(2rem,7vw,3rem);font-weight:700;color:var(--coconut);margin:.2
 @keyframes fall{0%{transform:translateY(-40px);opacity:0}25%{opacity:1}100%{transform:translateY(0);opacity:1}}
 </style></head>
 <body><div class="wrap">
-<a href="/tools/" style="display:inline-block;color:#FFF3E6;font-size:.82rem;font-weight:600;margin-bottom:8px;text-decoration:none">&lsaquo; All CapyBoba tools</a>
+<a href="/tools/" style="display:inline-block;color:#FFF3E6;font-size:.82rem;font-weight:600;margin-bottom:8px;text-decoration:none">&lsaquo; All NiteBoba tools</a>
 
-<span class="brand">Capy<b>Boba</b></span>
+<span class="brand">Nite<b>Boba</b></span>
 <div class="kicker">Make it exactly yours</div>
 <h1>Build Your Sip</h1>
 <p class="sub">Compose your drink layer by layer and watch the cup fill. Then carry the order to any shop.</p>
@@ -85,7 +85,7 @@ h1{font-size:clamp(2rem,7vw,3rem);font-weight:700;color:var(--coconut);margin:.2
 </div>
 
 <div class="note"><span>🧋</span><span>Your custom sip is a plan you can hand to any shop. Whether a given shop can make it exactly is something we confirm per shop, so we will not fake a match.</span></div>
-<p class="foot">A CapyBoba prototype · your order, your way · shop-menu matching unlocks after verification</p>
+<p class="foot">A NiteBoba prototype · your order, your way · shop-menu matching unlocks after verification</p>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -186,9 +186,9 @@ function buildPanel(){
   document.getElementById("shareBtn").onclick=shareOrder;
   document.getElementById("resetBtn").onclick=()=>{Object.assign(state,{base:"Oolong",milk:"No milk",fruit:"No fruit",sweet:"50%",ice:"Regular ice",topping:"Tapioca pearls"});buildPanel();updateCup();};
 }
-function orderText(){return "🧋 My CapyBoba sip: "+document.getElementById("orderName").textContent+". (Show this to any shop.)";}
+function orderText(){return "🧋 My NiteBoba sip: "+document.getElementById("orderName").textContent+". (Show this to any shop.)";}
 function copyOrder(){navigator.clipboard.writeText(orderText()).then(()=>toast("Order copied")).catch(()=>toast("Could not copy"));}
-function shareOrder(){const t=orderText();if(navigator.share){navigator.share({title:"My CapyBoba sip",text:t}).catch(()=>{});}else copyOrder();}
+function shareOrder(){const t=orderText();if(navigator.share){navigator.share({title:"My NiteBoba sip",text:t}).catch(()=>{});}else copyOrder();}
 function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1700);}
 buildPanel();updateCup();
 </script></body></html>

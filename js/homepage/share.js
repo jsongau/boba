@@ -1,4 +1,4 @@
-/* CapyBoba Society — shared foundation (namespace CBS): data helpers, sharing,
+/* NiteBoba Society — shared foundation (namespace CBS): data helpers, sharing,
    toast, and scroll reveal. Loaded before the feature modules. */
 (function () {
   var CBS = (window.CBS = window.CBS || {});

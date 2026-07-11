@@ -1,10 +1,10 @@
-# SEO + GEO STRATEGY — HOW CAPYBOBA BECOMES THE SOURCE AI CITES
+# SEO + GEO STRATEGY — HOW NITEBOBA BECOMES THE SOURCE AI CITES
 > This is the document that wins. Traditional SEO gets you ranked; GEO/AEO gets you *quoted* by ChatGPT, Perplexity, Google AI Overviews, and Gemini. Build every page to be liftable.
 
 ---
 
 ## 0. THE ONE IDEA
-When someone asks an AI "where should we get boba for a date night in Irvine?", the AI scans sources for **a structured, sourced, fresh answer to that exact question** and reproduces/cites the best one. CapyBoba wins by being the page that:
+When someone asks an AI "where should we get boba for a date night in Irvine?", the AI scans sources for **a structured, sourced, fresh answer to that exact question** and reproduces/cites the best one. NiteBoba wins by being the page that:
 1. **Answers in the first 40–60 words**, declaratively, in a liftable shape.
 2. **Backs it with structured data** the crawler can parse (`ItemList`, `LocalBusiness`, `FAQPage`).
 3. **Is demonstrably fresh** (dated, recently verified).
@@ -45,9 +45,9 @@ Emit JSON-LD on every page. Three workhorses:
   "numberOfItems":5,
   "itemListElement":[
     {"@type":"ListItem","position":1,"name":"{Shop A}",
-     "url":"https://capyboba.com/boba/ca/irvine/{slug-a}/"},
+     "url":"https://niteboba.vercel.app/boba/ca/irvine/{slug-a}/"},
     {"@type":"ListItem","position":2,"name":"{Shop B}",
-     "url":"https://capyboba.com/boba/ca/irvine/{slug-b}/"}
+     "url":"https://niteboba.vercel.app/boba/ca/irvine/{slug-b}/"}
   ]
 }
 </script>
@@ -74,7 +74,7 @@ Only fields you have VERIFIED. Omit anything unverified — never pad schema wit
 }
 </script>
 ```
-> ⚠️ Do NOT add `aggregateRating` here until CapyBoba has its own first-party review/check-in data (Phase 3). Putting third-party ratings in your schema as if they're yours is both a trust violation (your Locked Rule #2) and a schema-spam risk.
+> ⚠️ Do NOT add `aggregateRating` here until NiteBoba has its own first-party review/check-in data (Phase 3). Putting third-party ratings in your schema as if they're yours is both a trust violation (your Locked Rule #2) and a schema-spam risk.
 
 ### 2c. FAQ block → `FAQPage`
 ```html
@@ -119,7 +119,7 @@ Competitors update by hand "quarterly." Beat them permanently:
 
 ## 5. ENTITY + AUTHORITY (E-E-A-T for a directory)
 - **NAP consistency** across every reference (Locked Rule #6). Entity authority compounds.
-- **Author/credibility.** A visible "how CapyBoba verifies" page + per-page verification dates = the "experience" and "trustworthiness" signals Google rewards. The honesty rule is doing double duty as an SEO asset.
+- **Author/credibility.** A visible "how NiteBoba verifies" page + per-page verification dates = the "experience" and "trustworthiness" signals Google rewards. The honesty rule is doing double duty as an SEO asset.
 - **Source attribution.** When surfacing a third-party rating, attribute + date + link. This is honest AND it builds the outbound-citation graph that AI engines trust.
 - **Internal linking.** Dense, intentional: city ↔ its intents ↔ its shops ↔ region hub ↔ nearby cities ↔ relevant guides. Every shop profile links up to its city and across to the intents it qualifies for.
 
@@ -147,4 +147,4 @@ The UX-conversion layer (the "conversion analyst" job):
 ## 8. MEASUREMENT
 - GA4 (reuse the Capy GA4 property or a new one — decide in BUILD-PLAN).
 - Track: AI-referral traffic (referrers: chatgpt.com, perplexity.ai, gemini, etc. — watch these grow as GEO lands), intent-page → directions-click rate, filter usage, new-openings follow rate.
-- The north-star early metric is **"are we getting cited / referred by AI engines"** — monitor AI referrers and run periodic manual checks ("ask ChatGPT/Perplexity 'best boba date night Irvine' and see if CapyBoba appears").
+- The north-star early metric is **"are we getting cited / referred by AI engines"** — monitor AI referrers and run periodic manual checks ("ask ChatGPT/Perplexity 'best boba date night Irvine' and see if NiteBoba appears").
