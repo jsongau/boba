@@ -14,7 +14,7 @@ Intent pages are honest landing pages (no fabricated rankings) and noindex.
 """
 import csv, io, re, os, html, datetime
 
-ROOT = os.path.join(os.path.dirname(__file__), "boba-repo")
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repo root
 CSV  = os.path.join(ROOT, "data", "stores-seed.csv")
 TODAY = datetime.date.today().isoformat()
 SITE = "https://niteboba.vercel.app"

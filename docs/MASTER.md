@@ -1,5 +1,6 @@
 # NITEBOBA — MASTER BUILD INDEX
-> The single source of truth for the NiteBoba directory build. Memory lives in these docs, not in chat. Read this file first, every session. Nothing gets built that contradicts the LOCKED RULES below.
+> STRATEGY index. For operational truth (deploy targets, database locations, current state, how-tos) read **/CLAUDE.md at the repo root first** — it supersedes anything stale here. Written pre-build (2026-06-26); the site is now built and live.
+> The single source of truth for the NiteBoba directory *strategy*. Memory lives in these docs, not in chat. Read this file first, every session. Nothing gets built that contradicts the LOCKED RULES below.
 
 Last updated: 2026-06-26 · Owner: Jay · Stack target: vanilla static HTML/CSS/JS on Vercel + Supabase (mirror the CoverCapy stack)
 

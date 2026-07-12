@@ -18,7 +18,7 @@ Clean, lowercase, hyphenated, trailing slash, no query params for content.
 /guide/{slug}/                            Editorial guide     e.g. /guide/brown-sugar-vs-tiger-sugar/
 ```
 
-**Slug rules.** Shop slug = `kebab(name)` + disambiguator when a brand has multiple locations in one city (cross-street or center): `7-leaves-cafe-jeffrey`, `tapioca-express-diamond-jamboree`. Place slug = `kebab(city)`; regions use canonical short slugs (`sgv`, not `san-gabriel-valley`). Never change a published slug — 301 if you must.
+**Slug rules.** ~~Original plan: cross-street disambiguator~~ **AS PUBLISHED (locked 11 JUL 2026): shop slug = `kebab(name)-kebab(city)`, e.g. `7-leaves-cafe-irvine`.** The site shipped with city-based slugs; published slugs are permanent, so this is now the rule. Place slug = `kebab(city)`; regions use canonical short slugs (`sgv`, not `san-gabriel-valley`). Never change a published slug — 301 if you must.
 
 **Canonicalization.** A shop lives at exactly one canonical URL (`/boba/ca/{city}/{slug}/`). It is *referenced* from city pages, intent pages, region hubs, and landmark pages, but those references link to the canonical — never duplicate the full profile.
 
