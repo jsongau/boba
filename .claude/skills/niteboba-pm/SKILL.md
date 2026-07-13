@@ -22,10 +22,9 @@ treat him as the QA gate.
 
 ## Source-of-truth map (exact names — several are traps)
 
-- **Repo:** GitHub `jsongau/boba`, branch `main`. Jay's local clone:
+- **Repo:** GitHub `jsongau/niteboba` (renamed from `boba`; old URLs redirect), branch `main`. Jay's local clone:
   `~/Claude/Projects/NiteBoba` (ask him to connect this folder for file work).
-- **Production:** Vercel project **bobatime** (team `cover-capy`) — may be
-  renamed **niteboba**. A duplicate Vercel project **boba** deploys the same
+- **Production:** Vercel project **bobatime** (team `cover-capy`) — PENDING rename to **niteboba** (dashboard-only; activates niteboba.vercel.app which the site's canonical URLs expect). A duplicate Vercel project **boba** deploys the same
   repo; it is NOT canonical. Never create new Vercel projects.
 - **Database:** Supabase project **CoverCapy** (`hfvbeqlefwwjlrbyxpbj`),
   table `public.niteboba`. The Supabase project literally named "BOBA" is an

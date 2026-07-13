@@ -15,11 +15,22 @@ verified freshness and first-party fit attributes — see `docs/MASTER.md`.
 
 | Thing | Where | Notes |
 |---|---|---|
-| Code + pages | GitHub `jsongau/boba`, branch `main` | Jay's local clone: `~/Claude/Projects/NiteBoba` |
-| Production | Vercel project **bobatime** (team `cover-capy`, id `team_RgXcylGLXtdbEkjyjdtq6p6A`) | Jay may rename it `niteboba` → then niteboba.vercel.app |
+| Code + pages | GitHub `jsongau/niteboba` (renamed from `boba` 12 JUL 2026; old URLs redirect), branch `main` | Jay's local clone: `~/Claude/Projects/NiteBoba` |
+| Production | Vercel project **bobatime** (team `cover-capy`, id `team_RgXcylGLXtdbEkjyjdtq6p6A`) | PENDING RENAME → `niteboba` (see §Vercel renames below) |
 | Duplicate deploy | Vercel project **boba** | Same repo, auto-deploys too. Do NOT treat as canonical; ask Jay before touching. |
 | Store database | Supabase project **CoverCapy** (`hfvbeqlefwwjlrbyxpbj`), table `public.niteboba` | NOT the Supabase project named "BOBA" — that holds an unrelated benefits/HR app. |
 | Canonical domain in code | `https://niteboba.vercel.app` | Also in `SITE` constant in `build/gen_site.py`. |
+
+## Vercel renames still pending (dashboard-only, 12 JUL 2026)
+
+Two clicks Jay must do at vercel.com (Claude cannot — vercel.com is blocked
+in the Chrome extension unless Jay allows it in extension site permissions):
+1. Project **bobatime** → Settings → General → rename to `niteboba`.
+   This activates https://niteboba.vercel.app, which every canonical URL,
+   sitemap entry, and schema block on the site already points at. Until
+   then the site is reachable at bobatime-iota.vercel.app.
+2. Project **boba** (the duplicate) → Settings → Git → Disconnect, so only
+   one project deploys per push. GitHub repo + About link already renamed.
 
 ## Deploy
 
