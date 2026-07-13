@@ -50,7 +50,7 @@ houses (first: Taro Yuan, City of Industry). Purple `--taro`/#6b21a8 is
 reserved exclusively for featured placement. Featured slots, claim-to-upgrade,
 and chain menu partnerships are the revenue models — protect their integrity.
 
-## Add a store (6 touchpoints until the sync script exists)
+## Add a store — run `python3 build/add_spots.py spots.json` (it handles all surfaces incl. the roulette SHOPS array + prints the Supabase INSERT; hand-check area/city counts after). Manual reference:
 
 1. INSERT into Supabase `niteboba` — slug = `kebab(name)-kebab(city)`
    (city-based, matches published URLs; slugs are permanent once live).
@@ -95,7 +95,7 @@ homepage "featured house" section links to its profile.
 
 ## Current state + roadmap anchors (11 JUL 2026)
 
-322 = 145 chain + 177 specialty, 1 featured. All rows status='seed' —
+328 shops (13 JUL: +Chicha San Chen, Molly Tea, Somisomi Brea, Sunright DJ, One Zo, Meet Fresh Irvine). /critic/ = The Pearl Ratings (Nathan J. Song, House Critic; pearls publish only after real visits). All rows status='seed' —
 enrichment (geocode, hours, place IDs) not yet run; that's the top backend
 priority because it flips profiles indexable and unlocks "open now" — the
 NiteBoba signature feature. Next-highest: the Supabase→site sync script

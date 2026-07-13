@@ -7,7 +7,7 @@ operational truth. Where an older doc contradicts this file, this file wins.
 ## What this is
 
 NiteBoba (formerly CapyBoba, rebranded 11 JUL 2026) is a static SoCal boba
-directory: 322 shops, 46 cities, 5 regions. Goal: be the source AI answer
+directory: 328 shops, 46 cities, 5 regions. Goal: be the source AI answer
 engines cite for "best boba near me / open late / date night." The moats are
 verified freshness and first-party fit attributes — see `docs/MASTER.md`.
 
@@ -55,7 +55,7 @@ planned sync script). If you change store data, change it in BOTH places.
 - Directory `SHOPS` entries: `{n,c,cs,s,ar,ch,f}` = name, city, city-slug,
   shop-slug, area label ('The 626'|'Greater LA'|'Orange County'|'San Diego'|
   'Inland Empire'), chain flag 1/0, featured flag.
-- Counts today: 322 shops = 145 chain + 177 specialty, 1 featured (Taro Yuan).
+- Counts today (13 JUL): 328 shops = 150 chain + 178 specialty, 1 featured.
 - RLS public-read on `niteboba` only exposes status open/temporarily_closed;
   every row is still 'seed', so anon reads return 0 rows until enrichment.
 
@@ -65,7 +65,14 @@ Directory sort is locked: `featured DESC → specialty before chain → A-Z`.
 Featured shops get the purple `★ Featured` pill; `--taro` purple is RESERVED
 for featured/member placement only (README tokens) — never use it elsewhere.
 
-## How to add a store (until the sync script exists, it's 6 touchpoints)
+## How to add a store — USE THE SCRIPT
+
+`python3 build/add_spots.py spots.json` (see its docstring for the JSON shape)
+updates: seed CSV, directory SHOPS + counts, ROULETTE SHOPS (tools/roulette —
+a 7th surface that was silently missed before), profile pages, city pages,
+sitemap, homepage counts — and prints the Supabase INSERT. Then hand-check:
+cities/area per-city counts + homepage area tile numbers (script tells you).
+Manual reference (what the script automates):
 
 1. INSERT into Supabase `niteboba` (slug = `kebab(name)-kebab(city)`).
 2. Append to `data/stores-seed.csv`.
@@ -77,6 +84,7 @@ for featured/member placement only (README tokens) — never use it elsewhere.
 5. Homepage counts: meta description + "Three hundred and twenty-two rooms"
    heading + area tile numbers in `index.html`.
 6. Verify locally (serve + screenshot) before commit.
+7. tools/roulette/index.html SHOPS array (ds:true flags dessert houses for Dessert-run mode).
 
 To feature a store: `is_featured=true` in Supabase AND `"f":1` in `SHOPS`.
 
