@@ -122,8 +122,13 @@
       '<div class="cq-opts" role="list">' + opts + "</div>" +
       '<div class="cq-nav">' + (step > 0 ? '<button class="cq-back" type="button" data-back>\u2190 Back</button>' : "") + "</div></div>";
     var res = root.querySelector("[data-cq-result]"); if (res) res.classList.remove("show");
-    var focusable = root.querySelector(".cq-opt"); if (focusable) focusable.focus();
+    // Only move focus after the user has interacted — focusing on initial page
+    // load scroll-hijacks the visitor past the hero (real bug, fixed 12JUL26).
+    var focusable = root.querySelector(".cq-opt");
+    if (focusable && window.__cqInteracted) focusable.focus({preventScroll:true});
   }
+
+  document.addEventListener("click", function () { window.__cqInteracted = true; }, { once: true, capture: true });
 
   function showResult() {
     var res = scored();

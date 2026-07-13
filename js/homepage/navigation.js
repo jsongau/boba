@@ -23,6 +23,9 @@
     var xbtn = drawer && drawer.querySelector(".drawer-close"); if (xbtn) xbtn.addEventListener("click", closeDrawer);
     if (drawer) drawer.addEventListener("click", function (e) { if (e.target.closest("a")) closeDrawer(); });
 
+    var navForm = document.querySelector("[data-navsearch]");
+    if (navForm) navForm.addEventListener("submit", function (e) { e.preventDefault(); var i = navForm.querySelector("input"); var q = (i && i.value || "").trim(); if (q) location.href = "/directory/?q=" + encodeURIComponent(q); else if (i) i.focus(); });
+
     var search = drawer && drawer.querySelector(".drawer-search input");
     if (search) search.addEventListener("keydown", function (e) { if (e.key === "Enter") { var q = search.value.trim(); if (q) location.href = "/directory/?q=" + encodeURIComponent(q); } });
 

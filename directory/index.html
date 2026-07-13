@@ -1082,7 +1082,9 @@ body{background:var(--plum);
       var input = form.querySelector('input');
       var q = (input && input.value || '').trim();
       if(!q){ if(input) input.focus(); return; }
-      window.location.href = '/search?q=' + encodeURIComponent(q);
+      // Filter in place (there is no /search route yet)
+      state.q = q; state.shown = PAGE; render();
+      var d = document.getElementById("directory"); if (d) d.scrollIntoView({behavior:"smooth"});
     });
   });
 })();
@@ -1104,6 +1106,13 @@ body{background:var(--plum);
   function persist(){ try { localStorage.setItem(KEY, JSON.stringify(Array.from(saved))); } catch(e){} }
   function initial(name){ var m = String(name).match(/[A-Za-z0-9]/); return (m ? m[0] : "?").toUpperCase(); }
   function monoFor(name){ var h=0; for(var i=0;i<name.length;i++){ h=(h*31 + name.charCodeAt(i))>>>0; } return MONO[h % MONO.length]; }
+
+  // Accept ?q= from the header/drawer search on any page
+  try {
+    var __q = new URLSearchParams(location.search).get("q");
+    if (__q) { state.q = __q; var __qi = document.getElementById("q"); if (__qi) __qi.value = __q;
+      setTimeout(function(){ var d = document.getElementById("directory"); if (d) d.scrollIntoView(); }, 60); }
+  } catch(e) {}
 
   function filtered(){
     var q = state.q.trim().toLowerCase();
