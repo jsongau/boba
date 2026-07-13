@@ -64,6 +64,13 @@
     card.addEventListener("click", deal);
     card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); deal(); } });
     if (draw) draw.addEventListener("click", deal);
+    var send = document.getElementById("fmSend");
+    if (send) send.addEventListener("click", function () {
+      if (pos < 0) deal();
+      var text = DECK[order[pos]] + "\n\n— from The Pearl Deck · niteboba.vercel.app";
+      if (window.CBS && CBS.share) CBS.share("The Pearl Deck · NiteBoba", text);
+      else if (navigator.clipboard) navigator.clipboard.writeText(text);
+    });
 
     // energy picker
     var picks = [].slice.call(document.querySelectorAll(".fm-pick"));

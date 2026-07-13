@@ -50,6 +50,23 @@ The Tinder-match use case: two people matched, need a low-pressure first hang.
   details render as "check their page." See `docs/MEETUPS-RESEARCH-12JUL26.md`
   for findings + sources.
 
+## Round 2 layers (same day)
+
+- **Tonight's Pour** (`js/homepage/tonight-pour.js`): the hero selection now
+  rotates DAILY AT 5 PM, deterministically (date-seeded) across the 66 sourced
+  SOCIETY drinks + a real location of that chain. Tags render only what the
+  source states (caffeine/dairy unknown = no tag). Source line rebuilds per
+  chain. Static HTML stays as the no-JS fallback. Freshness signal, zero backend.
+- **The Order Oracle** (`/tools/order-oracle/`): 5-question personality quiz →
+  8 personas (Loose-Leaf Purist, Brown Sugar Maximalist, Fruit Tea Optimist,
+  Matcha Devotee, Topping Collector, Late-Night Regular, One-Order Loyalist,
+  Seasonal Chaser). Each result: verdict + "your order" + 3 intent links + a
+  1080x1350 canvas share card (Save/Send via Web Share API). All editorial —
+  the page literally says "The Oracle deals in opinions, not facts."
+  Entry points: Tonight mega, drawer, First Meet, tools index, sitemap.
+- **Pearl Deck "Send this card"**: shares the current icebreaker with
+  attribution via CBS.share.
+
 ## Verification
 
 All changes render-tested locally (Playwright screenshots): hero with Spin CTA,
