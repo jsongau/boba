@@ -67,6 +67,22 @@ The Tinder-match use case: two people matched, need a low-pressure first hang.
 - **Pearl Deck "Send this card"**: shares the current icebreaker with
   attribution via CBS.share.
 
+## Round 3 layers (13 JUL 2026)
+
+- **The Date Night Planner** (`/tools/date-planner/`): the flagship interactive.
+  Pick area + energy → deals a 3-stop night: a drink spot, a dessert house
+  (falls back to a "second pour" in the 2 areas with no dessert house yet — IE,
+  SD), and "the after" linking to the right intent page. Renders a 1080x1350
+  canvas share card ("Tonight in {area}"), Save/Send via Web Share API.
+  Powered by an embedded 328-shop dataset (name/city/area/slug/chain/dessert/
+  featured), seeded PRNG so re-deals vary. Honesty: every stop is a real shop,
+  each shows "Hours verifying" + links to profile/Google — the page states
+  "the itinerary is a plan, not a promise the doors are open." Entry points:
+  Tonight mega, drawer, First Meet, tools index (first card), sitemap.
+  Built via build/add_spots.py NOTE: the planner has its OWN embedded SHOPS
+  array (8th surface) — regenerate it from directory+roulette data when the
+  store list changes (see the /tmp gen in this session, or rebuild by hand).
+
 ## Verification
 
 All changes render-tested locally (Playwright screenshots): hero with Spin CTA,
