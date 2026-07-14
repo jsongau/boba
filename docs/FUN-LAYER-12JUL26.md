@@ -96,6 +96,25 @@ The Tinder-match use case: two people matched, need a low-pressure first hang.
 - **Bug fixed**: the round-3 critic wiring left a malformed anchor in the
   homepage Guides mega (\ + stray \). Repaired.
 
+## The Pantry + açaí (14 JUL 2026)
+
+- **/pantry/**: ingredient glossary — 57 items, each with Chinese name (中文) +
+  pinyin + what/how-made + honest health note + source. Live filter chips
+  (by category) + search that matches English, 中文 chars, AND pinyin (typing
+  紅豆 finds red bean). Grass jelly is the featured hero: full Platostoma
+  palustre botany, the 8–12hr Hakka boil, TCM cooling tradition + hedged
+  antioxidant research. Links to /best/grass-jelly/. Noto Serif SC font for
+  Chinese. Research: 4 Opus agents, all sourced. Full data:
+  docs/PANTRY-INGREDIENTS-14JUL26.md.
+- **6 açaí spots added** (334 shops): Birdie Bowl (Costa Mesa), Ubatuba (Brea),
+  Acai Joint (Arcadia), Paradise Bowls (Irvine), Acai Republic (Fullerton),
+  Berry Brand (Tustin) — dessert-flagged, so they show in Dessert-run roulette.
+- Wired: guide index (Pantry featured first), Guides mega, drawer, sitemap
+  (grass-jelly + pantry — grass-jelly was missing from sitemap, now fixed).
+- CAUTION LOGGED: add_spots.py appends to the CSV BEFORE its dupe guard, so
+  running it twice duplicates CSV rows (hit this; deduped by hand). Fix: move
+  the guard above the CSV append, or make CSV append idempotent.
+
 ## Verification
 
 All changes render-tested locally (Playwright screenshots): hero with Spin CTA,
