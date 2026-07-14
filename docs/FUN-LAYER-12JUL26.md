@@ -83,6 +83,19 @@ The Tinder-match use case: two people matched, need a low-pressure first hang.
   array (8th surface) — regenerate it from directory+roulette data when the
   store list changes (see the /tmp gen in this session, or rebuild by hand).
 
+## Grass jelly page + bug fix (13 JUL 2026)
+
+- **/best/grass-jelly/**: the first RICH intent page (siblings are verifying
+  skeletons). Jay'''s favorite beat — 7 real 仙草 houses by region (Blackball
+  x2, Meet Fresh x2, Taro Yuan, Sunright, Class 302 x2), editorial method box
+  (labeled opinion per Rule 4), FAQ explaining grass jelly, ItemList schema,
+  cross-linked to The Pearl Ratings Grass Jelly Files. noindex,follow to match
+  siblings while shops are seed. Snow Monster / Somisomi deliberately EXCLUDED
+  (snow/soft-serve, not grass jelly — honesty). Wired: Drinks mega, drawer,
+  best/ index, Guides mega, footer, sitemap, critic page.
+- **Bug fixed**: the round-3 critic wiring left a malformed anchor in the
+  homepage Guides mega (\ + stray \). Repaired.
+
 ## Verification
 
 All changes render-tested locally (Playwright screenshots): hero with Spin CTA,
