@@ -68,3 +68,49 @@
 Static HTML + vanilla JS, no framework, no build step beyond python scripts.
 Jay's preferred flow: preview files -vN → approval → commit → his "deploy" =
 push to main = live. Evidence with every preview (screenshots/diffs).
+
+## Part 2 (same day) — Directory midnight redesign
+
+**What changed.** `directory/index.html` re-skinned from the "Liquid Night
+Market" cream/purple theme to the obsidian Pearl Room system, aligned with the
+homepage: token remap (cream surfaces → smoked lacquer #111318/#171A20, ink →
+pearl #EDE7DB), 116-line midnight override layer, WKW-grade ambient washes
+(pink sign + jade counterweight + sodium amber, all ≤ .09 alpha), film-grain
+veil (SVG feTurbulence, 5%, soft-light), one neon voice (--syrup #ff3f6f;
+glow budget: wordmark + hot CTA only).
+
+**Structure.** Grid now renders SECTIONED: "The boutique houses" (178) above
+"The chains" (150) with champagne kicker + hairline rule; segmented control
+relabeled Boutique houses / Chains / Everything (editorial underline style,
+no fills). Cards are typographic (Fraunces name over letterspaced CITY · AREA
+meta, no monograms), status = dot + label chips (Open · verified / Verifying /
+Paused / Closed), closed cards desaturated and sorted last, featured card gets
+a lantern-glow hover (::after warm radial). Pagination removed (all 328
+render; #grid is now display:block, the inner .sgrid grids). Empty state
+names the applied filters and offers Clear all.
+
+**Decisions + traps.**
+- `--cream`/`--coconut` were dark-frame TEXT tokens, not surfaces — remapping
+  them dark made headings invisible. Diagnose with computed styles, not grep.
+- Purple stays ONLY on the ★ Featured pill (locked monetization token).
+  Taro purple as page theme is dead.
+- Design research (3 agents, saved in session workflow output): neon budget
+  90/8/2, one glowing element per viewport, glow = 4-layer halved-alpha stack.
+- Dragon-gate motif work (paifang SVG, seal-stamp badges, keyfret dividers,
+  moon-gate crops, anti-chinoiserie guardrails) is researched but NOT built —
+  deliberate, to avoid rushing culturally-loaded assets. Backlog: Phase E.
+
+## Next steps (in order)
+
+1. Push (needs Jay's Mac or credentials) → verify live at bobanight.com.
+2. Jay clicks: Porkbun email forwards (hello@/corrections@); Vercel rename
+   bobatime→bobanight; disconnect duplicate `boba` project.
+3. Phase C: night-intent SEO (/best/open-late/ strengthening, FAQ +
+   BreadcrumbList schema, llms.txt refresh).
+4. Phase D: sitewide nav rebuild (rail-and-pane mega menu, header search
+   overlay, mobile bottom bar, breadcrumbs) — research already banked.
+5. Phase E: extend midnight skin to homepage-adjacent surfaces + roulette
+   restyle + roulette-as-modal; dragon-gate motifs done carefully.
+6. Add the 6 DB-only shops (acai-joint-arcadia, acai-republic-fullerton,
+   berry-brand-tustin, birdie-bowl-and-juicery-costa-mesa, paradise-bowls-
+   irvine, ubatuba-acai-brea) via add_spots.py with real addresses.
