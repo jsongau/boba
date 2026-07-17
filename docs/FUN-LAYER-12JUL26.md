@@ -67,6 +67,54 @@ The Tinder-match use case: two people matched, need a low-pressure first hang.
 - **Pearl Deck "Send this card"**: shares the current icebreaker with
   attribution via CBS.share.
 
+## Round 3 layers (13 JUL 2026)
+
+- **The Date Night Planner** (`/tools/date-planner/`): the flagship interactive.
+  Pick area + energy → deals a 3-stop night: a drink spot, a dessert house
+  (falls back to a "second pour" in the 2 areas with no dessert house yet — IE,
+  SD), and "the after" linking to the right intent page. Renders a 1080x1350
+  canvas share card ("Tonight in {area}"), Save/Send via Web Share API.
+  Powered by an embedded 328-shop dataset (name/city/area/slug/chain/dessert/
+  featured), seeded PRNG so re-deals vary. Honesty: every stop is a real shop,
+  each shows "Hours verifying" + links to profile/Google — the page states
+  "the itinerary is a plan, not a promise the doors are open." Entry points:
+  Tonight mega, drawer, First Meet, tools index (first card), sitemap.
+  Built via build/add_spots.py NOTE: the planner has its OWN embedded SHOPS
+  array (8th surface) — regenerate it from directory+roulette data when the
+  store list changes (see the /tmp gen in this session, or rebuild by hand).
+
+## Grass jelly page + bug fix (13 JUL 2026)
+
+- **/best/grass-jelly/**: the first RICH intent page (siblings are verifying
+  skeletons). Jay'''s favorite beat — 7 real 仙草 houses by region (Blackball
+  x2, Meet Fresh x2, Taro Yuan, Sunright, Class 302 x2), editorial method box
+  (labeled opinion per Rule 4), FAQ explaining grass jelly, ItemList schema,
+  cross-linked to The Pearl Ratings Grass Jelly Files. noindex,follow to match
+  siblings while shops are seed. Snow Monster / Somisomi deliberately EXCLUDED
+  (snow/soft-serve, not grass jelly — honesty). Wired: Drinks mega, drawer,
+  best/ index, Guides mega, footer, sitemap, critic page.
+- **Bug fixed**: the round-3 critic wiring left a malformed anchor in the
+  homepage Guides mega (\ + stray \). Repaired.
+
+## The Pantry + açaí (14 JUL 2026)
+
+- **/pantry/**: ingredient glossary — 57 items, each with Chinese name (中文) +
+  pinyin + what/how-made + honest health note + source. Live filter chips
+  (by category) + search that matches English, 中文 chars, AND pinyin (typing
+  紅豆 finds red bean). Grass jelly is the featured hero: full Platostoma
+  palustre botany, the 8–12hr Hakka boil, TCM cooling tradition + hedged
+  antioxidant research. Links to /best/grass-jelly/. Noto Serif SC font for
+  Chinese. Research: 4 Opus agents, all sourced. Full data:
+  docs/PANTRY-INGREDIENTS-14JUL26.md.
+- **6 açaí spots added** (334 shops): Birdie Bowl (Costa Mesa), Ubatuba (Brea),
+  Acai Joint (Arcadia), Paradise Bowls (Irvine), Acai Republic (Fullerton),
+  Berry Brand (Tustin) — dessert-flagged, so they show in Dessert-run roulette.
+- Wired: guide index (Pantry featured first), Guides mega, drawer, sitemap
+  (grass-jelly + pantry — grass-jelly was missing from sitemap, now fixed).
+- CAUTION LOGGED: add_spots.py appends to the CSV BEFORE its dupe guard, so
+  running it twice duplicates CSV rows (hit this; deduped by hand). Fix: move
+  the guard above the CSV append, or make CSV append idempotent.
+
 ## Verification
 
 All changes render-tested locally (Playwright screenshots): hero with Spin CTA,
