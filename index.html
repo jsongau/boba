@@ -19,8 +19,24 @@
 /* W2 homepage rebuild — layered on luxury-homepage.css (which stays intact).
    New styles only; nothing here overrides the base design system's tokens. */
 
+/* S1 Hero — identity + proof. Balanced Fraunces H1, one hairline-framed honest
+   stat line (the neon glow budget is already spent on the nav wordmark, so the
+   hero stays pearl/champagne — no second glowing element in this viewport). */
+.arrival h1{text-wrap:balance;font-optical-sizing:auto}
+.arrival .sub{margin-bottom:1.1rem}
+
+/* Honest-stat line — a credential, not marketing: hard count in tabular figures,
+   champagne hairline frame, and the method link right in the fold. */
+.hero-proof{display:inline-flex;align-items:center;flex-wrap:wrap;gap:.55rem .8rem;margin:0 0 .4rem;
+  padding:.55rem .9rem;border:1px solid rgba(197,164,109,.42);border-radius:2px;
+  font-family:var(--sans);font-size:.8125rem;line-height:1;letter-spacing:.015em;color:var(--silver)}
+.hero-proof b{color:var(--pearl);font-weight:600;font-variant-numeric:tabular-nums lining-nums}
+.hero-proof .dot{width:3px;height:3px;border-radius:50%;background:var(--champagne);flex:none}
+.hero-proof a{color:var(--champagne);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.hero-proof a:hover{color:var(--pearl)}
+
 /* S1 Hero — search is the primary action, directory the primary link */
-.hero-search{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.5rem 0 1.1rem;max-width:30rem}
+.hero-search{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.1rem 0 1.1rem;max-width:30rem}
 .hero-search input{flex:1 1 15rem;min-width:0;background:rgba(244,239,231,.06);border:1px solid var(--line-dk);
   border-radius:3px;color:var(--pearl);font-family:var(--sans);font-size:1.02rem;padding:.95rem 1.1rem;line-height:1}
 .hero-search input::placeholder{color:var(--muted-dk)}
@@ -141,6 +157,7 @@
           <p class="eyebrow">Southern California · Est. 2026</p>
           <h1>The <span class="serif-hi">night</span> guide to Southern California boba.</h1>
           <p class="sub">334 tea shops across 46 cities and five regions. Every drink checked against official sources — no invented hours, ratings, or prices.</p>
+          <p class="hero-proof"><b>334</b> shops<span class="dot" aria-hidden="true"></span>menus checked<span class="dot" aria-hidden="true"></span>none paid to be here<span class="dot" aria-hidden="true"></span><a href="/how-we-rank/">How we rank</a></p>
           <form class="hero-search" role="search" action="/directory/" method="get">
             <label class="sr-only" for="heroQ">Search shops or cities</label>
             <input id="heroQ" name="q" type="search" placeholder="Search a shop or city" autocomplete="off">

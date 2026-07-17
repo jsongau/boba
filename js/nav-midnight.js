@@ -43,13 +43,43 @@
     openItem = item;
   }
 
+  // Desktop hover-intent: open on pointer-settle (~140ms), close on a ~260ms
+  // grace period so a diagonal trip to the panel doesn't dismiss it. Touch and
+  // narrow viewports fall through to click-to-open. Click + Escape stay intact.
+  var mqHover = window.matchMedia("(min-width:1080px) and (pointer:fine)");
+
   items.forEach(function (item) {
     var trig = $(".bn-trigger", item);
+    var openT = null, closeT = null, slow = false, lastX = null, lastY = null;
+
     trig.addEventListener("click", function (e) {
       e.stopPropagation();
+      clearTimeout(openT); clearTimeout(closeT);
       openPanel(item);
     });
-    // hover-intent is intentionally NOT used: click-to-open per spec.
+
+    // track pointer speed across the whole item (trigger + its panel)
+    item.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "touch") return;
+      var dx = e.clientX - (lastX == null ? e.clientX : lastX);
+      var dy = e.clientY - (lastY == null ? e.clientY : lastY);
+      slow = Math.sqrt(dx * dx + dy * dy) <= 8;
+      lastX = e.clientX; lastY = e.clientY;
+    });
+    trig.addEventListener("pointerenter", function (e) {
+      if (e.pointerType === "touch" || !mqHover.matches) return;
+      clearTimeout(closeT);
+      openT = setTimeout(function () {
+        if (slow && openItem !== item) openPanel(item);
+      }, 140);
+    });
+    item.addEventListener("pointerleave", function (e) {
+      if (e.pointerType === "touch") return;
+      clearTimeout(openT);
+      closeT = setTimeout(function () {
+        if (openItem === item) closePanel();
+      }, 260);
+    });
   });
 
   // close on outside click
@@ -96,6 +126,24 @@
   var index = null, indexLoading = false;
   var lastFocus = null;
   var activeRes = -1;
+  var statusEl = null;
+
+  // Upgrade the input to a proper combobox and add a polite live count.
+  // Real focus stays in the input; the highlighted option is tracked with
+  // aria-activedescendant (virtual focus), the tested pattern.
+  if (overlay && overlayInput) {
+    overlayInput.setAttribute("role", "combobox");
+    overlayInput.setAttribute("aria-autocomplete", "list");
+    overlayInput.setAttribute("aria-haspopup", "listbox");
+    var box = $(".bn-overlay-box", overlay);
+    if (box) {
+      statusEl = doc.createElement("p");
+      statusEl.className = "bn-sr";
+      statusEl.setAttribute("role", "status");
+      statusEl.setAttribute("aria-live", "polite");
+      box.appendChild(statusEl);
+    }
+  }
 
   function loadIndex(cb) {
     if (index) { cb(index); return; }
@@ -126,10 +174,36 @@
   }
 
   function esc(s) { return String(s).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
-  function highlight(name, q) {
-    var i = name.toLowerCase().indexOf(q);
-    if (i < 0) return esc(name);
-    return esc(name.slice(0, i)) + "<mark>" + esc(name.slice(i, i + q.length)) + "</mark>" + esc(name.slice(i + q.length));
+
+  // Subsequence fuzzy score: -1 = no match, higher = better. Rewards
+  // consecutive-hit streaks and word-start hits (start of string, or after a
+  // space / hyphen) so "bt" ranks "Boba Time" above scattered matches.
+  function fuzzyScore(q, text) {
+    text = text.toLowerCase();
+    var qi = 0, score = 0, streak = 0;
+    for (var ti = 0; ti < text.length && qi < q.length; ti++) {
+      if (text.charAt(ti) === q.charAt(qi)) {
+        streak++; score += streak;
+        var prev = ti === 0 ? " " : text.charAt(ti - 1);
+        if (prev === " " || prev === "-") score += 4;
+        qi++;
+      } else streak = 0;
+    }
+    return qi === q.length ? score : -1;
+  }
+  // <mark>-wrap the same subsequence characters the score matched.
+  function fuzzyMark(name, q) {
+    var out = "", qi = 0, low = name.toLowerCase();
+    for (var ti = 0; ti < name.length; ti++) {
+      var ch = name.charAt(ti);
+      if (qi < q.length && low.charAt(ti) === q.charAt(qi)) { out += "<mark>" + esc(ch) + "</mark>"; qi++; }
+      else out += esc(ch);
+    }
+    return out;
+  }
+  function announce(n, q) {
+    if (!statusEl) return;
+    statusEl.textContent = !q ? "" : (n === 0 ? "No results" : n + " result" + (n === 1 ? "" : "s"));
   }
 
   var GROUPS = [
@@ -142,36 +216,45 @@
   function renderResults(q) {
     if (!resultsBox) return;
     activeRes = -1;
+    if (overlayInput) overlayInput.removeAttribute("aria-activedescendant");
     q = (q || "").trim().toLowerCase();
-    if (!q) { resultsBox.innerHTML = ""; resultsBox.appendChild(emptyMsg); overlayInput.setAttribute("aria-expanded", "false"); return; }
+    if (!q) { resultsBox.innerHTML = ""; resultsBox.appendChild(emptyMsg); overlayInput.setAttribute("aria-expanded", "false"); announce(0, ""); return; }
     if (!index) { return; }
-    var html = "", any = false;
+    var html = "", total = 0, oid = 0;
     GROUPS.forEach(function (g) {
-      var rows = (index[g.key] || []).filter(function (r) {
-        return (r.n || "").toLowerCase().indexOf(q) >= 0;
-      }).slice(0, 5);
-      if (!rows.length) return;
-      any = true;
-      html += '<div class="bn-group-h">' + esc(g.label) + "</div>";
-      rows.forEach(function (r) {
-        var m = g.meta(r);
-        html += '<a class="bn-res" role="option" href="' + esc(r.u) + '">' +
-          '<span class="bn-res-name">' + highlight(r.n, q) + "</span>" +
+      var scored = [];
+      (index[g.key] || []).forEach(function (r) {
+        var s = fuzzyScore(q, r.n || "");
+        if (s >= 0) scored.push({ r: r, s: s });
+      });
+      if (!scored.length) return;
+      scored.sort(function (a, b) { return b.s - a.s; });
+      scored = scored.slice(0, 5);
+      html += '<div class="bn-group-h" role="presentation">' + esc(g.label) + "</div>";
+      scored.forEach(function (it) {
+        var r = it.r, m = g.meta(r);
+        html += '<a class="bn-res" role="option" id="bn-opt-' + (oid++) + '" href="' + esc(r.u) + '">' +
+          '<span class="bn-res-name">' + fuzzyMark(r.n, q) + "</span>" +
           (m ? '<span class="bn-res-meta">' + esc(m) + "</span>" : "") + "</a>";
+        total++;
       });
     });
-    overlayInput.setAttribute("aria-expanded", any ? "true" : "false");
-    resultsBox.innerHTML = any ? html : '<p class="bn-results-empty">No matches for “' + esc(q) + '”.</p>';
+    overlayInput.setAttribute("aria-expanded", total ? "true" : "false");
+    resultsBox.innerHTML = total ? html : '<p class="bn-results-empty">No matches for “' + esc(q) + '”.</p>';
+    announce(total, q);
   }
 
   function resItems() { return $$(".bn-res", resultsBox); }
   function setActive(i) {
     var els = resItems();
-    if (!els.length) return;
+    if (!els.length) { activeRes = -1; if (overlayInput) overlayInput.removeAttribute("aria-activedescendant"); return; }
     activeRes = (i + els.length) % els.length;
     els.forEach(function (el, n) {
-      if (n === activeRes) { el.setAttribute("aria-selected", "true"); el.scrollIntoView({ block: "nearest" }); }
-      else el.removeAttribute("aria-selected");
+      if (n === activeRes) {
+        el.setAttribute("aria-selected", "true");
+        el.scrollIntoView({ block: "nearest" });
+        overlayInput.setAttribute("aria-activedescendant", el.id);
+      } else el.removeAttribute("aria-selected");
     });
   }
 
@@ -182,7 +265,8 @@
       if (e.key === "ArrowDown") { e.preventDefault(); setActive(activeRes + 1); }
       else if (e.key === "ArrowUp") { e.preventDefault(); setActive(activeRes - 1); }
       else if (e.key === "Enter") {
-        if (activeRes >= 0 && els[activeRes]) { window.location.href = els[activeRes].getAttribute("href"); }
+        var go = (activeRes >= 0 && els[activeRes]) ? els[activeRes] : els[0];
+        if (go) { e.preventDefault(); window.location.href = go.getAttribute("href"); }
       }
     });
     $$("[data-bn-search-close]", overlay).forEach(function (b) {
@@ -255,4 +339,35 @@
       if (openItem) { var t = $(".bn-trigger", openItem); closePanel(); if (t) t.focus(); }
     }
   });
+
+  /* -------------------------------------------------------- mobile bottom bar */
+  var bottombar = $(".bn-bottombar");
+  if (bottombar) {
+    // Mark the tab for the current page so its neon dot carries the single glow.
+    var here = location.pathname.replace(/\/+$/, "") || "/";
+    var bbLinks = $$("a.bn-bb", bottombar);
+    for (var i = 0; i < bbLinks.length; i++) {
+      var lp = bbLinks[i].pathname.replace(/\/+$/, "") || "/";
+      var lh = bbLinks[i].hash || "";
+      if (lp === here && (!lh || lh === location.hash)) {
+        bbLinks[i].setAttribute("aria-current", "page");
+        break;
+      }
+    }
+    // Hide on scroll down, reveal on scroll up (transform only; CSS guards RM).
+    var lastY = window.pageYOffset || 0, ticking = false;
+    window.addEventListener("scroll", function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var y = window.pageYOffset || 0;
+        // don't hide while an overlay/drawer is open or near the top
+        var locked = doc.body.classList.contains("bn-lock");
+        if (!locked && y > lastY && y > 140) bottombar.classList.add("bn-bb-hidden");
+        else if (y < lastY || y <= 140) bottombar.classList.remove("bn-bb-hidden");
+        lastY = y;
+        ticking = false;
+      });
+    }, { passive: true });
+  }
 })();

@@ -1,14 +1,174 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Snow Monster, Long Beach: Boba Hours, Menu &amp; Map (2026) | Boba Night</title>
-<meta name="description" content="Snow Monster at 5211 E 2nd St, Long Beach. Directions, hours, and what to order. Boba Night.">
-<link rel="canonical" href="https://www.bobanight.com/boba/ca/long-beach/snow-monster-long-beach/"><meta name="robots" content="noindex,follow">
+<meta name="description" content="Snow Monster at 5211 E 2nd St, Long Beach. Hours, directions, and what to order. Boba Night.">
+<link rel="canonical" href="https://www.bobanight.com/boba/ca/long-beach/snow-monster-long-beach/"><meta name="robots" content="index,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.css">
-  <link rel="stylesheet" href="/css/nav-midnight.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/nav-midnight.css">
+<style>
+:root{
+  --obsidian:#0B0C0E;--smoked:#17191D;--smoked-2:#1F2228;
+  --pearl:#F4EFE7;--porcelain:#FCF9F3;--muted:#8B8981;--muted-dk:#6f6d67;
+  --champagne:#C5A46D;--guava:#ff3f6f;
+  --line:rgba(244,239,231,.14);--line-2:rgba(244,239,231,.08);
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--obsidian);color:var(--pearl);font-family:var(--sans);
+  font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--champagne);outline-offset:3px;border-radius:2px}
+::selection{background:var(--champagne);color:var(--obsidian)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.08;letter-spacing:-.015em;margin:0}
+p{margin:0 0 1rem}p:last-child{margin-bottom:0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(1.15rem,4vw,2.4rem);position:relative;z-index:2}
+.skip{position:absolute;left:-999px;top:0;background:var(--pearl);color:var(--obsidian);padding:.7rem 1rem;z-index:200}
+.skip:focus{left:12px;top:12px}
+.eyebrow,.kicker{font-size:.7rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--champagne)}
+.is-muted{color:var(--muted)}
+
+/* header / footer */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(11,12,14,.86);
+  backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line)}
+.header-inner{max-width:1080px;margin:0 auto;padding:0 clamp(1.15rem,4vw,2.4rem);height:60px;
+  display:flex;align-items:center;gap:1.4rem}
+.brand{font-family:var(--serif);font-size:1.28rem;color:var(--porcelain);letter-spacing:-.01em}
+.brand b{color:var(--guava);font-weight:500}
+.head-nav{display:flex;gap:.2rem;margin-left:auto}
+.head-nav a{font-size:.86rem;color:var(--pearl);opacity:.82;padding:.5rem .7rem;transition:opacity .18s var(--ease)}
+.head-nav a:hover{opacity:1}
+@media(max-width:640px){.head-nav{display:none}}
+.site-footer{border-top:1px solid var(--line);margin-top:5rem;padding:3rem 0 2.4rem;background:var(--smoked)}
+.footer-inner{max-width:1080px;margin:0 auto;padding:0 clamp(1.15rem,4vw,2.4rem);
+  display:grid;gap:2rem;grid-template-columns:1.6fr 1fr 1fr 1fr}
+@media(max-width:760px){.footer-inner{grid-template-columns:1fr 1fr}}
+.footer-brand p{color:var(--muted);font-size:.88rem;max-width:32ch;margin-top:.6rem}
+.footer-col h4{font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--champagne);margin:0 0 .8rem}
+.footer-col ul{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
+.footer-col a{font-size:.88rem;color:var(--pearl);opacity:.8}.footer-col a:hover{opacity:1;color:var(--guava)}
+.footer-bottom{max-width:1080px;margin:2.2rem auto 0;padding:1.4rem clamp(1.15rem,4vw,2.4rem) 0;
+  border-top:1px solid var(--line-2);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:.78rem;color:var(--muted)}
+
+/* breadcrumb */
+.crumb{font-size:.78rem;color:var(--muted);margin:1.6rem 0 1.2rem;display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+.crumb a{color:var(--muted)}.crumb a:hover{color:var(--pearl)}
+.crumb .sep{opacity:.4}.crumb [aria-current]{color:var(--pearl)}
+
+/* hero */
+.hero{padding:1.4rem 0 2.6rem;border-bottom:1px solid var(--line)}
+.hero .kicker{display:block;margin-bottom:1rem}
+.hero h1{font-size:clamp(2.4rem,6.4vw,4rem);font-weight:380;letter-spacing:-.02em}
+.hero .dek{font-size:1.06rem;color:var(--pearl);opacity:.78;margin:.9rem 0 0;max-width:52ch}
+
+/* verification ledger — dated chips instead of stars */
+.ledger{display:flex;flex-wrap:wrap;gap:.55rem;margin:1.5rem 0 0;list-style:none;padding:0}
+.chip{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--line);
+  border-radius:2px;padding:.42rem .8rem;font-size:.78rem;letter-spacing:.01em;color:var(--pearl);
+  background:var(--smoked)}
+.chip .led{width:7px;height:7px;border-radius:50%;background:var(--guava);flex:none;
+  box-shadow:0 0 0 3px rgba(255,63,111,.16),0 0 10px 1px rgba(255,63,111,.7)}
+.chip.tag{color:var(--muted);text-transform:uppercase;font-size:.66rem;letter-spacing:.16em}
+
+/* action row */
+.actions{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.6rem 0 0}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--sans);font-size:.86rem;font-weight:600;
+  letter-spacing:.02em;padding:.7rem 1.2rem;border-radius:2px;border:1px solid var(--line);color:var(--pearl);
+  background:transparent;cursor:pointer;transition:border-color .18s var(--ease),color .18s var(--ease);min-height:44px}
+.btn:hover{border-color:var(--champagne)}
+.btn-primary{background:var(--pearl);color:var(--obsidian);border-color:var(--pearl)}
+.btn-primary:hover{background:#fff;border-color:#fff}
+
+/* tonight strip */
+.tonight{margin:1.9rem 0 0;border:1px solid var(--line);border-radius:2px;background:var(--smoked);
+  padding:.95rem 1.15rem;display:flex;align-items:center;gap:.7rem;font-size:.94rem}
+.tonight .led{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.tonight.is-open .led{background:var(--guava);box-shadow:0 0 0 3px rgba(255,63,111,.16),0 0 10px 1px rgba(255,63,111,.7)}
+.tonight .lbl{color:var(--pearl)}.tonight .sub{color:var(--muted)}
+.tonight a{color:var(--champagne);border-bottom:1px solid var(--line)}
+
+/* layout grid */
+.grid{display:grid;gap:2.4rem;grid-template-columns:1fr;margin-top:2.6rem}
+@media(min-width:880px){.grid{grid-template-columns:1fr 320px;gap:3rem}}
+.sec{padding:1.9rem 0;border-top:1px solid var(--line-2)}
+.sec:first-child{border-top:0;padding-top:.4rem}
+.sec h2{font-size:1.5rem;font-weight:400;margin:0 0 1rem}
+.sec .stamp{display:block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--champagne);margin-top:.9rem}
+
+/* hours accordion */
+.hours{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:2px;overflow:hidden}
+.hours li{display:flex;justify-content:space-between;gap:1rem;padding:.6rem .95rem;font-size:.9rem;
+  border-top:1px solid var(--line-2)}
+.hours li:first-child{border-top:0}
+.hours li.today{background:var(--smoked)}
+.hours .d{color:var(--muted)}.hours .t{color:var(--pearl)}
+.hours li.today .d,.hours li.today .t{color:var(--porcelain)}
+details.acc{border:1px solid var(--line);border-radius:2px}
+details.acc>summary{list-style:none;cursor:pointer;padding:.8rem .95rem;font-size:.9rem;color:var(--pearl);
+  display:flex;justify-content:space-between;align-items:center}
+details.acc>summary::-webkit-details-marker{display:none}
+details.acc>summary .mk{color:var(--muted);font-size:.8rem}
+details.acc[open]>summary .mk{color:var(--champagne)}
+details.acc .hours{border:0;border-top:1px solid var(--line-2);border-radius:0}
+
+/* map */
+.map{border:1px solid var(--line);border-radius:2px;overflow:hidden}
+#map-canvas{height:300px;background:var(--smoked)}
+.map-fallback{height:auto;padding:1.4rem;background:var(--smoked);color:var(--pearl)}
+.map-fallback strong{display:block;font-size:1rem}
+.map-fallback span{color:var(--muted);font-size:.88rem}
+
+/* facts panel */
+.facts{border:1px solid var(--line);border-radius:2px;background:var(--smoked);padding:1.3rem}
+.facts .fc-title{font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--champagne);margin:0 0 1rem}
+.facts dl{margin:0;display:grid;gap:1rem}
+.facts dt{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
+.facts dd{margin:0;font-size:.92rem;color:var(--pearl)}
+.facts dd a{color:var(--pearl);border-bottom:1px solid var(--line)}
+.prov{display:block;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--champagne);opacity:.85;margin-top:.25rem;font-variant:small-caps}
+
+/* nearby rail */
+.nearby{list-style:none;margin:0;padding:0;display:grid;gap:.1rem}
+.nearby li{border-top:1px solid var(--line-2)}
+.nearby li:first-child{border-top:0}
+.nearby a{display:flex;justify-content:space-between;gap:1rem;padding:.7rem 0;align-items:baseline}
+.nearby .nm{color:var(--pearl);font-size:.94rem}
+.nearby a:hover .nm{color:var(--guava)}
+.nearby .di{color:var(--champagne);font-size:.78rem;letter-spacing:.04em;flex:none}
+.nearby .ci{color:var(--muted);font-size:.78rem;flex:none}
+
+/* order / what-to-order states */
+.order-empty{color:var(--muted);font-size:.94rem}
+.order-list{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.order-list li{display:flex;gap:.7rem;align-items:baseline;font-size:.95rem}
+.order-list .led{width:6px;height:6px;border-radius:50%;background:var(--guava);flex:none;margin-top:.5em}
+
+/* claim band */
+.claim{margin-top:3rem;border-top:1px solid var(--line);padding-top:2rem;
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
+.claim p{color:var(--muted);font-size:.9rem;margin:0;max-width:44ch}
+.claim a{color:var(--champagne);border-bottom:1px solid var(--line);font-size:.9rem}
+
+/* ---- CLOSED epitaph variant ---- */
+body.closed{--guava:#6f6d67}
+body.closed .wrap,body.closed .site-footer{filter:grayscale(1)}
+body.closed .hero{opacity:.92}
+.epitaph{font-size:.86rem;color:var(--muted);margin-top:1.3rem;max-width:46ch}
+
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head><body>
-<a class="skip" href="#main">Skip to content</a>
 <!-- Boba Night — canonical navigation partial. Generated from build/nav_data.py.
      Edit the data there, re-render, never hand-patch this file. -->
 <a class="bn-skip" href="#main">Skip to content</a>
@@ -73,69 +233,104 @@
 <a href="/boba/ca/long-beach/">Long Beach</a><span class="sep">/</span>
 <span aria-current="page">Snow Monster</span>
 </nav>
+<section class="hero">
+<span class="kicker">Long Beach · LA</span>
+<h1>Snow Monster</h1>
+<p class="dek">Bubble tea chain in Long Beach, LA.</p>
+<ul class="ledger"><li class="chip"><span class="led"></span>Verified open — checked 17 JUL 2026</li><li class="chip tag">Chain</li><li class="chip tag">LA</li></ul>
+<div class="actions"><a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=33.7604334%2C-118.1348145" rel="nofollow noopener" target="_blank">Directions</a><a class="btn" href="tel:5622000761">Call</a><a class="btn" href="https://minimonstercafe.com/" rel="nofollow noopener" target="_blank">Website</a></div>
+<div class="tonight" id="tonight" role="status"><span class="led"></span><span class="lbl">Checking hours…</span> <span class="sub"></span></div>
 
-<section class="hero"><div class="hero-inner">
-<div class="hero-logo"><span class="mono">SN</span></div>
-<div class="hero-body">
-<div class="hero-titlerow"><h1>Snow Monster</h1></div>
-<p class="hero-sub">Boba in Long Beach, Greater Los Angeles</p>
-<div class="hero-meta"><span class="status pending"><span class="led"></span>Verifying hours</span> <span class="tag tag-verifying">Verifying</span></div>
-<div class="hero-actions">
-<a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Snow%20Monster%205211%20E%202nd%20St%20Long%20Beach%20CA" rel="nofollow noopener" target="_blank">Get directions</a>
-<a class="btn btn-ghost" href="/boba/ca/long-beach/">More Long Beach boba</a>
-</div></div></div></section>
-
-<div class="grid">
-<div class="g-main">
-<section class="sec"><h2>Find it</h2>
-<div class="map-main"><div class="map-main-face"><span class="pin"></span><span class="map-hint">Map loads from verified coordinates</span></div>
-<div class="map-foot"><div class="addr"><strong>5211 E 2nd St</strong><span>Long Beach, CA</span></div>
-<a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Snow%20Monster%205211%20E%202nd%20St%20Long%20Beach%20CA" rel="nofollow noopener" target="_blank">Get directions</a></div></div>
-<p class="note-line">Coordinates are geocoded and verified before this profile is indexed, so the pin never drifts from the real address.</p>
 </section>
+<div class="grid"><div class="g-main">
+<section class="sec"><h2>Find it</h2><div class="map"><div id="map-canvas" aria-label="Map"></div></div></section>
 
-<section class="sec"><p class="p-summary"><span class="lbl">About <span class="tag tag-verifying">Verifying</span></span>
-We're verifying Snow Monster's hours, menu, and details against the shop's own listing. The name and address here are confirmed; the rest fills in shortly.</p></section>
-
-<section class="sec"><h2>What to order <span class="tag tag-verifying">Verifying</span></h2>
-<p class="is-muted">Signature drinks are pulled from the official menu before they show here. Nothing invented.</p></section>
-
-<section class="sec"><h2>Good to know <span class="tag tag-verifying">Verifying</span></h2>
-<p class="is-muted">Seating, wifi, non-dairy, and other details show only once a primary source confirms them.</p></section>
-
-<section class="sec"><h2>Other boba nearby</h2>
-<ul class="nearby-list"><li><a href="/boba/ca/long-beach/zero-express-long-beach/">Zero Express</a><span class="meta">1785 Palo Verde Ave</span></li><li><a href="/boba/ca/long-beach/honeybees-long-beach/">Honeybee&#x27;s</a><span class="meta">301 Loma Ave</span></li><li><a href="/boba/ca/long-beach/hiccups-long-beach/">Hiccups</a><span class="meta">1946 N Lakewood Blvd</span></li><li><a href="/boba/ca/long-beach/cha-for-tea-long-beach/">Cha For Tea</a><span class="meta">5720 E 7th St</span></li><li><a href="/boba/ca/long-beach/roasting-water-long-beach/">Roasting Water</a><span class="meta">7561 Carson Blvd</span></li></ul>
-<p class="note-line">Neighbors are real shops from the Long Beach list. Distances fill in from geocoded coordinates.</p></section>
-
-<section class="sec faq"><h2>FAQ</h2>
-<h3>Where is Snow Monster?</h3><p>Snow Monster is at 5211 E 2nd St in Long Beach, CA.</p>
-<h3>Is it open right now?</h3><p class="is-muted">We're verifying current hours against the shop's listing. Use Get directions above for live Google hours in the meantime.</p></section>
+<section class="sec"><h2>Hours</h2>
+<details class="acc" open><summary>This week's hours <span class="mk">expand</span></summary>
+<ul class="hours"><li class=""><span class="d">Monday</span><span class="t">11:00 AM – 10:00 PM</span></li><li class=""><span class="d">Tuesday</span><span class="t">11:00 AM – 10:00 PM</span></li><li class=""><span class="d">Wednesday</span><span class="t">11:00 AM – 10:00 PM</span></li><li class=""><span class="d">Thursday</span><span class="t">11:00 AM – 10:00 PM</span></li><li class="today"><span class="d">Friday</span><span class="t">11:00 AM – 11:00 PM</span></li><li class=""><span class="d">Saturday</span><span class="t">11:00 AM – 11:00 PM</span></li><li class=""><span class="d">Sunday</span><span class="t">11:00 AM – 10:00 PM</span></li></ul></details>
+<span class="stamp">Hours verified 17 JUL 2026</span>
+</section>
+<section class="sec"><h2>What to order</h2><p class="order-empty">We list what we can verify. Menu link above, nothing invented here.</p></section>
+<section class="sec"><h2>Nearby</h2><ul class="nearby"><li><a href="/boba/ca/long-beach/honeybees-long-beach/"><span class="nm">Honeybee&#x27;s</span><span class="di">1.0 mi</span></a></li><li><a href="/boba/ca/long-beach/cha-for-tea-long-beach/"><span class="nm">Cha For Tea</span><span class="di">1.3 mi</span></a></li><li><a href="/boba/ca/long-beach/hiccups-long-beach/"><span class="nm">Hiccups</span><span class="di">3.0 mi</span></a></li><li><a href="/boba/ca/long-beach/boba-tea-house-long-beach/"><span class="nm">Boba Tea House</span><span class="di">5.2 mi</span></a></li><li><a href="/boba/ca/long-beach/roasting-water-long-beach/"><span class="nm">Roasting Water</span><span class="di">5.5 mi</span></a></li></ul></section>
 </div>
-
-<aside class="g-aside"><div class="facts-card">
-<p class="fc-title">Find Snow Monster</p>
-<dl class="dl">
-<div><dt>Address</dt><dd>5211 E 2nd St, Long Beach, CA</dd></div>
-<div><dt>Area</dt><dd><a href="/area/greater-la/">Greater Los Angeles</a></dd></div>
-<div><dt>Hours</dt><dd class="is-muted">Verifying</dd></div>
-<div><dt>Phone</dt><dd class="is-muted">Verifying</dd></div>
-</dl>
-<p class="card-line"><span class="dot"></span>Is this your shop? <a class="textlink" href="/claim/">Claim this listing</a></p>
-<p class="card-line"><span class="dot"></span>Something wrong? <a class="textlink" href="/report/">Report it</a></p>
-</div></aside>
+<aside class="g-aside"><div class="facts"><p class="fc-title">Find Snow Monster</p><dl><div><dt>Address</dt><dd>5211 E 2nd St, Long Beach, CA<span class="prov">confirmed 17 JUL 2026</span></dd></div><div><dt>Phone</dt><dd>(562) 200-0761<span class="prov">confirmed 17 JUL 2026</span></dd></div><div><dt>Area</dt><dd><a href="/area/greater-la/">Greater Los Angeles</a><span class="prov">confirmed 17 JUL 2026</span></dd></div><div><dt>Type</dt><dd>Chain<span class="prov">confirmed 17 JUL 2026</span></dd></div></dl></div></aside>
 </div>
-
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"CafeOrCoffeeShop","name":"Snow Monster",
-"@id":"https://www.bobanight.com/boba/ca/long-beach/snow-monster-long-beach/#shop","url":"https://www.bobanight.com/boba/ca/long-beach/snow-monster-long-beach/","servesCuisine":"Bubble Tea",
-"address":{"@type":"PostalAddress","streetAddress":"5211 E 2nd St","addressLocality":"Long Beach","addressRegion":"CA","addressCountry":"US"}}
+<div class="claim"><p>Is this your shop? Correct the hours, add the menu, flag anything wrong.</p><a href="/claim/">Claim this listing →</a></div><script type="application/ld+json">{"@context": "https://schema.org", "@type": "CafeOrCoffeeShop", "name": "Snow Monster", "@id": "https://www.bobanight.com/boba/ca/long-beach/snow-monster-long-beach/#shop", "url": "https://www.bobanight.com/boba/ca/long-beach/snow-monster-long-beach/", "servesCuisine": "Bubble Tea", "address": {"@type": "PostalAddress", "streetAddress": "5211 E 2nd St", "addressLocality": "Long Beach", "addressRegion": "CA", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 33.7604334, "longitude": -118.1348145}, "telephone": "(562) 200-0761", "sameAs": ["https://minimonstercafe.com/"], "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJ-QoGETYw3YARp_j31_l8BsY", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": "https://schema.org/Sunday", "opens": "11:00", "closes": "22:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "https://schema.org/Monday", "opens": "11:00", "closes": "22:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "https://schema.org/Tuesday", "opens": "11:00", "closes": "22:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "https://schema.org/Wednesday", "opens": "11:00", "closes": "22:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "https://schema.org/Thursday", "opens": "11:00", "closes": "22:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "https://schema.org/Friday", "opens": "11:00", "closes": "23:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "https://schema.org/Saturday", "opens": "11:00", "closes": "23:00"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.bobanight.com/"}, {"@type": "ListItem", "position": 2, "name": "Greater Los Angeles", "item": "https://www.bobanight.com/area/greater-la/"}, {"@type": "ListItem", "position": 3, "name": "Long Beach", "item": "https://www.bobanight.com/boba/ca/long-beach/"}, {"@type": "ListItem", "position": 4, "name": "Snow Monster", "item": "https://www.bobanight.com/boba/ca/long-beach/snow-monster-long-beach/"}]}</script>
+<script>
+(function(){
+  var P = [{"open": {"day": 0, "time": "1100"}, "close": {"day": 0, "time": "2200"}}, {"open": {"day": 1, "time": "1100"}, "close": {"day": 1, "time": "2200"}}, {"open": {"day": 2, "time": "1100"}, "close": {"day": 2, "time": "2200"}}, {"open": {"day": 3, "time": "1100"}, "close": {"day": 3, "time": "2200"}}, {"open": {"day": 4, "time": "1100"}, "close": {"day": 4, "time": "2200"}}, {"open": {"day": 5, "time": "1100"}, "close": {"day": 5, "time": "2300"}}, {"open": {"day": 6, "time": "1100"}, "close": {"day": 6, "time": "2300"}}];
+  var el = document.getElementById('tonight');
+  if(!el) return;
+  if(!P || !P.length){ return; }
+  function laNow(){
+    var s = new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles'});
+    return new Date(s);
+  }
+  function fmt(hhmm){
+    var h = parseInt(hhmm.slice(0,2),10), m = parseInt(hhmm.slice(2),10);
+    var ap = h>=12?'PM':'AM'; var h12 = h%12; if(h12===0) h12=12;
+    return h12 + ':' + (m<10?'0'+m:m) + ' ' + ap;
+  }
+  var WK = 7*1440;
+  var d = laNow();
+  var cur = d.getDay()*1440 + d.getHours()*60 + d.getMinutes();
+  var openNow = null, nextOpen = null, nextOpenDelta = Infinity;
+  for(var i=0;i<P.length;i++){
+    var p = P[i]; if(!p.open || !p.close) continue;
+    var o = p.open.day*1440 + parseInt(p.open.time.slice(0,2),10)*60 + parseInt(p.open.time.slice(2),10);
+    var c = p.close.day*1440 + parseInt(p.close.time.slice(0,2),10)*60 + parseInt(p.close.time.slice(2),10);
+    while(c <= o){ c += WK; }
+    // test current instant and its previous-week image (for overnight wrap)
+    var checks = [cur, cur + WK];
+    for(var k=0;k<checks.length;k++){
+      if(checks[k] >= o && checks[k] < c){ openNow = p.close.time; }
+    }
+    // soonest future opening
+    var delta = ((o - cur) % WK + WK) % WK;
+    if(delta < nextOpenDelta){ nextOpenDelta = delta; nextOpen = p.open.time; }
+  }
+  if(openNow){
+    el.classList.add('is-open');
+    el.querySelector('.lbl').textContent = 'Open now';
+    el.querySelector('.sub').textContent = '\u00b7 closes ' + fmt(openNow);
+  }else{
+    el.classList.remove('is-open');
+    el.querySelector('.lbl').textContent = 'Closed now';
+    el.querySelector('.sub').textContent = nextOpen ? ('\u00b7 opens ' + fmt(nextOpen)) : '';
+  }
+})();
 </script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-{"@type":"ListItem","position":1,"name":"Home","item":"https://www.bobanight.com/"},
-{"@type":"ListItem","position":2,"name":"Greater Los Angeles","item":"https://www.bobanight.com/area/greater-la/"},
-{"@type":"ListItem","position":3,"name":"Long Beach","item":"https://www.bobanight.com/boba/ca/long-beach/"},
-{"@type":"ListItem","position":4,"name":"Snow Monster","item":"https://www.bobanight.com/boba/ca/long-beach/snow-monster-long-beach/"}]}
+
+<script>
+(function(){
+  var host = document.getElementById('map-canvas');
+  if(!host) return;
+  var lat = 33.7604334, lng = -118.1348145;
+  var loaded = false;
+  function load(){
+    if(loaded) return; loaded = true;
+    var css = document.createElement('link'); css.rel='stylesheet';
+    css.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';
+    document.head.appendChild(css);
+    var js = document.createElement('script');
+    js.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+    js.onload=function(){
+      var map = L.map(host,{scrollWheelZoom:false,attributionControl:true}).setView([lat,lng],16);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
+        attribution:'&copy; OpenStreetMap &copy; CARTO', subdomains:'abcd', maxZoom:20
+      }).addTo(map);
+      L.circleMarker([lat,lng],{radius:7,color:'#C5A46D',weight:2,fillColor:'#ff3f6f',fillOpacity:.9}).addTo(map);
+    };
+    document.body.appendChild(js);
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(en){
+      en.forEach(function(e){ if(e.isIntersecting){ load(); io.disconnect(); } });
+    },{rootMargin:'200px'});
+    io.observe(host);
+  }else{ load(); }
+})();
 </script>
 </main>
 <footer class="site-footer"><div class="footer-inner">
@@ -153,5 +348,6 @@ We're verifying Snow Monster's hours, menu, and details against the shop's own l
 <li><a href="/about/">About Boba Night</a></li></ul></div>
 </div><div class="footer-bottom">
 <span>&copy; 2026 Boba Night</span><span class="note">We don't take payment for placement on our best-for lists.</span>
-</div></footer><script src="/js/nav-midnight.js" defer></script>
+</div></footer>
+<script src="/js/nav-midnight.js" defer></script>
 </body></html>

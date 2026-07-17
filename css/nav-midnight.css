@@ -45,8 +45,17 @@
 
 /* ============================================================ HEADER BAR = */
 .bn-header{position:sticky;top:0;z-index:200;font-family:var(--bn-sans);
-  background:rgba(11,12,14,.80);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--bn-line)}
+  background:transparent;border-bottom:1px solid var(--bn-line)}
+/* Progressive-blur scrim: masked backdrop-filter that fades downward so page
+   content dissolves under the bar instead of hitting a hard seam. Lives on a
+   flat, non-rounded ::before (no overflow:hidden/border-radius) to dodge the
+   Chromium corner-mangling bug with masked backdrop-filters. Covers only the
+   bar box (var(--bn-h)) so it never clips the panels that drop below it. */
+.bn-header::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(11,12,14,.88),rgba(11,12,14,.50));
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  -webkit-mask-image:linear-gradient(180deg,#000 52%,rgba(0,0,0,.55) 82%,transparent);
+          mask-image:linear-gradient(180deg,#000 52%,rgba(0,0,0,.55) 82%,transparent)}
 .bn-bar{max-width:1240px;margin:0 auto;padding:0 clamp(1.05rem,4vw,2.4rem);
   height:var(--bn-h);display:flex;align-items:center;gap:1rem}
 
@@ -59,10 +68,16 @@
 .bn-nav{display:none}
 @media(min-width:1080px){.bn-nav{display:flex;align-items:center;gap:.1rem;margin-left:.4rem}}
 .bn-item{position:static}
-.bn-trigger{display:inline-flex;align-items:center;gap:.4rem;height:var(--bn-h);
+.bn-trigger{position:relative;display:inline-flex;align-items:center;gap:.4rem;height:var(--bn-h);
   padding:0 .72rem;font-size:.85rem;font-weight:500;letter-spacing:.01em;white-space:nowrap;
   color:var(--bn-silver);background:none;border:0;cursor:pointer;font-family:inherit;
   transition:color .16s var(--bn-ease)}
+/* champagne hairline underline-wipe — scaleX only, origin flips so it retracts
+   the way it came in. Compositor-only, no layout. */
+.bn-trigger::after{content:"";position:absolute;left:.72rem;right:.72rem;bottom:16px;height:1px;
+  background:var(--bn-champagne);transform:scaleX(0);transform-origin:right center;
+  transition:transform .3s var(--bn-ease);pointer-events:none}
+.bn-trigger:hover::after,.bn-trigger[aria-expanded="true"]::after{transform:scaleX(1);transform-origin:left center}
 @media(min-width:1080px) and (max-width:1200px){.bn-trigger{padding:0 .5rem;font-size:.82rem}}
 .bn-trigger:hover,.bn-trigger[aria-expanded="true"]{color:var(--bn-pearl)}
 .bn-caret{width:.5em;height:.5em;border-right:1.5px solid currentColor;
@@ -274,9 +289,12 @@
     z-index:250;height:calc(56px + env(safe-area-inset-bottom));
     padding-bottom:env(safe-area-inset-bottom);
     background:rgba(11,12,14,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    border-top:1px solid var(--bn-line);font-family:var(--bn-sans)}
+    border-top:1px solid var(--bn-line);font-family:var(--bn-sans);
+    transition:transform .28s var(--bn-ease);will-change:transform}
+  /* hide-on-scroll-down, reveal-on-scroll-up — transform only (JS toggles) */
+  .bn-bottombar.bn-bb-hidden{transform:translateY(112%)}
 }
-.bn-bb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+.bn-bb{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
   min-height:48px;color:var(--bn-silver);background:none;border:0;cursor:pointer;
   font-family:inherit;font-size:11px;letter-spacing:.02em;
   transition:color .15s var(--bn-ease)}
@@ -284,14 +302,18 @@
 .bn-bb span{line-height:1}
 .bn-bb:hover,.bn-bb:active{color:var(--bn-pearl)}
 .bn-bb--cta{color:var(--bn-neon)}
-.bn-bb--cta svg{filter:drop-shadow(0 0 8px rgba(255,63,111,.5))}  /* the one lit element on mobile chrome */
+/* the single glow on mobile chrome now rides the active tab's dot (aria-current),
+   set by JS to the current page — one lit element per viewport. */
+.bn-bb[aria-current="page"]{color:var(--bn-neon)}
+.bn-bb[aria-current="page"]::after{content:"";position:absolute;top:5px;width:4px;height:4px;border-radius:50%;
+  background:var(--bn-neon);box-shadow:0 0 8px 1px rgba(255,63,111,.7)}
 
 body.bn-lock{overflow:hidden}
 
 /* ======================================================= REDUCED MOTION == */
 @media(prefers-reduced-motion:reduce){
-  .bn-panel,.bn-trigger,.bn-caret,.bn-drawer,.bn-acc-panel,.bn-acc-ic::before,.bn-acc-ic::after,
-  .bn-scrim,.bn-feat,.bn-col-links a,.bn-pane-cities a,.bn-arrow,.bn-cta,.bn-overlay-box,.bn-burger span{
+  .bn-panel,.bn-trigger,.bn-trigger::after,.bn-caret,.bn-drawer,.bn-acc-panel,.bn-acc-ic::before,.bn-acc-ic::after,
+  .bn-scrim,.bn-feat,.bn-col-links a,.bn-pane-cities a,.bn-arrow,.bn-cta,.bn-overlay-box,.bn-burger span,.bn-bottombar{
     transition:none;animation:none}
   .bn-overlay-box{opacity:1;transform:none}
 }

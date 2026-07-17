@@ -22,6 +22,12 @@ Two template states:
 """
 import json, re, os, html, math, datetime, sys
 
+# Bake the site's unified nav directly into every profile (no separate
+# apply_nav pass needed). render_header() returns the canonical header partial
+# — skip link, sticky mega-nav, search overlay, mobile drawer, bottom bar.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from nav_data import render_header
+
 ROOT  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA  = os.path.join(ROOT, "data", "stores-data.json")
 SITE  = "https://www.bobanight.com"
@@ -284,6 +290,12 @@ body.closed .hero{opacity:.92}
 """
 
 # ---- head / chrome ----------------------------------------------------------
+# The unified site nav, rendered once from build/nav_data.py and baked into
+# every profile's <body>: skip link, sticky mega-nav, search overlay, mobile
+# drawer, bottom bar. Interpolated as a value into head()'s f-string, so any
+# braces inside it are inert.
+NAV_HEADER = render_header().rstrip("\n")
+
 def head(title, desc, canonical, robots):
     return f"""<!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -292,15 +304,10 @@ def head(title, desc, canonical, robots):
 <link rel="canonical" href="{canonical}"><meta name="robots" content="{robots}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/nav-midnight.css">
 <style>{STYLE}</style>
 </head><body{{BODYCLASS}}>
-<a class="skip" href="#main">Skip to content</a>
-<header class="site-header"><div class="header-inner">
-<a class="brand" href="/">Boba <b>Night</b></a>
-<nav class="head-nav" aria-label="Primary">
-<a href="/area/sgv/">By area</a><a href="/best/">By vibe</a><a href="/new/orange-county/">New</a><a href="/guide/">Guides</a>
-</nav>
-</div></header>
+{NAV_HEADER}
 <main id="main" class="wrap">"""
 
 FOOT = """</main>
@@ -319,7 +326,9 @@ FOOT = """</main>
 <li><a href="/about/">About Boba Night</a></li></ul></div>
 </div><div class="footer-bottom">
 <span>&copy; 2026 Boba Night</span><span class="note">We don't take payment for placement on our best-for lists.</span>
-</div></footer></body></html>"""
+</div></footer>
+<script src="/js/nav-midnight.js" defer></script>
+</body></html>"""
 
 # ---- weekday_text -> accordion rows ----------------------------------------
 DAY_ORDER = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
@@ -655,12 +664,23 @@ def main(argv):
     by_slug = {s["slug"]: s for s in shops}
 
     if "--all" in argv:
+        # Hand-edited featured house — never regenerate it.
+        SKIP = {"taro-yuan-city-of-industry"}
+        wrote = idx = noidx = 0
         for shop in shops:
+            if shop["slug"] in SKIP:
+                continue
             page, _ = render(shop, shops)
+            if 'name="robots" content="index,follow"' in page:
+                idx += 1
+            else:
+                noidx += 1
             p = out_path_for(shop)
             os.makedirs(os.path.dirname(p), exist_ok=True)
             open(p, "w", encoding="utf-8").write(page)
-        print(f"wrote {len(shops)} profiles")
+            wrote += 1
+        print(f"wrote {wrote} profiles (skipped {len(SKIP)}): "
+              f"{idx} index,follow / {noidx} noindex,follow")
         return 0
 
     if not argv:
