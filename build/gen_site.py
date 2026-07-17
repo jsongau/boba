@@ -12,12 +12,18 @@ SEO safety: city pages + region hubs are indexable (real directory value).
 Individual profiles are noindex until enriched (avoid thin-content penalty).
 Intent pages are honest landing pages (no fabricated rankings) and noindex.
 """
-import csv, io, re, os, html, datetime
+import csv, io, re, os, html, datetime, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repo root
 CSV  = os.path.join(ROOT, "data", "stores-seed.csv")
 TODAY = datetime.date.today().isoformat()
 SITE = "https://www.bobanight.com"
+
+# The unified obsidian nav comes from the single source of truth (nav_data).
+# gen_site runs as `python3 build/gen_site.py`, so build/ is on sys.path[0].
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from nav_data import render_header
+UNIFIED_HEADER = render_header()
 
 # ---- region mapping (editorial; adjustable) ----
 SGV_CITIES = {"Arcadia","Covina","Pasadena","Walnut","Rowland Heights","Monterey Park","City of Industry",
@@ -84,6 +90,11 @@ def load_rows():
     return rows
 
 # ---- shared chrome ----
+FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
+         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+         '<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;'
+         '1,9..144,300..500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">')
+
 def head(title, desc, canonical, noindex=False):
     robots = '<meta name="robots" content="noindex,follow">' if noindex else ""
     return f"""<!DOCTYPE html><html lang="en"><head>
@@ -91,18 +102,14 @@ def head(title, desc, canonical, noindex=False):
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{canonical}">{robots}
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0B0C0E">
+{FONTS}
 <link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="/css/nav-midnight.css">
+<link rel="stylesheet" href="/css/motif.css">
+<link rel="stylesheet" href="/css/sound.css">
 </head><body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="site-header"><div class="header-inner">
-<a class="brand" href="/">Boba <b>Night</b></a>
-<nav class="head-nav" aria-label="Primary">
-<a href="/area/sgv/">By area</a><a href="/best/">By vibe</a><a href="/new/orange-county/">New</a><a href="/guide/">Guides</a>
-</nav>
-<div class="head-actions"><a class="btn btn-ghost" href="/">Find boba</a></div>
-</div></header>
+{UNIFIED_HEADER}
 <main id="main" class="wrap">"""
 
 def foot():
@@ -122,7 +129,50 @@ def foot():
 <li><a href="/about/">About Boba Night</a></li></ul></div>
 </div><div class="footer-bottom">
 <span>&copy; 2026 Boba Night</span><span class="note">We don't take payment for placement on our best-for lists.</span>
-</div></footer></body></html>"""
+</div></footer>
+<script src="/js/nav-midnight.js" defer></script>
+<script src="/js/motif.js" defer></script>
+<script src="/js/sound.js" defer></script>
+</body></html>"""
+
+# ---- breadcrumb + city mini-nav helpers ----
+# Boba-infused breadcrumb: a small pearl motif separates each crumb, last item
+# carries aria-current. motif.js draws the SVG; site.css shows a champagne pip
+# fallback until then.
+CRUMB_SEP = '<span class="boba-motif crumb-sep" data-motif="pearl" aria-hidden="true"></span>'
+
+def crumbs(trail):
+    """trail: list of (label, href). href None => current page."""
+    out=[]
+    for i,(label,href) in enumerate(trail):
+        if i: out.append(CRUMB_SEP)
+        out.append(f'<a href="{href}">{esc(label)}</a>' if href
+                   else f'<span aria-current="page">{esc(label)}</span>')
+    return f'<nav class="crumb" aria-label="Breadcrumb">{"".join(out)}</nav>'
+
+def city_mininav(region, region_cities_map, current_city=None):
+    """Sticky sub-bar of a region's cities as chips with shop counts, current
+    city highlighted, horizontally scroll-snapping on mobile. One click between
+    cities instead of a back-and-forth to the region hub."""
+    reg=REGIONS[region]
+    cities=sorted(region_cities_map.keys(),
+                  key=lambda c:(-len(region_cities_map[c]), c.lower()))
+    on_area = current_city is None
+    all_cls='cmn-chip cmn-all'+(' is-current' if on_area else '')
+    all_aria=' aria-current="page"' if on_area else ''
+    chips=[f'<a class="{all_cls}" href="/area/{region}/"{all_aria}>All {esc(reg["label"])}</a>']
+    for c in cities:
+        cur=(c==current_city)
+        cls='cmn-chip'+(' is-current' if cur else '')
+        aria=' aria-current="page"' if cur else ''
+        chips.append(f'<a class="{cls}" href="/boba/ca/{slugify(c)}/"{aria}>'
+                     f'{esc(c)}<span class="cmn-ct">{len(region_cities_map[c])}</span></a>')
+    return (f'<nav class="city-mininav" aria-label="Cities in {esc(reg["label"])}">'
+            f'<div class="cmn-inner"><span class="cmn-label">{esc(reg["label"])}</span>'
+            f'{"".join(chips)}</div></nav>')
+
+# rotating motif set for city-card accents (jiggle on hover, wired by motif.js)
+CARD_MOTIFS = ["pearl","taro","matcha","grass-jelly","red-bean","foam","egg-tart","jelly"]
 
 def write(path, content):
     full=os.path.join(ROOT, path); os.makedirs(os.path.dirname(full), exist_ok=True)
@@ -220,7 +270,7 @@ We're verifying {esc(r['name'])}'s hours, menu, and details against the shop's o
           head(title,desc,url,noindex=not enriched)+body+foot())
 
 # ---- city page ----
-def render_city(city, county, region, shops, neighbor_cities):
+def render_city(city, county, region, shops, neighbor_cities, region_cities_map):
     cslug=slugify(city); reg=REGIONS[region]; url=f"{SITE}/boba/ca/{cslug}/"
     items="".join(
         f'<div class="dir-item"><div class="di-main"><a class="di-name" href="/boba/ca/{cslug}/{s["slug"]}/">{esc(s["name"])}</a>'
@@ -233,13 +283,14 @@ def render_city(city, county, region, shops, neighbor_cities):
         % (i+1, SITE, cslug, s["slug"], esc(s["name"]).replace('"','\\"'), "," if i<len(shops)-1 else "")
         for i,s in enumerate(shops))
     body=f"""
-<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span>
-<a href="/area/{region}/">{esc(reg['label'])}</a><span class="sep">/</span><span aria-current="page">{esc(city)}</span></nav>
+{crumbs([("Home","/"),(reg['label'],f"/area/{region}/"),(city,None)])}
+{city_mininav(region, region_cities_map, current_city=city)}
 <div class="page-head"><p class="eyebrow">{esc(reg['label'])}</p>
 <h1>Boba in {esc(city)}</h1>
 <p class="lede">We're tracking <b>{len(shops)} boba shop{'s' if len(shops)!=1 else ''}</b> in {esc(city)}. Addresses are below; hours and shop details are being verified against each shop's own listing before they show.</p></div>
 <div class="notice"><span class="tag tag-verifying">Verifying</span>
 <span>This is a live directory in progress. Shop names and addresses are confirmed. Hours, coordinates, and details are added as we verify each shop, so you won't see a wrong hour that sends you to a closed shop.</span></div>
+<div class="boba-divider" aria-hidden="true"></div>
 <section class="sec"><h2>Every boba shop in {esc(city)}</h2>
 <div class="dir-list">{items}</div></section>
 <section class="sec faq"><h2>FAQ</h2>
@@ -265,15 +316,19 @@ def render_region(region, cities_map):
     reg=REGIONS[region]; url=f"{SITE}/area/{region}/"
     cities=sorted(cities_map.keys())
     cards="".join(
-        f'<a class="card" href="/boba/ca/{slugify(c)}/"><h3>{esc(c)}</h3>'
+        f'<a class="card" href="/boba/ca/{slugify(c)}/">'
+        f'<span class="boba-motif" data-motif="{CARD_MOTIFS[i%len(CARD_MOTIFS)]}" aria-hidden="true"></span>'
+        f'<h3>{esc(c)}</h3>'
         f'<span class="c-meta">{len(cities_map[c])} shop{"s" if len(cities_map[c])!=1 else ""}</span></a>'
-        for c in cities)
+        for i,c in enumerate(cities))
     total=sum(len(v) for v in cities_map.values())
     body=f"""
-<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><span aria-current="page">{esc(reg['label'])}</span></nav>
+{crumbs([("Home","/"),(reg['label'],None)])}
+{city_mininav(region, cities_map, current_city=None)}
 <div class="page-head"><p class="eyebrow">{esc(reg['kicker'])}</p>
 <h1>Boba in {esc(reg['label'])}</h1>
 <p class="lede">{esc(reg['blurb'])} We're tracking <b>{total} shops</b> across <b>{len(cities)} cities</b> here. Pick a city to see the shops.</p></div>
+<div class="boba-divider" aria-hidden="true"></div>
 <section class="sec"><h2>Cities</h2><div class="card-grid">{cards}</div></section>
 <script type="application/ld+json">
 {{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
@@ -289,13 +344,16 @@ def render_region(region, cities_map):
 def render_intent_index():
     url=f"{SITE}/best/"
     tiles="".join(
-        f'<a class="card" href="/best/{slug}/"><h3>{esc(label)}</h3><span class="c-meta">{esc(desc)}</span></a>'
-        for slug,label,desc in INTENTS)
+        f'<a class="card" href="/best/{slug}/">'
+        f'<span class="boba-motif" data-motif="{CARD_MOTIFS[i%len(CARD_MOTIFS)]}" aria-hidden="true"></span>'
+        f'<h3>{esc(label)}</h3><span class="c-meta">{esc(desc)}</span></a>'
+        for i,(slug,label,desc) in enumerate(INTENTS))
     body=f"""
-<nav class="crumb"><a href="/">Home</a><span class="sep">/</span><span aria-current="page">By vibe</span></nav>
+{crumbs([("Home","/"),("By vibe",None)])}
 <div class="page-head"><p class="eyebrow">Start with the mood</p><h1>Boba by vibe</h1>
 <p class="lede">Most boba searches are about a moment, not a brand. These picks are ranked on verified attributes, so each list goes live once enough {esc('shops')} in an area are verified for it.</p></div>
 <div class="notice"><span class="tag tag-verifying">In progress</span><span>We don't post a ranking we haven't earned. As shops are verified, each vibe gets a real, method-shown list. Meanwhile, browse by area.</span></div>
+<div class="boba-divider" aria-hidden="true"></div>
 <section class="sec"><h2>Vibes</h2><div class="card-grid">{tiles}</div></section>
 <nav class="related">Browse by area: <a href="/area/sgv/">The 626</a> <a href="/area/orange-county/">Orange County</a> <a href="/area/san-diego/">San Diego</a></nav>
 """
@@ -306,7 +364,7 @@ def render_intent_index():
 def render_intent(slug,label,desc):
     url=f"{SITE}/best/{slug}/"
     body=f"""
-<nav class="crumb"><a href="/">Home</a><span class="sep">/</span><a href="/best/">By vibe</a><span class="sep">/</span><span aria-current="page">{esc(label)}</span></nav>
+{crumbs([("Home","/"),("By vibe","/best/"),(label,None)])}
 <div class="page-head"><p class="eyebrow">By vibe</p><h1>Best boba for {esc(label.lower())} in Southern California</h1>
 <p class="lede">Our {esc(label.lower())} picks are ranked on verified attributes ({esc(desc)}). This list goes live once enough shops in each area are verified, so it's honest rather than guessed.</p></div>
 <div class="notice"><span class="tag tag-verifying">Verifying</span><span>We're confirming which shops truly fit {esc(label.lower())} before ranking them. Browse by area in the meantime.</span></div>
@@ -345,15 +403,18 @@ def main():
     for r in rows:
         by_city.setdefault((r["city"],r["county"],r["region"]),[]).append(r)
         cities_by_region.setdefault(r["region"],{}).setdefault(r["city"],[]).append(r)
-    # profiles
-    for r in rows:
-        neighbors=[x for x in by_city[(r["city"],r["county"],r["region"])] if x["slug"]!=r["slug"]]
-        render_profile(r, neighbors)
+    # PROFILES ARE NOW OWNED BY build/gen_profiles.py (anti-Yelp template, 212
+    # indexed). gen_site MUST NOT write profile pages or it would overwrite them.
+    # The render_profile() function is kept for reference only; the loop below is
+    # deliberately disabled. Do not re-enable without coordinating with gen_profiles.
+    # for r in rows:
+    #     neighbors=[x for x in by_city[(r["city"],r["county"],r["region"])] if x["slug"]!=r["slug"]]
+    #     render_profile(r, neighbors)
     # city pages
     for (city,county,region),shops in by_city.items():
         shops_sorted=sorted(shops,key=lambda s:s["name"].lower())
         neighbor_cities=[c for c in cities_by_region[region] if c!=city]
-        render_city(city,county,region,shops_sorted,neighbor_cities)
+        render_city(city,county,region,shops_sorted,neighbor_cities,cities_by_region[region])
     # region hubs
     for region,cm in cities_by_region.items():
         render_region(region,cm)
@@ -362,9 +423,9 @@ def main():
     for slug,label,desc in INTENTS: render_intent(slug,label,desc)
     # meta
     render_meta_files(cities_by_region)
-    print(f"shops(profiles): {len(rows)}")
-    print(f"cities: {len(by_city)}")
-    print(f"regions: {len(cities_by_region)} -> {sorted(cities_by_region)}")
+    print(f"profiles: SKIPPED (owned by build/gen_profiles.py) — rows in CSV: {len(rows)}")
+    print(f"city pages: {len(by_city)}")
+    print(f"region hubs: {len(cities_by_region)} -> {sorted(cities_by_region)}")
     print(f"intent pages: {len(INTENTS)+1}")
 
 if __name__=="__main__":

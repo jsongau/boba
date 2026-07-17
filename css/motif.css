@@ -1,0 +1,196 @@
+/* ============================================================================
+   BOBA NIGHT — THE MOTIF SYSTEM (css/motif.css)
+   An original family of boba-ingredient marks: pearl, jelly, grass-jelly,
+   red-bean, taro, egg-tart, foam, drizzle, matcha. Elegant line + fill in the
+   lacquer palette (pearl / champagne-gold / cinnabar / garnet / jade / aubergine)
+   on obsidian. Cohesive as a set: one hairline stroke weight, one 44x44 grid,
+   controlled fills. Behaviour lives in js/motif.js.
+
+   Motion contract: transform + opacity only, 120–240ms transitions for hover,
+   short one-shot keyframes for the click "surprise". Everything animated is
+   gated behind @media (prefers-reduced-motion: no-preference). GPU-friendly:
+   no fill/stroke/path animation, no layout thrash, no animation libraries.
+   Palette resolves from luxury-homepage.css / nav-midnight.css tokens when
+   present, with self-contained fallbacks so the family renders anywhere.
+   ========================================================================== */
+
+:root{
+  --bm-obsidian:var(--obsidian,#0B0C0E);
+  --bm-surface:var(--smoked,#17191D);
+  --bm-surface-2:var(--smoked-2,#1F2228);
+  --bm-pearl:var(--pearl,#F4EFE7);
+  --bm-porcelain:var(--porcelain,#FCF9F3);
+  --bm-champagne:var(--champagne,#C5A46D);
+  --bm-gold:#B08D57;              /* antique gold, lacquer register */
+  --bm-cinnabar:#C8372D;          /* one accent moment, used once per mark */
+  --bm-garnet:var(--garnet,#7A2433);
+  --bm-jade:var(--jade,#123F35);
+  --bm-jade-lt:#2C6B5C;
+  --bm-aubergine:var(--aubergine,#342235);
+  --bm-ink:var(--obsidian,#0B0C0E);
+  --bm-size:44px;                 /* author overrides with --bm-size or font-size */
+  --bm-ease:cubic-bezier(.16,1,.3,1);     /* expo-out */
+}
+
+/* ------------------------------------------------------------------ shell */
+.boba-motif{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:var(--bm-size);height:var(--bm-size);
+  vertical-align:middle;line-height:0;cursor:pointer;
+  background:none;border:0;padding:0;color:inherit;
+  -webkit-tap-highlight-color:transparent;
+}
+.boba-motif .bm-svg{
+  width:100%;height:100%;display:block;overflow:visible;
+  transform:translateZ(0);           /* promote once, no repeated layer churn */
+}
+.boba-motif:focus-visible{outline:2px solid var(--bm-champagne);outline-offset:3px;border-radius:3px}
+
+/* -------------------------------------------------- shared SVG part paint */
+.bm-stroke{fill:none;stroke:var(--bm-champagne);stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bm-stroke-thin{fill:none;stroke:var(--bm-champagne);stroke-width:1.1;
+  stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.bm-hairline{fill:none;stroke:var(--bm-gold);stroke-width:1;opacity:.7;
+  stroke-linecap:round;vector-effect:non-scaling-stroke}
+
+.bm-fill-pearl{fill:var(--bm-pearl)}
+.bm-hi{fill:var(--bm-porcelain);opacity:.85}
+.bm-hi-line{fill:none;stroke:var(--bm-porcelain);stroke-width:1.4;opacity:.8;stroke-linecap:round}
+.bm-fill-amber{fill:var(--bm-champagne);opacity:.42}
+.bm-fill-amber-2{fill:var(--bm-champagne);opacity:.28}
+.bm-fill-amber-3{fill:var(--bm-champagne);opacity:.18}
+.bm-fill-dark{fill:var(--bm-surface-2)}
+.bm-fill-jelly{fill:#0E1F1B}                 /* grass jelly, near-black jade */
+.bm-fill-bean{fill:var(--bm-garnet)}
+.bm-fill-taro{fill:var(--bm-aubergine)}      /* taro without neon purple */
+.bm-fill-cream{fill:var(--bm-pearl)}
+.bm-fill-gold{fill:var(--bm-gold);opacity:.5}
+.bm-fill-custard{fill:var(--bm-champagne);opacity:.55}
+.bm-fill-cinnabar{fill:var(--bm-cinnabar)}   /* the single accent per mark */
+.bm-fill-jade{fill:var(--bm-jade)}
+.bm-froth{fill:var(--bm-jade-lt);opacity:.85}
+.bm-swirl-jade{fill:none;stroke:var(--bm-jade-lt);stroke-width:1.3;
+  stroke-linecap:round;opacity:.9;vector-effect:non-scaling-stroke}
+.bm-stream{fill:none;stroke:var(--bm-champagne);stroke-width:1.4;
+  stroke-linecap:round;opacity:.85;vector-effect:non-scaling-stroke}
+.bm-drop{fill:var(--bm-gold)}
+.bm-flute{fill:none;stroke:var(--bm-gold);stroke-width:.9;opacity:.6;stroke-linecap:round}
+.bm-bubble{fill:var(--bm-porcelain);opacity:.75}
+
+/* transform-origins so wobble/rotate pivot at the mark's centre, not 0,0 */
+.bm-anim,.bm-pearl-g,.bm-jelly-g,.bm-taro-g,.bm-matcha-g{transform-box:fill-box;transform-origin:center}
+.bm-bubble,.bm-drop{transform-box:fill-box;transform-origin:center}
+
+/* ============================================================== DIVIDER = */
+.boba-divider{
+  display:flex;align-items:center;gap:clamp(.8rem,3vw,1.6rem);
+  width:100%;margin:clamp(2rem,5vw,3.4rem) 0;color:var(--bm-champagne);
+}
+.boba-divider .bm-div-line{
+  flex:1 1 auto;height:1px;
+  background:linear-gradient(90deg,transparent,var(--bm-gold) 40%,var(--bm-champagne));
+  opacity:.55;
+}
+.boba-divider .bm-div-line:last-child{
+  background:linear-gradient(90deg,var(--bm-champagne),var(--bm-gold) 60%,transparent);
+}
+.boba-divider .bm-div-beads{flex:none;line-height:0}
+.boba-divider .bm-div-svg{display:block;height:22px;width:auto}
+
+/* ============================================================ SURPRISE =  */
+.boba-surprise{position:relative}
+/* burst layer injected by js on click; pearls float up + fade, then removed */
+.bm-burst{position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2}
+.bm-burst i{
+  position:absolute;width:9px;height:9px;border-radius:50%;
+  background:var(--bm-pearl);
+  box-shadow:inset -2px -2px 0 rgba(11,12,14,.18);
+  opacity:0;
+}
+
+/* =========================================================== MOTION ==== */
+/* Static by default; all movement is opt-in for motion-tolerant users. */
+@media (prefers-reduced-motion: no-preference){
+
+  /* hover / focus float — the family's calm resting gesture */
+  .boba-motif .bm-anim{
+    transition:transform .2s var(--bm-ease);
+    will-change:transform;
+  }
+  .boba-motif:hover .bm-anim,
+  .boba-motif:focus-visible .bm-anim{transform:translateY(-2px) scale(1.05)}
+
+  /* a little per-family character on hover */
+  .boba-motif[data-motif="jelly"]:hover .bm-anim{transform:translateY(-1px) skewX(-5deg) scale(1.04)}
+  .boba-motif[data-motif="taro"]:hover .bm-anim{transform:rotate(14deg) scale(1.05)}
+  .boba-motif[data-motif="drizzle"]:hover .bm-drop{transform:translateY(2.5px)}
+  .boba-motif[data-motif="foam"]:hover .bm-bubble{transform:translateY(-2.5px);opacity:1}
+  .boba-motif[data-motif="matcha"]:hover .bm-swirl-jade{transform:rotate(24deg)}
+  .boba-motif[data-motif="matcha"]:hover .bm-anim{transform:translateY(-1px) scale(1.04)}
+
+  /* ---- click SURPRISE: short one-shot keyframes, character per motif ---- */
+  .boba-motif.is-open[data-motif="pearl"] .bm-pearl-g{animation:bm-drop .6s var(--bm-ease)}
+  .boba-motif.is-open[data-motif="jelly"] .bm-jelly-g{animation:bm-wobble .55s var(--bm-ease)}
+  .boba-motif.is-open[data-motif="grass-jelly"] .bm-anim{animation:bm-jiggle .5s var(--bm-ease)}
+  .boba-motif.is-open[data-motif="red-bean"] .bm-anim{animation:bm-jiggle .5s var(--bm-ease)}
+  .boba-motif.is-open[data-motif="taro"] .bm-taro-g{animation:bm-spin .7s var(--bm-ease)}
+  .boba-motif.is-open[data-motif="egg-tart"] .bm-anim{animation:bm-bob .55s var(--bm-ease)}
+  .boba-motif.is-open[data-motif="foam"] .bm-bubble{animation:bm-rise .7s var(--bm-ease)}
+  .boba-motif.is-open[data-motif="foam"] .bm-anim{animation:bm-bob .5s var(--bm-ease)}
+  .boba-motif.is-open[data-motif="drizzle"] .bm-drop{animation:bm-pour .7s var(--bm-ease)}
+  .boba-motif.is-open[data-motif="matcha"] .bm-swirl-jade{animation:bm-spin .7s var(--bm-ease)}
+
+  /* divider beads bob softly on hover */
+  .boba-divider:hover .bm-bead{transition:transform .2s var(--bm-ease)}
+  .boba-divider:hover .bm-bead-1{transform:translateY(-2px)}
+  .boba-divider:hover .bm-bead-2{transform:translateY(-3px)}
+  .boba-divider:hover .bm-bead-3{transform:translateY(-2px)}
+
+  /* surprise burst pearls */
+  .bm-burst i{animation:bm-float-up .72s var(--bm-ease) forwards}
+}
+
+@keyframes bm-drop{
+  0%{transform:translateY(-9px)}
+  55%{transform:translateY(3px)}
+  75%{transform:translateY(-1.5px)}
+  100%{transform:translateY(0)}
+}
+@keyframes bm-wobble{
+  0%{transform:skewX(0) scale(1)}
+  25%{transform:skewX(-9deg) scale(1.04)}
+  55%{transform:skewX(6deg) scale(.98)}
+  80%{transform:skewX(-3deg)}
+  100%{transform:skewX(0) scale(1)}
+}
+@keyframes bm-jiggle{
+  0%,100%{transform:translateX(0) rotate(0)}
+  20%{transform:translateX(-1.5px) rotate(-4deg)}
+  50%{transform:translateX(1.5px) rotate(4deg)}
+  75%{transform:translateX(-1px) rotate(-2deg)}
+}
+@keyframes bm-spin{
+  0%{transform:rotate(0)}
+  100%{transform:rotate(360deg)}
+}
+@keyframes bm-bob{
+  0%,100%{transform:translateY(0)}
+  40%{transform:translateY(-3px)}
+  70%{transform:translateY(1px)}
+}
+@keyframes bm-rise{
+  0%{transform:translateY(0);opacity:.75}
+  60%{opacity:1}
+  100%{transform:translateY(-9px);opacity:0}
+}
+@keyframes bm-pour{
+  0%{transform:translateY(0);opacity:1}
+  70%{opacity:.7}
+  100%{transform:translateY(9px);opacity:0}
+}
+@keyframes bm-float-up{
+  0%{transform:translate(0,0) scale(.4);opacity:0}
+  25%{opacity:1}
+  100%{transform:translate(var(--bx,0),var(--by,-26px)) scale(1);opacity:0}
+}

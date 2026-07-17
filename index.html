@@ -15,6 +15,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/luxury-homepage.css">
+<link rel="stylesheet" href="/css/motif.css">
+<link rel="stylesheet" href="/css/sound.css">
 <style id="w2">
 /* W2 homepage rebuild — layered on luxury-homepage.css (which stays intact).
    New styles only; nothing here overrides the base design system's tokens. */
@@ -83,6 +85,42 @@
 
 /* Tighter vertical rhythm on the compressed sections, to hold under ~6 screens */
 .sx--tight{padding-top:clamp(2.8rem,6vw,4.4rem);padding-bottom:clamp(2.8rem,6vw,4.4rem)}
+
+/* ── LACQUER ELEVATION (Task D) — restrained gold/cinnabar on the obsidian ──
+   ~90% obsidian, a champagne-gold hairline, one moon-gate ring, one cinnabar
+   moment. The neon budget stays with the nav wordmark; nothing here glows. */
+
+/* A champagne-gold hairline rule under the hero eyebrow — a lacquer underline,
+   not a divider. Gradient fades to nothing so it reads as a hand-drawn mark. */
+.hero-rule{width:76px;height:1px;margin:-.4rem 0 1.1rem;
+  background:linear-gradient(90deg,var(--champagne),rgba(197,164,109,.15) 70%,transparent)}
+
+/* Moon-gate — a single circular gold hairline framing the Tonight's Pour media.
+   Sits behind the plate (which is opaque) so only a crescent arc reads, the way
+   a moon gate frames a view. Transform/opacity only; no repaint on scroll. */
+.arrival-media .plate{position:relative;z-index:1}
+.arrival-media::before{content:"";position:absolute;z-index:0;pointer-events:none;
+  width:min(72%,300px);aspect-ratio:1;top:-22px;right:-16px;border-radius:50%;
+  border:1px solid rgba(197,164,109,.42)}
+.arrival-media::after{content:"";position:absolute;z-index:0;pointer-events:none;
+  width:min(62%,258px);aspect-ratio:1;top:-8px;right:-2px;border-radius:50%;
+  border:1px solid rgba(176,141,87,.22)}
+
+/* The one cinnabar accent moment on the page — the featured house seal.
+   A single lacquer-red stamp on the otherwise gold/obsidian palette. */
+#featured .feat-chip{color:#C8372D;border-color:rgba(200,55,45,.5);
+  display:inline-flex;align-items:center;gap:.55em}
+#featured .feat-chip::before{content:"";width:.5em;height:.5em;border-radius:50%;
+  background:#C8372D;flex:none}
+
+/* Motif accents on the City After Dark region tiles — a small gold ingredient
+   mark beside each eyebrow, wired for hover/click by js/motif.js. */
+.cad-eye-row{display:flex;align-items:center;gap:.55rem}
+.cad-cell .boba-motif{--bm-size:26px;flex:none}
+
+/* Motif dividers already carry their own vertical rhythm; trim the top margin
+   when one opens a section so it hugs the section head. */
+.sx > .wrap > .boba-divider:first-child{margin-top:0;margin-bottom:clamp(1.4rem,4vw,2.4rem)}
 </style>
 <script>document.documentElement.className+=" js";</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Boba Night Society","url":"https://www.bobanight.com/","description":"The night guide to Southern California boba: 334 tea shops across 46 cities and five regions, menus checked against official sources.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.bobanight.com/directory/?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
@@ -155,6 +193,7 @@
       <div class="arrival-grid">
         <div class="arrival-copy reveal">
           <p class="eyebrow">Southern California · Est. 2026</p>
+          <div class="hero-rule" aria-hidden="true"></div>
           <h1>The <span class="serif-hi">night</span> guide to Southern California boba.</h1>
           <p class="sub">334 tea shops across 46 cities and five regions. Every drink checked against official sources — no invented hours, ratings, or prices.</p>
           <p class="hero-proof"><b>334</b> shops<span class="dot" aria-hidden="true"></span>menus checked<span class="dot" aria-hidden="true"></span>none paid to be here<span class="dot" aria-hidden="true"></span><a href="/how-we-rank/">How we rank</a></p>
@@ -164,7 +203,7 @@
             <button class="btn btn-primary" type="submit">Search</button>
           </form>
           <div class="arrival-cta">
-            <a class="btn btn-line" href="/directory/">Enter the directory &rarr;</a>
+            <a class="btn btn-line" href="/directory/">Enter the directory</a>
             <a class="link-quiet" href="#concierge">Ask the concierge</a>
           </div>
         </div>
@@ -235,28 +274,29 @@
   <!-- S3. CITY AFTER DARK — compressed pick strip, no gradient plates -->
   <section class="sx sx--tight" aria-label="City After Dark">
     <div class="wrap">
+      <div class="boba-divider reveal"></div>
       <div class="section-head reveal"><p class="eyebrow">City After Dark</p><h2>Where the good rooms are.</h2><p class="lede">Five regions taken seriously after nine, and one pour to look for in each of three.</p></div>
       <div class="cad reveal">
         <div class="cad-cell">
-          <span class="cad-eye">San Gabriel Valley</span>
+          <span class="cad-eye-row"><span class="boba-motif" data-motif="pearl" aria-label="Tapioca pearl"></span><span class="cad-eye">San Gabriel Valley</span></span>
           <h3 class="cad-h">The 626</h3>
           <p class="cad-p">The densest tea corridor in the country. Valley boulevards where oolong is taken seriously.</p>
           <p class="cad-pick">A pour to look for<b>Tiger Milk Tea</b>at Tastea · <a href="/boba/ca/rowland-heights/tastea-rowland-heights/">Rowland Heights</a></p>
-          <a class="link-quiet" href="/area/sgv/">The 626 &rarr;</a>
+          <a class="link-quiet" href="/area/sgv/">The 626</a>
         </div>
         <div class="cad-cell">
-          <span class="cad-eye">Irvine to Little Saigon</span>
+          <span class="cad-eye-row"><span class="boba-motif" data-motif="foam" aria-label="Milk foam"></span><span class="cad-eye">Irvine to Little Saigon</span></span>
           <h3 class="cad-h">Orange County</h3>
           <p class="cad-p">Diamond Jamboree lots and Bolsa strip malls, where the modern chains sharpened the craft.</p>
           <p class="cad-pick">A pour to look for<b>Oolong Milk Tea</b>at 7 Leaves Cafe · <a href="/boba/ca/irvine/7-leaves-cafe-irvine/">Irvine</a></p>
-          <a class="link-quiet" href="/area/orange-county/">Orange County &rarr;</a>
+          <a class="link-quiet" href="/area/orange-county/">Orange County</a>
         </div>
         <div class="cad-cell">
-          <span class="cad-eye">Convoy after dark</span>
+          <span class="cad-eye-row"><span class="boba-motif" data-motif="drizzle" aria-label="Brown sugar drizzle"></span><span class="cad-eye">Convoy after dark</span></span>
           <h3 class="cad-h">San Diego</h3>
           <p class="cad-p">Convoy Street stays open late by design. Brown sugar, snow, and a drive worth the last pour.</p>
           <p class="cad-pick">A pour to look for<b>Wow Milk (Brown Sugar)</b>at Kung Fu Tea · <a href="/boba/ca/san-diego/kung-fu-tea-san-diego/">San Diego</a></p>
-          <a class="link-quiet" href="/area/san-diego/">San Diego &rarr;</a>
+          <a class="link-quiet" href="/area/san-diego/">San Diego</a>
         </div>
       </div>
     </div>
@@ -347,7 +387,7 @@
         <p class="eyebrow" style="margin:0">This season’s featured house</p>
         <h2>Taro Yuan &middot; City of Industry</h2>
         <p>Taiwan’s taro specialists, pouring on Gale Avenue. Fresh taro balls, grass jelly signature ice, and the purple taro boba smoothie — a specialty dessert house, not a chain menu. Items checked against the official menu at <a href="https://www.taroyuan.com/en/" rel="noopener" target="_blank">taroyuan.com</a>.</p>
-        <a class="btn btn-primary" href="/boba/ca/city-of-industry/taro-yuan-city-of-industry/">Visit the profile &rarr;</a>
+        <a class="btn btn-primary" href="/boba/ca/city-of-industry/taro-yuan-city-of-industry/">Visit the profile</a>
       </div>
     </div>
   </section>
@@ -355,6 +395,7 @@
   <!-- S7. GUIDES STRIP -->
   <section class="sx" aria-label="The House Guide">
     <div class="wrap">
+      <div class="boba-divider reveal"></div>
       <div class="section-head reveal"><p class="eyebrow">The House Guide</p><h2>How to order, without the guesswork.</h2><p class="lede">Short, practical reads on sweetness, dairy, caffeine and the pours worth seeking.</p></div>
       <div class="gstrip reveal">
         <a class="gcell gcell--pantry" href="/pantry/"><span class="gt">The Pantry 🌿</span><span class="gd">Ingredients, toppings, sweetness</span></a>
@@ -400,5 +441,7 @@
 </footer>
 <script src="/js/homepage/society-data.js" defer></script><script src="/js/homepage/share.js" defer></script><script src="/js/homepage/black-book.js" defer></script><script src="/js/homepage/concierge.js" defer></script><script src="/js/homepage/navigation.js" defer></script><script src="/js/homepage/tonight-pour.js" defer></script>
 <script src="/js/nav-midnight.js" defer></script>
+<script src="/js/motif.js" defer></script>
+<script src="/js/sound.js" defer></script>
 </body>
 </html>

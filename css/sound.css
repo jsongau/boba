@@ -1,0 +1,104 @@
+/* ============================================================================
+   BOBA NIGHT — SOUND TOGGLE (css/sound.css)
+   Styles the .bn-sound-toggle injected by js/sound.js to the obsidian /
+   champagne theme. Matches the .bn-saved hairline square in the nav actions
+   area; a fixed top-right fallback is used when there is no nav bar. The
+   speaker icon shows sound waves when on and a champagne slash when off.
+   Motion is transform/opacity only, gated behind reduced-motion. 2px radii,
+   hairline borders, no shadows.
+   ========================================================================== */
+
+.bn-sound-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: #C8C6C1;                          /* --bn-silver */
+  background: transparent;
+  border: 1px solid rgba(244, 239, 231, .12);   /* --bn-line */
+  border-radius: 2px;
+  cursor: pointer;
+  flex: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: color .16s cubic-bezier(.16, 1, .3, 1),
+              border-color .16s cubic-bezier(.16, 1, .3, 1);
+}
+
+/* On small screens the nav collapses; keep the control visible but compact
+   only when it lives inside the actions row (float fallback stays fixed). */
+@media (max-width: 1079px) {
+  .bn-actions .bn-sound-toggle { display: none; }
+}
+
+.bn-sound-toggle:hover {
+  color: #F4EFE7;                          /* --bn-pearl */
+  border-color: rgba(244, 239, 231, .20);  /* --bn-line-strong */
+}
+
+.bn-sound-toggle:focus-visible {
+  outline: 2px solid #ff3f6f;              /* --bn-neon */
+  outline-offset: 2px;
+}
+
+.bn-sound-svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+/* Speaker cone is always drawn. */
+.bn-sound-spk { fill: none; }
+
+/* --- OFF state (default): waves hidden, a champagne slash across the cone -- */
+.bn-sound-wave {
+  opacity: 0;
+  transition: opacity .16s cubic-bezier(.16, 1, .3, 1);
+}
+.bn-sound-slash {
+  opacity: 1;
+  color: #C5A46D;                          /* --bn-champagne */
+  stroke: #C5A46D;
+  transition: opacity .16s cubic-bezier(.16, 1, .3, 1);
+}
+
+/* --- ON state: waves radiate, slash removed, control lit champagne -------- */
+.bn-sound-toggle[aria-pressed="true"] {
+  color: #C5A46D;                          /* champagne = quietly "live" */
+  border-color: rgba(197, 164, 109, .40);
+}
+.bn-sound-toggle[aria-pressed="true"] .bn-sound-wave { opacity: 1; }
+.bn-sound-toggle[aria-pressed="true"] .bn-sound-slash { opacity: 0; }
+
+/* --- fixed fallback when there is no .bn-actions nav row ------------------ */
+.bn-sound-toggle--float {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 350;
+  background: rgba(23, 25, 29, .82);       /* --bn-surface, translucent */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* --- gentle press feedback, motion-gated --------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .bn-sound-toggle {
+    transition: color .16s cubic-bezier(.16, 1, .3, 1),
+                border-color .16s cubic-bezier(.16, 1, .3, 1),
+                transform .12s cubic-bezier(.16, 1, .3, 1);
+  }
+  .bn-sound-toggle:active { transform: translateY(1px); }
+  /* a single soft pulse the moment sound is switched on */
+  .bn-sound-toggle[aria-pressed="true"] .bn-sound-wave {
+    animation: bn-sound-ping .34s cubic-bezier(.16, 1, .3, 1) 1;
+  }
+}
+
+@keyframes bn-sound-ping {
+  0%   { opacity: 0; transform: scale(.6); }
+  60%  { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
+}

@@ -669,6 +669,8 @@ a:hover{color:var(--syrup)}
 /* section furniture */
 .dsec{margin:0 0 2.6rem}
 .dsec-head{display:flex;align-items:baseline;gap:.85rem;margin:0 0 1.15rem}
+/* Task D — a subtle gold ingredient mark opening each section kicker. */
+.dsec-head .boba-motif{--bm-size:22px;flex:none;align-self:center;margin-right:-.35rem}
 .dsec-kick{font-size:.7rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--champagne)}
 .dsec-n{font-size:.7rem;color:var(--ink-60);font-variant-numeric:tabular-nums}
 .dsec-rule{flex:1;height:1px;background:linear-gradient(90deg,rgba(197,164,109,.4),rgba(197,164,109,.06))}
@@ -719,6 +721,8 @@ a:hover{color:var(--syrup)}
   .scard,.scard-name,.apill,.dbtn{transition:none}
 }
 </style>
+  <link rel="stylesheet" href="/css/motif.css">
+  <link rel="stylesheet" href="/css/sound.css">
   <link rel="stylesheet" href="/css/nav-midnight.css">
 </head>
 <body>
@@ -786,7 +790,7 @@ a:hover{color:var(--syrup)}
 
 <nav class="bn-bottombar" aria-label="Quick actions"><a class="bn-bb bn-bb--cta" href="/#tonight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span>Tonight</span></a><a class="bn-bb " href="/directory/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 9l1.2-4.2A2 2 0 0 1 6.1 3.4h11.8a2 2 0 0 1 1.9 1.4L21 9M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9M4 9h16"/></svg><span>Shops</span></a><button class="bn-bb bn-bb--search" data-bn-open-search type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search</span></button><a class="bn-bb " href="/#blackbook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 20s-7-4.4-9.2-8.4A5 5 0 0 1 12 6a5 5 0 0 1 9.2 5.6C19 15.6 12 20 12 20z"/></svg><span>Saved</span></a></nav>
 <main id="main">
-<p style="max-width:1120px;margin:1.1rem auto 0;padding:0 clamp(1rem,4vw,2rem);font-size:.86rem"><a href="/" style="color:var(--syrup);text-decoration:none">← Boba Night home</a></p>
+<p style="max-width:1120px;margin:1.1rem auto 0;padding:0 clamp(1rem,4vw,2rem);font-size:.86rem"><a href="/" style="color:var(--syrup);text-decoration:none">Boba Night home</a></p>
   <!-- FINDER (compact, not a tall hero) -->
   <section class="finder" id="find">
     <div class="finder-inner">
@@ -809,7 +813,7 @@ a:hover{color:var(--syrup)}
   <section class="decide">
     <div class="decide-inner">
       <span class="decide-lbl">Can't decide?</span>
-      <button class="dbtn dbtn-hot" id="surprise" type="button">Surprise me</button>
+      <button class="dbtn dbtn-hot boba-surprise" id="surprise" type="button">Surprise me</button>
       <a class="dbtn" href="/tools/roulette/">Spin roulette</a>
       <a class="dbtn" href="/tools/drink-matcher/">Match my taste</a>
       <a class="dbtn" href="/tools/build-your-sip/">Build a sip</a>
@@ -834,6 +838,7 @@ a:hover{color:var(--syrup)}
 
   <!-- DIRECTORY GRID -->
   <section class="dir" id="directory">
+    <div class="boba-divider"></div>
     <div class="dir-head">
       <h2>Browse all 334 shops</h2>
       <div class="dir-filters">
@@ -965,9 +970,10 @@ a:hover{color:var(--syrup)}
   }
 
   function gridOf(list){ return '<div class="sgrid">' + list.map(cardHTML).join("") + '</div>'; }
-  function sectionHTML(kicker, list){
+  function sectionHTML(kicker, list, motif){
     if(!list.length) return '';
-    return '<section class="dsec"><header class="dsec-head"><span class="dsec-kick">'+kicker+'</span>'
+    var mark = motif ? '<span class="boba-motif" data-motif="'+motif+'" aria-label="'+kicker+' mark"></span>' : '';
+    return '<section class="dsec"><header class="dsec-head">'+mark+'<span class="dsec-kick">'+kicker+'</span>'
       + '<span class="dsec-n">'+list.length+'</span><span class="dsec-rule" aria-hidden="true"></span></header>'
       + gridOf(list) + '</section>';
   }
@@ -997,10 +1003,11 @@ a:hover{color:var(--syrup)}
     }
     if(state.type==="all" && !state.savedOnly){
       var bout = list.filter(function(s){return !s.ch;}), ch = list.filter(function(s){return s.ch;});
-      grid.innerHTML = sectionHTML("The boutique houses", bout) + sectionHTML("The chains", ch);
+      grid.innerHTML = sectionHTML("The boutique houses", bout, "taro") + sectionHTML("The chains", ch, "foam");
     } else {
       grid.innerHTML = gridOf(list);
     }
+    if(window.BobaMotif && window.BobaMotif.refresh) window.BobaMotif.refresh();
     var openN = list.filter(function(s){return !s.x && !s.tc;}).length;
     $("count").textContent = "Showing " + list.length + " of " + SHOPS.length + " \u2014 " + openN + " pouring";
   }
@@ -1078,5 +1085,7 @@ a:hover{color:var(--syrup)}
 })();
 </script>
 <script src="/js/nav-midnight.js" defer></script>
+<script src="/js/motif.js" defer></script>
+<script src="/js/sound.js" defer></script>
 </body>
 </html>
