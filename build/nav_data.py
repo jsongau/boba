@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""build/nav_data.py — SINGLE SOURCE OF TRUTH for the Boba Night unified nav.
+"""build/nav_data.py, SINGLE SOURCE OF TRUTH for the Boba Night unified nav.
 
 Everything the navigation renders is defined or derived here:
 
@@ -7,7 +7,7 @@ Everything the navigation renders is defined or derived here:
     RATINGS & MEETUPS), the persistent search field, and the pink "Tonight" CTA.
   * Region + city lists and their counts, DERIVED at build time from the
     ``var SHOPS = [...]`` array baked into ``directory/index.html`` (never
-    hand-copied — that array is the store truth for the static site).
+    hand-copied, that array is the store truth for the static site).
   * Each mega panel's columns, links and its one editorial feature cell.
 
 Importable:
@@ -48,7 +48,7 @@ REGION_ORDER = ["The 626", "Orange County", "Greater LA", "San Diego", "Inland E
 # Per-region metadata: the /area/ view-all slug, the /new/ slug, and a short
 # honest blurb (no banned words) used on the city pane header.
 REGION_META = {
-    "The 626":        {"area": "sgv",           "new": "sgv",           "blurb": "The San Gabriel Valley — the densest tea corridor in the country."},
+    "The 626":        {"area": "sgv",           "new": "sgv",           "blurb": "The San Gabriel Valley, the densest tea corridor in the country."},
     "Orange County":  {"area": "orange-county", "new": "orange-county", "blurb": "Irvine to Westminster, down through Little Saigon."},
     "Greater LA":     {"area": "greater-la",    "new": "greater-la",    "blurb": "The city proper, the beach cities, and the east-side edges."},
     "San Diego":      {"area": "san-diego",     "new": "san-diego",     "blurb": "Convoy and beyond, all the way south."},
@@ -108,13 +108,13 @@ def compute_regions():
 
 REGIONS, TOTAL_SHOPS = compute_regions()
 
-# The one featured house — the SHOPS panel's editorial cell.
+# The one featured house, the SHOPS panel's editorial cell.
 FEATURED_SHOP = {
     "name": "Taro Yuan",
     "city": "City of Industry",
     "region": "The 626",
     "url": "/boba/ca/city-of-industry/taro-yuan-city-of-industry/",
-    "note": "The featured house — taro pulled fresh, not powdered.",
+    "note": "The featured house. Taro pulled fresh, not powdered.",
 }
 
 
@@ -133,7 +133,7 @@ LANDMARKS = [
     {"label": "Disneyland",        "url": "/near/disneyland/"},
 ]
 
-# BEST FOR — two intent columns + view-all.
+# BEST FOR, two intent columns + view-all.
 BEST_OCCASION = [
     {"label": "Date night",  "url": "/best/date-night/"},
     {"label": "First date",  "url": "/best/first-date/"},
@@ -151,7 +151,7 @@ BEST_CRAVING = [
     {"label": "Cheap",       "url": "/best/cheap/"},
 ]
 
-# PICK FOR ME — five tools + the concierge.
+# PICK FOR ME, five tools + the concierge.
 TOOLS = [
     {"label": "The Order Oracle",   "url": "/tools/order-oracle/",  "hint": "what your order says"},
     {"label": "Drink Matcher",      "url": "/tools/drink-matcher/", "hint": "answer three questions"},
@@ -160,7 +160,7 @@ TOOLS = [
     {"label": "Roulette",           "url": "/tools/roulette/",      "hint": "spin for a shop"},
 ]
 
-# GUIDES — six explainers + the Pantry.
+# GUIDES, six explainers + the Pantry.
 GUIDES = [
     {"label": "Brown sugar vs tiger sugar", "url": "/guide/brown-sugar-vs-tiger-sugar/"},
     {"label": "Crystal boba vs tapioca",    "url": "/guide/crystal-boba-vs-tapioca/"},
@@ -170,7 +170,7 @@ GUIDES = [
     {"label": "What cheese foam is",        "url": "/guide/what-is-cheese-foam/"},
 ]
 
-# RATINGS & MEETUPS — critic column + meetups column.
+# RATINGS & MEETUPS, critic column + meetups column.
 CRITIC_LINKS = [
     {"label": "The Pearl Ratings",  "url": "/critic/"},
     {"label": "How we rank",        "url": "/how-we-rank/"},
@@ -227,7 +227,7 @@ NAV = [
         "feature": {
             "kicker": "Editor's pick",
             "title": "Where to take a first date",
-            "sub": "Room, noise, and a menu you can share — ranked on fit.",
+            "sub": "Room, noise, and a menu you can share, ranked on fit.",
             "url": "/best/first-date/",
             "plate": "plate--jade",
         },
@@ -278,7 +278,7 @@ NAV = [
         "columns": [
             {"heading": "Explainers", "links": GUIDES},
             {"heading": "Reference", "links": [
-                {"label": "The Pantry — ingredients", "url": "/pantry/", "hint": "57 toppings & teas"},
+                {"label": "The Pantry, ingredients", "url": "/pantry/", "hint": "57 toppings & teas"},
             ]},
         ],
         "feature": {
@@ -596,7 +596,7 @@ def render_header():
     burger = ('<button class="bn-burger" aria-label="Open menu" aria-expanded="false" '
               'aria-controls="bn-drawer"><span></span><span></span><span></span></button>')
 
-    return f"""<!-- Boba Night — canonical navigation partial. Generated from build/nav_data.py.
+    return f"""<!-- Boba Night, canonical navigation partial. Generated from build/nav_data.py.
      Edit the data there, re-render, never hand-patch this file. -->
 <a class="bn-skip" href="#main">Skip to content</a>
 <header class="bn-header" data-bn-header>

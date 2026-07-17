@@ -7,14 +7,14 @@ X-WR-CALNAME:Boba Night — Run 4 Boba 5K
 X-WR-TIMEZONE:America/Los_Angeles
 BEGIN:VEVENT
 UID:run-4-boba-5k-20260824@bobanight.com
-DTSTAMP:20260717T185207Z
+DTSTAMP:20260717T211728Z
 DTSTART;VALUE=DATE:20260824
 DTEND;VALUE=DATE:20260825
 SUMMARY:Run 4 Boba 5K
-LOCATION:Virtual — run anywhere
-DESCRIPTION:The one entry where running is actually involved — finish a 5
- K anywhere\, then reward yourself with boba from your favorite shop. — V
- irtual 5K — date listed on the race page at last check
+LOCATION:Virtual\, run anywhere
+DESCRIPTION:The one entry where running is actually involved. Finish a 5K a
+ nywhere\, then reward yourself with boba from your favorite shop. — Virt
+ ual 5K — date listed on the race page at last check
 URL:https://www.raceentry.com/run-4-boba/race-information
 END:VEVENT
 END:VCALENDAR

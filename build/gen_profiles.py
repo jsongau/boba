@@ -79,6 +79,26 @@ def type_chip(store_type):
     return {"chain":"Chain","specialty":"Specialty house"}.get(
         (store_type or "").lower(), "Tea shop")
 
+# ---- motif rotation (deterministic per shop, so each page feels bespoke) -----
+MOTIF_NAMES = ["pearl","jelly","grass-jelly","red-bean","taro",
+               "egg-tart","foam","drizzle","matcha"]
+MOTIF_LABEL = {
+    "pearl":"Tapioca pearl","jelly":"Lychee jelly","grass-jelly":"Grass jelly",
+    "red-bean":"Red bean","taro":"Taro swirl","egg-tart":"Egg tart",
+    "foam":"Cheese foam","drizzle":"Brown sugar drizzle","matcha":"Matcha",
+}
+def motif_for(seed):
+    h = 0
+    for ch in (seed or "boba"):
+        h = (h * 31 + ord(ch)) & 0xFFFFFFFF
+    return MOTIF_NAMES[h % len(MOTIF_NAMES)]
+
+def monogram(name):
+    for ch in (name or ""):
+        if ch.isalnum():
+            return ch.upper()
+    return "B"
+
 def load_shops():
     with open(DATA, encoding="utf-8") as f:
         shops = json.load(f)
@@ -186,16 +206,39 @@ p{margin:0 0 1rem}p:last-child{margin-bottom:0}
 /* hero */
 .hero{padding:1.4rem 0 2.6rem;border-bottom:1px solid var(--line)}
 .hero .kicker{display:block;margin-bottom:1rem}
-.hero h1{font-size:clamp(2.4rem,6.4vw,4rem);font-weight:380;letter-spacing:-.02em}
+.hero h1{font-size:clamp(2.7rem,7vw,4.5rem);font-weight:380;letter-spacing:-.022em}
 .hero .dek{font-size:1.06rem;color:var(--pearl);opacity:.78;margin:.9rem 0 0;max-width:52ch}
+
+/* hero medallion — a moon-gate monogram, the page's one neon spend */
+.hero-top{display:flex;gap:clamp(1.2rem,4vw,2.3rem);align-items:center}
+@media(max-width:560px){.hero-top{gap:1.25rem}}
+.hero-head{min-width:0}
+.medallion{position:relative;flex:none;width:clamp(94px,17vw,126px);height:clamp(94px,17vw,126px);
+  border-radius:50%;display:grid;place-items:center;cursor:pointer;
+  background:radial-gradient(circle at 50% 36%,var(--smoked-2),var(--obsidian) 74%);
+  border:1px solid var(--champagne);
+  box-shadow:inset 0 0 0 5px var(--obsidian),inset 0 0 0 6px rgba(197,164,109,.30)}
+.medallion::after{content:"";position:absolute;inset:-7px;border-radius:50%;
+  border:1px solid var(--line);pointer-events:none}
+.med-mono{font-family:var(--serif);font-weight:400;line-height:1;letter-spacing:-.02em;
+  font-size:clamp(2.3rem,6.5vw,3.2rem);color:var(--porcelain)}
+.med-led{position:absolute;top:11%;right:11%;width:11px;height:11px;border-radius:50%;
+  background:var(--guava);z-index:3;
+  box-shadow:0 0 0 3px rgba(255,63,111,.16),0 0 12px 2px rgba(255,63,111,.75)}
+.med-motif{position:absolute;bottom:-11px;left:50%;transform:translateX(-50%);z-index:3;
+  --bm-size:26px;background:var(--obsidian);border:1px solid rgba(197,164,109,.42);
+  border-radius:50%;padding:6px;box-sizing:content-box}
+
+/* champagne flourish under the title block */
+.hero .boba-divider{margin:1.5rem 0 1.25rem}
 
 /* verification ledger — dated chips instead of stars */
 .ledger{display:flex;flex-wrap:wrap;gap:.55rem;margin:1.5rem 0 0;list-style:none;padding:0}
 .chip{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--line);
   border-radius:2px;padding:.42rem .8rem;font-size:.78rem;letter-spacing:.01em;color:var(--pearl);
   background:var(--smoked)}
-.chip .led{width:7px;height:7px;border-radius:50%;background:var(--guava);flex:none;
-  box-shadow:0 0 0 3px rgba(255,63,111,.16),0 0 10px 1px rgba(255,63,111,.7)}
+/* champagne (not neon) dot: the hero keeps a single neon spend — the medallion */
+.chip .led{width:7px;height:7px;border-radius:50%;background:var(--champagne);flex:none}
 .chip.tag{color:var(--muted);text-transform:uppercase;font-size:.66rem;letter-spacing:.16em}
 
 /* action row */
@@ -207,11 +250,18 @@ p{margin:0 0 1rem}p:last-child{margin-bottom:0}
 .btn-primary{background:var(--pearl);color:var(--obsidian);border-color:var(--pearl)}
 .btn-primary:hover{background:#fff;border-color:#fff}
 
-/* tonight strip */
-.tonight{margin:1.9rem 0 0;border:1px solid var(--line);border-radius:2px;background:var(--smoked);
-  padding:.95rem 1.15rem;display:flex;align-items:center;gap:.7rem;font-size:.94rem}
-.tonight .led{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+/* tonight strip — richer lacquer frame, the LED breathes only when open */
+.tonight{position:relative;margin:1.9rem 0 0;border:1px solid var(--line);border-radius:2px;
+  background:var(--smoked);padding:.95rem 1.15rem .95rem 1.25rem;display:flex;align-items:center;
+  gap:.7rem;font-size:.94rem;overflow:hidden}
+.tonight::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--champagne);opacity:.5}
+.tonight.is-open{border-color:rgba(197,164,109,.34)}
+.tonight.is-open::before{background:var(--guava);opacity:.85}
+.tonight .led{position:relative;width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
 .tonight.is-open .led{background:var(--guava);box-shadow:0 0 0 3px rgba(255,63,111,.16),0 0 10px 1px rgba(255,63,111,.7)}
+.tonight.is-open .led::after{content:"";position:absolute;inset:-5px;border-radius:50%;
+  border:1px solid var(--guava);opacity:0}
 .tonight .lbl{color:var(--pearl)}.tonight .sub{color:var(--muted)}
 .tonight a{color:var(--champagne);border-bottom:1px solid var(--line)}
 
@@ -240,12 +290,36 @@ details.acc>summary .mk{color:var(--muted);font-size:.8rem}
 details.acc[open]>summary .mk{color:var(--champagne)}
 details.acc .hours{border:0;border-top:1px solid var(--line-2);border-radius:0}
 
-/* map */
-.map{border:1px solid var(--line);border-radius:2px;overflow:hidden}
-#map-canvas{height:300px;background:var(--smoked)}
-.map-fallback{height:auto;padding:1.4rem;background:var(--smoked);color:var(--pearl)}
-.map-fallback strong{display:block;font-size:1rem}
-.map-fallback span{color:var(--muted);font-size:.88rem}
+/* map — champagne-hairline lacquer frame; the address is the default layer
+   so a failed or coord-less map still reads as intentional, never a black box */
+.map{border:1px solid rgba(197,164,109,.30);border-radius:2px;overflow:hidden;background:var(--smoked)}
+#map-canvas{height:300px;background:var(--smoked);position:relative;z-index:1}
+.map-cap{display:flex;justify-content:space-between;align-items:center;gap:.8rem 1rem;flex-wrap:wrap;
+  padding:.8rem 1rem;border-top:1px solid var(--line-2);background:var(--smoked-2);
+  font-size:.85rem;position:relative;z-index:2}
+.map-cap .adr{color:var(--pearl)}.map-cap .adr b{color:var(--porcelain);font-weight:500}
+.map-cap a{color:var(--champagne);border-bottom:1px solid var(--line);flex:none}
+.map-empty{min-height:216px;display:grid;place-items:center;text-align:center;padding:1.6rem 1.2rem}
+.map-empty .moongate{width:76px;height:76px;border-radius:50%;border:1px solid var(--champagne);
+  display:grid;place-items:center;margin:0 auto .75rem;
+  box-shadow:inset 0 0 0 4px var(--obsidian),inset 0 0 0 5px rgba(197,164,109,.26)}
+.map-empty .moongate i{width:9px;height:9px;border-radius:50%;background:var(--champagne);display:block}
+.map-empty strong{display:block;font-size:1.02rem;color:var(--porcelain)}
+.map-empty span{color:var(--muted);font-size:.88rem}
+
+/* nearby — a scroll-snap rail of motif-accented cards with a peeking next card */
+.nearby-rail{display:flex;gap:.7rem;list-style:none;margin:0;padding:.15rem .15rem 1rem;
+  overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.nb-card{flex:0 0 clamp(156px,44%,196px);scroll-snap-align:start}
+.nb-card a{display:flex;flex-direction:column;gap:.55rem;height:100%;
+  border:1px solid var(--line);border-radius:2px;background:var(--smoked);padding:.9rem .95rem 1rem;
+  transition:transform .18s var(--ease),border-color .18s var(--ease)}
+.nb-card a:hover{transform:translateY(-3px);border-color:var(--champagne)}
+.nb-card .boba-motif{--bm-size:30px;flex:none}
+.nb-nm{font-size:.94rem;color:var(--pearl);line-height:1.28}
+.nb-card a:hover .nb-nm{color:var(--guava)}
+.nb-meta{margin-top:auto;font-size:.76rem;letter-spacing:.05em;color:var(--champagne)}
+.nb-meta.ci{color:var(--muted);letter-spacing:0}
 
 /* facts panel */
 .facts{border:1px solid var(--line);border-radius:2px;background:var(--smoked);padding:1.3rem}
@@ -280,11 +354,24 @@ details.acc .hours{border:0;border-top:1px solid var(--line-2);border-radius:0}
 .claim p{color:var(--muted);font-size:.9rem;margin:0;max-width:44ch}
 .claim a{color:var(--champagne);border-bottom:1px solid var(--line);font-size:.9rem}
 
-/* ---- CLOSED epitaph variant ---- */
+/* ---- CLOSED epitaph variant — elevated, but desaturated with no neon ---- */
 body.closed{--guava:#6f6d67}
 body.closed .wrap,body.closed .site-footer{filter:grayscale(1)}
-body.closed .hero{opacity:.92}
+body.closed .hero{opacity:.94}
+body.closed .medallion{border-color:var(--muted-dk);box-shadow:inset 0 0 0 5px var(--obsidian),inset 0 0 0 6px rgba(139,137,129,.22)}
 .epitaph{font-size:.86rem;color:var(--muted);margin-top:1.3rem;max-width:46ch}
+
+/* ---- reveal motion (opt-in; static and full-opacity for reduced-motion) ---- */
+@media (prefers-reduced-motion: no-preference){
+  .ledger .chip{opacity:0;animation:bn-chip-in .5s var(--ease) forwards}
+  .ledger .chip:nth-child(1){animation-delay:.04s}
+  .ledger .chip:nth-child(2){animation-delay:.12s}
+  .ledger .chip:nth-child(3){animation-delay:.20s}
+  .ledger .chip:nth-child(4){animation-delay:.28s}
+  .tonight.is-open .led::after{animation:bn-led-pulse 2.6s var(--ease) infinite}
+}
+@keyframes bn-chip-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes bn-led-pulse{0%{transform:scale(.5);opacity:.7}70%{transform:scale(1.9);opacity:0}100%{opacity:0}}
 
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 """
@@ -305,6 +392,8 @@ def head(title, desc, canonical, robots):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/nav-midnight.css">
+<link rel="stylesheet" href="/css/motif.css">
+<link rel="stylesheet" href="/css/sound.css">
 <style>{STYLE}</style>
 </head><body{{BODYCLASS}}>
 {NAV_HEADER}
@@ -328,6 +417,8 @@ FOOT = """</main>
 <span>&copy; 2026 Boba Night</span><span class="note">We don't take payment for placement on our best-for lists.</span>
 </div></footer>
 <script src="/js/nav-midnight.js" defer></script>
+<script src="/js/motif.js" defer></script>
+<script src="/js/sound.js" defer></script>
 </body></html>"""
 
 # ---- weekday_text -> accordion rows ----------------------------------------
@@ -481,9 +572,9 @@ def render(shop, shops):
                    'instead of a dead end.</p>')
     else:
         dek = f"{type_phrase(shop.get('store_type')).capitalize()} in {esc(city)}, {esc(kicker)}."
-        verified_chip = (f'<li class="chip"><span class="led"></span>Verified open — checked {STAMP}</li>'
+        verified_chip = (f'<li class="chip"><span class="led"></span>Verified open, checked {STAMP}</li>'
                          if has_hours else
-                         f'<li class="chip">Listing confirmed — checked {STAMP}</li>')
+                         f'<li class="chip">Listing confirmed, checked {STAMP}</li>')
         ledger = (
             '<ul class="ledger">'
             f'{verified_chip}'
@@ -510,11 +601,31 @@ def render(shop, shops):
                        f'<span class="sub"><a href="{gsearch_hours(shop)}" rel="nofollow noopener" target="_blank">Check Google</a></span></div>')
         epitaph = ""
 
+    # -- hero medallion (moon-gate monogram + bespoke motif accent) --
+    mtf   = motif_for(shop["slug"])
+    mlbl  = MOTIF_LABEL.get(mtf, "boba")
+    mono  = monogram(name)
+    # the neon verification dot is spent only on a verified, open shop
+    med_led = ('<span class="med-led" aria-hidden="true"></span>'
+               if (not is_closed and has_hours) else "")
+    medallion = (
+        '<div class="medallion boba-surprise">'
+        f'<span class="med-mono" aria-hidden="true">{esc(mono)}</span>'
+        f'{med_led}'
+        f'<span class="boba-motif med-motif" data-motif="{mtf}" aria-label="{esc(mlbl)} motif"></span>'
+        '</div>')
+
     hero = f"""
 <section class="hero">
+<div class="hero-top">
+{medallion}
+<div class="hero-head">
 <span class="kicker">{esc(city)} · {esc(kicker)}</span>
 <h1>{esc(name)}</h1>
 <p class="dek">{dek}</p>
+</div>
+</div>
+<div class="boba-divider"></div>
 {ledger}
 {actions}
 {tonight}
@@ -545,15 +656,19 @@ def render(shop, shops):
                  '<p class="order-empty">We list what we can verify. Menu link above, '
                  'nothing invented here.</p></section>')
 
-    # -- map --
+    # -- map (champagne-hairline frame; address is the always-there default) --
+    dir_label = "Open in Maps" if not has_coords else "Directions"
+    map_cap = (f'<div class="map-cap"><span class="adr"><b>{esc(name)}</b> · {esc(addr)}, {esc(city)}, CA</span>'
+               f'<a href="{dirn}" rel="nofollow noopener" target="_blank">{dir_label}</a></div>')
     if has_coords:
-        map_body = '<div id="map-canvas" aria-label="Map"></div>'
+        map_body = f'<div id="map-canvas" aria-label="Map of {esc(name)}"></div>'
         map_js = MAP_JS.replace("%LAT%", repr(lat)).replace("%LNG%", repr(lng))
     else:
-        map_body = (f'<div class="map-fallback"><strong>{esc(addr)}</strong>'
-                    f'<span>{esc(city)}, CA</span></div>')
+        map_body = ('<div class="map-empty"><div><span class="moongate"><i></i></span>'
+                    f'<strong>{esc(addr)}</strong><span>{esc(city)}, CA</span></div></div>')
         map_js = ""
-    map_sec = f'<section class="sec"><h2>Find it</h2><div class="map">{map_body}</div></section>'
+    map_sec = (f'<section class="sec"><h2>Find it</h2>'
+               f'<div class="map">{map_body}{map_cap}</div></section>')
 
     # -- facts panel (provenance stamps) --
     facts = [f'<div><dt>Address</dt><dd>{esc(addr)}, {esc(city)}, CA<span class="prov">confirmed {STAMP}</span></dd></div>']
@@ -570,17 +685,20 @@ def render(shop, shops):
     nb = nearby(shop, shops)
     nb_items = ""
     for s, dist in nb:
-        right = (f'<span class="di">{esc(dist)}</span>' if dist
-                 else f'<span class="ci">{esc(s.get("city",""))}</span>')
-        nb_items += (f'<li><a href="/boba/ca/{s["city_slug"]}/{s["slug"]}/">'
-                     f'<span class="nm">{esc(s.get("name",""))}</span>{right}</a></li>')
+        nmtf = motif_for(s["slug"])
+        nlbl = MOTIF_LABEL.get(nmtf, "boba")
+        meta = (f'<span class="nb-meta">{esc(dist)}</span>' if dist
+                else f'<span class="nb-meta ci">{esc(s.get("city",""))}</span>')
+        nb_items += (f'<li class="nb-card"><a href="/boba/ca/{s["city_slug"]}/{s["slug"]}/">'
+                     f'<span class="boba-motif" data-motif="{nmtf}" aria-label="{esc(nlbl)} motif"></span>'
+                     f'<span class="nb-nm">{esc(s.get("name",""))}</span>{meta}</a></li>')
     nb_title = "Still pouring nearby" if is_closed else "Nearby"
-    nearby_sec = f'<section class="sec"><h2>{nb_title}</h2><ul class="nearby">{nb_items}</ul></section>'
+    nearby_sec = f'<section class="sec"><h2>{nb_title}</h2><ul class="nearby-rail">{nb_items}</ul></section>'
 
     # -- claim band --
     claim = ('<div class="claim">'
              '<p>Is this your shop? Correct the hours, add the menu, flag anything wrong.</p>'
-             '<a href="/claim/">Claim this listing →</a></div>')
+             '<a href="/claim/">Claim this listing</a></div>')
 
     main = f"""{crumb}{hero}
 <div class="grid"><div class="g-main">

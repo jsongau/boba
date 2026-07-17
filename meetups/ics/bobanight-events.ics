@@ -7,27 +7,27 @@ X-WR-CALNAME:Boba Night — all events
 X-WR-TIMEZONE:America/Los_Angeles
 BEGIN:VEVENT
 UID:silent-book-club-irvine-rrule@bobanight.com
-DTSTAMP:20260717T185207Z
+DTSTAMP:20260717T211728Z
 DTSTART;TZID=America/Los_Angeles:20260723T184500
 DTEND;TZID=America/Los_Angeles:20260723T204500
 RRULE:FREQ=WEEKLY;BYDAY=TH
-SUMMARY:Silent Book Club — Irvine
+SUMMARY:Silent Book Club\, Irvine
 LOCATION:One Zo Boba\, 6376 Irvine Blvd\, Irvine
 DESCRIPTION:Order a drink at One Zo Boba\, read silently for forty-five min
- utes alongside a few thousand fellow members\, then talk about it — the 
- rare club where showing up alone is the point.
+ utes alongside a few thousand fellow members\, then talk about it. This is
+  the rare club where showing up alone is the point.
 URL:https://www.meetup.com/silent-book-club-irvine/
 END:VEVENT
 BEGIN:VEVENT
 UID:run-4-boba-5k-20260824@bobanight.com
-DTSTAMP:20260717T185207Z
+DTSTAMP:20260717T211728Z
 DTSTART;VALUE=DATE:20260824
 DTEND;VALUE=DATE:20260825
 SUMMARY:Run 4 Boba 5K
-LOCATION:Virtual — run anywhere
-DESCRIPTION:The one entry where running is actually involved — finish a 5
- K anywhere\, then reward yourself with boba from your favorite shop. — V
- irtual 5K — date listed on the race page at last check
+LOCATION:Virtual\, run anywhere
+DESCRIPTION:The one entry where running is actually involved. Finish a 5K a
+ nywhere\, then reward yourself with boba from your favorite shop. — Virt
+ ual 5K — date listed on the race page at last check
 URL:https://www.raceentry.com/run-4-boba/race-information
 END:VEVENT
 END:VCALENDAR
