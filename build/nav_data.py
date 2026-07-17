@@ -457,7 +457,7 @@ def _panel_regions_html(item):
     )
     rail.append(
         f'<a class="bn-rail-b bn-rail-all" href="{item["all_url"]}">'
-        f'All {item["all_count"]}<span class="bn-arrow" aria-hidden="true">&rarr;</span></a>'
+        f'All {item["all_count"]}</a>'
     )
 
     # right: one pane per region with its city links
@@ -471,7 +471,7 @@ def _panel_regions_html(item):
             )
         cities.append(
             f'<a class="bn-viewall" href="{r["view_all_url"]}">'
-            f'All of {_esc(r["name"])}<span class="bn-arrow" aria-hidden="true">&rarr;</span></a>'
+            f'All of {_esc(r["name"])}</a>'
         )
         panes.append(
             f'<div class="bn-pane" id="bnpane-{_slug(r["name"])}" role="tabpanel" '
@@ -501,7 +501,7 @@ def _panel_columns_html(item):
     if item.get("view_all"):
         va = (f'<a class="bn-viewall" href="{item["view_all"]["url"]}">'
               f'{_esc(item["view_all"]["label"])}'
-              f'<span class="bn-arrow" aria-hidden="true">&rarr;</span></a>')
+              f'</a>')
     return (
         f'<div class="bn-mega">'
         f'<div class="bn-cols">{"".join(cols)}{va}</div>'
@@ -536,7 +536,7 @@ def _drawer_accordions():
         cities = []
         for c in r["cities"]:
             cities.append(f'<a href="{c["url"]}">{_esc(c["name"])}<span class="bn-ct">{c["count"]}</span></a>')
-        cities.append(f'<a class="bn-viewall" href="{r["view_all_url"]}">All of {_esc(r["name"])} &rarr;</a>')
+        cities.append(f'<a class="bn-viewall" href="{r["view_all_url"]}">All of {_esc(r["name"])}</a>')
         out.append(
             f'<div class="bn-acc" data-acc>'
             f'<button class="bn-acc-b" aria-expanded="false">'
