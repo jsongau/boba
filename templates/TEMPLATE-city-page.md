@@ -13,9 +13,9 @@ This page is a **directory**, not a ranking. It lists every verified shop in the
 <h1>Boba in {{place.name}}, {{place.region_label}}</h1>
 
 <!-- META (head) -->
-<title>Boba in {{place.name}} — {{shops.count}} Shops, Hours & Map ({{year}}) | NiteBoba</title>
+<title>Boba in {{place.name}} — {{shops.count}} Shops, Hours & Map ({{year}}) | Boba Night</title>
 <meta name="description" content="Every boba shop in {{place.name}}: {{shops.count}} verified spots with addresses, hours, and what to order. Looking for date night, study, or open-late? Filtered picks inside. Updated {{verified_at}}.">
-<link rel="canonical" href="https://niteboba.vercel.app/boba/{{place.state_slug}}/{{place.slug}}/">
+<link rel="canonical" href="https://www.bobanight.com/boba/{{place.state_slug}}/{{place.slug}}/">
 
 <!-- ANSWER LEDE (40–60 words, liftable). States the count, the clusters, and 2–3 standouts by name. MODEL writes the gloss clause; counts/names are data. -->
 <p class="lede">
@@ -100,14 +100,14 @@ Full list below with hours and addresses; for a specific vibe, jump to the filte
  "name":"Boba shops in {{place.name}}, {{place.region_label}}",
  "numberOfItems":{{shops.count}},
  "itemListElement":[
-   {{#each shops}}{"@type":"ListItem","position":{{position}},"url":"https://niteboba.vercel.app/boba/{{../place.state_slug}}/{{../place.slug}}/{{slug}}/","name":"{{name}}"}{{,}}{{/each}}
+   {{#each shops}}{"@type":"ListItem","position":{{position}},"url":"https://www.bobanight.com/boba/{{../place.state_slug}}/{{../place.slug}}/{{slug}}/","name":"{{name}}"}{{,}}{{/each}}
  ]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-  {"@type":"ListItem","position":1,"name":"Home","item":"https://niteboba.vercel.app/"},
-  {"@type":"ListItem","position":2,"name":"{{place.region_label}}","item":"https://niteboba.vercel.app/area/{{place.region_slug}}/"},
-  {"@type":"ListItem","position":3,"name":"{{place.name}}","item":"https://niteboba.vercel.app/boba/{{place.state_slug}}/{{place.slug}}/"}
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://www.bobanight.com/"},
+  {"@type":"ListItem","position":2,"name":"{{place.region_label}}","item":"https://www.bobanight.com/area/{{place.region_slug}}/"},
+  {"@type":"ListItem","position":3,"name":"{{place.name}}","item":"https://www.bobanight.com/boba/{{place.state_slug}}/{{place.slug}}/"}
 ]}
 </script>
 <script type="application/ld+json">

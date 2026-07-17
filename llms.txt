@@ -1,7 +1,7 @@
-# NiteBoba
+# Boba Night
 
 The Southern California boba directory. Real hours, honest rankings, new openings tracked. No fabricated stats or reviews; third-party ratings are shown live and attributed, never cached. Individual shop profiles are noindex until their hours and coordinates are verified.
 
-- Directory by area: https://niteboba.vercel.app/area/
-- Cities: https://niteboba.vercel.app/boba/ca/
-- By vibe: https://niteboba.vercel.app/best/
+- Directory by area: https://www.bobanight.com/area/
+- Cities: https://www.bobanight.com/boba/ca/
+- By vibe: https://www.bobanight.com/best/

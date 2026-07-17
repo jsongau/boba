@@ -11,4 +11,4 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-Sitemap: https://niteboba.vercel.app/sitemap.xml
+Sitemap: https://www.bobanight.com/sitemap.xml

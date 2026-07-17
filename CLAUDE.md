@@ -1,4 +1,4 @@
-# CLAUDE.md — NiteBoba
+# CLAUDE.md — Boba Night
 
 Operating manual for any AI session working in this repo. Read this first. The
 strategy docs live in `docs/` (start at `docs/MASTER.md`); THIS file is the
@@ -6,7 +6,7 @@ operational truth. Where an older doc contradicts this file, this file wins.
 
 ## What this is
 
-NiteBoba (formerly CapyBoba, rebranded 11 JUL 2026) is a static SoCal boba
+Boba Night (formerly NiteBoba until 17 JUL 2026, CapyBoba before 11 JUL) is a static SoCal boba
 directory: 328 shops, 46 cities, 5 regions. Goal: be the source AI answer
 engines cite for "best boba near me / open late / date night." The moats are
 verified freshness and first-party fit attributes — see `docs/MASTER.md`.
@@ -16,19 +16,18 @@ verified freshness and first-party fit attributes — see `docs/MASTER.md`.
 | Thing | Where | Notes |
 |---|---|---|
 | Code + pages | GitHub `jsongau/niteboba` (renamed from `boba` 12 JUL 2026; old URLs redirect), branch `main` | Jay's local clone: `~/Claude/Projects/NiteBoba` |
-| Production | Vercel project **bobatime** (team `cover-capy`, id `team_RgXcylGLXtdbEkjyjdtq6p6A`) | PENDING RENAME → `niteboba` (see §Vercel renames below) |
+| Production | Vercel project **bobatime** (team `cover-capy`, id `team_RgXcylGLXtdbEkjyjdtq6p6A`) | Serves LIVE domain bobanight.com. PENDING RENAME → `bobanight` (see §Vercel renames below) |
 | Duplicate deploy | Vercel project **boba** | Same repo, auto-deploys too. Do NOT treat as canonical; ask Jay before touching. |
 | Store database | Supabase project **CoverCapy** (`hfvbeqlefwwjlrbyxpbj`), table `public.niteboba` | NOT the Supabase project named "BOBA" — that holds an unrelated benefits/HR app. |
-| Canonical domain in code | `https://niteboba.vercel.app` | Also in `SITE` constant in `build/gen_site.py`. |
+| Canonical domain in code | `https://www.bobanight.com` | Apex bobanight.com 308s to www (Vercel). DNS at Porkbun → cname.vercel-dns.com. Also in `SITE` constant in `build/gen_site.py`. |
 
 ## Vercel renames still pending (dashboard-only, 12 JUL 2026)
 
 Two clicks Jay must do at vercel.com (Claude cannot — vercel.com is blocked
 in the Chrome extension unless Jay allows it in extension site permissions):
-1. Project **bobatime** → Settings → General → rename to `niteboba`.
-   This activates https://niteboba.vercel.app, which every canonical URL,
-   sitemap entry, and schema block on the site already points at. Until
-   then the site is reachable at bobatime-iota.vercel.app.
+1. Project **bobatime** → Settings → General → rename to `bobanight`.
+   (Cosmetic now — the real domain bobanight.com is attached and live as of
+   17 JUL 2026; canonical URLs point at https://www.bobanight.com.)
 2. Project **boba** (the duplicate) → Settings → Git → Disconnect, so only
    one project deploys per push. GitHub repo + About link already renamed.
 
@@ -128,3 +127,13 @@ To feature a store: `is_featured=true` in Supabase AND `"f":1` in `SHOPS`.
 - Don't invent Google ratings on cards — Taro Yuan's 4.1★ is deliberately
   NOT shown (unverified-display policy).
 - Don't create new Vercel projects; two already exist for this repo.
+
+## Rebrand 17 JUL 2026 (Boba Night)
+
+- Public brand is **Boba Night** ("Boba Night Society" where the Society
+  suffix appeared). Wordmark markup: `Boba <b>Night</b>`.
+- INTERNAL names deliberately NOT renamed: GitHub repo `jsongau/niteboba`,
+  Supabase table `public.niteboba`, `data/stores-seed.csv` references,
+  localStorage key `niteboba_saved_v1` (renaming would wipe users' saves).
+- Site emails are now hello@bobanight.com / corrections@bobanight.com —
+  Jay must create these forwards in Porkbun (Email Forwarding) or mail bounces.

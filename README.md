@@ -1,4 +1,4 @@
-# NiteBoba
+# Boba Night
 
 The Southern California boba directory. Real hours, honest rankings, new openings tracked — no fabricated stats, no fabricated reviews, no first-party star rating until Boba Passport (Phase 3).
 
@@ -36,7 +36,7 @@ archive/                                      → earlier profile page iteration
 
 ## The rules (see `docs/SITE-SPEC.md` for the full list)
 
-No fabricated stats, reviews, or testimonials, ever. Ratings shown are third-party, attributed, dated, and linked — never a NiteBoba score. Editorial "best for" picks are labeled opinions with a stated method. Every page ships with an `Updated {date}` stamp. File versions are additive (`-v2`, `-v3`, ...), never overwritten.
+No fabricated stats, reviews, or testimonials, ever. Ratings shown are third-party, attributed, dated, and linked — never a Boba Night score. Editorial "best for" picks are labeled opinions with a stated method. Every page ships with an `Updated {date}` stamp. File versions are additive (`-v2`, `-v3`, ...), never overwritten.
 
 ## Design tokens
 

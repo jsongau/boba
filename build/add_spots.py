@@ -101,16 +101,16 @@ def main(spots_path):
         website = f'<a class="btn btn-ghost" href="{html.escape(sp["website"])}" rel="noopener" target="_blank">Official site</a>' if sp.get("website") else ""
         pg = f'''<!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{nm}, {ct}: Hours, Menu &amp; Map (2026) | NiteBoba</title>
-<meta name="description" content="{nm} at {ad}, {ct}. Directions, what to order, and verified details as they land. NiteBoba.">
-<link rel="canonical" href="https://niteboba.vercel.app/boba/ca/{sp["cs"]}/{sp["slug"]}/"><meta name="robots" content="noindex,follow">
+<title>{nm}, {ct}: Hours, Menu &amp; Map (2026) | Boba Night</title>
+<meta name="description" content="{nm} at {ad}, {ct}. Directions, what to order, and verified details as they land. Boba Night.">
+<link rel="canonical" href="https://www.bobanight.com/boba/ca/{sp["cs"]}/{sp["slug"]}/"><meta name="robots" content="noindex,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/site.css">
 </head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header"><div class="header-inner">
-<a class="brand" href="/">Nite<b>Boba</b></a>
+<a class="brand" href="/">Boba <b>Night</b></a>
 <nav class="head-nav" aria-label="Primary">
 <a href="/cities/">Cities</a><a href="/best/">By vibe</a><a href="/tools/">Tools</a><a href="/new/">New</a><a href="/guide/">Guides</a>
 </nav>
@@ -164,12 +164,12 @@ def main(spots_path):
 </div>
 <script type="application/ld+json">
 {{"@context":"https://schema.org","@type":"CafeOrCoffeeShop","name":{json.dumps(sp["name"])},
-"@id":"https://niteboba.vercel.app/boba/ca/{sp["cs"]}/{sp["slug"]}/#shop","url":"https://niteboba.vercel.app/boba/ca/{sp["cs"]}/{sp["slug"]}/","servesCuisine":"Bubble Tea",
+"@id":"https://www.bobanight.com/boba/ca/{sp["cs"]}/{sp["slug"]}/#shop","url":"https://www.bobanight.com/boba/ca/{sp["cs"]}/{sp["slug"]}/","servesCuisine":"Bubble Tea",
 "address":{{"@type":"PostalAddress","streetAddress":{json.dumps(sp["address"])},"addressLocality":{json.dumps(sp["city"])},"addressRegion":"CA","addressCountry":"US"}}}}
 </script>
 </main>
 <footer class="site-footer"><div class="footer-inner">
-<div class="footer-brand"><a class="brand" href="/">Nite<b>Boba</b></a>
+<div class="footer-brand"><a class="brand" href="/">Boba <b>Night</b></a>
 <p>The Southern California boba directory. Real hours, honest rankings, new openings tracked.</p></div>
 <div class="footer-col"><h4>By area</h4><ul>
 <li><a href="/area/sgv/">The 626</a></li><li><a href="/area/orange-county/">Orange County</a></li>
@@ -180,9 +180,9 @@ def main(spots_path):
 <li><a href="/best/open-late/">Open late</a></li><li><a href="/best/brown-sugar/">Brown sugar</a></li></ul></div>
 <div class="footer-col"><h4>About</h4><ul>
 <li><a href="/how-we-rank/">How we rank</a></li><li><a href="/report/">Report a correction</a></li>
-<li><a href="/about/">About NiteBoba</a></li></ul></div>
+<li><a href="/about/">About Boba Night</a></li></ul></div>
 </div><div class="footer-bottom">
-<span>&copy; 2026 NiteBoba</span><span class="note">We don't take payment for placement on our best-for lists.</span>
+<span>&copy; 2026 Boba Night</span><span class="note">We don't take payment for placement on our best-for lists.</span>
 </div></footer></body></html>
 '''
         wr(os.path.join("boba/ca",sp["cs"],sp["slug"],"index.html"), pg)
@@ -209,14 +209,14 @@ def main(spots_path):
             t = t.replace("San Gabriel Valley", sp["area"]).replace("/area/sgv/", f'/area/{sp["region_slug"]}/')
             t = t.replace('<a class="di-name" href="/boba/ca/'+sp["cs"]+'/taro-yuan-'+sp["cs"]+'/">Taro Yuan</a><div class="di-addr">18246 Gale Ave A</div>',
                           f'<a class="di-name" href="/boba/ca/{sp["cs"]}/{sp["slug"]}/">{html.escape(sp["name"])}</a><div class="di-addr">{html.escape(sp["address"])}</div>')
-            t = re.sub(r'"itemListElement":\[.*?\]\}', f'"itemListElement":[{{"@type":"ListItem","position":1,"url":"https://niteboba.vercel.app/boba/ca/{sp["cs"]}/{sp["slug"]}/","name":{json.dumps(sp["name"])}}}]}}', t, count=1, flags=re.S)
+            t = re.sub(r'"itemListElement":\[.*?\]\}', f'"itemListElement":[{{"@type":"ListItem","position":1,"url":"https://www.bobanight.com/boba/ca/{sp["cs"]}/{sp["slug"]}/","name":{json.dumps(sp["name"])}}}]}}', t, count=1, flags=re.S)
             t = t.replace("starting with Taro Yuan on Gale Ave", f"starting with {sp['name']}")
             t = t.replace("Taro Yuan", sp["name"])  # residual mentions
             wr(cp, t)
             # sitemap
             sm = rd("sitemap.xml")
-            anchor = "  <url><loc>https://niteboba.vercel.app/meetups/</loc>"
-            sm = sm.replace(anchor, f'  <url><loc>https://niteboba.vercel.app/boba/ca/{sp["cs"]}/</loc><lastmod>{TODAY}</lastmod></url>\n'+anchor,1)
+            anchor = "  <url><loc>https://www.bobanight.com/meetups/</loc>"
+            sm = sm.replace(anchor, f'  <url><loc>https://www.bobanight.com/boba/ca/{sp["cs"]}/</loc><lastmod>{TODAY}</lastmod></url>\n'+anchor,1)
             wr("sitemap.xml", sm)
         # cities index card
         if f'/boba/ca/{sp["cs"]}/' not in cities_idx:
