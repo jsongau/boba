@@ -11,7 +11,7 @@
       { v: "date", t: "A date", d: "Something considered", sw: "#7A2433", cats: ["matcha", "milk_tea"], adv: 0.5 },
       { v: "friends", t: "With friends", d: "Easy and generous", sw: "#C5A46D", cats: ["slush", "fruit_tea", "milk_tea"], adv: 0.5 },
       { v: "study", t: "A long session", d: "Something to sit with", sw: "#342235", cats: ["milk_tea", "brewed_tea"], adv: 0 },
-      { v: "after", t: "After dinner", d: "A small indulgence", sw: "#8E734B", cats: ["cheese_foam", "smoothie", "matcha"], adv: 0.5 },
+      { v: "after", t: "After dinner", d: "A sweet nightcap", sw: "#8E734B", cats: ["cheese_foam", "smoothie", "matcha"], adv: 0.5 },
       { v: "spont", t: "Something spontaneous", d: "Surprise me a little", sw: "#0E332B", cats: [], adv: 1 }
     ] },
     { key: "sip", q: "What should the first sip feel like?", opts: [

@@ -46,14 +46,7 @@
     } else { CBS.toast("Copy: " + s); }
   };
 
-  // scroll reveal (content is visible even if this never runs)
-  function initReveal() {
-    var els = [].slice.call(document.querySelectorAll(".reveal"));
-    if (!("IntersectionObserver" in window) || !els.length) { els.forEach(function (e) { e.classList.add("in"); }); return; }
-    var io = new IntersectionObserver(function (ents) {
-      ents.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
-    els.forEach(function (e) { io.observe(e); });
-  }
-  if (document.readyState !== "loading") initReveal(); else document.addEventListener("DOMContentLoaded", initReveal);
+  // scroll reveal retired 17 JUL 2026: replaced by pure CSS scroll-driven
+  // animation in luxury-homepage.css (animation-timeline: view()). Content is
+  // never opacity-gated by JS again.
 })();

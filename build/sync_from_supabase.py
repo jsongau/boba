@@ -117,6 +117,7 @@ if unmatched:
 hpath = ROOT / "index.html"
 hhtml = hpath.read_text()
 hhtml2 = re.sub(r"Directory · \d{3}", f"Directory · {len(shops)}", hhtml)
+hhtml2 = re.sub(r"Directory &middot; \d{3}", f"Directory &middot; {len(shops)}", hhtml2)
 if not CHECK and hhtml2 != hhtml:
     hpath.write_text(hhtml2)
 print(f"homepage nav: Directory · {len(shops)}")
