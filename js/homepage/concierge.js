@@ -34,6 +34,13 @@
       { v: "Los Angeles", t: "Los Angeles", d: "Greater LA", sw: "#342235", city: "Los Angeles" },
       { v: "San Diego", t: "San Diego", d: "Convoy and beyond", sw: "#0E332B", city: "San Diego" },
       { v: "drive", t: "Willing to drive", d: "Open to the best", sw: "#C5A46D", city: "" }
+    ] },
+    // Final step folds in the old "Leave it to the house" caffeine control, so
+    // the concierge is now the ONE picker on the homepage (city + pour + caffeine).
+    { key: "caf", q: "Caffeine tonight?", opts: [
+      { v: "", t: "Either way", d: "No preference", sw: "#123F35", caf: "" },
+      { v: "yes", t: "Yes, a lift", d: "Keep the tea awake", sw: "#8E734B", caf: "yes" },
+      { v: "no", t: "Caffeine-free", d: "Something to wind down", sw: "#342235", caf: "no" }
     ] }
   ];
 
@@ -52,8 +59,17 @@
     var advPref = advOpt ? advOpt.adv : (e0.adv != null ? e0.adv : 0.5);
     var w4 = STEPS[3].opts.filter(function (o) { return o.v === answers.where; })[0] || {};
     var city = w4.city || "";
+    var c5 = STEPS[4].opts.filter(function (o) { return o.v === answers.caf; })[0] || {};
+    var caf = c5.caf || "";
 
-    var pool = S.drinks.filter(function (d) { return !city || (CBS.chain(d).locs || []).some(function (l) { return l.city === city; }); });
+    var pool = S.drinks.filter(function (d) {
+      if (city && !(CBS.chain(d).locs || []).some(function (l) { return l.city === city; })) return false;
+      if (caf && d.caf !== caf) return false;
+      return true;
+    });
+    // Relax caffeine before city so a "caffeine-free in Irvine" with no match
+    // still returns something sourced rather than an empty result.
+    if (!pool.length && caf) pool = S.drinks.filter(function (d) { return !city || (CBS.chain(d).locs || []).some(function (l) { return l.city === city; }); });
     if (!pool.length) pool = S.drinks;
 
     var ranked = pool.map(function (d) {

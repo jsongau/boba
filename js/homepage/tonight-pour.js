@@ -8,13 +8,24 @@
   function wire() {
     var card = document.querySelector(".note--float"); if (!card) return;
 
-    // Day index that ticks over at 5 PM local — "tonight" starts at five.
-    var now = new Date();
-    var shifted = new Date(now.getTime() - 17 * 3600 * 1000);
-    var dayN = Math.floor((shifted.getTime() - shifted.getTimezoneOffset() * 60000) / 86400000);
+    // Date-seeded rotation on the America/Los_Angeles calendar, ticking at
+    // 5 PM local — "tonight" starts at five, so before 17:00 LA time we still
+    // show the previous night's pour. We resolve the LA wall-clock via Intl
+    // (correct across DST, independent of the visitor's own timezone), roll the
+    // date back a day when it's before 5 PM, then HASH that YYYY-MM-DD key to
+    // index the sourced menu. Hashing (not a sequential walk) spreads the pick
+    // across the 66 drinks and keeps it stable for the whole LA night.
+    var parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit",
+      day: "2-digit", hour: "2-digit", hour12: false
+    }).formatToParts(new Date());
+    var f = {}; parts.forEach(function (p) { f[p.type] = p.value; });
+    var hour = parseInt(f.hour, 10) % 24; // some engines report midnight as "24"
+    var dayMs = Date.UTC(+f.year, +f.month - 1, +f.day) - (hour < 17 ? 86400000 : 0);
+    var key = new Date(dayMs).toISOString().slice(0, 10); // LA "night" date
 
     var drinks = CBS.S.drinks;
-    var d = drinks[((dayN % drinks.length) + drinks.length) % drinks.length];
+    var d = drinks[CBS.hash(key) % drinks.length];
     var chain = CBS.chain(d);
     var shop = CBS.shopFor(d, null);
     if (!shop) return; // keep static fallback if the chain has no locations

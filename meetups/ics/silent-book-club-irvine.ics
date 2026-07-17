@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Boba Night//Meetups//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Boba Night — Silent Book Club — Irvine
+X-WR-TIMEZONE:America/Los_Angeles
+BEGIN:VEVENT
+UID:silent-book-club-irvine-rrule@bobanight.com
+DTSTAMP:20260717T185207Z
+DTSTART;TZID=America/Los_Angeles:20260723T184500
+DTEND;TZID=America/Los_Angeles:20260723T204500
+RRULE:FREQ=WEEKLY;BYDAY=TH
+SUMMARY:Silent Book Club — Irvine
+LOCATION:One Zo Boba\, 6376 Irvine Blvd\, Irvine
+DESCRIPTION:Order a drink at One Zo Boba\, read silently for forty-five min
+ utes alongside a few thousand fellow members\, then talk about it — the 
+ rare club where showing up alone is the point.
+URL:https://www.meetup.com/silent-book-club-irvine/
+END:VEVENT
+END:VCALENDAR

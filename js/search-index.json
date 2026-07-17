@@ -1,0 +1,2320 @@
+{
+  "generated": "build/nav_data.py",
+  "shops": [
+    {
+      "n": "Pearl's Finest Teas",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/pearls-finest-teas-los-angeles/"
+    },
+    {
+      "n": "It's Boba Time",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/its-boba-time-los-angeles/"
+    },
+    {
+      "n": "Four Leaf",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/four-leaf-los-angeles/"
+    },
+    {
+      "n": "House of Boba",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/house-of-boba-los-angeles/"
+    },
+    {
+      "n": "Quickly",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/quickly-los-angeles/"
+    },
+    {
+      "n": "T - Tea Shoppe",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/t-tea-shoppe-los-angeles/"
+    },
+    {
+      "n": "Yo! Boba",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/yo-boba-los-angeles/"
+    },
+    {
+      "n": "Ten Ren's Tea Time",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/ten-rens-tea-time-los-angeles/"
+    },
+    {
+      "n": "Lollicup",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/lollicup-los-angeles/"
+    },
+    {
+      "n": "Boba Time",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/boba-time-los-angeles/"
+    },
+    {
+      "n": "Formosa Boba Men",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/formosa-boba-men-los-angeles/"
+    },
+    {
+      "n": "Volcano Tea House",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/volcano-tea-house-los-angeles/"
+    },
+    {
+      "n": "Boba Bear",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/boba-bear-los-angeles/"
+    },
+    {
+      "n": "Boba Loca",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/boba-loca-los-angeles/"
+    },
+    {
+      "n": "MJ Cafe Express",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/mj-cafe-express-los-angeles/"
+    },
+    {
+      "n": "Cafe Latte",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/cafe-latte-los-angeles/"
+    },
+    {
+      "n": "Bon Bon Tea House",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/bon-bon-tea-house-los-angeles/"
+    },
+    {
+      "n": "Cafe Home",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/cafe-home-los-angeles/"
+    },
+    {
+      "n": "Bubble U",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/bubble-u-los-angeles/"
+    },
+    {
+      "n": "CoCo Fresh Tea & Juice",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/coco-fresh-tea-and-juice-los-angeles/"
+    },
+    {
+      "n": "Honeyboba",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/honeyboba-los-angeles/"
+    },
+    {
+      "n": "Twinkle Brown Sugar",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/twinkle-brown-sugar-los-angeles/"
+    },
+    {
+      "n": "I Love Boba",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/i-love-boba-los-angeles/"
+    },
+    {
+      "n": "I Love Sweetea",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/i-love-sweetea-los-angeles/"
+    },
+    {
+      "n": "Kukui Hut Cafe",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/kukui-hut-cafe-los-angeles/"
+    },
+    {
+      "n": "Berlins",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/berlins-los-angeles/"
+    },
+    {
+      "n": "Hashtag Coffee & Tea",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/hashtag-coffee-and-tea-los-angeles/"
+    },
+    {
+      "n": "Cantaloop",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/cantaloop-los-angeles/"
+    },
+    {
+      "n": "Boba Story",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/boba-story-los-angeles/"
+    },
+    {
+      "n": "Mr. Boba",
+      "c": "Los Angeles",
+      "u": "/boba/ca/los-angeles/mr-boba-los-angeles/"
+    },
+    {
+      "n": "Zero Express",
+      "c": "Long Beach",
+      "u": "/boba/ca/long-beach/zero-express-long-beach/"
+    },
+    {
+      "n": "Honeybee's",
+      "c": "Long Beach",
+      "u": "/boba/ca/long-beach/honeybees-long-beach/"
+    },
+    {
+      "n": "Hiccups",
+      "c": "Long Beach",
+      "u": "/boba/ca/long-beach/hiccups-long-beach/"
+    },
+    {
+      "n": "Cha For Tea",
+      "c": "Long Beach",
+      "u": "/boba/ca/long-beach/cha-for-tea-long-beach/"
+    },
+    {
+      "n": "Roasting Water",
+      "c": "Long Beach",
+      "u": "/boba/ca/long-beach/roasting-water-long-beach/"
+    },
+    {
+      "n": "Boba Tea House",
+      "c": "Long Beach",
+      "u": "/boba/ca/long-beach/boba-tea-house-long-beach/"
+    },
+    {
+      "n": "Snow Monster",
+      "c": "Long Beach",
+      "u": "/boba/ca/long-beach/snow-monster-long-beach/"
+    },
+    {
+      "n": "Boba Loca",
+      "c": "Long Beach",
+      "u": "/boba/ca/long-beach/boba-loca-long-beach/"
+    },
+    {
+      "n": "Boba Lab",
+      "c": "Santa Monica",
+      "u": "/boba/ca/santa-monica/boba-lab-santa-monica/"
+    },
+    {
+      "n": "Bubble Boba",
+      "c": "Santa Monica",
+      "u": "/boba/ca/santa-monica/bubble-boba-santa-monica/"
+    },
+    {
+      "n": "TLight Boba",
+      "c": "Santa Monica",
+      "u": "/boba/ca/santa-monica/tlight-boba-santa-monica/"
+    },
+    {
+      "n": "The Boba Promenade Cafe",
+      "c": "Santa Monica",
+      "u": "/boba/ca/santa-monica/the-boba-promenade-cafe-santa-monica/"
+    },
+    {
+      "n": "Boba Tea & Me Truck",
+      "c": "Santa Monica",
+      "u": "/boba/ca/santa-monica/boba-tea-and-me-truck-santa-monica/"
+    },
+    {
+      "n": "Nest Tea House",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/nest-tea-house-arcadia/"
+    },
+    {
+      "n": "Half And Half Tea Express",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/half-and-half-tea-express-arcadia/"
+    },
+    {
+      "n": "CoCo Fresh Tea & Juice",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/coco-fresh-tea-and-juice-arcadia/"
+    },
+    {
+      "n": "Honeyboba",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/honeyboba-arcadia/"
+    },
+    {
+      "n": "Yoshantea Tea House",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/yoshantea-tea-house-arcadia/"
+    },
+    {
+      "n": "AU79 Tea House",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/au79-tea-house-arcadia/"
+    },
+    {
+      "n": "Bearology",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/bearology-arcadia/"
+    },
+    {
+      "n": "BAMBU",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/bambu-arcadia/"
+    },
+    {
+      "n": "Chatime",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/chatime-arcadia/"
+    },
+    {
+      "n": "Tea Bar Starry",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/tea-bar-starry-arcadia/"
+    },
+    {
+      "n": "Ten Ren's Tea Time",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/ten-rens-tea-time-arcadia/"
+    },
+    {
+      "n": "Tapioca Express",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/tapioca-express-arcadia/"
+    },
+    {
+      "n": "Boba Ave Express",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/boba-ave-express-arcadia/"
+    },
+    {
+      "n": "Quickly",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/quickly-arcadia/"
+    },
+    {
+      "n": "Spiceology",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/spiceology-arcadia/"
+    },
+    {
+      "n": "Bird Pick Tea & Herb",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/bird-pick-tea-and-herb-arcadia/"
+    },
+    {
+      "n": "BYOB A Boba Company",
+      "c": "Covina",
+      "u": "/boba/ca/covina/byob-a-boba-company-covina/"
+    },
+    {
+      "n": "The Ice Bar",
+      "c": "Covina",
+      "u": "/boba/ca/covina/the-ice-bar-covina/"
+    },
+    {
+      "n": "Black & White",
+      "c": "Covina",
+      "u": "/boba/ca/covina/black-and-white-covina/"
+    },
+    {
+      "n": "Factory Tea Bar",
+      "c": "Covina",
+      "u": "/boba/ca/covina/factory-tea-bar-covina/"
+    },
+    {
+      "n": "Jin Teahouse",
+      "c": "Covina",
+      "u": "/boba/ca/covina/jin-teahouse-covina/"
+    },
+    {
+      "n": "Cha2o",
+      "c": "Covina",
+      "u": "/boba/ca/covina/cha2o-covina/"
+    },
+    {
+      "n": "Tapioca Express",
+      "c": "Covina",
+      "u": "/boba/ca/covina/tapioca-express-covina/"
+    },
+    {
+      "n": "Lollicup",
+      "c": "Covina",
+      "u": "/boba/ca/covina/lollicup-covina/"
+    },
+    {
+      "n": "Boba Tea Lounge",
+      "c": "Covina",
+      "u": "/boba/ca/covina/boba-tea-lounge-covina/"
+    },
+    {
+      "n": "Home Brewed Bar",
+      "c": "Pasadena",
+      "u": "/boba/ca/pasadena/home-brewed-bar-pasadena/"
+    },
+    {
+      "n": "AU79 Tea Express",
+      "c": "Pasadena",
+      "u": "/boba/ca/pasadena/au79-tea-express-pasadena/"
+    },
+    {
+      "n": "Cafe 86",
+      "c": "Pasadena",
+      "u": "/boba/ca/pasadena/cafe-86-pasadena/"
+    },
+    {
+      "n": "T Pumps",
+      "c": "Pasadena",
+      "u": "/boba/ca/pasadena/t-pumps-pasadena/"
+    },
+    {
+      "n": "Tea Spots",
+      "c": "Pasadena",
+      "u": "/boba/ca/pasadena/tea-spots-pasadena/"
+    },
+    {
+      "n": "Bird Pick Tea & Herb",
+      "c": "Pasadena",
+      "u": "/boba/ca/pasadena/bird-pick-tea-and-herb-pasadena/"
+    },
+    {
+      "n": "Half and Half Tea Express",
+      "c": "Pasadena",
+      "u": "/boba/ca/pasadena/half-and-half-tea-express-pasadena/"
+    },
+    {
+      "n": "Jin Tea Shop",
+      "c": "Pasadena",
+      "u": "/boba/ca/pasadena/jin-tea-shop-pasadena/"
+    },
+    {
+      "n": "Boba Time",
+      "c": "Walnut",
+      "u": "/boba/ca/walnut/boba-time-walnut/"
+    },
+    {
+      "n": "Freshia Tea Time",
+      "c": "Walnut",
+      "u": "/boba/ca/walnut/freshia-tea-time-walnut/"
+    },
+    {
+      "n": "Teaology",
+      "c": "Walnut",
+      "u": "/boba/ca/walnut/teaology-walnut/"
+    },
+    {
+      "n": "$1 Drink",
+      "c": "Walnut",
+      "u": "/boba/ca/walnut/1-drink-walnut/"
+    },
+    {
+      "n": "Lollicup",
+      "c": "Walnut",
+      "u": "/boba/ca/walnut/lollicup-walnut/"
+    },
+    {
+      "n": "Boba V Cafe",
+      "c": "Walnut",
+      "u": "/boba/ca/walnut/boba-v-cafe-walnut/"
+    },
+    {
+      "n": "Ten Ren's Tea Time",
+      "c": "Walnut",
+      "u": "/boba/ca/walnut/ten-rens-tea-time-walnut/"
+    },
+    {
+      "n": "MJ Cafe & Teahouse",
+      "c": "Walnut",
+      "u": "/boba/ca/walnut/mj-cafe-and-teahouse-walnut/"
+    },
+    {
+      "n": "Tea Block",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/tea-block-rowland-heights/"
+    },
+    {
+      "n": "Dragonfly Tea Bar",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/dragonfly-tea-bar-rowland-heights/"
+    },
+    {
+      "n": "Tastea",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/tastea-rowland-heights/"
+    },
+    {
+      "n": "Boba Bear",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/boba-bear-rowland-heights/"
+    },
+    {
+      "n": "Half & Half Tea Express",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/half-and-half-tea-express-rowland-heights/"
+    },
+    {
+      "n": "I Heart Boba",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/i-heart-boba-rowland-heights/"
+    },
+    {
+      "n": "BAMBU",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/bambu-rowland-heights/"
+    },
+    {
+      "n": "Ten Ren's Tea Time",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/ten-rens-tea-time-rowland-heights/"
+    },
+    {
+      "n": "Tea Bar",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/tea-bar-rowland-heights/"
+    },
+    {
+      "n": "Boba Gogo",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/boba-gogo-rowland-heights/"
+    },
+    {
+      "n": "Lollicup Fresh",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/lollicup-fresh-rowland-heights/"
+    },
+    {
+      "n": "MJ Cafe & Teahouse",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/mj-cafe-and-teahouse-rowland-heights/"
+    },
+    {
+      "n": "Little Bean",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/little-bean-rowland-heights/"
+    },
+    {
+      "n": "Tea Station",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/tea-station-rowland-heights/"
+    },
+    {
+      "n": "Tea Time Express",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/tea-time-express-rowland-heights/"
+    },
+    {
+      "n": "Quickly",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/quickly-rowland-heights/"
+    },
+    {
+      "n": "Bobee 5",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/bobee-5-rowland-heights/"
+    },
+    {
+      "n": "Zero Degrees",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/zero-degrees-rowland-heights/"
+    },
+    {
+      "n": "Blackball Taiwanese Dessert",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/blackball-taiwanese-dessert-rowland-heights/"
+    },
+    {
+      "n": "Honeymee",
+      "c": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/honeymee-rowland-heights/"
+    },
+    {
+      "n": "Tea Brick",
+      "c": "Monterey Park",
+      "u": "/boba/ca/monterey-park/tea-brick-monterey-park/"
+    },
+    {
+      "n": "Boba Ave",
+      "c": "Monterey Park",
+      "u": "/boba/ca/monterey-park/boba-ave-monterey-park/"
+    },
+    {
+      "n": "Half & Half Tea Express",
+      "c": "Monterey Park",
+      "u": "/boba/ca/monterey-park/half-and-half-tea-express-monterey-park/"
+    },
+    {
+      "n": "Honeyboba",
+      "c": "Monterey Park",
+      "u": "/boba/ca/monterey-park/honeyboba-monterey-park/"
+    },
+    {
+      "n": "Got Boba?!",
+      "c": "Monterey Park",
+      "u": "/boba/ca/monterey-park/got-boba-monterey-park/"
+    },
+    {
+      "n": "Ten Ren's Tea Time",
+      "c": "Monterey Park",
+      "u": "/boba/ca/monterey-park/ten-rens-tea-time-monterey-park/"
+    },
+    {
+      "n": "CoCo Fresh Tea & Juice",
+      "c": "Monterey Park",
+      "u": "/boba/ca/monterey-park/coco-fresh-tea-and-juice-monterey-park/"
+    },
+    {
+      "n": "Quickly",
+      "c": "Monterey Park",
+      "u": "/boba/ca/monterey-park/quickly-monterey-park/"
+    },
+    {
+      "n": "Zero X",
+      "c": "Pomona",
+      "u": "/boba/ca/pomona/zero-x-pomona/"
+    },
+    {
+      "n": "Boba Tea Zone",
+      "c": "Pomona",
+      "u": "/boba/ca/pomona/boba-tea-zone-pomona/"
+    },
+    {
+      "n": "Cha For Tea",
+      "c": "Pomona",
+      "u": "/boba/ca/pomona/cha-for-tea-pomona/"
+    },
+    {
+      "n": "Mana Tea House",
+      "c": "El Monte",
+      "u": "/boba/ca/el-monte/mana-tea-house-el-monte/"
+    },
+    {
+      "n": "Cha Cafe",
+      "c": "El Monte",
+      "u": "/boba/ca/el-monte/cha-cafe-el-monte/"
+    },
+    {
+      "n": "Boba Bear",
+      "c": "El Monte",
+      "u": "/boba/ca/el-monte/boba-bear-el-monte/"
+    },
+    {
+      "n": "Tea Republic",
+      "c": "El Monte",
+      "u": "/boba/ca/el-monte/tea-republic-el-monte/"
+    },
+    {
+      "n": "The Vounge",
+      "c": "El Monte",
+      "u": "/boba/ca/el-monte/the-vounge-el-monte/"
+    },
+    {
+      "n": "Tea Rush",
+      "c": "Diamond Bar",
+      "u": "/boba/ca/diamond-bar/tea-rush-diamond-bar/"
+    },
+    {
+      "n": "Oku 1",
+      "c": "Diamond Bar",
+      "u": "/boba/ca/diamond-bar/oku-1-diamond-bar/"
+    },
+    {
+      "n": "Tea Garden Cafe",
+      "c": "Diamond Bar",
+      "u": "/boba/ca/diamond-bar/tea-garden-cafe-diamond-bar/"
+    },
+    {
+      "n": "Tealicious",
+      "c": "Diamond Bar",
+      "u": "/boba/ca/diamond-bar/tealicious-diamond-bar/"
+    },
+    {
+      "n": "Cafe Haus",
+      "c": "Diamond Bar",
+      "u": "/boba/ca/diamond-bar/cafe-haus-diamond-bar/"
+    },
+    {
+      "n": "Lollicup",
+      "c": "Diamond Bar",
+      "u": "/boba/ca/diamond-bar/lollicup-diamond-bar/"
+    },
+    {
+      "n": "Health Station",
+      "c": "Diamond Bar",
+      "u": "/boba/ca/diamond-bar/health-station-diamond-bar/"
+    },
+    {
+      "n": "Mimi 5 Bobee",
+      "c": "Diamond Bar",
+      "u": "/boba/ca/diamond-bar/mimi-5-bobee-diamond-bar/"
+    },
+    {
+      "n": "You & Me Cafe",
+      "c": "Diamond Bar",
+      "u": "/boba/ca/diamond-bar/you-and-me-cafe-diamond-bar/"
+    },
+    {
+      "n": "Tea Station",
+      "c": "Gardena",
+      "u": "/boba/ca/gardena/tea-station-gardena/"
+    },
+    {
+      "n": "Dingle Berries Coffee & Tea",
+      "c": "Rosemead",
+      "u": "/boba/ca/rosemead/dingle-berries-coffee-and-tea-rosemead/"
+    },
+    {
+      "n": "Neighbors Tea House",
+      "c": "Rosemead",
+      "u": "/boba/ca/rosemead/neighbors-tea-house-rosemead/"
+    },
+    {
+      "n": "Honeyboba",
+      "c": "Rosemead",
+      "u": "/boba/ca/rosemead/honeyboba-rosemead/"
+    },
+    {
+      "n": "Le Arbre Tea House",
+      "c": "Rosemead",
+      "u": "/boba/ca/rosemead/le-arbre-tea-house-rosemead/"
+    },
+    {
+      "n": "Quickly",
+      "c": "Rosemead",
+      "u": "/boba/ca/rosemead/quickly-rosemead/"
+    },
+    {
+      "n": "Boba Corner",
+      "c": "Rosemead",
+      "u": "/boba/ca/rosemead/boba-corner-rosemead/"
+    },
+    {
+      "n": "Cha Bei Bei Tea House",
+      "c": "Rosemead",
+      "u": "/boba/ca/rosemead/cha-bei-bei-tea-house-rosemead/"
+    },
+    {
+      "n": "Tea Republic",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/tea-republic-san-gabriel/"
+    },
+    {
+      "n": "Factory Tea Bar",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/factory-tea-bar-san-gabriel/"
+    },
+    {
+      "n": "T4U Cafe",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/t4u-cafe-san-gabriel/"
+    },
+    {
+      "n": "Half & Half Tea House",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/half-and-half-tea-house-san-gabriel/"
+    },
+    {
+      "n": "BAMBU",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/bambu-san-gabriel/"
+    },
+    {
+      "n": "A Plus Tea House",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/a-plus-tea-house-san-gabriel/"
+    },
+    {
+      "n": "Fresh Roast",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/fresh-roast-san-gabriel/"
+    },
+    {
+      "n": "Half & Half Good Old Time",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/half-and-half-good-old-time-san-gabriel/"
+    },
+    {
+      "n": "Share Tea",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/share-tea-san-gabriel/"
+    },
+    {
+      "n": "Bubble Republic",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/bubble-republic-san-gabriel/"
+    },
+    {
+      "n": "Milk & Honey",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/milk-and-honey-san-gabriel/"
+    },
+    {
+      "n": "Oh My Pan Bakery & Tea",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/oh-my-pan-bakery-and-tea-san-gabriel/"
+    },
+    {
+      "n": "Snow House Tea Bar",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/snow-house-tea-bar-san-gabriel/"
+    },
+    {
+      "n": "Tapioca Express",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/tapioca-express-san-gabriel/"
+    },
+    {
+      "n": "Ten Ren",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/ten-ren-san-gabriel/"
+    },
+    {
+      "n": "ID Cha House",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/id-cha-house-san-gabriel/"
+    },
+    {
+      "n": "Tea Station",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/tea-station-san-gabriel/"
+    },
+    {
+      "n": "Blackball Taiwanese Dessert",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/blackball-taiwanese-dessert-san-gabriel/"
+    },
+    {
+      "n": "Boba Ave 8090",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/boba-ave-8090-san-gabriel/"
+    },
+    {
+      "n": "Quickly",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/quickly-san-gabriel/"
+    },
+    {
+      "n": "Labobatory",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/labobatory-san-gabriel/"
+    },
+    {
+      "n": "Miss Tea",
+      "c": "Baldwin Park",
+      "u": "/boba/ca/baldwin-park/miss-tea-baldwin-park/"
+    },
+    {
+      "n": "Bobana",
+      "c": "Huntington Park",
+      "u": "/boba/ca/huntington-park/bobana-huntington-park/"
+    },
+    {
+      "n": "Hola Coffee & Boba",
+      "c": "Huntington Park",
+      "u": "/boba/ca/huntington-park/hola-coffee-and-boba-huntington-park/"
+    },
+    {
+      "n": "Boba Express",
+      "c": "Temple City",
+      "u": "/boba/ca/temple-city/boba-express-temple-city/"
+    },
+    {
+      "n": "Quickly",
+      "c": "Temple City",
+      "u": "/boba/ca/temple-city/quickly-temple-city/"
+    },
+    {
+      "n": "Tea Station Express",
+      "c": "Temple City",
+      "u": "/boba/ca/temple-city/tea-station-express-temple-city/"
+    },
+    {
+      "n": "Rendezvous Cafe",
+      "c": "Temple City",
+      "u": "/boba/ca/temple-city/rendezvous-cafe-temple-city/"
+    },
+    {
+      "n": "Meet Fresh",
+      "c": "Temple City",
+      "u": "/boba/ca/temple-city/meet-fresh-temple-city/"
+    },
+    {
+      "n": "Tea Station",
+      "c": "Temple City",
+      "u": "/boba/ca/temple-city/tea-station-temple-city/"
+    },
+    {
+      "n": "Boba Loca",
+      "c": "Burbank",
+      "u": "/boba/ca/burbank/boba-loca-burbank/"
+    },
+    {
+      "n": "Tea Pop",
+      "c": "Burbank",
+      "u": "/boba/ca/burbank/tea-pop-burbank/"
+    },
+    {
+      "n": "It's Boba Time",
+      "c": "Hollywood",
+      "u": "/boba/ca/hollywood/its-boba-time-hollywood/"
+    },
+    {
+      "n": "Cantaloop",
+      "c": "Hollywood",
+      "u": "/boba/ca/hollywood/cantaloop-hollywood/"
+    },
+    {
+      "n": "Hollywood Rock Cafe",
+      "c": "Hollywood",
+      "u": "/boba/ca/hollywood/hollywood-rock-cafe-hollywood/"
+    },
+    {
+      "n": "Pearl's Finest Teas",
+      "c": "Hollywood",
+      "u": "/boba/ca/hollywood/pearls-finest-teas-hollywood/"
+    },
+    {
+      "n": "Hart's Cafe",
+      "c": "Hollywood",
+      "u": "/boba/ca/hollywood/harts-cafe-hollywood/"
+    },
+    {
+      "n": "Alfred Tea",
+      "c": "Hollywood",
+      "u": "/boba/ca/hollywood/alfred-tea-hollywood/"
+    },
+    {
+      "n": "Share Tea",
+      "c": "Cerritos",
+      "u": "/boba/ca/cerritos/share-tea-cerritos/"
+    },
+    {
+      "n": "Fusion Tea Bar",
+      "c": "Cerritos",
+      "u": "/boba/ca/cerritos/fusion-tea-bar-cerritos/"
+    },
+    {
+      "n": "BAMBU",
+      "c": "Cerritos",
+      "u": "/boba/ca/cerritos/bambu-cerritos/"
+    },
+    {
+      "n": "Kape Republik",
+      "c": "Cerritos",
+      "u": "/boba/ca/cerritos/kape-republik-cerritos/"
+    },
+    {
+      "n": "Tapioca Express",
+      "c": "Cerritos",
+      "u": "/boba/ca/cerritos/tapioca-express-cerritos/"
+    },
+    {
+      "n": "Guppy Teahouse",
+      "c": "Cerritos",
+      "u": "/boba/ca/cerritos/guppy-teahouse-cerritos/"
+    },
+    {
+      "n": "Class 302",
+      "c": "Cerritos",
+      "u": "/boba/ca/cerritos/class-302-cerritos/"
+    },
+    {
+      "n": "Cha2O",
+      "c": "Cerritos",
+      "u": "/boba/ca/cerritos/cha2o-cerritos/"
+    },
+    {
+      "n": "Tea Station",
+      "c": "Cerritos",
+      "u": "/boba/ca/cerritos/tea-station-cerritos/"
+    },
+    {
+      "n": "It's Boba Time",
+      "c": "Artesia",
+      "u": "/boba/ca/artesia/its-boba-time-artesia/"
+    },
+    {
+      "n": "Dolphin Bay",
+      "c": "Artesia",
+      "u": "/boba/ca/artesia/dolphin-bay-artesia/"
+    },
+    {
+      "n": "Lollicup",
+      "c": "Artesia",
+      "u": "/boba/ca/artesia/lollicup-artesia/"
+    },
+    {
+      "n": "The Loose Teas",
+      "c": "Monrovia",
+      "u": "/boba/ca/monrovia/the-loose-teas-monrovia/"
+    },
+    {
+      "n": "Roasting Water",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/roasting-water-westminster/"
+    },
+    {
+      "n": "4 Seasons Tea",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/4-seasons-tea-westminster/"
+    },
+    {
+      "n": "Bloomz Tea",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/bloomz-tea-westminster/"
+    },
+    {
+      "n": "3 Blossoms Cafe",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/3-blossoms-cafe-westminster/"
+    },
+    {
+      "n": "Dingtea Bolsa",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/dingtea-bolsa-westminster/"
+    },
+    {
+      "n": "Zero Degrees",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/zero-degrees-westminster/"
+    },
+    {
+      "n": "Lollicup",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/lollicup-westminster/"
+    },
+    {
+      "n": "Boba Corner 2",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/boba-corner-2-westminster/"
+    },
+    {
+      "n": "Snow Monster",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/snow-monster-westminster/"
+    },
+    {
+      "n": "Kung Fu Tea",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/kung-fu-tea-westminster/"
+    },
+    {
+      "n": "Tapioca Express",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/tapioca-express-westminster/"
+    },
+    {
+      "n": "Tebo Tebo Tea Lounge",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/tebo-tebo-tea-lounge-westminster/"
+    },
+    {
+      "n": "Tebo Tebo Tea Express",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/tebo-tebo-tea-express-westminster/"
+    },
+    {
+      "n": "Turtle Tea",
+      "c": "Westminster",
+      "u": "/boba/ca/westminster/turtle-tea-westminster/"
+    },
+    {
+      "n": "Pick Me Up Teahouse",
+      "c": "Garden Grove",
+      "u": "/boba/ca/garden-grove/pick-me-up-teahouse-garden-grove/"
+    },
+    {
+      "n": "Almond Haus",
+      "c": "Garden Grove",
+      "u": "/boba/ca/garden-grove/almond-haus-garden-grove/"
+    },
+    {
+      "n": "7 Leaves Cafe",
+      "c": "Garden Grove",
+      "u": "/boba/ca/garden-grove/7-leaves-cafe-garden-grove/"
+    },
+    {
+      "n": "Gotcha Cafe",
+      "c": "Garden Grove",
+      "u": "/boba/ca/garden-grove/gotcha-cafe-garden-grove/"
+    },
+    {
+      "n": "Tastea",
+      "c": "Garden Grove",
+      "u": "/boba/ca/garden-grove/tastea-garden-grove/"
+    },
+    {
+      "n": "Roasting Water",
+      "c": "Garden Grove",
+      "u": "/boba/ca/garden-grove/roasting-water-garden-grove/"
+    },
+    {
+      "n": "Boba Loca",
+      "c": "Garden Grove",
+      "u": "/boba/ca/garden-grove/boba-loca-garden-grove/"
+    },
+    {
+      "n": "Crave",
+      "c": "Garden Grove",
+      "u": "/boba/ca/garden-grove/crave-garden-grove/"
+    },
+    {
+      "n": "Mio Tea House",
+      "c": "Garden Grove",
+      "u": "/boba/ca/garden-grove/mio-tea-house-garden-grove/"
+    },
+    {
+      "n": "Urban Location",
+      "c": "Garden Grove",
+      "u": "/boba/ca/garden-grove/urban-location-garden-grove/"
+    },
+    {
+      "n": "Tebo Tebo Tea Express",
+      "c": "Garden Grove",
+      "u": "/boba/ca/garden-grove/tebo-tebo-tea-express-garden-grove/"
+    },
+    {
+      "n": "Ten Ren Tea",
+      "c": "Anaheim",
+      "u": "/boba/ca/anaheim/ten-ren-tea-anaheim/"
+    },
+    {
+      "n": "Mini Monster",
+      "c": "Anaheim",
+      "u": "/boba/ca/anaheim/mini-monster-anaheim/"
+    },
+    {
+      "n": "Formosa Tea Time",
+      "c": "Anaheim",
+      "u": "/boba/ca/anaheim/formosa-tea-time-anaheim/"
+    },
+    {
+      "n": "OMG! Dessert Lounge",
+      "c": "Anaheim",
+      "u": "/boba/ca/anaheim/omg-dessert-lounge-anaheim/"
+    },
+    {
+      "n": "Monkey Tea",
+      "c": "Huntington Beach",
+      "u": "/boba/ca/huntington-beach/monkey-tea-huntington-beach/"
+    },
+    {
+      "n": "TeaArias",
+      "c": "Huntington Beach",
+      "u": "/boba/ca/huntington-beach/teaarias-huntington-beach/"
+    },
+    {
+      "n": "7 Leaves Cafe",
+      "c": "Huntington Beach",
+      "u": "/boba/ca/huntington-beach/7-leaves-cafe-huntington-beach/"
+    },
+    {
+      "n": "Snow Monster",
+      "c": "Huntington Beach",
+      "u": "/boba/ca/huntington-beach/snow-monster-huntington-beach/"
+    },
+    {
+      "n": "Share Tea",
+      "c": "Fullerton",
+      "u": "/boba/ca/fullerton/share-tea-fullerton/"
+    },
+    {
+      "n": "Zero Express",
+      "c": "Fullerton",
+      "u": "/boba/ca/fullerton/zero-express-fullerton/"
+    },
+    {
+      "n": "Ice Bomb",
+      "c": "Fullerton",
+      "u": "/boba/ca/fullerton/ice-bomb-fullerton/"
+    },
+    {
+      "n": "Cafe Bing",
+      "c": "Fullerton",
+      "u": "/boba/ca/fullerton/cafe-bing-fullerton/"
+    },
+    {
+      "n": "Ten Ren's Tea Time",
+      "c": "Fullerton",
+      "u": "/boba/ca/fullerton/ten-rens-tea-time-fullerton/"
+    },
+    {
+      "n": "Cha2o",
+      "c": "Fullerton",
+      "u": "/boba/ca/fullerton/cha2o-fullerton/"
+    },
+    {
+      "n": "Pink Boba",
+      "c": "Fullerton",
+      "u": "/boba/ca/fullerton/pink-boba-fullerton/"
+    },
+    {
+      "n": "Quickly",
+      "c": "Fullerton",
+      "u": "/boba/ca/fullerton/quickly-fullerton/"
+    },
+    {
+      "n": "Kung Fu Tea",
+      "c": "Fullerton",
+      "u": "/boba/ca/fullerton/kung-fu-tea-fullerton/"
+    },
+    {
+      "n": "BAMBU",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/bambu-irvine/"
+    },
+    {
+      "n": "7 Leaves Cafe",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/7-leaves-cafe-irvine/"
+    },
+    {
+      "n": "Honeyberry",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/honeyberry-irvine/"
+    },
+    {
+      "n": "Lollicup",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/lollicup-irvine/"
+    },
+    {
+      "n": "Quickly",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/quickly-irvine/"
+    },
+    {
+      "n": "Tapioca Express",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/tapioca-express-irvine/"
+    },
+    {
+      "n": "i-Tea Cafe",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/i-tea-cafe-irvine/"
+    },
+    {
+      "n": "Tea Station",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/tea-station-irvine/"
+    },
+    {
+      "n": "Snow Monster",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/snow-monster-irvine/"
+    },
+    {
+      "n": "E + Boba",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/e-boba-irvine/"
+    },
+    {
+      "n": "Cha For Tea",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/cha-for-tea-irvine/"
+    },
+    {
+      "n": "Class 302",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/class-302-irvine/"
+    },
+    {
+      "n": "Tebo Tebo Tea Lounge",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/tebo-tebo-tea-lounge-irvine/"
+    },
+    {
+      "n": "85C Bakery Cafe",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/85c-bakery-cafe-irvine/"
+    },
+    {
+      "n": "Champion Food",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/champion-food-irvine/"
+    },
+    {
+      "n": "Shaved N Boba",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/shaved-n-boba-irvine/"
+    },
+    {
+      "n": "85C Bakery Cafe (Diamond Jamboree)",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/85c-bakery-cafe-diamond-jamboree-irvine/"
+    },
+    {
+      "n": "Midastee Tea House",
+      "c": "Brea",
+      "u": "/boba/ca/brea/midastee-tea-house-brea/"
+    },
+    {
+      "n": "iTea",
+      "c": "Yorba Linda",
+      "u": "/boba/ca/yorba-linda/itea-yorba-linda/"
+    },
+    {
+      "n": "Harmony Tea Bar",
+      "c": "Mission Viejo",
+      "u": "/boba/ca/mission-viejo/harmony-tea-bar-mission-viejo/"
+    },
+    {
+      "n": "Milk Box",
+      "c": "Mission Viejo",
+      "u": "/boba/ca/mission-viejo/milk-box-mission-viejo/"
+    },
+    {
+      "n": "Chatime",
+      "c": "Mission Viejo",
+      "u": "/boba/ca/mission-viejo/chatime-mission-viejo/"
+    },
+    {
+      "n": "Tastea",
+      "c": "Costa Mesa",
+      "u": "/boba/ca/costa-mesa/tastea-costa-mesa/"
+    },
+    {
+      "n": "Tapioca Express",
+      "c": "Costa Mesa",
+      "u": "/boba/ca/costa-mesa/tapioca-express-costa-mesa/"
+    },
+    {
+      "n": "That Boba Place",
+      "c": "Costa Mesa",
+      "u": "/boba/ca/costa-mesa/that-boba-place-costa-mesa/"
+    },
+    {
+      "n": "7 Leaves Cafe",
+      "c": "Costa Mesa",
+      "u": "/boba/ca/costa-mesa/7-leaves-cafe-costa-mesa/"
+    },
+    {
+      "n": "Sweetea Cafe",
+      "c": "Costa Mesa",
+      "u": "/boba/ca/costa-mesa/sweetea-cafe-costa-mesa/"
+    },
+    {
+      "n": "Dragonfly Tea Bar",
+      "c": "Orange",
+      "u": "/boba/ca/orange/dragonfly-tea-bar-orange/"
+    },
+    {
+      "n": "H2SNOW",
+      "c": "Orange",
+      "u": "/boba/ca/orange/h2snow-orange/"
+    },
+    {
+      "n": "It's Boba Time",
+      "c": "Tustin",
+      "u": "/boba/ca/tustin/its-boba-time-tustin/"
+    },
+    {
+      "n": "7 Leaves",
+      "c": "Tustin",
+      "u": "/boba/ca/tustin/7-leaves-tustin/"
+    },
+    {
+      "n": "Leaf N Cream",
+      "c": "Tustin",
+      "u": "/boba/ca/tustin/leaf-n-cream-tustin/"
+    },
+    {
+      "n": "Sharetea",
+      "c": "Santa Ana",
+      "u": "/boba/ca/santa-ana/sharetea-santa-ana/"
+    },
+    {
+      "n": "Class 302",
+      "c": "Santa Ana",
+      "u": "/boba/ca/santa-ana/class-302-santa-ana/"
+    },
+    {
+      "n": "Lantern Grill",
+      "c": "Santa Ana",
+      "u": "/boba/ca/santa-ana/lantern-grill-santa-ana/"
+    },
+    {
+      "n": "Sweet Boba",
+      "c": "Santa Ana",
+      "u": "/boba/ca/santa-ana/sweet-boba-santa-ana/"
+    },
+    {
+      "n": "Tapioca Express",
+      "c": "Santa Ana",
+      "u": "/boba/ca/santa-ana/tapioca-express-santa-ana/"
+    },
+    {
+      "n": "Milk Bar",
+      "c": "Fountain Valley",
+      "u": "/boba/ca/fountain-valley/milk-bar-fountain-valley/"
+    },
+    {
+      "n": "Craved Tea House",
+      "c": "Fountain Valley",
+      "u": "/boba/ca/fountain-valley/craved-tea-house-fountain-valley/"
+    },
+    {
+      "n": "T Cup Coffee & Tea",
+      "c": "Fountain Valley",
+      "u": "/boba/ca/fountain-valley/t-cup-coffee-and-tea-fountain-valley/"
+    },
+    {
+      "n": "7 Leaves Cafe",
+      "c": "Fountain Valley",
+      "u": "/boba/ca/fountain-valley/7-leaves-cafe-fountain-valley/"
+    },
+    {
+      "n": "7 Leaves Cafe",
+      "c": "Cypress",
+      "u": "/boba/ca/cypress/7-leaves-cafe-cypress/"
+    },
+    {
+      "n": "Boba Tea House",
+      "c": "Riverside",
+      "u": "/boba/ca/riverside/boba-tea-house-riverside/"
+    },
+    {
+      "n": "Boba Fiend Tea House",
+      "c": "Riverside",
+      "u": "/boba/ca/riverside/boba-fiend-tea-house-riverside/"
+    },
+    {
+      "n": "O' Tea Time",
+      "c": "Riverside",
+      "u": "/boba/ca/riverside/o-tea-time-riverside/"
+    },
+    {
+      "n": "5s' Teas",
+      "c": "Riverside",
+      "u": "/boba/ca/riverside/5s-teas-riverside/"
+    },
+    {
+      "n": "Bobaloca",
+      "c": "Riverside",
+      "u": "/boba/ca/riverside/bobaloca-riverside/"
+    },
+    {
+      "n": "Lollicup Fresh",
+      "c": "Riverside",
+      "u": "/boba/ca/riverside/lollicup-fresh-riverside/"
+    },
+    {
+      "n": "Ten Ren's Tea Time",
+      "c": "Riverside",
+      "u": "/boba/ca/riverside/ten-rens-tea-time-riverside/"
+    },
+    {
+      "n": "Boba Cafe",
+      "c": "Riverside",
+      "u": "/boba/ca/riverside/boba-cafe-riverside/"
+    },
+    {
+      "n": "Cha2O",
+      "c": "Riverside",
+      "u": "/boba/ca/riverside/cha2o-riverside/"
+    },
+    {
+      "n": "Tea Time Express",
+      "c": "Corona",
+      "u": "/boba/ca/corona/tea-time-express-corona/"
+    },
+    {
+      "n": "Tea Time",
+      "c": "Temecula",
+      "u": "/boba/ca/temecula/tea-time-temecula/"
+    },
+    {
+      "n": "Chill Zone",
+      "c": "Temecula",
+      "u": "/boba/ca/temecula/chill-zone-temecula/"
+    },
+    {
+      "n": "Triple Beverage",
+      "c": "Temecula",
+      "u": "/boba/ca/temecula/triple-beverage-temecula/"
+    },
+    {
+      "n": "Snow & Crab",
+      "c": "Temecula",
+      "u": "/boba/ca/temecula/snow-and-crab-temecula/"
+    },
+    {
+      "n": "Juice Bar",
+      "c": "Temecula",
+      "u": "/boba/ca/temecula/juice-bar-temecula/"
+    },
+    {
+      "n": "Cafe Gossip",
+      "c": "Moreno Valley",
+      "u": "/boba/ca/moreno-valley/cafe-gossip-moreno-valley/"
+    },
+    {
+      "n": "Better Be Donuts",
+      "c": "Moreno Valley",
+      "u": "/boba/ca/moreno-valley/better-be-donuts-moreno-valley/"
+    },
+    {
+      "n": "Boba Express",
+      "c": "Moreno Valley",
+      "u": "/boba/ca/moreno-valley/boba-express-moreno-valley/"
+    },
+    {
+      "n": "7 Leaves Cafe",
+      "c": "Chino",
+      "u": "/boba/ca/chino/7-leaves-cafe-chino/"
+    },
+    {
+      "n": "Boba Fiend Tea House",
+      "c": "Rancho Cucamonga",
+      "u": "/boba/ca/rancho-cucamonga/boba-fiend-tea-house-rancho-cucamonga/"
+    },
+    {
+      "n": "BOBA PLANET & Sandwiches",
+      "c": "Rancho Cucamonga",
+      "u": "/boba/ca/rancho-cucamonga/boba-planet-and-sandwiches-rancho-cucamonga/"
+    },
+    {
+      "n": "Square Bar Cafe",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/square-bar-cafe-san-diego/"
+    },
+    {
+      "n": "Tapioca Express",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/tapioca-express-san-diego/"
+    },
+    {
+      "n": "Tapioca Heaven",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/tapioca-heaven-san-diego/"
+    },
+    {
+      "n": "Bobalicious",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/bobalicious-san-diego/"
+    },
+    {
+      "n": "Cafe Hue",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/cafe-hue-san-diego/"
+    },
+    {
+      "n": "Trinitea",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/trinitea-san-diego/"
+    },
+    {
+      "n": "Lollicup Tea Zone",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/lollicup-tea-zone-san-diego/"
+    },
+    {
+      "n": "VaniTea Cafe",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/vanitea-cafe-san-diego/"
+    },
+    {
+      "n": "Tastea Grill",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/tastea-grill-san-diego/"
+    },
+    {
+      "n": "M.I. Tea Express",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/mi-tea-express-san-diego/"
+    },
+    {
+      "n": "Tea Station",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/tea-station-san-diego/"
+    },
+    {
+      "n": "It's Boba Time",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/its-boba-time-san-diego/"
+    },
+    {
+      "n": "Tea N More",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/tea-n-more-san-diego/"
+    },
+    {
+      "n": "Up2you Cafe",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/up2you-cafe-san-diego/"
+    },
+    {
+      "n": "Ice Box",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/ice-box-san-diego/"
+    },
+    {
+      "n": "SD Boba Tea",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/sd-boba-tea-san-diego/"
+    },
+    {
+      "n": "Share Tea",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/share-tea-san-diego/"
+    },
+    {
+      "n": "85 C Bakery",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/85-c-bakery-san-diego/"
+    },
+    {
+      "n": "Kung Fu Tea",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/kung-fu-tea-san-diego/"
+    },
+    {
+      "n": "OO Tea",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/oo-tea-san-diego/"
+    },
+    {
+      "n": "Guiltea Cravings",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/guiltea-cravings-san-diego/"
+    },
+    {
+      "n": "Boba Bar (OG Location)",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/boba-bar-og-location-san-diego/"
+    },
+    {
+      "n": "Snoice",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/snoice-san-diego/"
+    },
+    {
+      "n": "Boba Bar and Desserts",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/boba-bar-and-desserts-san-diego/"
+    },
+    {
+      "n": "Infini Tea",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/infini-tea-san-diego/"
+    },
+    {
+      "n": "Camellia Rd. Tea Bar",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/camellia-rd-tea-bar-san-diego/"
+    },
+    {
+      "n": "Serenitea",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/serenitea-san-diego/"
+    },
+    {
+      "n": "Tea Republic",
+      "c": "San Diego",
+      "u": "/boba/ca/san-diego/tea-republic-san-diego/"
+    },
+    {
+      "n": "Taro Yuan",
+      "c": "City of Industry",
+      "u": "/boba/ca/city-of-industry/taro-yuan-city-of-industry/"
+    },
+    {
+      "n": "Somisomi",
+      "c": "Brea",
+      "u": "/boba/ca/brea/somisomi-brea/"
+    },
+    {
+      "n": "Chicha San Chen",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/chicha-san-chen-san-gabriel/"
+    },
+    {
+      "n": "Molly Tea",
+      "c": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/molly-tea-san-gabriel/"
+    },
+    {
+      "n": "Sunright Tea Studio",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/sunright-tea-studio-irvine/"
+    },
+    {
+      "n": "One Zo Boba",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/one-zo-boba-irvine/"
+    },
+    {
+      "n": "Meet Fresh",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/meet-fresh-irvine/"
+    },
+    {
+      "n": "Birdie Bowl and Juicery",
+      "c": "Costa Mesa",
+      "u": "/boba/ca/costa-mesa/birdie-bowl-and-juicery-costa-mesa/"
+    },
+    {
+      "n": "Ubatuba Acai",
+      "c": "Brea",
+      "u": "/boba/ca/brea/ubatuba-acai-brea/"
+    },
+    {
+      "n": "Acai Joint",
+      "c": "Arcadia",
+      "u": "/boba/ca/arcadia/acai-joint-arcadia/"
+    },
+    {
+      "n": "Paradise Bowls",
+      "c": "Irvine",
+      "u": "/boba/ca/irvine/paradise-bowls-irvine/"
+    },
+    {
+      "n": "Acai Republic",
+      "c": "Fullerton",
+      "u": "/boba/ca/fullerton/acai-republic-fullerton/"
+    },
+    {
+      "n": "Berry Brand",
+      "c": "Tustin",
+      "u": "/boba/ca/tustin/berry-brand-tustin/"
+    }
+  ],
+  "cities": [
+    {
+      "n": "Anaheim",
+      "u": "/boba/ca/anaheim/"
+    },
+    {
+      "n": "Arcadia",
+      "u": "/boba/ca/arcadia/"
+    },
+    {
+      "n": "Artesia",
+      "u": "/boba/ca/artesia/"
+    },
+    {
+      "n": "Baldwin Park",
+      "u": "/boba/ca/baldwin-park/"
+    },
+    {
+      "n": "Brea",
+      "u": "/boba/ca/brea/"
+    },
+    {
+      "n": "Burbank",
+      "u": "/boba/ca/burbank/"
+    },
+    {
+      "n": "Cerritos",
+      "u": "/boba/ca/cerritos/"
+    },
+    {
+      "n": "Chino",
+      "u": "/boba/ca/chino/"
+    },
+    {
+      "n": "City of Industry",
+      "u": "/boba/ca/city-of-industry/"
+    },
+    {
+      "n": "Corona",
+      "u": "/boba/ca/corona/"
+    },
+    {
+      "n": "Costa Mesa",
+      "u": "/boba/ca/costa-mesa/"
+    },
+    {
+      "n": "Covina",
+      "u": "/boba/ca/covina/"
+    },
+    {
+      "n": "Cypress",
+      "u": "/boba/ca/cypress/"
+    },
+    {
+      "n": "Diamond Bar",
+      "u": "/boba/ca/diamond-bar/"
+    },
+    {
+      "n": "El Monte",
+      "u": "/boba/ca/el-monte/"
+    },
+    {
+      "n": "Fountain Valley",
+      "u": "/boba/ca/fountain-valley/"
+    },
+    {
+      "n": "Fullerton",
+      "u": "/boba/ca/fullerton/"
+    },
+    {
+      "n": "Garden Grove",
+      "u": "/boba/ca/garden-grove/"
+    },
+    {
+      "n": "Gardena",
+      "u": "/boba/ca/gardena/"
+    },
+    {
+      "n": "Hollywood",
+      "u": "/boba/ca/hollywood/"
+    },
+    {
+      "n": "Huntington Beach",
+      "u": "/boba/ca/huntington-beach/"
+    },
+    {
+      "n": "Huntington Park",
+      "u": "/boba/ca/huntington-park/"
+    },
+    {
+      "n": "Irvine",
+      "u": "/boba/ca/irvine/"
+    },
+    {
+      "n": "Long Beach",
+      "u": "/boba/ca/long-beach/"
+    },
+    {
+      "n": "Los Angeles",
+      "u": "/boba/ca/los-angeles/"
+    },
+    {
+      "n": "Mission Viejo",
+      "u": "/boba/ca/mission-viejo/"
+    },
+    {
+      "n": "Monrovia",
+      "u": "/boba/ca/monrovia/"
+    },
+    {
+      "n": "Monterey Park",
+      "u": "/boba/ca/monterey-park/"
+    },
+    {
+      "n": "Moreno Valley",
+      "u": "/boba/ca/moreno-valley/"
+    },
+    {
+      "n": "Orange",
+      "u": "/boba/ca/orange/"
+    },
+    {
+      "n": "Pasadena",
+      "u": "/boba/ca/pasadena/"
+    },
+    {
+      "n": "Pomona",
+      "u": "/boba/ca/pomona/"
+    },
+    {
+      "n": "Rancho Cucamonga",
+      "u": "/boba/ca/rancho-cucamonga/"
+    },
+    {
+      "n": "Riverside",
+      "u": "/boba/ca/riverside/"
+    },
+    {
+      "n": "Rosemead",
+      "u": "/boba/ca/rosemead/"
+    },
+    {
+      "n": "Rowland Heights",
+      "u": "/boba/ca/rowland-heights/"
+    },
+    {
+      "n": "San Diego",
+      "u": "/boba/ca/san-diego/"
+    },
+    {
+      "n": "San Gabriel",
+      "u": "/boba/ca/san-gabriel/"
+    },
+    {
+      "n": "Santa Ana",
+      "u": "/boba/ca/santa-ana/"
+    },
+    {
+      "n": "Santa Monica",
+      "u": "/boba/ca/santa-monica/"
+    },
+    {
+      "n": "Temecula",
+      "u": "/boba/ca/temecula/"
+    },
+    {
+      "n": "Temple City",
+      "u": "/boba/ca/temple-city/"
+    },
+    {
+      "n": "Tustin",
+      "u": "/boba/ca/tustin/"
+    },
+    {
+      "n": "Walnut",
+      "u": "/boba/ca/walnut/"
+    },
+    {
+      "n": "Westminster",
+      "u": "/boba/ca/westminster/"
+    },
+    {
+      "n": "Yorba Linda",
+      "u": "/boba/ca/yorba-linda/"
+    }
+  ],
+  "pages": [
+    {
+      "n": "Best for date night",
+      "u": "/best/date-night/",
+      "g": "Best for"
+    },
+    {
+      "n": "Best for first date",
+      "u": "/best/first-date/",
+      "g": "Best for"
+    },
+    {
+      "n": "Best for open late",
+      "u": "/best/open-late/",
+      "g": "Best for"
+    },
+    {
+      "n": "Best for study",
+      "u": "/best/study/",
+      "g": "Best for"
+    },
+    {
+      "n": "Best for groups",
+      "u": "/best/group/",
+      "g": "Best for"
+    },
+    {
+      "n": "Best for with food",
+      "u": "/best/with-food/",
+      "g": "Best for"
+    },
+    {
+      "n": "Best for drive-thru",
+      "u": "/best/drive-thru/",
+      "g": "Best for"
+    },
+    {
+      "n": "Best for brown sugar",
+      "u": "/best/brown-sugar/",
+      "g": "Best for"
+    },
+    {
+      "n": "Best for fruit tea",
+      "u": "/best/fruit-tea/",
+      "g": "Best for"
+    },
+    {
+      "n": "Best for matcha",
+      "u": "/best/matcha/",
+      "g": "Best for"
+    },
+    {
+      "n": "Best for non-dairy",
+      "u": "/best/non-dairy/",
+      "g": "Best for"
+    },
+    {
+      "n": "Best for cheap",
+      "u": "/best/cheap/",
+      "g": "Best for"
+    },
+    {
+      "n": "The Order Oracle",
+      "u": "/tools/order-oracle/",
+      "g": "Tools"
+    },
+    {
+      "n": "Drink Matcher",
+      "u": "/tools/drink-matcher/",
+      "g": "Tools"
+    },
+    {
+      "n": "Build Your Sip",
+      "u": "/tools/build-your-sip/",
+      "g": "Tools"
+    },
+    {
+      "n": "Date Night Planner",
+      "u": "/tools/date-planner/",
+      "g": "Tools"
+    },
+    {
+      "n": "Roulette",
+      "u": "/tools/roulette/",
+      "g": "Tools"
+    },
+    {
+      "n": "Brown sugar vs tiger sugar",
+      "u": "/guide/brown-sugar-vs-tiger-sugar/",
+      "g": "Guides"
+    },
+    {
+      "n": "Crystal boba vs tapioca",
+      "u": "/guide/crystal-boba-vs-tapioca/",
+      "g": "Guides"
+    },
+    {
+      "n": "Loose-leaf vs powder",
+      "u": "/guide/loose-leaf-vs-powder/",
+      "g": "Guides"
+    },
+    {
+      "n": "How to order non-dairy",
+      "u": "/guide/order-non-dairy-boba/",
+      "g": "Guides"
+    },
+    {
+      "n": "What 50% sweet means",
+      "u": "/guide/what-50-percent-sweet-means/",
+      "g": "Guides"
+    },
+    {
+      "n": "What cheese foam is",
+      "u": "/guide/what-is-cheese-foam/",
+      "g": "Guides"
+    },
+    {
+      "n": "New in The 626",
+      "u": "/new/sgv/",
+      "g": "New"
+    },
+    {
+      "n": "The 626",
+      "u": "/area/sgv/",
+      "g": "Areas"
+    },
+    {
+      "n": "New in Orange County",
+      "u": "/new/orange-county/",
+      "g": "New"
+    },
+    {
+      "n": "Orange County",
+      "u": "/area/orange-county/",
+      "g": "Areas"
+    },
+    {
+      "n": "New in Greater LA",
+      "u": "/new/greater-la/",
+      "g": "New"
+    },
+    {
+      "n": "Greater LA",
+      "u": "/area/greater-la/",
+      "g": "Areas"
+    },
+    {
+      "n": "New in San Diego",
+      "u": "/new/san-diego/",
+      "g": "New"
+    },
+    {
+      "n": "San Diego",
+      "u": "/area/san-diego/",
+      "g": "Areas"
+    },
+    {
+      "n": "New in Inland Empire",
+      "u": "/new/inland-empire/",
+      "g": "New"
+    },
+    {
+      "n": "Inland Empire",
+      "u": "/area/inland-empire/",
+      "g": "Areas"
+    },
+    {
+      "n": "The Pantry",
+      "u": "/pantry/",
+      "g": "Pages"
+    },
+    {
+      "n": "The directory",
+      "u": "/directory/",
+      "g": "Pages"
+    },
+    {
+      "n": "The Pearl Ratings",
+      "u": "/critic/",
+      "g": "Pages"
+    },
+    {
+      "n": "How we rank",
+      "u": "/how-we-rank/",
+      "g": "Pages"
+    },
+    {
+      "n": "Meetups & clubs",
+      "u": "/meetups/",
+      "g": "Pages"
+    },
+    {
+      "n": "New openings",
+      "u": "/new/",
+      "g": "Pages"
+    }
+  ],
+  "ingredients": [
+    {
+      "n": "Aloe vera",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Coconut jelly / Nata de coco",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Lychee jelly",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Rainbow jelly",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Chrysanthemum (flower)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Goji berry / wolfberry",
+      "u": "/pantry/"
+    },
+    {
+      "n": "White fungus / snow fungus",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Ginger",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Osmanthus (sweet olive flower)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Tapioca pearls / Boba (black pearls)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Crystal boba / Deerioca",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Taro balls",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Sweet potato balls",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Pudding (custard)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Egg pudding",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Sago",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Mochi / QQ",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Taro paste",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Taiwanese shaved snow / snowflake ice",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Thai rolled ice cream",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Red bean (adzuki)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Mung bean",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Lotus seed",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Job's tears (Chinese 'barley')",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Pearl barley (true barley vs. coix)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Winter melon (wax gourd / ash gourd)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Winter melon tea",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Cheese tea",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Black tea",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Assam black tea",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Green tea",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Oolong tea",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Jasmine tea",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Earl Grey tea",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Thai tea",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Matcha",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Hojicha (roasted green tea)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Pu-erh tea",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Milk tea vs. fruit tea (the split)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Sweetness levels & ice culture",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Cheese foam / milk cap",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Fresh milk",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Condensed milk",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Non-dairy creamer",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Oat milk",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Brown sugar syrup",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Longan (dried)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Red date / jujube",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Popping boba",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Ube (purple yam)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Matcha soft serve",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Brown sugar boba ice cream",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Mango sticky rice",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Taiyaki",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Mochi donut",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Açaí bowl (how it is built)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Açaí (the berry)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Ubatuba Açaí",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Acai Joint",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Paradise Bowls",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Pressed (Acai Bowls / Juicery)",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Nekter Juice Bar",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Berry Brand",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Acai Republic",
+      "u": "/pantry/"
+    },
+    {
+      "n": "Sunberry Acai Bowls",
+      "u": "/pantry/"
+    }
+  ]
+}

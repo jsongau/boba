@@ -1,137 +1,259 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Boba Meetups &amp; Clubs in Southern California (2026) | Boba Night</title>
 <meta name="description" content="Run clubs, mahjong nights, book clubs, and cupsleeve events that meet at SoCal boba shops — every listing sourced and linked to the organizer. Boba Night.">
 <link rel="canonical" href="https://www.bobanight.com/meetups/">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.css">
-<style>
-.mu-card{border:1px solid var(--line,#E4D8C7);border-radius:14px;padding:1.2rem 1.4rem;margin:.9rem 0;background:var(--paper,#FBF7F0)}
-.mu-card h3{margin:0 0 .3rem;font-size:1.12rem}
-.mu-meta{font-size:.85rem;opacity:.75;margin:0 0 .5rem}
-.mu-card p{margin:.3rem 0}
-.mu-src{font-size:.8rem;margin-top:.6rem}
-.mu-src a{text-decoration:underline;text-underline-offset:3px}
-.mu-tag{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.22em .6em;border-radius:6px;margin-right:.4rem;color:#38491f;background:rgba(185,238,99,.26);border:1px solid rgba(140,180,70,.5)}
-.mu-tag--sgv{color:#6b21a8;background:rgba(216,180,254,.28);border-color:rgba(168,85,247,.5)}
+<meta name="theme-color" content="#0B0C0E">
+<link rel="alternate" type="text/calendar" title="Boba Night events" href="/meetups/ics/bobanight-events.ics">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/luxury-homepage.css">
+<link rel="stylesheet" href="/css/nav-midnight.css">
+<style id="w4">
+/* W4 events hub — layered on luxury-homepage.css, obsidian theme. New rules only. */
+.w4-crumb{font-family:var(--sans);font-size:.78rem;letter-spacing:.02em;color:var(--muted-dk);
+  display:flex;gap:.5rem;align-items:center;padding:1.6rem 0 0}
+.w4-crumb a{color:var(--muted-dk)}.w4-crumb a:hover{color:var(--pearl)}
+.w4-crumb .sep{opacity:.5}
+.w4-head{padding:2.2rem 0 1rem;max-width:60ch}
+.w4-head h1{font-size:clamp(2.2rem,5.4vw,3.6rem);margin:.3rem 0 1rem}
+.w4-notice{display:flex;gap:.8rem;align-items:flex-start;border:1px solid var(--line-dk);
+  border-radius:3px;padding:1rem 1.2rem;margin:1.4rem 0 0;background:rgba(244,239,231,.03);
+  font-size:.9rem;color:var(--silver)}
+.w4-notice .w4-note-k{font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--champagne);white-space:nowrap;padding-top:.15rem}
+.w4-sec{padding:clamp(2.4rem,5vw,3.6rem) 0 0}
+.w4-sec-head{display:flex;align-items:baseline;gap:.9rem;border-bottom:1px solid var(--line-dk);
+  padding-bottom:.9rem;margin-bottom:1.6rem}
+.w4-sec-head h2{font-size:clamp(1.5rem,3.2vw,2.1rem)}
+.w4-grid{display:grid;gap:1px;background:var(--line-dk);border:1px solid var(--line-dk);border-radius:6px;overflow:hidden}
+@media(min-width:780px){.w4-grid{grid-template-columns:1fr 1fr}}
+.w4-card{background:var(--smoked);padding:1.5rem 1.6rem 1.35rem;display:flex;flex-direction:column;gap:.55rem}
+.w4-card-head{display:flex;gap:.4rem;flex-wrap:wrap}
+.w4-tag{font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  padding:.28em .6em;border-radius:2px;border:1px solid var(--line-dk);color:var(--silver);background:rgba(244,239,231,.03)}
+.w4-tag--sgv{color:var(--champagne);border-color:rgba(197,164,109,.4)}
+.w4-tag--kind{color:var(--muted-dk)}
+.w4-card h3{font-size:1.28rem;line-height:1.12;margin:.1rem 0 0}
+.w4-meta{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:.15rem 0 .1rem}
+.w4-chip{font-family:var(--sans);font-size:.64rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--obsidian);background:var(--champagne);padding:.32em .7em;border-radius:2px}
+.w4-cad{font-family:var(--sans);font-size:.78rem;color:var(--silver)}
+.w4-next{font-family:var(--sans);font-size:.8rem;color:var(--pearl)}
+.w4-next-k{font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--syrup);margin-right:.3rem}
+.w4-vibe{font-size:.96rem;color:var(--silver);line-height:1.5;margin:.15rem 0 .1rem}
+.w4-shops{font-size:.85rem;color:var(--silver);margin:.1rem 0}
+.w4-shops-k{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-dk);margin-right:.35rem}
+.w4-shops a{color:var(--pearl);border-bottom:1px solid var(--line-dk)}
+.w4-shops a:hover{border-color:var(--champagne)}
+.w4-shops .w4-in{color:var(--muted-dk);font-size:.8em}
+.w4-links{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;margin-top:auto;padding-top:.5rem}
+.w4-src{font-size:.82rem;font-weight:600;color:var(--pearl);border-bottom:1px solid var(--champagne);padding-bottom:1px}
+.w4-src:hover{color:#fff}
+.w4-ics{font-size:.82rem;color:var(--muted-dk);border-bottom:1px solid var(--line-dk);padding-bottom:1px}
+.w4-ics:hover{color:var(--silver)}
+.w4-checked{font-size:.7rem;color:var(--muted-dk);margin:.35rem 0 0}
+.w4-host{margin-top:clamp(2.4rem,5vw,3.6rem)}
+.w4-host .btn{margin-top:1rem}
+.w4-faq{margin-top:clamp(2.4rem,5vw,3.6rem);border-top:1px solid var(--line-dk);padding-top:1.6rem}
+.w4-faq h3{font-size:1.08rem;margin:1.3rem 0 .3rem}
+.w4-faq p{color:var(--silver);font-size:.94rem;max-width:64ch}
+.w4-faq a,.w4-host a.link-quiet{color:var(--champagne)}
 </style>
-</head><body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="site-header"><div class="header-inner">
-<a class="brand" href="/">Boba <b>Night</b></a>
-<nav class="head-nav" aria-label="Primary">
-<a href="/cities/">Cities</a><a href="/best/">By vibe</a><a href="/tools/">Tools</a><a href="/new/">New</a><a href="/guide/">Guides</a>
-</nav>
-<div class="head-actions"><a class="btn btn-ghost" href="/">Find boba</a></div>
-</div></header>
+</head>
+<body>
+<!-- Boba Night — canonical navigation partial. Generated from build/nav_data.py.
+     Edit the data there, re-render, never hand-patch this file. -->
+<a class="bn-skip" href="#main">Skip to content</a>
+<header class="bn-header" data-bn-header>
+  <div class="bn-bar">
+    <a class="bn-word" href="/" aria-label="Boba Night, home">Boba <b>Night</b></a>
+    <nav class="bn-nav" aria-label="Primary">
+      <div class="bn-item" data-item="shops"><button class="bn-trigger" aria-expanded="false" aria-controls="bnpanel-shops">Shops<span class="bn-caret" aria-hidden="true"></span></button><div class="bn-panel" id="bnpanel-shops" role="region" aria-label="Shops" hidden><div class="bn-mega bn-mega--shops"><div class="bn-rail" role="tablist" aria-label="Regions"><button class="bn-rail-b" role="tab" aria-selected="true" tabindex="0" data-region="the-626" aria-controls="bnpane-the-626">The 626<span class="bn-ct">123</span></button><button class="bn-rail-b" role="tab" aria-selected="false" tabindex="-1" data-region="orange-county" aria-controls="bnpane-orange-county">Orange County<span class="bn-ct">93</span></button><button class="bn-rail-b" role="tab" aria-selected="false" tabindex="-1" data-region="greater-la" aria-controls="bnpane-greater-la">Greater LA<span class="bn-ct">69</span></button><button class="bn-rail-b" role="tab" aria-selected="false" tabindex="-1" data-region="san-diego" aria-controls="bnpane-san-diego">San Diego<span class="bn-ct">28</span></button><button class="bn-rail-b" role="tab" aria-selected="false" tabindex="-1" data-region="inland-empire" aria-controls="bnpane-inland-empire">Inland Empire<span class="bn-ct">21</span></button><a class="bn-rail-b bn-rail-link" href="/near/">Near a landmark</a><a class="bn-rail-b bn-rail-all" href="/directory/">All 334<span class="bn-arrow" aria-hidden="true">&rarr;</span></a></div><div class="bn-panes"><div class="bn-pane" id="bnpane-the-626" role="tabpanel" data-region="the-626"><p class="bn-pane-blurb">The San Gabriel Valley — the densest tea corridor in the country.</p><div class="bn-pane-cities"><a href="/boba/ca/san-gabriel/">San Gabriel<span class="bn-ct">23</span></a><a href="/boba/ca/rowland-heights/">Rowland Heights<span class="bn-ct">20</span></a><a href="/boba/ca/arcadia/">Arcadia<span class="bn-ct">17</span></a><a href="/boba/ca/covina/">Covina<span class="bn-ct">9</span></a><a href="/boba/ca/diamond-bar/">Diamond Bar<span class="bn-ct">9</span></a><a href="/boba/ca/pasadena/">Pasadena<span class="bn-ct">8</span></a><a href="/boba/ca/walnut/">Walnut<span class="bn-ct">8</span></a><a class="bn-viewall" href="/area/sgv/">All of The 626<span class="bn-arrow" aria-hidden="true">&rarr;</span></a></div></div><div class="bn-pane" id="bnpane-orange-county" role="tabpanel" data-region="orange-county" hidden><p class="bn-pane-blurb">Irvine to Westminster, down through Little Saigon.</p><div class="bn-pane-cities"><a href="/boba/ca/irvine/">Irvine<span class="bn-ct">21</span></a><a href="/boba/ca/westminster/">Westminster<span class="bn-ct">14</span></a><a href="/boba/ca/garden-grove/">Garden Grove<span class="bn-ct">11</span></a><a href="/boba/ca/fullerton/">Fullerton<span class="bn-ct">10</span></a><a href="/boba/ca/costa-mesa/">Costa Mesa<span class="bn-ct">6</span></a><a href="/boba/ca/santa-ana/">Santa Ana<span class="bn-ct">5</span></a><a href="/boba/ca/anaheim/">Anaheim<span class="bn-ct">4</span></a><a class="bn-viewall" href="/area/orange-county/">All of Orange County<span class="bn-arrow" aria-hidden="true">&rarr;</span></a></div></div><div class="bn-pane" id="bnpane-greater-la" role="tabpanel" data-region="greater-la" hidden><p class="bn-pane-blurb">The city proper, the beach cities, and the east-side edges.</p><div class="bn-pane-cities"><a href="/boba/ca/los-angeles/">Los Angeles<span class="bn-ct">30</span></a><a href="/boba/ca/cerritos/">Cerritos<span class="bn-ct">9</span></a><a href="/boba/ca/long-beach/">Long Beach<span class="bn-ct">8</span></a><a href="/boba/ca/hollywood/">Hollywood<span class="bn-ct">6</span></a><a href="/boba/ca/santa-monica/">Santa Monica<span class="bn-ct">5</span></a><a href="/boba/ca/pomona/">Pomona<span class="bn-ct">3</span></a><a href="/boba/ca/artesia/">Artesia<span class="bn-ct">3</span></a><a class="bn-viewall" href="/area/greater-la/">All of Greater LA<span class="bn-arrow" aria-hidden="true">&rarr;</span></a></div></div><div class="bn-pane" id="bnpane-san-diego" role="tabpanel" data-region="san-diego" hidden><p class="bn-pane-blurb">Convoy and beyond, all the way south.</p><div class="bn-pane-cities"><a href="/boba/ca/san-diego/">San Diego<span class="bn-ct">28</span></a><a class="bn-viewall" href="/area/san-diego/">All of San Diego<span class="bn-arrow" aria-hidden="true">&rarr;</span></a></div></div><div class="bn-pane" id="bnpane-inland-empire" role="tabpanel" data-region="inland-empire" hidden><p class="bn-pane-blurb">Riverside, Temecula, and the valleys inland.</p><div class="bn-pane-cities"><a href="/boba/ca/riverside/">Riverside<span class="bn-ct">9</span></a><a href="/boba/ca/temecula/">Temecula<span class="bn-ct">5</span></a><a href="/boba/ca/moreno-valley/">Moreno Valley<span class="bn-ct">3</span></a><a href="/boba/ca/rancho-cucamonga/">Rancho Cucamonga<span class="bn-ct">2</span></a><a href="/boba/ca/corona/">Corona<span class="bn-ct">1</span></a><a href="/boba/ca/chino/">Chino<span class="bn-ct">1</span></a><a class="bn-viewall" href="/area/inland-empire/">All of Inland Empire<span class="bn-arrow" aria-hidden="true">&rarr;</span></a></div></div></div><a class="bn-feat" href="/boba/ca/city-of-industry/taro-yuan-city-of-industry/"><span class="bn-feat-plate plate plate--night"><span class="grain"></span></span><span class="bn-feat-kick">Featured</span><span class="bn-feat-t">Taro Yuan</span><span class="bn-feat-s">City of Industry · The featured house — taro pulled fresh, not powdered.</span></a></div></div></div><div class="bn-item" data-item="best-for"><button class="bn-trigger" aria-expanded="false" aria-controls="bnpanel-best-for">Best for<span class="bn-caret" aria-hidden="true"></span></button><div class="bn-panel" id="bnpanel-best-for" role="region" aria-label="Best for" hidden><div class="bn-mega"><div class="bn-cols"><div class="bn-col"><h4>By occasion</h4><div class="bn-col-links"><a href="/best/date-night/">Date night</a><a href="/best/first-date/">First date</a><a href="/best/open-late/">Open late</a><a href="/best/study/">Study</a><a href="/best/group/">Groups</a><a href="/best/with-food/">With food</a><a href="/best/drive-thru/">Drive-thru</a></div></div><div class="bn-col"><h4>By craving</h4><div class="bn-col-links"><a href="/best/brown-sugar/">Brown sugar</a><a href="/best/fruit-tea/">Fruit tea</a><a href="/best/matcha/">Matcha</a><a href="/best/non-dairy/">Non-dairy</a><a href="/best/cheap/">Cheap</a></div></div><a class="bn-viewall" href="/best/">All best-for lists<span class="bn-arrow" aria-hidden="true">&rarr;</span></a></div><a class="bn-feat" href="/best/first-date/"><span class="bn-feat-plate plate plate--jade"><span class="grain"></span></span><span class="bn-feat-kick">Editor's pick</span><span class="bn-feat-t">Where to take a first date</span><span class="bn-feat-s">Room, noise, and a menu you can share — ranked on fit.</span></a></div></div></div><div class="bn-item" data-item="new"><button class="bn-trigger" aria-expanded="false" aria-controls="bnpanel-new">New<span class="bn-caret" aria-hidden="true"></span></button><div class="bn-panel" id="bnpanel-new" role="region" aria-label="New" hidden><div class="bn-mega"><div class="bn-cols"><div class="bn-col"><h4>By region</h4><div class="bn-col-links"><a href="/new/sgv/">The 626</a><a href="/new/orange-county/">Orange County</a><a href="/new/greater-la/">Greater LA</a><a href="/new/san-diego/">San Diego</a><a href="/new/inland-empire/">Inland Empire</a></div></div><a class="bn-viewall" href="/new/">All new openings<span class="bn-arrow" aria-hidden="true">&rarr;</span></a></div><a class="bn-feat" href="/new/"><span class="bn-feat-plate plate plate--amber"><span class="grain"></span></span><span class="bn-feat-kick">Freshly opened</span><span class="bn-feat-t">Openings we're tracking</span><span class="bn-feat-s">New rooms across the five regions, dated as we verify them.</span></a></div></div></div><div class="bn-item" data-item="pick-for-me"><button class="bn-trigger" aria-expanded="false" aria-controls="bnpanel-pick-for-me">Pick for me<span class="bn-caret" aria-hidden="true"></span></button><div class="bn-panel" id="bnpanel-pick-for-me" role="region" aria-label="Pick for me" hidden><div class="bn-mega"><div class="bn-cols"><div class="bn-col"><h4>Tools</h4><div class="bn-col-links"><a href="/tools/order-oracle/">The Order Oracle<span class="bn-hint">what your order says</span></a><a href="/tools/drink-matcher/">Drink Matcher<span class="bn-hint">answer three questions</span></a><a href="/tools/build-your-sip/">Build Your Sip<span class="bn-hint">assemble a cup</span></a><a href="/tools/date-planner/">Date Night Planner<span class="bn-hint">an itinerary for two</span></a><a href="/tools/roulette/">Roulette<span class="bn-hint">spin for a shop</span></a></div></div><div class="bn-col"><h4>Or ask</h4><div class="bn-col-links"><a href="/#concierge">Ask the concierge<span class="bn-hint">tell us the night</span></a></div></div></div><a class="bn-feat" href="/#concierge"><span class="bn-feat-plate plate plate--jade"><span class="grain"></span></span><span class="bn-feat-kick">Undecided?</span><span class="bn-feat-t">Ask the concierge</span><span class="bn-feat-s">Say the night you're planning; get a shop and an order back.</span></a></div></div></div><div class="bn-item" data-item="guides"><button class="bn-trigger" aria-expanded="false" aria-controls="bnpanel-guides">Guides<span class="bn-caret" aria-hidden="true"></span></button><div class="bn-panel" id="bnpanel-guides" role="region" aria-label="Guides" hidden><div class="bn-mega"><div class="bn-cols"><div class="bn-col"><h4>Explainers</h4><div class="bn-col-links"><a href="/guide/brown-sugar-vs-tiger-sugar/">Brown sugar vs tiger sugar</a><a href="/guide/crystal-boba-vs-tapioca/">Crystal boba vs tapioca</a><a href="/guide/loose-leaf-vs-powder/">Loose-leaf vs powder</a><a href="/guide/order-non-dairy-boba/">How to order non-dairy</a><a href="/guide/what-50-percent-sweet-means/">What 50% sweet means</a><a href="/guide/what-is-cheese-foam/">What cheese foam is</a></div></div><div class="bn-col"><h4>Reference</h4><div class="bn-col-links"><a href="/pantry/">The Pantry — ingredients<span class="bn-hint">57 toppings &amp; teas</span></a></div></div></div><a class="bn-feat" href="/pantry/"><span class="bn-feat-plate plate plate--amber"><span class="grain"></span></span><span class="bn-feat-kick">Start here</span><span class="bn-feat-t">The Pantry</span><span class="bn-feat-s">Every topping and tea, with what it is and where it comes from.</span></a></div></div></div><div class="bn-item" data-item="ratings-meetups"><button class="bn-trigger" aria-expanded="false" aria-controls="bnpanel-ratings-meetups">Ratings &amp; meetups<span class="bn-caret" aria-hidden="true"></span></button><div class="bn-panel" id="bnpanel-ratings-meetups" role="region" aria-label="Ratings &amp; meetups" hidden><div class="bn-mega"><div class="bn-cols"><div class="bn-col"><h4>The critic</h4><div class="bn-col-links"><a href="/critic/">The Pearl Ratings</a><a href="/how-we-rank/">How we rank</a><a href="/how-we-make-money/">How we make money</a><a href="/report/">Report a correction</a><a href="/claim/">Claim a shop</a></div></div><div class="bn-col"><h4>Meetups</h4><div class="bn-col-links"><a href="/meetups/">Meetups &amp; clubs</a><a href="/meetups/#clubs">Boba social clubs</a><a href="/meetups/#crawls">Crawls &amp; runs</a><a href="/meetups/#fandom">Fandom nights</a><a href="/meetups/#host">Host a club</a></div></div></div><a class="bn-feat" href="/how-we-rank/"><span class="bn-feat-plate plate plate--night"><span class="grain"></span></span><span class="bn-feat-kick">How it works</span><span class="bn-feat-t">How we rank</span><span class="bn-feat-s">Fit over hype. The method is written down and the money is disclosed.</span></a></div></div></div>
+    </nav>
+    <div class="bn-actions">
+      <form class="bn-search" role="search" data-bn-search-open><label class="bn-sr" for="bn-searchq">Search</label><span class="bn-search-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span><input id="bn-searchq" type="search" placeholder="A shop, a city, an ingredient" autocomplete="off" readonly aria-haspopup="dialog"><kbd class="bn-kbd" aria-hidden="true">/</kbd></form>
+      <a class="bn-saved" href="/#blackbook" aria-label="Saved shops"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 20s-7-4.4-9.2-8.4A5 5 0 0 1 12 6a5 5 0 0 1 9.2 5.6C19 15.6 12 20 12 20z"/></svg></a>
+      <a class="bn-cta" href="/#tonight">Tonight</a>
+      <button class="bn-burger" aria-label="Open menu" aria-expanded="false" aria-controls="bn-drawer"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="bn-scrim" data-bn-scrim hidden></div>
+</header>
+
+<!-- Command-K / slash search overlay -->
+<div class="bn-overlay" id="bn-search" role="dialog" aria-modal="true" aria-label="Search Boba Night" hidden>
+  <div class="bn-overlay-scrim" data-bn-search-close></div>
+  <div class="bn-overlay-box" role="document">
+    <form class="bn-overlay-field" role="search">
+      <span class="bn-search-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+      <label class="bn-sr" for="bn-overlayq">Search a shop, a city, an ingredient</label>
+      <input id="bn-overlayq" type="search" placeholder="A shop, a city, an ingredient" autocomplete="off"
+             aria-controls="bn-results" aria-expanded="false">
+      <button class="bn-overlay-esc" type="button" data-bn-search-close aria-label="Close search">Esc</button>
+    </form>
+    <div class="bn-results" id="bn-results" role="listbox" aria-label="Results">
+      <p class="bn-results-empty" data-bn-empty>Type to search 334 shops, 46 cities, pages and ingredients.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile drawer -->
+<div class="bn-drawer" id="bn-drawer" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="bn-drawer-top">
+    <span class="bn-word">Boba <b>Night</b></span>
+    <button class="bn-drawer-x" aria-label="Close menu" data-bn-drawer-close>&times;</button>
+  </div>
+  <button class="bn-drawer-search" data-bn-open-search type="button">
+    <span class="bn-search-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+    <span>A shop, a city, an ingredient</span>
+  </button>
+  <nav class="bn-drawer-nav" aria-label="Regions">
+    <div class="bn-acc" data-acc><button class="bn-acc-b" aria-expanded="false">The 626<span class="bn-ct">123</span><span class="bn-acc-ic" aria-hidden="true"></span></button><div class="bn-acc-panel"><div class="bn-acc-inner"><a href="/boba/ca/san-gabriel/">San Gabriel<span class="bn-ct">23</span></a><a href="/boba/ca/rowland-heights/">Rowland Heights<span class="bn-ct">20</span></a><a href="/boba/ca/arcadia/">Arcadia<span class="bn-ct">17</span></a><a href="/boba/ca/covina/">Covina<span class="bn-ct">9</span></a><a href="/boba/ca/diamond-bar/">Diamond Bar<span class="bn-ct">9</span></a><a href="/boba/ca/pasadena/">Pasadena<span class="bn-ct">8</span></a><a href="/boba/ca/walnut/">Walnut<span class="bn-ct">8</span></a><a class="bn-viewall" href="/area/sgv/">All of The 626 &rarr;</a></div></div></div><div class="bn-acc" data-acc><button class="bn-acc-b" aria-expanded="false">Orange County<span class="bn-ct">93</span><span class="bn-acc-ic" aria-hidden="true"></span></button><div class="bn-acc-panel"><div class="bn-acc-inner"><a href="/boba/ca/irvine/">Irvine<span class="bn-ct">21</span></a><a href="/boba/ca/westminster/">Westminster<span class="bn-ct">14</span></a><a href="/boba/ca/garden-grove/">Garden Grove<span class="bn-ct">11</span></a><a href="/boba/ca/fullerton/">Fullerton<span class="bn-ct">10</span></a><a href="/boba/ca/costa-mesa/">Costa Mesa<span class="bn-ct">6</span></a><a href="/boba/ca/santa-ana/">Santa Ana<span class="bn-ct">5</span></a><a href="/boba/ca/anaheim/">Anaheim<span class="bn-ct">4</span></a><a class="bn-viewall" href="/area/orange-county/">All of Orange County &rarr;</a></div></div></div><div class="bn-acc" data-acc><button class="bn-acc-b" aria-expanded="false">Greater LA<span class="bn-ct">69</span><span class="bn-acc-ic" aria-hidden="true"></span></button><div class="bn-acc-panel"><div class="bn-acc-inner"><a href="/boba/ca/los-angeles/">Los Angeles<span class="bn-ct">30</span></a><a href="/boba/ca/cerritos/">Cerritos<span class="bn-ct">9</span></a><a href="/boba/ca/long-beach/">Long Beach<span class="bn-ct">8</span></a><a href="/boba/ca/hollywood/">Hollywood<span class="bn-ct">6</span></a><a href="/boba/ca/santa-monica/">Santa Monica<span class="bn-ct">5</span></a><a href="/boba/ca/pomona/">Pomona<span class="bn-ct">3</span></a><a href="/boba/ca/artesia/">Artesia<span class="bn-ct">3</span></a><a class="bn-viewall" href="/area/greater-la/">All of Greater LA &rarr;</a></div></div></div><div class="bn-acc" data-acc><button class="bn-acc-b" aria-expanded="false">San Diego<span class="bn-ct">28</span><span class="bn-acc-ic" aria-hidden="true"></span></button><div class="bn-acc-panel"><div class="bn-acc-inner"><a href="/boba/ca/san-diego/">San Diego<span class="bn-ct">28</span></a><a class="bn-viewall" href="/area/san-diego/">All of San Diego &rarr;</a></div></div></div><div class="bn-acc" data-acc><button class="bn-acc-b" aria-expanded="false">Inland Empire<span class="bn-ct">21</span><span class="bn-acc-ic" aria-hidden="true"></span></button><div class="bn-acc-panel"><div class="bn-acc-inner"><a href="/boba/ca/riverside/">Riverside<span class="bn-ct">9</span></a><a href="/boba/ca/temecula/">Temecula<span class="bn-ct">5</span></a><a href="/boba/ca/moreno-valley/">Moreno Valley<span class="bn-ct">3</span></a><a href="/boba/ca/rancho-cucamonga/">Rancho Cucamonga<span class="bn-ct">2</span></a><a href="/boba/ca/corona/">Corona<span class="bn-ct">1</span></a><a href="/boba/ca/chino/">Chino<span class="bn-ct">1</span></a><a class="bn-viewall" href="/area/inland-empire/">All of Inland Empire &rarr;</a></div></div></div>
+  </nav>
+  <div class="bn-drawer-links">
+    <a href="/best/">Best for</a><a href="/new/">New openings</a>
+    <a href="/pantry/">The Pantry</a><a href="/critic/">The Pearl Ratings</a>
+    <a href="/meetups/">Meetups &amp; clubs</a><a href="/directory/">All 334 shops</a>
+  </div>
+</div>
+
+<nav class="bn-bottombar" aria-label="Quick actions"><a class="bn-bb bn-bb--cta" href="/#tonight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span>Tonight</span></a><a class="bn-bb " href="/directory/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 9l1.2-4.2A2 2 0 0 1 6.1 3.4h11.8a2 2 0 0 1 1.9 1.4L21 9M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9M4 9h16"/></svg><span>Shops</span></a><button class="bn-bb bn-bb--search" data-bn-open-search type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search</span></button><a class="bn-bb " href="/#blackbook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 20s-7-4.4-9.2-8.4A5 5 0 0 1 12 6a5 5 0 0 1 9.2 5.6C19 15.6 12 20 12 20z"/></svg><span>Saved</span></a></nav>
 <main id="main" class="wrap">
-<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><span aria-current="page">Meetups &amp; clubs</span></nav>
-<div class="page-head"><p class="eyebrow">The social calendar</p>
+<nav class="w4-crumb" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><span aria-current="page">Meetups &amp; clubs</span></nav>
+<div class="w4-head">
+<p class="eyebrow">The social calendar</p>
 <h1>Meetups &amp; clubs that run on boba</h1>
-<p class="lede">Southern California treats boba shops as third places — clubs meet in them, crawls route through them, and fandoms take them over for a night. Everything below is a real group with a real public page; <b>details come from each organizer's own listing</b>, so check their page before you go.</p></div>
-<div class="notice"><span class="tag tag-verifying">Sourced</span>
-<span>We list only what an organizer publishes, and we link straight to them. Days and venues change — the organizer's page is always the truth. Nothing here is sponsored.</span></div>
-
-<section class="sec"><h2>Boba social clubs</h2>
-
-<div class="mu-card"><span class="mu-tag mu-tag--sgv">The 626</span><span class="mu-tag">Social club</span>
+<p class="lede">Southern California treats boba shops as third places — clubs meet in them, crawls route through them, and fandoms take them over for a night. Everything below is a real group with a real public page; <b>details come from each organizer's own listing</b>, so check their page before you go.</p>
+<div class="w4-notice"><span class="w4-note-k">Sourced</span>
+<span>We list only what an organizer publishes, and we link straight to them. Days and venues change — the organizer's page is always the truth. A &ldquo;Next&rdquo; date, when shown, is computed from the organizer's stated schedule, not asserted by us. Nothing here is sponsored.</span></div>
+</div>
+<section class="w4-sec" id="clubs"><div class="w4-sec-head"><span class="idx">05</span><h2>Boba social clubs</h2></div><div class="w4-grid"><article class="w4-card" id="socal-boba-run-club">
+<div class="w4-card-head">
+<span class="w4-tag w4-tag--sgv">The 626</span><span class="w4-tag w4-tag--kind">Social club</span>
+</div>
 <h3>SoCal Boba Run Club</h3>
-<p class="mu-meta">San Gabriel Valley &amp; beyond &middot; boba crawls, mahjong nights, sober raves</p>
-<p>The flagship. Their words: "no running, just vibes." Launched at 3CAT in Arcadia and now fills tea bars across the 626 — Summerfield Tea Bar in Rosemead, UG Tea in San Gabriel, Jianghui NLA in Alhambra — with events that draw a few hundred people.</p>
-<p class="mu-src">Follow: <a href="https://www.instagram.com/socalbobarunclub/" rel="noopener" target="_blank">@socalbobarunclub</a> &middot; events post via Partiful</p></div>
-
-<div class="mu-card"><span class="mu-tag mu-tag--sgv">The 626</span><span class="mu-tag">Game night</span>
+<div class="w4-meta"><span class="w4-cad">Events post on Partiful — no fixed day</span></div>
+<p class="w4-vibe">In their own words, “no running, just vibes” — boba crawls, mahjong nights, and sober raves that take over 626 tea bars for a few hundred people.</p>
+<div class="w4-links"><a class="w4-src" href="https://www.instagram.com/socalbobarunclub/" rel="noopener" target="_blank">@socalbobarunclub &#8599;</a></div>
+<p class="w4-checked">Organizer listing checked 2026-07-12</p>
+</article><article class="w4-card" id="sgv-boba-mahjong-club">
+<div class="w4-card-head">
+<span class="w4-tag w4-tag--sgv">The 626</span><span class="w4-tag w4-tag--kind">Social club</span>
+</div>
 <h3>SGV Boba Mahjong Club</h3>
-<p class="mu-meta">Summerfield Tea Bar &middot; 9021 Valley Blvd, Rosemead</p>
-<p>Mahjong nights inside a working tea bar — recent editions ran Saturday evenings. Bring patience; the tiles move fast.</p>
-<p class="mu-src">Recent listing: <a href="https://partiful.com/e/dwleqGjm0wumSZFf40sh" rel="noopener" target="_blank">Partiful</a></p></div>
-
-<div class="mu-card"><span class="mu-tag">Greater LA</span><span class="mu-tag">Social club</span>
+<div class="w4-meta"><span class="w4-cad">Recent editions ran Saturday evenings</span></div>
+<p class="w4-vibe">Mahjong nights run inside a working tea bar — recent editions ran Saturday evenings, and the tiles move fast.</p>
+<div class="w4-links"><a class="w4-src" href="https://partiful.com/e/dwleqGjm0wumSZFf40sh" rel="noopener" target="_blank">SGV Boba Mahjong Club (Partiful) &#8599;</a></div>
+<p class="w4-checked">Organizer listing checked 2026-07-12</p>
+</article><article class="w4-card" id="boba-buddies-la">
+<div class="w4-card-head">
+<span class="w4-tag ">Greater LA</span><span class="w4-tag w4-tag--kind">Social club</span>
+</div>
 <h3>Boba Buddies LA</h3>
-<p class="mu-meta">Westwood, Santa Monica, K-town &middot; via Meetup</p>
-<p>The format is simple: order at a shop — past picks include Junbi, Just Boba, and Sunright — then find a spot nearby and actually talk. Sometimes board games.</p>
-<p class="mu-src">Join: <a href="https://www.meetup.com/boba-buddies-la/" rel="noopener" target="_blank">meetup.com/boba-buddies-la</a></p></div>
-
-<div class="mu-card"><span class="mu-tag">San Diego</span><span class="mu-tag">Social club</span>
+<div class="w4-meta"><span class="w4-cad">Posts irregularly on Meetup</span></div>
+<p class="w4-vibe">Order at a shop — past picks include Junbi, Just Boba, and Sunright — then find a spot nearby and actually talk, sometimes over board games.</p>
+<div class="w4-links"><a class="w4-src" href="https://www.meetup.com/boba-buddies-la/" rel="noopener" target="_blank">Boba Buddies LA (Meetup) &#8599;</a></div>
+<p class="w4-checked">Organizer listing checked 2026-07-12</p>
+</article><article class="w4-card" id="boba-tea-social-club">
+<div class="w4-card-head">
+<span class="w4-tag ">San Diego</span><span class="w4-tag w4-tag--kind">Social club</span>
+</div>
 <h3>Boba Tea Social Club</h3>
-<p class="mu-meta">Mira Mesa &amp; Clairemont Mesa &middot; roughly monthly</p>
-<p>Two-thousand-plus members meeting at the shops along the Convoy corridor's orbit — Cafe 86 on Mira Mesa Blvd, Tea N More on Clairemont Mesa Blvd.</p>
-<p class="mu-src">Join: <a href="https://www.meetup.com/bobateasocial/" rel="noopener" target="_blank">meetup.com/bobateasocial</a></p></div>
-
-<div class="mu-card"><span class="mu-tag">Orange County</span><span class="mu-tag">Book club</span>
+<div class="w4-meta"><span class="w4-cad">Roughly monthly</span></div>
+<p class="w4-vibe">Two-thousand-plus members meet roughly monthly at the shops orbiting Convoy — Tea N More on Clairemont Mesa Blvd among them.</p>
+<p class="w4-shops"><span class="w4-shops-k">In our directory:</span> <a href="/boba/ca/san-diego/tea-n-more-san-diego/">Tea N More <span class="w4-in">San Diego</span></a></p>
+<div class="w4-links"><a class="w4-src" href="https://www.meetup.com/bobateasocial/" rel="noopener" target="_blank">Boba Tea Social Club (Meetup) &#8599;</a></div>
+<p class="w4-checked">Organizer listing checked 2026-07-12</p>
+</article><article class="w4-card" id="silent-book-club-irvine">
+<div class="w4-card-head">
+<span class="w4-tag ">Orange County</span><span class="w4-tag w4-tag--kind">Book club</span>
+</div>
 <h3>Silent Book Club — Irvine</h3>
-<p class="mu-meta">One Zo Boba &middot; Woodbury Town Center, Irvine &middot; Thursdays per their page</p>
-<p>Order a drink, read silently for forty-five minutes with a few thousand fellow members' chapter, then talk about it. The rare club where showing up alone is the whole point.</p>
-<p class="mu-src">Join: <a href="https://www.meetup.com/silent-book-club-irvine/" rel="noopener" target="_blank">meetup.com/silent-book-club-irvine</a></p></div>
-</section>
-
-<section class="sec"><h2>Crawls, runs &amp; circuits</h2>
-
-<div class="mu-card"><span class="mu-tag mu-tag--sgv">Pasadena</span><span class="mu-tag">Crawl</span>
+<div class="w4-meta"><span class="w4-chip">EVERY THURSDAY · 6:45 PM</span><span class="w4-next"><span class="w4-next-k">Next</span> Thu, Jul 23, 2026</span></div>
+<p class="w4-vibe">Order a drink at One Zo Boba, read silently for forty-five minutes alongside a few thousand fellow members, then talk about it — the rare club where showing up alone is the point.</p>
+<p class="w4-shops"><span class="w4-shops-k">In our directory:</span> <a href="/boba/ca/irvine/one-zo-boba-irvine/">One Zo Boba <span class="w4-in">Irvine</span></a></p>
+<div class="w4-links"><a class="w4-src" href="https://www.meetup.com/silent-book-club-irvine/" rel="noopener" target="_blank">Silent Book Club Irvine (Meetup) &#8599;</a><a class="w4-ics" href="/meetups/ics/silent-book-club-irvine.ics">Add to calendar (.ics)</a></div>
+<p class="w4-checked">Organizer listing checked 2026-07-12</p>
+</article></div></section><section class="w4-sec" id="crawls"><div class="w4-sec-head"><span class="idx">02</span><h2>Crawls, runs &amp; circuits</h2></div><div class="w4-grid"><article class="w4-card" id="pasadena-boba-trail">
+<div class="w4-card-head">
+<span class="w4-tag w4-tag--sgv">The 626</span><span class="w4-tag w4-tag--kind">Crawl</span>
+</div>
 <h3>Pasadena Boba Trail</h3>
-<p class="mu-meta">29 shops &middot; Old Pasadena, Playhouse Village, South Lake</p>
-<p>The city's official digital passport — check in at shops along Route 66, collect points, earn boba-themed prizes. A ready-made route for a group afternoon or an ambitious second date.</p>
-<p class="mu-src">Start: <a href="https://www.visitpasadena.com/food-drink/pasadena-boba-trail/" rel="noopener" target="_blank">visitpasadena.com</a></p></div>
-
-<div class="mu-card"><span class="mu-tag">Anywhere</span><span class="mu-tag">Run</span>
+<div class="w4-meta"><span class="w4-cad">Self-guided — anytime</span></div>
+<p class="w4-vibe">The city's official digital passport across 29 shops — check in along Route 66, collect points, earn boba-themed prizes on your own clock.</p>
+<div class="w4-links"><a class="w4-src" href="https://www.visitpasadena.com/food-drink/pasadena-boba-trail/" rel="noopener" target="_blank">Visit Pasadena &#8599;</a></div>
+<p class="w4-checked">Organizer listing checked 2026-07-12</p>
+</article><article class="w4-card" id="run-4-boba-5k">
+<div class="w4-card-head">
+<span class="w4-tag ">Virtual</span><span class="w4-tag w4-tag--kind">Run</span>
+</div>
 <h3>Run 4 Boba 5K</h3>
-<p class="mu-meta">Virtual &middot; next edition listed for late August per the race page</p>
-<p>The one entry where running is actually involved: finish your 5K anywhere, then — their words — reward yourself with boba from your favorite shop.</p>
-<p class="mu-src">Enter: <a href="https://www.raceentry.com/run-4-boba/race-information" rel="noopener" target="_blank">raceentry.com</a></p></div>
-</section>
-
-<section class="sec"><h2>Fandom nights</h2>
-
-<div class="mu-card"><span class="mu-tag">Greater LA + OC</span><span class="mu-tag">Cupsleeve</span>
+<div class="w4-meta"><span class="w4-cad">Next edition listed for Aug 24, 2026</span><span class="w4-next"><span class="w4-next-k">Next</span> Mon, Aug 24, 2026</span></div>
+<p class="w4-vibe">The one entry where running is actually involved — finish a 5K anywhere, then reward yourself with boba from your favorite shop.</p>
+<div class="w4-links"><a class="w4-src" href="https://www.raceentry.com/run-4-boba/race-information" rel="noopener" target="_blank">Run 4 Boba &#8599;</a><a class="w4-ics" href="/meetups/ics/run-4-boba-5k.ics">Add to calendar (.ics)</a></div>
+<p class="w4-checked">Organizer listing checked 2026-07-12</p>
+</article></div></section><section class="w4-sec" id="fandom"><div class="w4-sec-head"><span class="idx">02</span><h2>Fandom nights</h2></div><div class="w4-grid"><article class="w4-card" id="kpop-cupsleeve-circuit">
+<div class="w4-card-head">
+<span class="w4-tag ">Greater LA + OC</span><span class="w4-tag w4-tag--kind">Cupsleeve</span>
+</div>
 <h3>The K-pop cupsleeve circuit</h3>
-<p class="mu-meta">DOL Cafe (Gardena) and Krak Boba (Lomita) are documented repeat hosts</p>
-<p>Fan-organized celebrations around idol birthdays and comebacks: collectible cup sleeves with any drink, artist alley, raffles. The circuit also passes through Katsubo Tea in Fullerton, Almond Haus in Garden Grove, Feng Cha in Costa Mesa, Calitea in Long Beach, and Miss Cheese Tea in Pasadena.</p>
-<p class="mu-src">Track events: <a href="https://www.kpoptracker.net/" rel="noopener" target="_blank">kpoptracker.net</a> &middot; background: <a href="https://spectrumnews1.com/ca/southern-california/la-times-today/2023/04/06/how-k-pop-fans-connect-at--cupsleeve--events" rel="noopener" target="_blank">Spectrum News</a></p></div>
-
-<div class="mu-card"><span class="mu-tag">Little Tokyo</span><span class="mu-tag">Collab</span>
+<div class="w4-meta"><span class="w4-cad">Around idol birthdays and comebacks — no fixed schedule</span></div>
+<p class="w4-vibe">Fan-organized celebrations around idol birthdays and comebacks — collectible cup sleeves with any drink, artist alley, raffles — rotating through boba shops across LA and OC.</p>
+<p class="w4-shops"><span class="w4-shops-k">In our directory:</span> <a href="/boba/ca/garden-grove/almond-haus-garden-grove/">Almond Haus <span class="w4-in">Garden Grove</span></a></p>
+<div class="w4-links"><a class="w4-src" href="https://www.kpoptracker.net/" rel="noopener" target="_blank">KpopTracker (community calendar) &#8599;</a></div>
+<p class="w4-checked">Organizer listing checked 2026-07-12</p>
+</article><article class="w4-card" id="sunright-collab-meetups">
+<div class="w4-card-head">
+<span class="w4-tag ">SoCal (chain-wide)</span><span class="w4-tag w4-tag--kind">Collab</span>
+</div>
 <h3>Sunright Tea Studio collab meetups</h3>
-<p class="mu-meta">Official game &amp; anime collaborations with in-store gatherings</p>
-<p>The chain runs sanctioned crossovers — Honkai Star Rail with voice actors and cosplayers, MapleStory pop-ups — that turn the Little Tokyo store into a fan meetup for a weekend.</p>
-<p class="mu-src">Current collabs: <a href="https://www.snrtea.com/collaboration/" rel="noopener" target="_blank">snrtea.com/collaboration</a></p></div>
+<div class="w4-meta"><span class="w4-cad">During official collab runs — check the collab page</span></div>
+<p class="w4-vibe">The chain runs sanctioned crossovers — Honkai Star Rail with voice actors, MapleStory pop-ups — that turn a store into a fan meetup for a weekend.</p>
+<p class="w4-shops"><span class="w4-shops-k">In our directory:</span> <a href="/boba/ca/irvine/sunright-tea-studio-irvine/">Sunright Tea Studio <span class="w4-in">Irvine</span></a></p>
+<div class="w4-links"><a class="w4-src" href="https://www.snrtea.com/collaboration/" rel="noopener" target="_blank">Sunright Tea Studio &#8599;</a></div>
+<p class="w4-checked">Organizer listing checked 2026-07-12</p>
+</article></div></section>
+<section class="w4-host" id="host">
+<div class="w4-sec-head"><span class="idx">+</span><h2>Run a club? Put your boba stop on the map.</h2></div>
+<p class="lede">Real jogging clubs in the 626 end their runs at coffee and beer — as far as we can find, <b>no SoCal run club has a published boba-shop home yet</b>. If yours does, or you're a shop that wants to host one, we'll list it with a link to your page. Listing is free, and we only publish what your own page says.</p>
+<a class="btn btn-primary" href="/meetups/submit/">Submit a meetup &#8599;</a>
 </section>
-
-<section class="sec"><h2>Run a club? Put your boba stop on the map.</h2>
-<p>Real jogging clubs in the 626 end their runs at coffee and beer — as far as we can find, <b>no SoCal run club has a published boba-shop home yet</b>. If yours does (or you're a shop that wants to host one), we'll list it with a link to your page. <a href="/report/">Tell us here</a> &mdash; listing is free, and we only publish what your own page says.</p></section>
-
-<section class="sec faq"><h2>FAQ</h2>
+<section class="w4-faq" id="faq">
+<div class="w4-sec-head"><span class="idx">?</span><h2>FAQ</h2></div>
 <h3>How do we know these are real?</h3><p>Every listing links to the organizer's own public page — Meetup, Instagram, Partiful, or an official site. We publish nothing we can't link.</p>
-<h3>Are the days and times current?</h3><p>Schedules change without telling us, so we point you at the organizer's page instead of asserting times ourselves. When we say "Thursdays," it's because their page said so at our last check.</p>
-<h3>Meeting someone from an app instead?</h3><p>Different mission, same drinks — start with the <a href="/#first-meet">First Meet guide</a> on our homepage, then pick a <a href="/best/first-date/">first-meet room</a>.</p></section>
+<h3>Are the days and times current?</h3><p>Schedules change without telling us, so we point you at the organizer's page instead of asserting times ourselves. When we show a cadence or a &ldquo;Next&rdquo; date, it's computed from what their page stated at our last check.</p>
+<h3>Can I add one to my calendar?</h3><p>Where an organizer publishes a fixed schedule or a dated event, we generate an <code>.ics</code> file you can import. Times follow the organizer — confirm on their page.</p>
+<h3>Meeting someone from an app instead?</h3><p>Different mission, same drinks — start with the <a href="/#first-meet">First Meet guide</a> on our homepage, then pick a <a href="/best/first-date/">first-meet room</a>.</p>
+</section>
 </main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <span class="wordmark" style="font-size:1.5rem">Boba <b>Night</b><span class="soc">Society</span></span>
+        <p style="margin:1rem 0 0;max-width:34ch;color:var(--muted-dk);font-size:.9rem">The night guide to Southern California boba. Menus checked, sources shown, nothing invented.</p>
+      </div>
+      <div class="foot-col"><h5>Meetups</h5><a href="/meetups/#clubs">Social clubs</a><a href="/meetups/#crawls">Crawls &amp; runs</a><a href="/meetups/#fandom">Fandom nights</a><a href="/meetups/submit/">Submit a meetup</a></div>
+      <div class="foot-col"><h5>Explore</h5><a href="/directory/">The directory</a><a href="/cities/">Cities</a><a href="/area/sgv/">The 626</a><a href="/area/orange-county/">Orange County</a></div>
+      <div class="foot-col"><h5>The Menu</h5><a href="/best/matcha/">Matcha</a><a href="/best/fruit-tea/">Fruit tea</a><a href="/best/brown-sugar/">Brown sugar</a><a href="/best/non-dairy/">Dairy-free</a></div>
+    </div>
+    <div class="foot-bottom"><span>&copy; 2026 Boba Night Society · Southern California</span><span>Listings checked per organizer · No paid placement · <a href="/meetups/submit/" style="color:var(--silver)">Submit a meetup</a></span></div>
+  </div>
+</footer>
+<script src="/js/nav-midnight.js" defer></script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ItemList","name":"Boba meetups and clubs in Southern California","itemListElement":[
-{"@type":"ListItem","position":1,"name":"SoCal Boba Run Club","url":"https://www.instagram.com/socalbobarunclub/"},
-{"@type":"ListItem","position":2,"name":"SGV Boba Mahjong Club","url":"https://partiful.com/e/dwleqGjm0wumSZFf40sh"},
-{"@type":"ListItem","position":3,"name":"Boba Buddies LA","url":"https://www.meetup.com/boba-buddies-la/"},
-{"@type":"ListItem","position":4,"name":"Boba Tea Social Club San Diego","url":"https://www.meetup.com/bobateasocial/"},
-{"@type":"ListItem","position":5,"name":"Silent Book Club Irvine","url":"https://www.meetup.com/silent-book-club-irvine/"},
-{"@type":"ListItem","position":6,"name":"Pasadena Boba Trail","url":"https://www.visitpasadena.com/food-drink/pasadena-boba-trail/"},
-{"@type":"ListItem","position":7,"name":"Run 4 Boba 5K","url":"https://www.raceentry.com/run-4-boba/race-information"}]}
+{"@context": "https://schema.org", "@type": "ItemList", "name": "Boba meetups and clubs in Southern California", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SoCal Boba Run Club", "url": "https://www.instagram.com/socalbobarunclub/"}, {"@type": "ListItem", "position": 2, "name": "SGV Boba Mahjong Club", "url": "https://partiful.com/e/dwleqGjm0wumSZFf40sh"}, {"@type": "ListItem", "position": 3, "name": "Boba Buddies LA", "url": "https://www.meetup.com/boba-buddies-la/"}, {"@type": "ListItem", "position": 4, "name": "Boba Tea Social Club", "url": "https://www.meetup.com/bobateasocial/"}, {"@type": "ListItem", "position": 5, "name": "Silent Book Club — Irvine", "url": "https://www.meetup.com/silent-book-club-irvine/"}, {"@type": "ListItem", "position": 6, "name": "Pasadena Boba Trail", "url": "https://www.visitpasadena.com/food-drink/pasadena-boba-trail/"}, {"@type": "ListItem", "position": 7, "name": "Run 4 Boba 5K", "url": "https://www.raceentry.com/run-4-boba/race-information"}, {"@type": "ListItem", "position": 8, "name": "The K-pop cupsleeve circuit", "url": "https://www.kpoptracker.net/"}, {"@type": "ListItem", "position": 9, "name": "Sunright Tea Studio collab meetups", "url": "https://www.snrtea.com/collaboration/"}]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-{"@type":"ListItem","position":1,"name":"Home","item":"https://www.bobanight.com/"},
-{"@type":"ListItem","position":2,"name":"Meetups & clubs","item":"https://www.bobanight.com/meetups/"}]}
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.bobanight.com/"}, {"@type": "ListItem", "position": 2, "name": "Meetups & clubs", "item": "https://www.bobanight.com/meetups/"}]}
 </script>
-<footer class="site-footer"><div class="footer-inner">
-<div class="footer-brand"><a class="brand" href="/">Boba <b>Night</b></a>
-<p>The Southern California boba directory. Real hours, honest rankings, new openings tracked.</p></div>
-<div class="footer-col"><h4>By area</h4><ul>
-<li><a href="/area/sgv/">The 626</a></li><li><a href="/area/orange-county/">Orange County</a></li>
-<li><a href="/area/san-diego/">San Diego</a></li><li><a href="/area/greater-la/">Greater LA</a></li>
-<li><a href="/area/inland-empire/">Inland Empire</a></li></ul></div>
-<div class="footer-col"><h4>By vibe</h4><ul>
-<li><a href="/best/date-night/">Date night</a></li><li><a href="/best/study/">Study-friendly</a></li>
-<li><a href="/best/open-late/">Open late</a></li><li><a href="/best/brown-sugar/">Brown sugar</a></li></ul></div>
-<div class="footer-col"><h4>About</h4><ul>
-<li><a href="/how-we-rank/">How we rank</a></li><li><a href="/report/">Report a correction</a></li>
-<li><a href="/about/">About Boba Night</a></li></ul></div>
-</div><div class="footer-bottom">
-<span>&copy; 2026 Boba Night</span><span class="note">We don't take payment for placement on our best-for lists.</span>
-</div></footer></body></html>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Event", "name": "Run 4 Boba 5K", "startDate": "2026-08-24", "eventStatus": "https://schema.org/EventScheduled", "description": "The one entry where running is actually involved — finish a 5K anywhere, then reward yourself with boba from your favorite shop.", "url": "https://www.raceentry.com/run-4-boba/race-information", "organizer": {"@type": "Organization", "name": "Run 4 Boba", "url": "https://www.raceentry.com/run-4-boba/race-information"}, "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode", "location": {"@type": "VirtualLocation", "url": "https://www.raceentry.com/run-4-boba/race-information"}}
+</script>
+</body>
+</html>
