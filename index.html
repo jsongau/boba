@@ -150,6 +150,32 @@
 .near-all{display:inline-block;margin-top:.9rem;font-size:.85rem;color:var(--champagne,#C5A46D);text-decoration:underline;text-underline-offset:3px}
 @media (prefers-reduced-motion: reduce){.btn-find{transition:none}}
 </style>
+<style id="pourrail">
+.pour-rail{position:fixed;left:0;right:0;bottom:0;z-index:90;display:flex;align-items:center;gap:1rem;
+  padding:.6rem clamp(1rem,4vw,2rem);background:rgba(11,12,14,.86);backdrop-filter:blur(12px) saturate(1.1);
+  border-top:1px solid var(--line-dk,rgba(244,239,231,.14));box-shadow:0 -1px 0 rgba(197,164,109,.18);
+  transform:translateY(110%);transition:transform .32s cubic-bezier(.16,1,.3,1)}
+.pour-rail.is-in{transform:translateY(0)}
+.pour-rail.is-out{transform:translateY(110%)}
+.pr-kick{flex:none;font-size:.64rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--champagne,#C5A46D)}
+.pr-body{flex:1;min-width:0;display:flex;align-items:center;gap:.7rem;text-decoration:none;color:inherit;overflow:hidden}
+.pr-motif{flex:none;width:20px;height:20px;display:inline-block}
+.pr-text{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:1;transition:opacity .3s ease}
+.pour-rail:not(.is-in) .pr-text,.pour-rail.is-in .pr-text{animation:prfade .5s ease}
+@keyframes prfade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+.pr-name{font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:1.02rem;color:var(--pearl,#F4EFE7)}
+.pr-where{font-size:.85rem;color:var(--muted-dk,#8B8981)}
+.pr-body:hover .pr-name{color:var(--syrup,#ff3f6f)}
+.pr-controls{flex:none;display:flex;align-items:center;gap:.5rem}
+.pr-next{background:transparent;border:1px solid var(--line-dk,rgba(244,239,231,.22));color:var(--pearl,#F4EFE7);
+  border-radius:2px;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.4em .8em;cursor:pointer}
+.pr-next:hover{border-color:var(--champagne,#C5A46D)}
+.pr-x{background:transparent;border:0;color:var(--muted-dk,#8B8981);font-size:1.2rem;line-height:1;cursor:pointer;padding:0 .2em}
+.pr-x:hover{color:var(--pearl,#F4EFE7)}
+.has-pour-rail{padding-bottom:52px}
+@media (max-width:719px){.pour-rail{display:none}}
+@media (prefers-reduced-motion:reduce){.pour-rail{transition:none}.pr-text{animation:none}}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -533,7 +559,7 @@
      real dated event falls today; the site never invents a "Tonight" event. -->
 <!-- BUILD:EVENTS-TOAST:START -->
   <!-- BUILD:EVENTS-TOAST:END -->
-<script src="/js/homepage/society-data.js" defer></script><script src="/js/homepage/share.js" defer></script><script src="/js/homepage/black-book.js" defer></script><script src="/js/homepage/concierge.js" defer></script><script src="/js/homepage/navigation.js" defer></script><script src="/js/homepage/tonight-pour.js" defer></script><script src="/js/homepage/near-me.js" defer></script>
+<script src="/js/homepage/society-data.js" defer></script><script src="/js/homepage/share.js" defer></script><script src="/js/homepage/black-book.js" defer></script><script src="/js/homepage/concierge.js" defer></script><script src="/js/homepage/navigation.js" defer></script><script src="/js/homepage/tonight-pour.js" defer></script><script src="/js/homepage/near-me.js" defer></script><script src="/js/homepage/pour-rail.js" defer></script>
 <script src="/js/nav-midnight.js" defer></script>
 <script src="/js/motif.js" defer></script>
 <script src="/js/sound.js" defer></script>
