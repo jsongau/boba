@@ -17,7 +17,10 @@
   --bn-silver:#C8C6C1;
   --bn-muted:#8B8981;
   --bn-champagne:#C5A46D;
-  --bn-neon:#ff3f6f;            /* the one accent */
+  --bn-neon:#ff2f6d;            /* the one accent */
+  --bn-gilt:#F4DDA2;            /* bright gold — featured */
+  --bn-orchid:#b46bd6;          /* royal purple accent */
+  --bn-imperial:#5c2c86;        /* deep imperial purple */
   --bn-line:rgba(244,239,231,.12);
   --bn-line-strong:rgba(244,239,231,.20);
   --bn-scrim:rgba(0,0,0,.55);

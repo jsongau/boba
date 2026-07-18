@@ -11,6 +11,7 @@
   --pearl:#F4EFE7; --porcelain:#FCF9F3; --paper:#F7F2EA;
   --champagne:#C5A46D; --old-gold:#8E734B;
   --jade:#123F35; --jade-deep:#0E332B; --garnet:#7A2433; --aubergine:#342235;
+  --neon:#ff2f6d; --gilt:#F4DDA2; --orchid:#b46bd6; --imperial:#5c2c86; --velvet:#2a0b12;
   --silver:#C8C6C1; --ink:#151619; --muted:#76736D; --muted-dk:#8B8981;
   --line-dk:rgba(244,239,231,.14); --line-lt:rgba(21,22,25,.12);
   --maxw:1240px; --read:64ch;
@@ -23,7 +24,13 @@
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
-  margin:0;background:var(--obsidian);color:var(--pearl);
+  margin:0;color:var(--pearl);
+  background:
+    radial-gradient(1100px 520px at 84% -6%, rgba(255,47,109,.14), transparent 58%),
+    radial-gradient(860px 660px at 2% 5%, rgba(92,44,134,.18), transparent 60%),
+    radial-gradient(900px 900px at 50% 120%, rgba(18,63,53,.11), transparent 62%),
+    var(--obsidian);
+  background-attachment:fixed;
   font-family:var(--sans);font-size:17px;line-height:1.6;font-weight:400;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   overflow-x:hidden;

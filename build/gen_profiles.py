@@ -150,7 +150,8 @@ STYLE = """
 :root{
   --obsidian:#0B0C0E;--smoked:#17191D;--smoked-2:#1F2228;
   --pearl:#F4EFE7;--porcelain:#FCF9F3;--muted:#8B8981;--muted-dk:#6f6d67;
-  --champagne:#C5A46D;--guava:#ff3f6f;
+  --champagne:#C5A46D;--gilt:#F4DDA2;--guava:#ff3f6f;--neon:#ff2f6d;
+  --orchid:#b46bd6;--imperial:#5c2c86;--velvet:#2a0b12;--jade:#123F35;
   --line:rgba(244,239,231,.14);--line-2:rgba(244,239,231,.08);
   --serif:"Fraunces",Georgia,"Times New Roman",serif;
   --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -158,7 +159,13 @@ STYLE = """
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--obsidian);color:var(--pearl);font-family:var(--sans);
+body{margin:0;color:var(--pearl);font-family:var(--sans);
+  background:
+    radial-gradient(1100px 520px at 84% -6%, rgba(255,47,109,.13), transparent 58%),
+    radial-gradient(820px 640px at 2% 6%, rgba(92,44,134,.17), transparent 60%),
+    radial-gradient(900px 900px at 50% 118%, rgba(18,63,53,.12), transparent 62%),
+    var(--obsidian);
+  background-attachment:fixed;
   font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.035;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -219,7 +226,8 @@ p{margin:0 0 1rem}p:last-child{margin-bottom:0}
   border:1px solid var(--champagne);
   box-shadow:inset 0 0 0 5px var(--obsidian),inset 0 0 0 6px rgba(197,164,109,.30)}
 .medallion::after{content:"";position:absolute;inset:-7px;border-radius:50%;
-  border:1px solid var(--line);pointer-events:none}
+  border:1px solid rgba(180,107,214,.30);
+  box-shadow:0 0 28px 2px rgba(92,44,134,.34);pointer-events:none}
 .med-mono{font-family:var(--serif);font-weight:400;line-height:1;letter-spacing:-.02em;
   font-size:clamp(2.3rem,6.5vw,3.2rem);color:var(--porcelain)}
 .med-led{position:absolute;top:11%;right:11%;width:11px;height:11px;border-radius:50%;

@@ -23,7 +23,11 @@
   --gold:#B08D57;      /* antique gold — lacquer depth, used sparingly */
   --cinnabar:#C8372D;  /* one accent moment max per screen */
   --jade:#123F35;
-  --neon:#ff3f6f;      /* the one action colour */
+  --neon:#ff2f6d;      /* the one action colour */
+  --gilt:#F4DDA2;      /* bright gold — featured/paid slot */
+  --orchid:#b46bd6;    /* royal purple accent */
+  --imperial:#5c2c86;  /* deep imperial purple */
+  --velvet:#2a0b12;    /* oxblood velvet, accent panels */
   --line:rgba(244,239,231,.12);
   --line-strong:rgba(244,239,231,.20);
   --gold-line:rgba(197,164,109,.34);
@@ -38,8 +42,10 @@ body{margin:0;color:var(--pearl);background:var(--obsidian);
   font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip;
   /* faint lacquer depth + film grain, fixed so it never scrolls into a seam */
   background-image:
+    radial-gradient(70% 44% at 84% -4%,rgba(255,47,109,.11),transparent 58%),
+    radial-gradient(64% 50% at 2% 6%,rgba(92,44,134,.15),transparent 60%),
     radial-gradient(60% 40% at 12% -4%,rgba(197,164,109,.06),transparent 60%),
-    radial-gradient(50% 40% at 100% 0%,rgba(255,63,111,.05),transparent 55%);
+    radial-gradient(70% 60% at 50% 118%,rgba(18,63,53,.10),transparent 62%);
   background-attachment:fixed}
 body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4;mix-blend-mode:overlay;
   background-image:radial-gradient(rgba(255,255,255,.5) .5px,transparent .6px);background-size:3px 3px}
