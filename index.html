@@ -239,6 +239,33 @@
 <main id="main">
 
   <!-- S1. HERO, identity + proof in five seconds -->
+  <style id="impdeck">
+.imp-deck{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.imp-card{position:relative;aspect-ratio:2/3;border-radius:15px;overflow:hidden;cursor:pointer;border:1px solid rgba(197,164,109,.42);background:#160f14;box-shadow:0 22px 50px rgba(0,0,0,.5);transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s;text-align:left;color:#F4EFE7;padding:0}
+.imp-card:not(.locked):not(.revealed):hover{transform:translateY(-5px) rotate(-.5deg)}
+.imp-card.yin:not(.locked):not(.revealed):hover{transform:translateY(-5px) rotate(.5deg)}
+.imp-card.locked{opacity:.44;filter:grayscale(.4) saturate(.7);cursor:not-allowed}
+.imp-art{position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat}
+.imp-card.yang .imp-art{background-image:url('/tools/roulette/card-yang.jpg');background-color:#120b08}
+.imp-card.yin .imp-art{background-image:url('/tools/roulette/card-yin.jpg');background-color:#0a0b12}
+.imp-lab{position:absolute;top:11px;left:50%;transform:translateX(-50%);padding:3px 11px;border-radius:999px;background:rgba(6,5,8,.5);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:#F4DDA2;z-index:3;white-space:nowrap}
+.imp-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);padding:5px 12px;border-radius:999px;background:rgba(6,5,8,.52);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);font-size:.74rem;color:#F4EFE7;z-index:3;transition:opacity .3s;white-space:nowrap;display:flex;align-items:center;gap:.4em}
+.imp-hint svg{width:11px;height:11px;fill:#b09a86}
+.imp-res{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 14px;z-index:3;text-align:center;background:linear-gradient(to top,rgba(6,5,8,.94) 32%,rgba(6,5,8,.55) 70%,transparent);opacity:0;transform:translateY(8px);transition:opacity .5s .12s,transform .5s .12s;pointer-events:none}
+.imp-res .rn{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:1.15rem;font-weight:600;line-height:1.12;color:#F4DDA2}
+.imp-res .rm{display:block;font-size:.72rem;color:#b09a86;margin-top:4px;line-height:1.35}
+.imp-card.revealed .imp-hint{opacity:0}
+.imp-card.revealed .imp-res{opacity:1;transform:none}
+.imp-ring{position:absolute;inset:0;border-radius:15px;border:1px solid transparent;pointer-events:none;z-index:4}
+.imp-card.lit .imp-ring{animation:impflash 1s cubic-bezier(.2,.8,.2,1)}
+@keyframes impflash{0%{border-color:#ff2f6d;box-shadow:0 0 0 1px #ff2f6d,0 0 44px 8px rgba(255,47,109,.6),inset 0 0 42px rgba(255,47,109,.28)}55%{border-color:#F4DDA2;box-shadow:0 0 0 1px #F4DDA2,0 0 32px 4px rgba(244,221,162,.45)}100%{border-color:transparent;box-shadow:none}}
+.imp-sweep{position:absolute;inset:0;z-index:4;pointer-events:none;transform:translateX(-130%);background:linear-gradient(115deg,transparent 34%,rgba(244,221,162,.4) 50%,transparent 66%)}
+.imp-card.lit .imp-sweep{animation:impsweep .95s cubic-bezier(.2,.8,.2,1)}
+@keyframes impsweep{to{transform:translateX(130%)}}
+.imp-cap{grid-column:1/-1;text-align:center;margin-top:2px;min-height:18px;font-size:.82rem;color:#F4EFE7}
+.imp-cap a{color:#F4DDA2;border-bottom:1px solid rgba(197,164,109,.42)}
+@media (prefers-reduced-motion:reduce){.imp-card.lit .imp-ring,.imp-card.lit .imp-sweep{animation:none}}
+</style>
   <section class="sx arrival" id="tonight" aria-label="Arrival">
     <div class="wrap">
       <div class="arrival-grid">
@@ -262,49 +289,23 @@
           <div id="nearResults" class="near-results" hidden aria-live="polite"></div>
         </div>
         <div class="arrival-media reveal">
-          <div class="plate"><span class="grain"></span><svg class="pour" viewBox="0 0 400 500" role="img" aria-label="An editorial rendering of a tea being poured over pearls">
-  <defs>
-    <linearGradient id="tea" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#7c5a34"/><stop offset=".45" stop-color="#4d3117"/><stop offset="1" stop-color="#241505"/>
-    </linearGradient>
-    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="rgba(244,239,231,.06)"/><stop offset=".5" stop-color="rgba(244,239,231,.16)"/><stop offset="1" stop-color="rgba(244,239,231,.04)"/>
-    </linearGradient>
-    <clipPath id="cup"><path d="M126 150 h148 l-16 250 a26 26 0 0 1 -26 22 H168 a26 26 0 0 1 -26 -22 Z"/></clipPath>
-  </defs>
-  <g clip-path="url(#cup)">
-    <rect x="120" y="150" width="160" height="292" fill="url(#glass)"/>
-    <rect x="120" y="214" width="160" height="228" fill="url(#tea)"/>
-    <path d="M120 214 q80 -34 160 0 v40 q-80 30 -160 0 Z" fill="rgba(247,242,234,.14)"/>
-    <path d="M150 214 C182 300 150 360 205 360 C250 360 232 300 264 226" fill="none" stroke="rgba(247,242,234,.5)" stroke-width="10" stroke-linecap="round"/>
-    <g fill="#1c120a">
-      <circle cx="160" cy="416" r="13"/><circle cx="188" cy="424" r="13"/><circle cx="216" cy="416" r="13"/><circle cx="244" cy="424" r="13"/><circle cx="174" cy="404" r="12"/><circle cx="232" cy="404" r="12"/><circle cx="202" cy="416" r="13"/>
-    </g>
-    <g fill="rgba(247,242,234,.28)"><circle cx="156" cy="412" r="3.4"/><circle cx="212" cy="412" r="3.4"/><circle cx="240" cy="420" r="3.4"/></g>
-    <rect x="130" y="150" width="10" height="292" fill="rgba(247,242,234,.14)"/>
-  </g>
-  <path d="M126 150 h148 l-16 250 a26 26 0 0 1 -26 22 H168 a26 26 0 0 1 -26 -22 Z" fill="none" stroke="rgba(244,239,231,.55)" stroke-width="2.4"/>
-  <path d="M118 150 q82 -30 164 0" fill="none" stroke="rgba(244,239,231,.5)" stroke-width="2.4"/>
-  <rect x="116" y="139" width="168" height="14" rx="7" fill="rgba(244,239,231,.10)" stroke="rgba(244,239,231,.5)" stroke-width="2"/>
-  <path d="M150 120 C150 90 250 92 250 60" fill="none" stroke="rgba(247,242,234,.4)" stroke-width="2" stroke-dasharray="1 9" stroke-linecap="round"/>
-  <rect x="238" y="40" width="12" height="112" rx="6" transform="rotate(9 244 96)" fill="#7A2433"/>
-  <g stroke="rgba(244,239,231,.22)" stroke-width="2" fill="none"><path d="M96 300 q-8 20 0 40"/><path d="M304 320 q8 18 0 36"/></g>
-</svg><span class="plate-cap">The pour · editorial rendering</span></div>
-          <span id="tonight-note"></span>
-          <div class="note note--float reveal">
-      <p class="note-kick">Tonight’s selection</p>
-      <h2 class="note-drink" style="font-size:1.6rem">Oolong Milk Tea</h2>
-      <p class="note-where">at 7 Leaves Cafe <a href="/boba/ca/irvine/7-leaves-cafe-irvine/">Irvine</a></p>
-      <p class="note-why">Silky and tea-forward. Real loose-leaf oolong with milk and cane sugar; toasted and smooth.</p>
-      <div class="chiprow"><span class="tag">Caffeine</span><span class="tag">Contains dairy</span></div>
-      <div class="note-actions" style="margin-top:1rem">
-        <a class="btn-mini btn-mini--solid" href="https://7leavescafe.com/menu/" target="_blank" rel="noopener">The menu</a>
-        <a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=7%20Leaves%20Cafe%20Irvine%20CA" target="_blank" rel="noopener">Directions</a>
-        <button class="btn-mini" type="button" data-save='{&quot;id&quot;: &quot;7-leaves-oolong-milk-tea&quot;, &quot;name&quot;: &quot;Oolong Milk Tea · 7 Leaves Cafe&quot;, &quot;where&quot;: &quot;Irvine&quot;, &quot;url&quot;: &quot;/boba/ca/irvine/7-leaves-cafe-irvine/&quot;}'>Keep it</button>
-        <button class="btn-mini" type="button" data-send="Oolong Milk Tea at 7 Leaves Cafe (Irvine)">Send</button>
-      </div>
-      <p class="note-src">7 Leaves Cafe’s menu, checked July 1, 2026. We show only what the official menu states.</p>
-    </div>
+          <div class="imp-deck" id="impDeck" aria-label="Turn a card to pick a spot and a drink">
+            <button class="imp-card yang" id="impCard1" type="button" aria-label="Turn the card for a spot">
+              <span class="imp-art"></span>
+              <span class="imp-lab">The place</span>
+              <span class="imp-hint" id="impHint1">Turn for a spot</span>
+              <span class="imp-res" id="impRes1"><span class="rn" id="impR1n"></span><span class="rm" id="impR1m"></span></span>
+              <span class="imp-sweep"></span><span class="imp-ring"></span>
+            </button>
+            <button class="imp-card yin locked" id="impCard2" type="button" aria-label="Turn the card for a drink" disabled>
+              <span class="imp-art"></span>
+              <span class="imp-lab">The drink</span>
+              <span class="imp-hint" id="impHint2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10V8a6 6 0 1112 0v2h1v12H5V10h1zm2 0h8V8a4 4 0 10-8 0v2z"/></svg>Turn the first card</span>
+              <span class="imp-res" id="impRes2"><span class="rn" id="impR2n"></span><span class="rm" id="impR2m"></span></span>
+              <span class="imp-sweep"></span><span class="imp-ring"></span>
+            </button>
+            <div class="imp-cap" id="impCap">Turn the place card. <a href="/tools/roulette/">Open the full deck</a></div>
+          </div>
         </div>
       </div>
     </div>
@@ -563,5 +564,27 @@
 <script src="/js/nav-midnight.js" defer></script>
 <script src="/js/motif.js" defer></script>
 <script src="/js/sound.js" defer></script>
+<script>
+(function(){
+  var FB_SHOPS=[{n:"Wanpo Tea Shop",c:"Arcadia",cs:"arcadia",s:"wanpo-tea-shop-arcadia"},{n:"Sunright Tea Studio",c:"Hacienda Heights",cs:"hacienda-heights",s:"sunright-tea-studio-hacienda-heights"},{n:"Tastea",c:"Costa Mesa",cs:"costa-mesa",s:"tastea-costa-mesa"},{n:"Meet Fresh",c:"Temple City",cs:"temple-city",s:"meet-fresh-temple-city"},{n:"Half & Half Tea House",c:"San Gabriel",cs:"san-gabriel",s:"half-and-half-tea-house-san-gabriel"},{n:"Ten Ren's Tea Time",c:"Arcadia",cs:"arcadia",s:"ten-rens-tea-time-arcadia"},{n:"85C Bakery Cafe",c:"Irvine",cs:"irvine",s:"85c-bakery-cafe-irvine"},{n:"Tea Block",c:"Rowland Heights",cs:"rowland-heights",s:"tea-block-rowland-heights"}];
+  var FB_DRINKS=[{n:"Pearl Milk Tea",d:"Black milk tea with chewy tapioca pearls. The classic order."},{n:"Taro Milk Tea",d:"Real taro root. Sweet, nutty, and naturally purple."},{n:"Thai Tea",d:"Spiced Thai tea, sweet and creamy over ice."},{n:"Matcha Milk Tea",d:"Stone-ground matcha with milk. Grassy and rich."},{n:"Wintermelon Tea",d:"Caramel-like wintermelon. Sweet and caffeine-free."},{n:"Okinawa Pearl Milk Tea",d:"Roasted brown sugar milk tea with pearls."}];
+  var SHOPS=FB_SHOPS;
+  fetch('/js/near-index.json').then(function(r){return r.json();}).then(function(d){var rows=Array.isArray(d)?d:(d.shops||[]);var v=rows.filter(function(x){return x&&x.vf;}).map(function(x){return {n:x.n,c:x.c,cs:x.cs,s:x.s};});if(v.length)SHOPS=v;}).catch(function(){});
+  function drinks(){return (window.SOCIETY&&window.SOCIETY.drinks)?window.SOCIETY.drinks.map(function(d){return {n:d.n,d:d.sum};}):FB_DRINKS;}
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function rand(a){return a[Math.floor(Math.random()*a.length)];}
+  function $(id){return document.getElementById(id);}
+  var c1=$('impCard1'),c2=$('impCard2'); if(!c1||!c2)return;
+  var stage=0,busy=false,spot=null,drink=null;
+  function pop(){try{if(window.BobaSound&&window.BobaSound.pop)window.BobaSound.pop();}catch(e){}}
+  function chime(){try{if(window.BobaSound&&window.BobaSound.chime)window.BobaSound.chime();}catch(e){}}
+  function lit(card){card.classList.remove('lit');void card.offsetWidth;card.classList.add('lit');setTimeout(function(){card.classList.remove('lit');},1000);}
+  function revealPlace(){if(busy||stage!==0)return;busy=true;spot=rand(SHOPS);pop();lit(c1);setTimeout(function(){$('impR1n').textContent=spot.n;$('impR1m').textContent=spot.c+', CA';c1.classList.add('revealed');chime();stage=1;busy=false;c2.classList.remove('locked');c2.disabled=false;$('impCap').innerHTML='Now turn the drink card. <a href="/tools/roulette/">Open the full deck</a>';},reduce?0:280);}
+  function revealDrink(){if(busy||stage!==1)return;busy=true;drink=rand(drinks());pop();lit(c2);setTimeout(function(){$('impR2n').textContent=drink.n;$('impR2m').textContent=drink.d;c2.classList.add('revealed');chime();stage=2;busy=false;$('impCap').innerHTML='<a href="/boba/ca/'+spot.cs+'/'+spot.s+'/">See '+spot.n+'</a> \u00b7 <a href="#" id="impAgain">Turn again</a>';var a=$('impAgain');if(a)a.addEventListener('click',function(e){e.preventDefault();reset();});},reduce?0:280);}
+  function reset(){stage=0;spot=drink=null;[c1,c2].forEach(function(c){c.classList.remove('revealed','lit');});c2.classList.add('locked');c2.disabled=true;$('impCap').innerHTML='Turn the place card. <a href="/tools/roulette/">Open the full deck</a>';}
+  c1.addEventListener('click',revealPlace);
+  c2.addEventListener('click',function(){if(!c2.classList.contains('locked'))revealDrink();});
+})();
+</script>
 </body>
 </html>
