@@ -1,297 +1,871 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boba Night, turn a card for tonight | pick a spot and a drink</title>
 <meta name="description" content="Can't decide where to get boba tonight? Turn a card for a real SoCal shop, then turn the next for a drink to order. Two cards and you're out the door.">
 <link rel="canonical" href="https://www.bobanight.com/tools/roulette/">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&family=Ephesis&display=swap" rel="stylesheet">
 <script src="/js/homepage/society-data.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --lacquer:#08070a; --lacquer-2:#160f14; --pearl:#F4EFE7; --brass:#b09a86;
-    --gold:#C5A46D; --gilt:#F4DDA2; --neon:#ff2f6d; --jade:#123F35; --jade-lt:#2C6B5C;
-    --orchid:#b46bd6; --imperial:#5c2c86; --velvet:#2a0b12;
-    --line:rgba(217,183,121,.20); --gold-line:rgba(197,164,109,.42);
-    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
-    --ease:cubic-bezier(.2,.8,.2,1);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    background:
-      radial-gradient(1100px 520px at 84% -6%, rgba(255,47,109,.13), transparent 58%),
-      radial-gradient(860px 660px at 2% 5%, rgba(92,44,134,.17), transparent 60%),
-      radial-gradient(900px 900px at 50% 120%, rgba(18,63,53,.11), transparent 62%),
-      var(--lacquer);
-    background-attachment:fixed; color:var(--pearl); font-family:var(--sans);
-    line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh; overflow-x:hidden;
-  }
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1000px;margin:0 auto;padding:0 22px 60px}
-  /* header */
-  .site-head{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:1px solid var(--line)}
-  .wordmark{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--pearl)}
-  .wordmark b{color:var(--neon);font-weight:600}
-  .head-right{display:flex;align-items:center;gap:14px}
-  .kicker{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:.5em}
-  .kicker::before{content:"";width:.5em;height:.5em;border-radius:50%;background:var(--gold)}
-  .snd{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--gold);cursor:pointer;display:grid;place-items:center;padding:0;transition:border-color .18s,color .18s,opacity .18s}
-  .snd svg{width:17px;height:17px;fill:currentColor}
-  .snd:hover{border-color:var(--gold);color:var(--gilt)}
-  .snd.off{color:var(--brass);opacity:.55}
-  .snd.off .wv{display:none}
-  /* hero */
-  .hero{text-align:center;padding:38px 0 30px}
-  .eyebrow{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-  .hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,6vw,3.4rem);line-height:1.02;color:var(--pearl)}
-  .hero h1 em{font-style:italic;color:var(--gilt)}
-  .sub{color:var(--brass);margin:14px auto 0;font-size:1rem;max-width:460px}
-  /* cards */
-  .deck{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,3vw,26px);max-width:660px;margin:22px auto 0}
-  .tcard{
-    position:relative;aspect-ratio:2/3;border-radius:18px;overflow:hidden;cursor:pointer;
-    border:1px solid var(--gold-line);background:var(--lacquer-2);
-    box-shadow:0 24px 60px rgba(0,0,0,.5), inset 0 0 0 1px rgba(0,0,0,.4);
-    transition:transform .2s var(--ease), box-shadow .2s var(--ease), opacity .3s var(--ease), filter .3s var(--ease);
-    text-align:left;font-family:var(--sans);color:var(--pearl);
-  }
-  .tcard:not(.locked):not(.revealed):hover{transform:translateY(-4px);box-shadow:0 30px 70px rgba(0,0,0,.55), 0 0 0 1px var(--gold-line)}
-  .tcard.locked{opacity:.42;filter:grayscale(.4) saturate(.7);cursor:not-allowed}
-  /* card art (placeholder — swap .art background-image with the maiden PNG) */
-  .art{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden}
-  .art .halo{position:absolute;width:64%;aspect-ratio:1;border-radius:50%;top:20%;filter:blur(2px);opacity:.5}
-  .art .glyph{font-family:var(--serif);font-size:clamp(5rem,17vw,8.5rem);line-height:1;opacity:.9;position:relative;z-index:1}
-  .art .seed{position:absolute;bottom:16%;width:14px;height:14px;border-radius:50%;z-index:1}
-  .yang .art{background:#120b08 url('card-yang.jpg') center/cover no-repeat}
-  .yang .art .halo{background:radial-gradient(circle, rgba(244,221,162,.9), transparent 62%)}
-  .yang .art .glyph{color:var(--gilt);text-shadow:0 0 26px rgba(244,221,162,.5)}
-  .yang .art .seed{background:var(--jade-lt);box-shadow:0 0 12px rgba(44,107,92,.9)}
-  .yin .art{background:#0a0b12 url('card-yin.jpg') center/cover no-repeat}
-  .yin .art .halo{background:radial-gradient(circle, rgba(210,225,255,.75), transparent 62%)}
-  .yin .art .glyph{color:#dfe7f2;text-shadow:0 0 26px rgba(120,150,220,.5)}
-  .yin .art .seed{background:var(--gilt);box-shadow:0 0 12px rgba(244,221,162,.9)}
-  /* gilded frame */
-  .art .glyph,.art .halo,.art .seed{display:none}
-  .frame{display:none}
-  .frame::before,.frame::after{content:"";position:absolute;width:20px;height:20px;border:1px solid var(--gold);opacity:.55}
-  .frame::before{top:12px;left:12px;border-right:0;border-bottom:0}
-  .frame::after{bottom:12px;right:12px;border-left:0;border-top:0}
-  /* labels + hint + result */
-  .clabel{position:absolute;top:14px;left:50%;transform:translateX(-50%);padding:4px 13px;border-radius:999px;background:rgba(6,5,8,.5);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gilt);z-index:3;white-space:nowrap}
-  .chint{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);padding:5px 14px;border-radius:999px;background:rgba(6,5,8,.5);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);font-size:.82rem;color:var(--pearl);z-index:3;transition:opacity .3s var(--ease);white-space:nowrap}
-  .chint .lock{display:inline-flex;align-items:center;gap:.4em;color:var(--brass)}
-  .chint svg{width:12px;height:12px;fill:var(--brass)}
-  .cresult{position:absolute;left:0;right:0;bottom:0;padding:26px 18px 20px;z-index:3;
-    background:linear-gradient(to top, rgba(6,5,8,.92) 30%, rgba(6,5,8,.55) 68%, transparent);
-    opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease) .12s, transform .5s var(--ease) .12s;pointer-events:none;text-align:center}
-  .cresult .rn{display:block;font-family:var(--serif);font-size:1.5rem;font-weight:600;line-height:1.14;color:var(--gilt)}
-  .cresult .rm{display:block;font-size:.82rem;color:var(--brass);margin-top:5px;line-height:1.4}
-  .tcard.revealed .chint{opacity:0}
-  .tcard.revealed .cresult{opacity:1;transform:none}
-  /* the light-up reveal (from the slot effect) */
-  .lit-ring{position:absolute;inset:0;border-radius:18px;border:1px solid transparent;pointer-events:none;z-index:4}
-  .tcard.lit .lit-ring{animation:cardflash 1s var(--ease)}
-  @keyframes cardflash{
-    0%{border-color:var(--neon);box-shadow:0 0 0 1px var(--neon), 0 0 46px 8px rgba(255,47,109,.6), inset 0 0 44px rgba(255,47,109,.28)}
-    55%{border-color:var(--gilt);box-shadow:0 0 0 1px var(--gilt), 0 0 34px 4px rgba(244,221,162,.45), inset 0 0 26px rgba(244,221,162,.18)}
-    100%{border-color:transparent;box-shadow:0 0 0 0 transparent, inset 0 0 0 transparent}
-  }
-  .sweep{position:absolute;inset:0;z-index:4;pointer-events:none;transform:translateX(-130%);
-    background:linear-gradient(115deg,transparent 34%, rgba(244,221,162,.4) 50%, transparent 66%)}
-  .tcard.lit .sweep{animation:sweep .95s var(--ease)}
-  @keyframes sweep{to{transform:translateX(130%)}}
-  .prompt{text-align:center;margin-top:20px;min-height:22px;color:var(--pearl);font-size:.94rem}
-  .prompt b{color:var(--gilt);font-weight:600}
-  /* plan overlay (fixed so nothing grows the page) */
-  .plan-scrim{position:fixed;inset:0;z-index:70;background:rgba(6,5,8,.68);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
-  .plan-scrim.show{opacity:1;pointer-events:auto}
-  .plan{position:fixed;left:50%;top:50%;z-index:75;width:min(640px,92vw);max-height:88vh;overflow:auto;
-    border-radius:20px;padding:30px 30px 26px;
-    background:radial-gradient(120% 90% at 100% 0%, rgba(180,107,214,.12), transparent 55%), linear-gradient(160deg,#191016 0%, #14161b 100%);
-    box-shadow:inset 0 0 0 1px rgba(197,164,109,.28), 0 40px 90px rgba(0,0,0,.6);
-    opacity:0;transform:translate(-50%,-44%) scale(.97);pointer-events:none;transition:opacity .5s var(--ease), transform .5s var(--ease)}
-  .plan.show{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
-  .peyebrow{font-family:'Ephesis',cursive;color:var(--gilt);font-size:2rem;line-height:1;text-align:center;margin-bottom:4px}
-  .ptag{text-align:center;color:var(--brass);font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;margin-bottom:16px}
-  .pair{display:grid;grid-template-columns:1fr 1fr}
-  .pcol{padding:6px 18px}
-  .pcol + .pcol{border-left:1px solid rgba(197,164,109,.22)}
-  .pcap{font-size:.64rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-  .pname{font-family:var(--serif);font-size:1.55rem;font-weight:600;line-height:1.08;color:var(--pearl)}
-  .pmeta{font-size:.82rem;color:var(--brass);margin-top:5px;line-height:1.5}
-  .plan-actions{display:flex;gap:14px;justify-content:center;align-items:center;margin-top:24px;flex-wrap:wrap}
-  .btn{font-family:var(--sans);font-weight:600;font-size:.95rem;padding:13px 24px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:transform .16s var(--ease), box-shadow .16s}
-  .btn.solid{background:linear-gradient(180deg,#ff5b86,var(--neon));color:#2a0410;box-shadow:0 10px 30px rgba(255,47,109,.32)}
-  .btn.solid:hover{transform:translateY(-2px)}
-  .btn.ghost{background:transparent;color:var(--gilt);border-color:var(--gold-line)}
-  .btn.ghost:hover{border-color:var(--gold)}
-  footer{margin-top:34px;color:var(--brass);font-size:.74rem;letter-spacing:.04em;opacity:.75;text-align:center;line-height:1.5}
-  @media (max-width:520px){
-    .pair{grid-template-columns:1fr}
-    .pcol + .pcol{border-left:0;border-top:1px solid rgba(197,164,109,.22);margin-top:6px;padding-top:14px}
-    .kicker{display:none}
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{transition-duration:.001ms !important;animation-duration:.001ms !important}
-  }
-</style></head>
+:root{
+  --obsidian:#08070a; --panel:#160f14; --pearl:#F4EFE7; --brass:#b09a86;
+  --gold:#C5A46D; --gilt:#F4DDA2; --pink:#ff2f6d; --jade:#123F35;
+  --jade-lit:#2f9678; --orchid:#b46bd6; --imperial:#5c2c86; --velvet:#2a0b12;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  min-height:100vh; color:var(--pearl);
+  font-family:'Inter',system-ui,sans-serif;
+  background:
+    radial-gradient(58vw 44vh at 84% -6%, rgba(255,47,109,.16), transparent 62%),
+    radial-gradient(52vw 42vh at 8% -4%, rgba(92,44,134,.24), transparent 60%),
+    radial-gradient(70vw 46vh at 50% 108%, rgba(18,63,53,.42), transparent 64%),
+    var(--obsidian);
+  background-attachment:fixed;
+  overflow-x:hidden;
+}
+/* film grain */
+body::after{
+  content:""; position:fixed; inset:-40px; pointer-events:none; z-index:90; opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
+}
+
+/* ---------- header ---------- */
+header{ text-align:center; padding:26px 16px 6px; position:relative; z-index:5 }
+.brand{
+  font-family:'Cinzel',serif; font-weight:700; font-size:.78rem; letter-spacing:.42em;
+  text-transform:uppercase; color:var(--brass);
+}
+h1{
+  font-family:'Cinzel',serif; font-weight:700; margin-top:10px;
+  font-size:clamp(1.5rem,3.6vw,2.3rem); letter-spacing:.06em; color:var(--pearl);
+  text-shadow:0 0 26px rgba(197,164,109,.28);
+}
+.sub{
+  margin-top:8px; font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500;
+  font-size:1.06rem; color:var(--brass);
+}
+
+/* ---------- slim site header + footer ---------- */
+.site-head{
+  position:relative; z-index:6; display:flex; align-items:center; justify-content:space-between;
+  max-width:980px; margin:0 auto; padding:18px 74px 0 20px;
+}
+.wordmark{
+  font-family:'Cormorant Garamond',serif; font-weight:600; font-size:1.35rem;
+  color:var(--pearl); text-decoration:none; letter-spacing:.02em;
+}
+.wordmark b{ color:var(--pink); font-weight:600 }
+.kicker{
+  font-family:'Cinzel',serif; font-size:.6rem; letter-spacing:.32em;
+  text-transform:uppercase; color:var(--brass); white-space:nowrap;
+}
+.site-foot{
+  position:relative; z-index:6; text-align:center; padding:8px 20px 34px;
+  font-size:.8rem; color:var(--brass);
+}
+.site-foot a{ color:var(--gilt); text-decoration:none; border-bottom:1px solid rgba(197,164,109,.4) }
+.site-foot a:hover{ color:var(--pearl) }
+
+/* ---------- temple stage ---------- */
+main{ position:relative; z-index:5; padding:22px 16px 40px; }
+.stage{
+  max-width:980px; margin:0 auto; display:grid;
+  grid-template-columns:1fr minmax(180px,230px) 1fr;
+  align-items:center; gap:10px;
+}
+/* temple gate arch behind the scene */
+.gate{
+  position:fixed; left:50%; top:52%; transform:translate(-50%,-50%);
+  width:min(1060px,96vw); opacity:.5; pointer-events:none; z-index:1;
+}
+
+/* ---------- cards ---------- */
+.card-col{ display:flex; flex-direction:column; align-items:center; }
+.card-wrap{
+  position:relative; width:min(250px,38vw); aspect-ratio:5/8;
+  cursor:pointer; -webkit-tap-highlight-color:transparent; outline:none;
+}
+.card-frame{
+  position:absolute; inset:0; border-radius:14px; overflow:hidden;
+  border:1px solid rgba(197,164,109,.55);
+  background-size:cover; background-position:center;
+  box-shadow:0 18px 44px rgba(0,0,0,.6), inset 0 0 0 1px rgba(8,7,10,.5);
+  transition:filter 1s ease, box-shadow 1s ease, transform .35s ease;
+}
+#wrap-yang .card-frame{ background-image:url(card-yang.jpg) }
+#wrap-yin  .card-frame{ background-image:url(card-yin.jpg) }
+.card-wrap:not(.landed):not(.charging):hover .card-frame,
+.card-wrap:focus-visible .card-frame{ transform:translateY(-5px) }
+#wrap-yang:not(.landed):not(.charging):hover .card-frame{ box-shadow:0 22px 50px rgba(0,0,0,.65), 0 0 32px rgba(197,164,109,.3) }
+
+/* landed: persistent breathing aura */
+.card-wrap.landed{ cursor:default }
+.card-wrap.landed .card-frame{
+  border-color:rgba(244,221,162,.85);
+  box-shadow:0 0 22px rgba(255,47,109,.45), 0 0 60px rgba(255,47,109,.28), 0 0 110px rgba(244,221,162,.2), 0 18px 44px rgba(0,0,0,.6);
+  animation:aura 3.2s ease-in-out infinite;
+}
+@keyframes aura{
+  0%,100%{ box-shadow:0 0 20px rgba(255,47,109,.4), 0 0 55px rgba(255,47,109,.24), 0 0 100px rgba(244,221,162,.16), 0 18px 44px rgba(0,0,0,.6) }
+  50%   { box-shadow:0 0 30px rgba(255,47,109,.6), 0 0 80px rgba(255,47,109,.36), 0 0 140px rgba(244,221,162,.3), 0 18px 44px rgba(0,0,0,.6) }
+}
+/* one-shot light sweep across a freshly landed card */
+.card-frame::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(112deg, transparent 38%, rgba(244,239,231,.5) 50%, transparent 62%);
+  transform:translateX(-130%); opacity:0;
+}
+.card-wrap.landed .card-frame::after{ animation:sweep 1s .1s cubic-bezier(.3,.6,.2,1) forwards }
+@keyframes sweep{ 0%{transform:translateX(-130%);opacity:1} 100%{transform:translateX(130%);opacity:0} }
+
+/* ---------- sealed Yin: frosted jade slab + gold chain ---------- */
+#wrap-yin.sealed{ cursor:not-allowed }
+#wrap-yin.sealed .card-frame{ filter:grayscale(.88) brightness(.35) }
+.slab{
+  position:absolute; inset:0; border-radius:14px; overflow:hidden; z-index:3; pointer-events:none;
+  background:linear-gradient(160deg, rgba(18,63,53,.55), rgba(8,7,10,.35) 46%, rgba(18,63,53,.6));
+  -webkit-backdrop-filter:blur(3px) saturate(.5); backdrop-filter:blur(3px) saturate(.5);
+  border:1px solid rgba(47,150,120,.35);
+  display:flex; align-items:flex-end; justify-content:center;
+  transition:opacity .9s ease;
+}
+.slab span{
+  font-family:'Cinzel',serif; font-size:.62rem; letter-spacing:.34em; text-transform:uppercase;
+  color:rgba(244,239,231,.75); padding:0 8px 14px; text-align:center;
+  text-shadow:0 0 10px rgba(18,63,53,.9);
+}
+.chains{ position:absolute; inset:-4px; z-index:4; pointer-events:none; overflow:visible }
+.chains path{ fill:none; stroke:var(--gilt); stroke-width:2.6; stroke-linecap:round; stroke-dasharray:7 5;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.7)) }
+.chains .clasp{ fill:var(--panel); stroke:var(--gold); stroke-width:2 }
+.chain-a,.chain-b{ transform-box:fill-box; transform-origin:center; transition:transform 1s cubic-bezier(.5,0,.85,.4) .1s, opacity .9s ease .25s }
+#wrap-yin.awake .chain-a{ transform:translate(-30px,120px) rotate(-24deg); opacity:0 }
+#wrap-yin.awake .chain-b{ transform:translate(26px,130px) rotate(21deg); opacity:0 }
+#wrap-yin.awake .slab{ opacity:0 }
+#wrap-yin.awake .card-frame{ filter:none;
+  box-shadow:0 0 26px rgba(244,239,231,.22), 0 0 60px rgba(180,107,214,.16), 0 18px 44px rgba(0,0,0,.6) }
+#wrap-yin.awake{ cursor:pointer }
+#wrap-yin.landed .card-frame{ filter:none }
+
+/* ---------- charging ring ---------- */
+.ring{ position:absolute; inset:-11px; width:calc(100% + 22px); height:calc(100% + 22px);
+  z-index:6; pointer-events:none; overflow:visible; opacity:0; transition:opacity .5s ease }
+.ring rect{
+  fill:none; stroke:var(--jade-lit); stroke-width:3.5; vector-effect:non-scaling-stroke;
+  stroke-linecap:round; stroke-dasharray:100; stroke-dashoffset:100;
+  filter:drop-shadow(0 0 6px rgba(244,221,162,.85));
+}
+.card-wrap.charging .ring{ opacity:1 }
+.card-wrap.charging .ring rect{
+  animation:ringdraw 1.55s cubic-bezier(.4,.05,.6,.95) forwards, ringcolor 1.55s linear forwards;
+}
+@keyframes ringdraw{ to{ stroke-dashoffset:0 } }
+@keyframes ringcolor{
+  0%{ stroke:#2f9678 } 45%{ stroke:#C5A46D } 78%{ stroke:#F4DDA2 } 100%{ stroke:#ff2f6d }
+}
+
+/* ---------- spotlight veil + beam ---------- */
+#veil{ position:fixed; inset:0; z-index:40; pointer-events:none; opacity:0; transition:opacity .55s ease }
+body.dimmed #veil{ opacity:1 }
+#beam{ position:fixed; top:0; z-index:41; pointer-events:none; opacity:0; transition:opacity .7s ease;
+  background:linear-gradient(180deg, rgba(244,221,162,.32), rgba(244,221,162,.1) 55%, rgba(244,221,162,0));
+  clip-path:polygon(38% 0, 62% 0, 100% 100%, 0 100%); filter:blur(10px) }
+body.dimmed #beam{ opacity:1 }
+
+/* ---------- burst particles ---------- */
+.burst{ position:absolute; inset:0; z-index:8; pointer-events:none; overflow:visible }
+.p{ position:absolute; left:50%; top:50%; display:block; border-radius:50%;
+  animation:fling var(--d) cubic-bezier(.16,.84,.34,1) forwards }
+.p.star{ width:7px; height:7px;
+  background:radial-gradient(circle at 40% 35%, #fff8e6, var(--gilt) 45%, rgba(244,221,162,0) 72%);
+  box-shadow:0 0 8px rgba(244,221,162,.9) }
+.p.pearl{ width:13px; height:13px;
+  background:radial-gradient(circle at 34% 28%, #6b5748, #241a16 58%, #120d0b);
+  box-shadow:inset 0 -2px 3px rgba(0,0,0,.6), 0 0 6px rgba(197,164,109,.5) }
+.p.spark{ width:4px; height:4px; background:var(--pink); box-shadow:0 0 8px var(--pink) }
+@keyframes fling{
+  0%{ transform:translate(-50%,-50%) scale(0); opacity:1 }
+  65%{ opacity:1 }
+  100%{ transform:translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(var(--s)); opacity:0 }
+}
+
+/* ---------- smoke plumes (ported from the seance table) ----------
+   Blurred violet smoke that curls up and parts as the card reveals.
+   Fired just before the star burst so the burst punches through it. */
+.plume{
+  position:absolute; z-index:7; pointer-events:none; border-radius:50%;
+  width:120px; height:120px; left:var(--x); top:var(--y);
+  background:radial-gradient(circle at 45% 55%, rgba(180,150,200,.4), rgba(120,90,150,.2) 45%, transparent 70%);
+  filter:blur(16px); opacity:0;
+  animation:plume-curl var(--dur) var(--delay) ease-out forwards;
+}
+@keyframes plume-curl{
+  0%{ opacity:0; transform:translate(0,10px) scale(.35) rotate(0) }
+  22%{ opacity:.95 }
+  60%{ opacity:.55 }
+  100%{ opacity:0; transform:translate(var(--dx),-110px) scale(1.7) rotate(var(--rot)) }
+}
+
+/* ---------- orbiting pearls (ported from the seance halo) ----------
+   The persistent after-state: once a card lands, dark gilt-rimmed pearls
+   drift around its glow, each on its own lane — varied radii and speeds. */
+.orbit{
+  position:absolute; left:50%; top:50%; width:132%; aspect-ratio:1;
+  transform:translate(-50%,-50%); pointer-events:none; z-index:7;
+  opacity:0; transition:opacity 1.2s .4s ease;
+}
+.card-wrap.landed .orbit{ opacity:1 }
+.olane{ position:absolute; inset:0; animation:orbitspin var(--os,22s) linear infinite; animation-delay:var(--od,0s) }
+.opearl{
+  position:absolute; top:50%; left:calc(50% + var(--orad,45%));
+  width:var(--sz,9px); height:var(--sz,9px);
+  transform:translate(-50%,-50%); border-radius:50%;
+  background:radial-gradient(circle at 30% 26%, #8a6f58, #2b1d15 52%, #0c0806);
+  border:1px solid rgba(244,221,162,.45);
+  box-shadow:inset -2px -2px 4px rgba(0,0,0,.85), inset 1.5px 1.5px 2px rgba(244,221,162,.4), 0 0 9px rgba(244,221,162,.55);
+}
+@keyframes orbitspin{ to{ transform:rotate(360deg) } }
+
+/* faint idle smoke wisp rising from the boba-cup shrine */
+.cup-wisps{
+  position:absolute; top:-42px; left:50%; transform:translateX(-50%);
+  width:72px; height:96px; pointer-events:none; z-index:1; opacity:.55;
+}
+.swisp{
+  position:absolute; bottom:0; left:50%; width:8px; height:58%; border-radius:50%;
+  background:linear-gradient(to top, rgba(244,239,231,.22), rgba(180,107,214,.1) 55%, transparent);
+  filter:blur(5px); opacity:0; transform-origin:50% 100%;
+  animation:swisp var(--dur) var(--delay) ease-in-out infinite;
+}
+@keyframes swisp{
+  0%{ opacity:0; transform:translate(-50%,12%) scaleY(.4) }
+  30%{ opacity:.7 }
+  70%{ opacity:.3; transform:translate(calc(-50% + var(--dx)),-45%) scaleY(1.1) }
+  100%{ opacity:0; transform:translate(calc(-50% + var(--dx2)),-85%) scaleY(1.3) }
+}
+
+/* ---------- reveal name plate ---------- */
+.name-plate{
+  position:absolute; left:50%; top:56%; transform:translate(-50%,-50%);
+  width:165%; z-index:9; text-align:center; pointer-events:none;
+  opacity:0; transition:opacity .3s ease;
+}
+.card-wrap.landed .name-plate{ opacity:1 }
+.name-plate b{
+  display:block; font-family:'Cinzel',serif; font-weight:900;
+  font-size:clamp(1.7rem, 4.6vw, 3rem); line-height:1.08; letter-spacing:.03em;
+  color:var(--pearl); font-variant:small-caps;
+  animation:slam .68s cubic-bezier(.2,1.35,.35,1) both;
+}
+.name-plate{
+  text-shadow:0 0 12px rgba(18,63,53,.9), 0 0 26px rgba(47,150,120,.55),
+    0 0 44px rgba(244,221,162,.5), 0 0 70px rgba(255,47,109,.35), 0 2px 4px rgba(0,0,0,.9);
+  animation:nameglow 3.2s ease-in-out infinite;
+}
+@keyframes nameglow{
+  0%,100%{ text-shadow:0 0 12px rgba(18,63,53,.9), 0 0 26px rgba(47,150,120,.5),
+    0 0 42px rgba(244,221,162,.45), 0 0 66px rgba(255,47,109,.3), 0 2px 4px rgba(0,0,0,.9) }
+  50%{ text-shadow:0 0 14px rgba(18,63,53,.95), 0 0 34px rgba(47,150,120,.7),
+    0 0 60px rgba(244,221,162,.7), 0 0 96px rgba(255,47,109,.5), 0 2px 4px rgba(0,0,0,.9) }
+}
+@keyframes slam{
+  0%{ transform:scale(2.3); opacity:0 }
+  55%{ transform:scale(.92); opacity:1 }
+  75%{ transform:scale(1.05) }
+  100%{ transform:scale(1); opacity:1 }
+}
+.name-plate small{
+  display:block; margin-top:8px; font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-weight:600; font-size:clamp(.95rem,1.9vw,1.15rem); color:var(--gilt);
+  text-shadow:0 0 14px rgba(8,7,10,.95), 0 1px 2px rgba(0,0,0,.9);
+  animation:subin .5s .35s ease both;
+}
+@keyframes subin{ from{ opacity:0; transform:translateY(8px) } to{ opacity:1; transform:none } }
+
+/* hint pill on active card */
+.hint{
+  position:absolute; left:50%; bottom:-40px; transform:translateX(-50%); z-index:7;
+  font-size:.74rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gilt); background:rgba(22,15,20,.85); border:1px solid rgba(197,164,109,.45);
+  padding:7px 14px; border-radius:999px; white-space:nowrap;
+  transition:opacity .4s ease; pointer-events:none;
+}
+.card-wrap.charging .hint, .card-wrap.landed .hint{ opacity:0 }
+#wrap-yin .hint{ opacity:0 }
+#wrap-yin.awake:not(.landed):not(.charging) .hint{ opacity:1 }
+.card-col{ padding-bottom:56px } /* reserved space so hints never shift layout */
+
+/* ---------- shrine column: cup, tease, CTA ---------- */
+.shrine{ display:flex; flex-direction:column; align-items:center; gap:0; min-height:420px; position:relative }
+#cup{ width:min(150px,26vw); overflow:visible }
+#cup .line{ fill:none; stroke:var(--gold); stroke-width:2.4; stroke-linecap:round }
+#cup .lid{ fill:rgba(22,15,20,.9); stroke:var(--gold); stroke-width:2.2 }
+#cup .tea-rect{ transform:translateY(96px); transform-box:fill-box;
+  transition:transform 1.7s cubic-bezier(.25,.7,.2,1) }
+#cup.has-tea .tea-rect{ transform:translateY(0) }
+#cup .pl{ transform:translateY(-92px); opacity:0; transform-box:fill-box;
+  transition:transform .8s cubic-bezier(.3,1.4,.4,1), opacity .3s ease }
+#cup.has-pearls .pl{ transform:translateY(0); opacity:1 }
+#cup .pl:nth-of-type(2){ transition-delay:.1s } #cup .pl:nth-of-type(3){ transition-delay:.18s }
+#cup .pl:nth-of-type(4){ transition-delay:.26s } #cup .pl:nth-of-type(5){ transition-delay:.34s }
+#cup .straw{ transform:translateY(-70px) rotate(-16deg); opacity:0; transform-box:fill-box; transform-origin:center bottom;
+  transition:transform .85s .3s cubic-bezier(.3,1.3,.4,1), opacity .3s .3s ease }
+#cup.has-pearls .straw{ transform:rotate(9deg); opacity:1 }
+#cup .steam{ opacity:0; fill:none; stroke:rgba(244,239,231,.75); stroke-width:2; stroke-linecap:round }
+#cup.has-steam .steam{ animation:steam 3s ease-in-out infinite }
+#cup.has-steam .steam.s2{ animation-delay:1.1s }
+@keyframes steam{
+  0%{ opacity:0; transform:translateY(5px) } 40%{ opacity:.8 } 100%{ opacity:0; transform:translateY(-12px) }
+}
+.shrine-label{
+  margin-top:8px; font-family:'Cinzel',serif; font-size:.6rem; letter-spacing:.36em;
+  text-transform:uppercase; color:var(--brass);
+}
+/* tease line: fixed slot, never shifts layout */
+#tease{
+  height:34px; margin-top:14px; display:flex; align-items:center; text-align:center;
+  font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:600;
+  font-size:1.12rem; color:var(--gilt); text-shadow:0 0 16px rgba(244,221,162,.4);
+  opacity:0; transform:translateY(10px); transition:opacity .9s ease .3s, transform .9s ease .3s;
+}
+#tease.show{ opacity:1; transform:none }
+
+/* CTA conjures out of the cup's steam */
+#cta-slot{ position:relative; height:126px; width:100%; margin-top:6px }
+#cta{
+  position:absolute; left:50%; top:14px; transform:translate(-50%,26px) scale(.94);
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  opacity:0; pointer-events:none; filter:blur(6px);
+  transition:opacity .9s ease, transform .9s cubic-bezier(.2,1,.3,1), filter .9s ease;
+}
+#cta.show{ opacity:1; transform:translate(-50%,0) scale(1); filter:blur(0); pointer-events:auto }
+#cta .go{
+  display:inline-block; font-family:'Cinzel',serif; font-weight:700; font-size:.95rem;
+  letter-spacing:.16em; text-transform:uppercase; text-decoration:none; color:var(--obsidian);
+  background:linear-gradient(160deg, var(--gilt), var(--gold));
+  padding:14px 30px; border-radius:999px; white-space:nowrap;
+  box-shadow:0 0 22px rgba(244,221,162,.5), 0 0 50px rgba(255,47,109,.28), 0 8px 20px rgba(0,0,0,.55);
+  animation:ctabreathe 3s ease-in-out infinite;
+}
+@keyframes ctabreathe{
+  0%,100%{ box-shadow:0 0 20px rgba(244,221,162,.45), 0 0 46px rgba(255,47,109,.24), 0 8px 20px rgba(0,0,0,.55) }
+  50%{ box-shadow:0 0 30px rgba(244,221,162,.7), 0 0 70px rgba(255,47,109,.4), 0 8px 20px rgba(0,0,0,.55) }
+}
+#cta .go:hover{ filter:brightness(1.08) }
+#again{
+  background:none; border:none; cursor:pointer; color:var(--brass);
+  font-family:'Inter',sans-serif; font-size:.8rem; letter-spacing:.1em;
+  border-bottom:1px solid rgba(176,154,134,.4); padding-bottom:2px;
+}
+#again:hover{ color:var(--pearl) }
+
+/* ---------- ambient side smoke: incense at the edges of the altar ----------
+   Always present. Slow violet-grey plumes drift up the left and right
+   edges of the viewport; they thicken for a moment on each reveal. */
+.side-smoke{
+  position:fixed; top:0; bottom:0; width:170px; z-index:2; pointer-events:none;
+  opacity:.85; transition:opacity .5s ease;
+}
+.side-smoke.left{ left:-34px } .side-smoke.right{ right:-34px }
+body.smoke-surge .side-smoke{ opacity:1 }
+.sm{
+  position:absolute; left:50%; bottom:-160px; width:190px; height:190px; border-radius:50%;
+  background:radial-gradient(circle at 45% 55%, rgba(190,160,215,.55), rgba(130,100,160,.3) 45%, transparent 70%);
+  filter:blur(22px); opacity:0;
+  animation:sm-rise var(--dur) var(--delay) linear infinite;
+}
+@keyframes sm-rise{
+  0%{ opacity:0; transform:translate(-50%,0) scale(.55) rotate(0) }
+  14%{ opacity:var(--o,.32) }
+  60%{ opacity:calc(var(--o,.32)*.7) }
+  100%{ opacity:0; transform:translate(calc(-50% + var(--dx,0px)),-112vh) scale(1.55) rotate(var(--rot,14deg)) }
+}
+/* one-shot thicker plumes spawned when a card reveals */
+.sm.sm-once{ animation:sm-rise var(--dur) var(--delay) ease-out forwards }
+
+/* sound toggle */
+#snd{
+  position:fixed; top:16px; right:16px; z-index:95; width:42px; height:42px; border-radius:50%;
+  background:rgba(22,15,20,.85); border:1px solid rgba(197,164,109,.5); cursor:pointer;
+  display:flex; align-items:center; justify-content:center; color:var(--gilt);
+}
+#snd svg{ width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round }
+#snd .off-x{ display:none } #snd[aria-pressed="false"] .off-x{ display:block }
+#snd[aria-pressed="false"] .waves{ display:none }
+
+/* ---------- responsive stack ---------- */
+@media (max-width:719px){
+  .stage{ display:flex; flex-direction:column; gap:6px }
+  .card-col{ padding-bottom:52px }
+  #col-yang{ order:1 } #col-yin{ order:2 } .shrine{ order:3; min-height:0 }
+  .card-wrap{ width:min(270px,74vw) }
+  .name-plate{ width:130% }
+  .name-plate b{ font-size:clamp(1.6rem,7.5vw,2.2rem) }
+  .gate{ display:none }
+  .shrine{ padding-top:46px } /* room for the idle wisp above the cup */
+  .cup-wisps{ top:4px }
+  .side-smoke{ width:90px; opacity:.6 }
+  .side-smoke.left{ left:-40px } .side-smoke.right{ right:-40px }
+}
+
+/* ---------- instant (demo) mode: skip one-shots, keep breathing ---------- */
+html.instant .name-plate b{ animation-duration:0s }
+html.instant .name-plate small{ animation-duration:0s; animation-delay:0s }
+html.instant .card-frame::after{ animation:none }
+html.instant #cup .tea-rect, html.instant #cup .pl, html.instant #cup .straw,
+html.instant #wrap-yin .chain-a, html.instant #wrap-yin .chain-b, html.instant #wrap-yin .slab,
+html.instant #cta, html.instant #tease, html.instant .orbit{ transition:none }
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation:none !important; transition:none !important }
+  .card-wrap.landed .card-frame{
+    box-shadow:0 0 26px rgba(255,47,109,.5), 0 0 70px rgba(244,221,162,.25), 0 18px 44px rgba(0,0,0,.6) }
+  .name-plate b{ opacity:1; transform:none }
+  .name-plate small{ opacity:1; transform:none }
+  #cup .tea-rect{ transform:translateY(96px) } #cup.has-tea .tea-rect{ transform:translateY(0) }
+  #cup .steam{ opacity:0 } #cup.has-steam .steam{ opacity:.6 }
+  .plume, .cup-wisps, .orbit{ display:none !important }
+  /* side smoke stays, but as static faint wisps */
+  .side-smoke .sm{ animation:none !important; opacity:.15 !important }
+  .side-smoke .sm:nth-child(1){ transform:translate(-50%,-16vh) scale(1.1) }
+  .side-smoke .sm:nth-child(2){ transform:translate(-38%,-42vh) scale(1.3) }
+  .side-smoke .sm:nth-child(3){ transform:translate(-60%,-66vh) scale(1.2) }
+  .side-smoke .sm:nth-child(4){ transform:translate(-50%,-88vh) scale(1.35) }
+  .side-smoke .sm-once{ display:none !important }
+}
+</style>
+</head>
 <body>
-<div class="wrap">
-  <header class="site-head">
-    <a class="wordmark" href="/">Boba <b>Night</b></a>
-    <div class="head-right">
-      <span class="kicker">The night deck</span>
-      <button class="snd" id="sndBtn" type="button" aria-label="Sound on" aria-pressed="true" title="Sound">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="wv" d="M16 8.5c1.4 1.3 1.4 5.7 0 7M18.6 6c2.6 2.3 2.6 9.7 0 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-      </button>
-    </div>
-  </header>
 
-  <section class="hero">
-    <div class="eyebrow">Can't decide?</div>
-    <h1>Let the night <em>pick</em>.</h1>
-    <p class="sub">Turn a card for a spot, then turn the next for a drink. One place, one order, and you're out the door.</p>
-  </section>
+<button id="snd" aria-pressed="true" aria-label="Sound on or off" title="Sound">
+  <svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="waves" d="M16 9c1.2 1.6 1.2 4.4 0 6M18.5 7c2 2.8 2 7.2 0 10"/><path class="off-x" d="M16 9l5 6M21 9l-5 6"/></svg>
+</button>
 
-  <div class="deck">
-    <button class="tcard yang" id="card1" type="button" aria-label="Turn the card for a spot">
-      <span class="art"><span class="halo"></span><span class="glyph">&#38525;</span><span class="seed"></span></span>
-      <span class="frame"></span>
-      <span class="clabel">The place</span>
-      <span class="chint" id="hint1">Turn for a spot</span>
-      <span class="cresult" id="res1"><span class="rn" id="r1n"></span><span class="rm" id="r1m"></span></span>
-      <span class="sweep"></span><span class="lit-ring"></span>
-    </button>
+<div id="veil"></div>
+<div id="beam"></div>
 
-    <button class="tcard yin locked" id="card2" type="button" aria-label="Turn the card for a drink" disabled>
-      <span class="art"><span class="halo"></span><span class="glyph">&#38452;</span><span class="seed"></span></span>
-      <span class="frame"></span>
-      <span class="clabel">The drink</span>
-      <span class="chint" id="hint2"><span class="lock"><svg viewBox="0 0 24 24"><path d="M6 10V8a6 6 0 1112 0v2h1v12H5V10h1zm2 0h8V8a4 4 0 10-8 0v2z"/></svg>Turn the first card</span></span>
-      <span class="cresult" id="res2"><span class="rn" id="r2n"></span><span class="rm" id="r2m"></span></span>
-      <span class="sweep"></span><span class="lit-ring"></span>
-    </button>
-  </div>
-
-  <div class="prompt" id="prompt">Turn the first card for a spot</div>
-
-  <div class="plan-scrim" id="planScrim"></div>
-  <div class="plan" id="plan" aria-live="polite" aria-hidden="true">
-    <div class="peyebrow">Tonight's plan</div>
-    <div class="ptag">Set. Grab your keys.</div>
-    <div class="pair">
-      <div class="pcol"><div class="pcap">The place</div><div class="pname" id="planSpotName"></div><div class="pmeta" id="planSpotCity"></div></div>
-      <div class="pcol"><div class="pcap">The drink</div><div class="pname" id="planDrinkName"></div><div class="pmeta" id="planDrinkNote"></div></div>
-    </div>
-    <div class="plan-actions">
-      <a class="btn solid" id="seeSpot" href="#">See the spot</a>
-      <button class="btn ghost" id="turnAgain" type="button">Turn again</button>
-    </div>
-  </div>
-
-  <footer>Real SoCal shops, real drinks. The cards just settle the argument so you can get moving.</footer>
+<!-- ambient side smoke: negative delays keep plumes mid-drift at any moment -->
+<div class="side-smoke left" aria-hidden="true">
+  <span class="sm" style="--dur:13s;--delay:-2s;--dx:34px;--rot:18deg;--o:.38"></span>
+  <span class="sm" style="--dur:16s;--delay:-9s;--dx:-26px;--rot:-14deg;--o:.3"></span>
+  <span class="sm" style="--dur:14s;--delay:-5.5s;--dx:22px;--rot:11deg;--o:.34"></span>
+  <span class="sm" style="--dur:18s;--delay:-13s;--dx:-30px;--rot:-19deg;--o:.26"></span>
+</div>
+<div class="side-smoke right" aria-hidden="true">
+  <span class="sm" style="--dur:15s;--delay:-4s;--dx:-32px;--rot:-16deg;--o:.36"></span>
+  <span class="sm" style="--dur:13.5s;--delay:-11s;--dx:28px;--rot:13deg;--o:.3"></span>
+  <span class="sm" style="--dur:17s;--delay:-7s;--dx:-20px;--rot:-11deg;--o:.33"></span>
+  <span class="sm" style="--dur:14.5s;--delay:-1s;--dx:26px;--rot:17deg;--o:.27"></span>
 </div>
 
+<svg class="gate" viewBox="0 0 1060 640" aria-hidden="true">
+  <g fill="none" stroke="rgba(47,150,120,.4)" stroke-width="2">
+    <path d="M110 640V210q0-60 60-60h720q60 0 60 60v430"/>
+    <path d="M70 150h920M110 118h840M180 86h700" stroke="rgba(197,164,109,.35)"/>
+    <path d="M60 150c0-22 20-40 50-40M1000 150c0-22-20-40-50-40" stroke="rgba(197,164,109,.35)"/>
+    <circle cx="530" cy="52" r="16" stroke="rgba(244,221,162,.4)"/>
+  </g>
+</svg>
+
+<div class="site-head">
+  <a class="wordmark" href="/">Boba <b>Night</b></a>
+  <span class="kicker">The night deck</span>
+</div>
+
+<header>
+  <h1>Can't decide? Let the night pick.</h1>
+  <p class="sub">One card picks the place. One picks the drink.</p>
+</header>
+
+<main>
+  <div class="stage">
+
+    <!-- YANG: the place -->
+    <div class="card-col" id="col-yang">
+      <div class="card-wrap" id="wrap-yang" role="button" tabindex="0" aria-label="Turn the sun card for a spot">
+        <div class="card-frame"></div>
+        <svg class="ring" viewBox="0 0 100 160" preserveAspectRatio="none" aria-hidden="true">
+          <rect x="2.5" y="2.5" width="95" height="155" rx="9" pathLength="100"/>
+        </svg>
+        <div class="orbit" aria-hidden="true"></div>
+        <div class="burst" aria-hidden="true"></div>
+        <div class="name-plate" id="plate-yang" aria-live="polite"><b></b><small></small></div>
+        <div class="hint">Turn for a spot</div>
+      </div>
+    </div>
+
+    <!-- shrine: cup, tease, CTA -->
+    <div class="shrine">
+      <div class="cup-wisps" aria-hidden="true">
+        <span class="swisp" style="--dur:7.5s;--delay:0s;--dx:10px;--dx2:-8px"></span>
+        <span class="swisp" style="--dur:9s;--delay:3.4s;--dx:-9px;--dx2:12px"></span>
+      </div>
+      <svg id="cup" viewBox="0 0 140 175" aria-hidden="true">
+        <defs>
+          <clipPath id="cupClip"><path d="M38 52 L102 52 L94 148 Q93 156 84 156 L56 156 Q47 156 46 148 Z"/></clipPath>
+          <linearGradient id="teaG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#C5A46D" stop-opacity=".9"/>
+            <stop offset="1" stop-color="#5c3b22" stop-opacity=".95"/>
+          </linearGradient>
+        </defs>
+        <path class="steam s1" d="M56 40c-4-7 4-9 0-16 3-2 6-1 6 2"/>
+        <path class="steam s2" d="M76 42c4-7-4-10 0-17 3-2 6 0 6 3"/>
+        <g clip-path="url(#cupClip)">
+          <rect class="tea-rect" x="30" y="60" width="80" height="100" fill="url(#teaG)"/>
+          <circle class="pl" cx="56" cy="146" r="6" fill="#241a16" stroke="#C5A46D" stroke-width="1.2"/>
+          <circle class="pl" cx="70" cy="149" r="6" fill="#241a16" stroke="#C5A46D" stroke-width="1.2"/>
+          <circle class="pl" cx="84" cy="146" r="6" fill="#241a16" stroke="#C5A46D" stroke-width="1.2"/>
+          <circle class="pl" cx="63" cy="136" r="5.4" fill="#241a16" stroke="#C5A46D" stroke-width="1.2"/>
+          <circle class="pl" cx="78" cy="137" r="5.4" fill="#241a16" stroke="#C5A46D" stroke-width="1.2"/>
+        </g>
+        <rect class="straw" x="80" y="18" width="9" height="72" rx="4"
+          fill="rgba(255,47,109,.85)" stroke="#F4DDA2" stroke-width="1.4"/>
+        <path class="line" d="M38 52 L102 52 L94 148 Q93 156 84 156 L56 156 Q47 156 46 148 Z"/>
+        <path class="lid" d="M34 52 Q34 44 44 44 L96 44 Q106 44 106 52 Z"/>
+        <path class="line" d="M46 96 L94 96" stroke-dasharray="3 5" opacity=".5"/>
+      </svg>
+      <p class="shrine-label">The night's cup</p>
+      <p id="tease"></p>
+      <div id="cta-slot">
+        <div id="cta">
+          <a class="go" id="go" href="#">See the spot</a>
+          <button id="again" type="button">Turn again</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- YIN: the drink -->
+    <div class="card-col" id="col-yin">
+      <div class="card-wrap sealed" id="wrap-yin" role="button" tabindex="0" aria-label="The moon card stays sealed until the spot lands" aria-disabled="true">
+        <div class="card-frame"></div>
+        <div class="slab" aria-hidden="true"><span>Sealed until the spot lands</span></div>
+        <svg class="chains" viewBox="0 0 100 160" preserveAspectRatio="none" aria-hidden="true">
+          <g class="chain-a"><path d="M2 24 L98 132" vector-effect="non-scaling-stroke"/></g>
+          <g class="chain-b"><path d="M98 22 L2 136" vector-effect="non-scaling-stroke"/>
+            <circle class="clasp" cx="50" cy="78" r="7" vector-effect="non-scaling-stroke"/></g>
+        </svg>
+        <svg class="ring" viewBox="0 0 100 160" preserveAspectRatio="none" aria-hidden="true">
+          <rect x="2.5" y="2.5" width="95" height="155" rx="9" pathLength="100"/>
+        </svg>
+        <div class="orbit" aria-hidden="true"></div>
+        <div class="burst" aria-hidden="true"></div>
+        <div class="name-plate" id="plate-yin" aria-live="polite"><b></b><small></small></div>
+        <div class="hint">Turn for a drink</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <p>Every card on the table is a real Southern California boba shop from the <a href="/">Boba Night</a> directory.</p>
+</footer>
+
 <script>
+(function(){
+'use strict';
+
 const SHOPS = [{"n":"$1 Drink","c":"Walnut","cs":"walnut","s":"1-drink-walnut"},{"n":"3 Blossoms Cafe","c":"Westminster","cs":"westminster","s":"3-blossoms-cafe-westminster"},{"n":"5s' Teas","c":"Riverside","cs":"riverside","s":"5s-teas-riverside"},{"n":"7 Leaves Cafe","c":"Chino","cs":"chino","s":"7-leaves-cafe-chino"},{"n":"7 Leaves Cafe","c":"Costa Mesa","cs":"costa-mesa","s":"7-leaves-cafe-costa-mesa"},{"n":"7 Leaves Cafe","c":"Cypress","cs":"cypress","s":"7-leaves-cafe-cypress"},{"n":"7 Leaves Cafe","c":"Fountain Valley","cs":"fountain-valley","s":"7-leaves-cafe-fountain-valley"},{"n":"7 Leaves Cafe","c":"Garden Grove","cs":"garden-grove","s":"7-leaves-cafe-garden-grove"},{"n":"7 Leaves Cafe","c":"Huntington Beach","cs":"huntington-beach","s":"7-leaves-cafe-huntington-beach"},{"n":"7 Leaves Cafe","c":"Irvine","cs":"irvine","s":"7-leaves-cafe-irvine"},{"n":"7 Leaves","c":"Tustin","cs":"tustin","s":"7-leaves-tustin"},{"n":"85C Bakery Cafe (Diamond Jamboree)","c":"Irvine","cs":"irvine","s":"85c-bakery-cafe-diamond-jamboree-irvine"},{"n":"85C Bakery Cafe","c":"Irvine","cs":"irvine","s":"85c-bakery-cafe-irvine"},{"n":"Alfred Tea","c":"Hollywood","cs":"hollywood","s":"alfred-tea-hollywood"},{"n":"AU79 Tea House","c":"Arcadia","cs":"arcadia","s":"au79-tea-house-arcadia"},{"n":"BAMBU","c":"Arcadia","cs":"arcadia","s":"bambu-arcadia"},{"n":"BAMBU","c":"Cerritos","cs":"cerritos","s":"bambu-cerritos"},{"n":"Bearology","c":"Arcadia","cs":"arcadia","s":"bearology-arcadia"},{"n":"Berlins","c":"Los Angeles","cs":"los-angeles","s":"berlins-los-angeles"},{"n":"Better Be Donuts","c":"Moreno Valley","cs":"moreno-valley","s":"better-be-donuts-moreno-valley"},{"n":"Black & White","c":"Covina","cs":"covina","s":"black-and-white-covina"},{"n":"Bloomz Tea","c":"Westminster","cs":"westminster","s":"bloomz-tea-westminster"},{"n":"Boba Ave 8090","c":"San Gabriel","cs":"san-gabriel","s":"boba-ave-8090-san-gabriel"},{"n":"Boba Ave Express","c":"Arcadia","cs":"arcadia","s":"boba-ave-express-arcadia"},{"n":"Boba Ave","c":"Monterey Park","cs":"monterey-park","s":"boba-ave-monterey-park"},{"n":"Boba Bar and Desserts","c":"San Diego","cs":"san-diego","s":"boba-bar-and-desserts-san-diego"},{"n":"Boba Bar (OG Location)","c":"San Diego","cs":"san-diego","s":"boba-bar-og-location-san-diego"},{"n":"Boba Bear","c":"Los Angeles","cs":"los-angeles","s":"boba-bear-los-angeles"},{"n":"Boba Bear","c":"Rowland Heights","cs":"rowland-heights","s":"boba-bear-rowland-heights"},{"n":"Boba Cafe","c":"Riverside","cs":"riverside","s":"boba-cafe-riverside"},{"n":"Boba Corner 2","c":"Westminster","cs":"westminster","s":"boba-corner-2-westminster"},{"n":"Boba Corner","c":"Rosemead","cs":"rosemead","s":"boba-corner-rosemead"},{"n":"Boba Express","c":"Moreno Valley","cs":"moreno-valley","s":"boba-express-moreno-valley"},{"n":"Boba Fiend Tea House","c":"Rancho Cucamonga","cs":"rancho-cucamonga","s":"boba-fiend-tea-house-rancho-cucamonga"},{"n":"Boba Fiend Tea House","c":"Riverside","cs":"riverside","s":"boba-fiend-tea-house-riverside"},{"n":"Boba Gogo","c":"Rowland Heights","cs":"rowland-heights","s":"boba-gogo-rowland-heights"},{"n":"Boba Lab","c":"Santa Monica","cs":"santa-monica","s":"boba-lab-santa-monica"},{"n":"Boba Loca","c":"Burbank","cs":"burbank","s":"boba-loca-burbank"},{"n":"Boba Tea & Me Truck","c":"Santa Monica","cs":"santa-monica","s":"boba-tea-and-me-truck-santa-monica"},{"n":"Boba Tea House","c":"Long Beach","cs":"long-beach","s":"boba-tea-house-long-beach"},{"n":"Boba Tea House","c":"Riverside","cs":"riverside","s":"boba-tea-house-riverside"},{"n":"Boba Tea Lounge","c":"Covina","cs":"covina","s":"boba-tea-lounge-covina"},{"n":"Boba Tea Zone","c":"Pomona","cs":"pomona","s":"boba-tea-zone-pomona"},{"n":"Boba Time","c":"Los Angeles","cs":"los-angeles","s":"boba-time-los-angeles"},{"n":"Boba Time","c":"Walnut","cs":"walnut","s":"boba-time-walnut"},{"n":"Boba V Cafe","c":"Walnut","cs":"walnut","s":"boba-v-cafe-walnut"},{"n":"Bobalicious","c":"San Diego","cs":"san-diego","s":"bobalicious-san-diego"},{"n":"Bobaloca","c":"Riverside","cs":"riverside","s":"bobaloca-riverside"},{"n":"Bobana","c":"Huntington Park","cs":"huntington-park","s":"bobana-huntington-park"},{"n":"Bobee 5","c":"Rowland Heights","cs":"rowland-heights","s":"bobee-5-rowland-heights"},{"n":"Bon Bon Tea House","c":"Los Angeles","cs":"los-angeles","s":"bon-bon-tea-house-los-angeles"},{"n":"Bubble Boba","c":"Santa Monica","cs":"santa-monica","s":"bubble-boba-santa-monica"},{"n":"BYOB A Boba Company","c":"Covina","cs":"covina","s":"byob-a-boba-company-covina"},{"n":"Cafe Gossip","c":"Moreno Valley","cs":"moreno-valley","s":"cafe-gossip-moreno-valley"},{"n":"Cafe Home","c":"Los Angeles","cs":"los-angeles","s":"cafe-home-los-angeles"},{"n":"Cafe Hue","c":"San Diego","cs":"san-diego","s":"cafe-hue-san-diego"},{"n":"Camellia Rd. Tea Bar","c":"San Diego","cs":"san-diego","s":"camellia-rd-tea-bar-san-diego"},{"n":"Cantaloop","c":"Hollywood","cs":"hollywood","s":"cantaloop-hollywood"},{"n":"Cantaloop","c":"Los Angeles","cs":"los-angeles","s":"cantaloop-los-angeles"},{"n":"Cha Bei Bei Tea House","c":"Rosemead","cs":"rosemead","s":"cha-bei-bei-tea-house-rosemead"},{"n":"Cha Cafe","c":"El Monte","cs":"el-monte","s":"cha-cafe-el-monte"},{"n":"Cha For Tea","c":"Irvine","cs":"irvine","s":"cha-for-tea-irvine"},{"n":"Cha For Tea","c":"Long Beach","cs":"long-beach","s":"cha-for-tea-long-beach"},{"n":"Cha For Tea","c":"Pomona","cs":"pomona","s":"cha-for-tea-pomona"},{"n":"Cha2o","c":"Covina","cs":"covina","s":"cha2o-covina"},{"n":"Cha2o","c":"Fullerton","cs":"fullerton","s":"cha2o-fullerton"},{"n":"Cha2O","c":"Riverside","cs":"riverside","s":"cha2o-riverside"},{"n":"Chill Zone","c":"Temecula","cs":"temecula","s":"chill-zone-temecula"},{"n":"Class 302","c":"Cerritos","cs":"cerritos","s":"class-302-cerritos"},{"n":"Class 302","c":"Irvine","cs":"irvine","s":"class-302-irvine"},{"n":"Class 302","c":"Santa Ana","cs":"santa-ana","s":"class-302-santa-ana"},{"n":"Crave","c":"Garden Grove","cs":"garden-grove","s":"crave-garden-grove"},{"n":"Dingtea Bolsa","c":"Westminster","cs":"westminster","s":"dingtea-bolsa-westminster"},{"n":"Dolphin Bay","c":"Artesia","cs":"artesia","s":"dolphin-bay-artesia"},{"n":"Dragonfly Tea Bar","c":"Orange","cs":"orange","s":"dragonfly-tea-bar-orange"},{"n":"Dragonfly Tea Bar","c":"Rowland Heights","cs":"rowland-heights","s":"dragonfly-tea-bar-rowland-heights"},{"n":"Formosa Boba Men","c":"Los Angeles","cs":"los-angeles","s":"formosa-boba-men-los-angeles"},{"n":"Fresh Roast","c":"San Gabriel","cs":"san-gabriel","s":"fresh-roast-san-gabriel"},{"n":"Got Boba?!","c":"Monterey Park","cs":"monterey-park","s":"got-boba-monterey-park"},{"n":"Guiltea Cravings","c":"San Diego","cs":"san-diego","s":"guiltea-cravings-san-diego"},{"n":"H2SNOW","c":"Orange","cs":"orange","s":"h2snow-orange"},{"n":"Half & Half Good Old Time","c":"San Gabriel","cs":"san-gabriel","s":"half-and-half-good-old-time-san-gabriel"},{"n":"Half And Half Tea Express","c":"Arcadia","cs":"arcadia","s":"half-and-half-tea-express-arcadia"},{"n":"Half & Half Tea Express","c":"Monterey Park","cs":"monterey-park","s":"half-and-half-tea-express-monterey-park"},{"n":"Half and Half Tea Express","c":"Pasadena","cs":"pasadena","s":"half-and-half-tea-express-pasadena"},{"n":"Half & Half Tea Express","c":"Rowland Heights","cs":"rowland-heights","s":"half-and-half-tea-express-rowland-heights"},{"n":"Half & Half Tea House","c":"San Gabriel","cs":"san-gabriel","s":"half-and-half-tea-house-san-gabriel"},{"n":"Harmony Tea Bar","c":"Mission Viejo","cs":"mission-viejo","s":"harmony-tea-bar-mission-viejo"},{"n":"Hashtag Coffee & Tea","c":"Los Angeles","cs":"los-angeles","s":"hashtag-coffee-and-tea-los-angeles"},{"n":"Health Station","c":"Diamond Bar","cs":"diamond-bar","s":"health-station-diamond-bar"},{"n":"Hiccups","c":"Long Beach","cs":"long-beach","s":"hiccups-long-beach"},{"n":"Hola Coffee & Boba","c":"Huntington Park","cs":"huntington-park","s":"hola-coffee-and-boba-huntington-park"},{"n":"Hollywood Rock Cafe","c":"Hollywood","cs":"hollywood","s":"hollywood-rock-cafe-hollywood"},{"n":"Home Brewed Bar","c":"Pasadena","cs":"pasadena","s":"home-brewed-bar-pasadena"},{"n":"Honeybee's","c":"Long Beach","cs":"long-beach","s":"honeybees-long-beach"},{"n":"Honeyboba","c":"Los Angeles","cs":"los-angeles","s":"honeyboba-los-angeles"},{"n":"House of Boba","c":"Los Angeles","cs":"los-angeles","s":"house-of-boba-los-angeles"},{"n":"I Love Boba","c":"Los Angeles","cs":"los-angeles","s":"i-love-boba-los-angeles"},{"n":"Ice Bomb","c":"Fullerton","cs":"fullerton","s":"ice-bomb-fullerton"},{"n":"It's Boba Time","c":"Artesia","cs":"artesia","s":"its-boba-time-artesia"},{"n":"It's Boba Time","c":"Hollywood","cs":"hollywood","s":"its-boba-time-hollywood"},{"n":"It's Boba Time","c":"Los Angeles","cs":"los-angeles","s":"its-boba-time-los-angeles"},{"n":"It's Boba Time","c":"San Diego","cs":"san-diego","s":"its-boba-time-san-diego"},{"n":"It's Boba Time","c":"Tustin","cs":"tustin","s":"its-boba-time-tustin"},{"n":"Jin Tea Shop","c":"Pasadena","cs":"pasadena","s":"jin-tea-shop-pasadena"},{"n":"Jin Teahouse","c":"Covina","cs":"covina","s":"jin-teahouse-covina"},{"n":"Juice Bar","c":"Temecula","cs":"temecula","s":"juice-bar-temecula"},{"n":"Kung Fu Tea","c":"Fullerton","cs":"fullerton","s":"kung-fu-tea-fullerton"},{"n":"Kung Fu Tea","c":"San Diego","cs":"san-diego","s":"kung-fu-tea-san-diego"},{"n":"Kung Fu Tea","c":"Westminster","cs":"westminster","s":"kung-fu-tea-westminster"},{"n":"Labobatory","c":"San Gabriel","cs":"san-gabriel","s":"labobatory-san-gabriel"},{"n":"Lantern Grill","c":"Santa Ana","cs":"santa-ana","s":"lantern-grill-santa-ana"},{"n":"Leaf N Cream","c":"Tustin","cs":"tustin","s":"leaf-n-cream-tustin"},{"n":"Lollicup","c":"Artesia","cs":"artesia","s":"lollicup-artesia"},{"n":"Lollicup","c":"Covina","cs":"covina","s":"lollicup-covina"},{"n":"Lollicup","c":"Diamond Bar","cs":"diamond-bar","s":"lollicup-diamond-bar"},{"n":"Lollicup Fresh","c":"Riverside","cs":"riverside","s":"lollicup-fresh-riverside"},{"n":"Lollicup Fresh","c":"Rowland Heights","cs":"rowland-heights","s":"lollicup-fresh-rowland-heights"},{"n":"Lollicup","c":"Los Angeles","cs":"los-angeles","s":"lollicup-los-angeles"},{"n":"Lollicup Tea Zone","c":"San Diego","cs":"san-diego","s":"lollicup-tea-zone-san-diego"},{"n":"Lollicup","c":"Westminster","cs":"westminster","s":"lollicup-westminster"},{"n":"Meet Fresh","c":"Temple City","cs":"temple-city","s":"meet-fresh-temple-city"},{"n":"Milk & Honey","c":"San Gabriel","cs":"san-gabriel","s":"milk-and-honey-san-gabriel"},{"n":"Milk Bar","c":"Fountain Valley","cs":"fountain-valley","s":"milk-bar-fountain-valley"},{"n":"Mimi 5 Bobee","c":"Diamond Bar","cs":"diamond-bar","s":"mimi-5-bobee-diamond-bar"},{"n":"Mini Monster","c":"Anaheim","cs":"anaheim","s":"mini-monster-anaheim"},{"n":"Miss Tea","c":"Baldwin Park","cs":"baldwin-park","s":"miss-tea-baldwin-park"},{"n":"MJ Cafe & Teahouse","c":"Rowland Heights","cs":"rowland-heights","s":"mj-cafe-and-teahouse-rowland-heights"},{"n":"MJ Cafe & Teahouse","c":"Walnut","cs":"walnut","s":"mj-cafe-and-teahouse-walnut"},{"n":"Mr. Boba","c":"Los Angeles","cs":"los-angeles","s":"mr-boba-los-angeles"},{"n":"Neighbors Tea House","c":"Rosemead","cs":"rosemead","s":"neighbors-tea-house-rosemead"},{"n":"Nest Tea House","c":"Arcadia","cs":"arcadia","s":"nest-tea-house-arcadia"},{"n":"Oh My Pan Bakery & Tea","c":"San Gabriel","cs":"san-gabriel","s":"oh-my-pan-bakery-and-tea-san-gabriel"},{"n":"OMG! Dessert Lounge","c":"Anaheim","cs":"anaheim","s":"omg-dessert-lounge-anaheim"},{"n":"OO Tea","c":"San Diego","cs":"san-diego","s":"oo-tea-san-diego"},{"n":"Pink Boba","c":"Fullerton","cs":"fullerton","s":"pink-boba-fullerton"},{"n":"Quickly","c":"Fullerton","cs":"fullerton","s":"quickly-fullerton"},{"n":"Quickly","c":"Irvine","cs":"irvine","s":"quickly-irvine"},{"n":"Quickly","c":"Los Angeles","cs":"los-angeles","s":"quickly-los-angeles"},{"n":"Quickly","c":"Monterey Park","cs":"monterey-park","s":"quickly-monterey-park"},{"n":"Quickly","c":"Rosemead","cs":"rosemead","s":"quickly-rosemead"},{"n":"Quickly","c":"Rowland Heights","cs":"rowland-heights","s":"quickly-rowland-heights"},{"n":"Quickly","c":"San Gabriel","cs":"san-gabriel","s":"quickly-san-gabriel"},{"n":"Quickly","c":"Temple City","cs":"temple-city","s":"quickly-temple-city"},{"n":"Roasting Water","c":"Garden Grove","cs":"garden-grove","s":"roasting-water-garden-grove"},{"n":"Roasting Water","c":"Long Beach","cs":"long-beach","s":"roasting-water-long-beach"},{"n":"Roasting Water","c":"Westminster","cs":"westminster","s":"roasting-water-westminster"},{"n":"SD Boba Tea","c":"San Diego","cs":"san-diego","s":"sd-boba-tea-san-diego"},{"n":"Share Tea","c":"Cerritos","cs":"cerritos","s":"share-tea-cerritos"},{"n":"Share Tea","c":"Fullerton","cs":"fullerton","s":"share-tea-fullerton"},{"n":"Share Tea","c":"San Diego","cs":"san-diego","s":"share-tea-san-diego"},{"n":"Share Tea","c":"San Gabriel","cs":"san-gabriel","s":"share-tea-san-gabriel"},{"n":"Sharetea","c":"Santa Ana","cs":"santa-ana","s":"sharetea-santa-ana"},{"n":"Snoice","c":"San Diego","cs":"san-diego","s":"snoice-san-diego"},{"n":"Snow & Crab","c":"Temecula","cs":"temecula","s":"snow-and-crab-temecula"},{"n":"Snow Monster","c":"Huntington Beach","cs":"huntington-beach","s":"snow-monster-huntington-beach"},{"n":"Snow Monster","c":"Long Beach","cs":"long-beach","s":"snow-monster-long-beach"},{"n":"Spiceology","c":"Arcadia","cs":"arcadia","s":"spiceology-arcadia"},{"n":"Square Bar Cafe","c":"San Diego","cs":"san-diego","s":"square-bar-cafe-san-diego"},{"n":"Sweetea Cafe","c":"Costa Mesa","cs":"costa-mesa","s":"sweetea-cafe-costa-mesa"},{"n":"T Pumps","c":"Pasadena","cs":"pasadena","s":"t-pumps-pasadena"},{"n":"T4U Cafe","c":"San Gabriel","cs":"san-gabriel","s":"t4u-cafe-san-gabriel"},{"n":"Tapioca Express","c":"Arcadia","cs":"arcadia","s":"tapioca-express-arcadia"},{"n":"Tapioca Express","c":"Cerritos","cs":"cerritos","s":"tapioca-express-cerritos"},{"n":"Tapioca Express","c":"Covina","cs":"covina","s":"tapioca-express-covina"},{"n":"Tapioca Express","c":"Irvine","cs":"irvine","s":"tapioca-express-irvine"},{"n":"Tapioca Express","c":"San Diego","cs":"san-diego","s":"tapioca-express-san-diego"},{"n":"Tapioca Express","c":"San Gabriel","cs":"san-gabriel","s":"tapioca-express-san-gabriel"},{"n":"Tapioca Express","c":"Westminster","cs":"westminster","s":"tapioca-express-westminster"},{"n":"Taro Yuan","c":"City of Industry","cs":"city-of-industry","s":"taro-yuan-city-of-industry"},{"n":"Tastea","c":"Costa Mesa","cs":"costa-mesa","s":"tastea-costa-mesa"},{"n":"Tastea","c":"Garden Grove","cs":"garden-grove","s":"tastea-garden-grove"},{"n":"Tastea Grill","c":"San Diego","cs":"san-diego","s":"tastea-grill-san-diego"},{"n":"Tastea","c":"Rowland Heights","cs":"rowland-heights","s":"tastea-rowland-heights"},{"n":"Tea Block","c":"Rowland Heights","cs":"rowland-heights","s":"tea-block-rowland-heights"},{"n":"Tea Brick","c":"Monterey Park","cs":"monterey-park","s":"tea-brick-monterey-park"},{"n":"Tea Garden Cafe","c":"Diamond Bar","cs":"diamond-bar","s":"tea-garden-cafe-diamond-bar"},{"n":"Tea N More","c":"San Diego","cs":"san-diego","s":"tea-n-more-san-diego"},{"n":"Tea Pop","c":"Burbank","cs":"burbank","s":"tea-pop-burbank"},{"n":"Tea Republic","c":"El Monte","cs":"el-monte","s":"tea-republic-el-monte"},{"n":"Tea Republic","c":"San Diego","cs":"san-diego","s":"tea-republic-san-diego"},{"n":"Tea Republic","c":"San Gabriel","cs":"san-gabriel","s":"tea-republic-san-gabriel"},{"n":"Tea Spots","c":"Pasadena","cs":"pasadena","s":"tea-spots-pasadena"},{"n":"Tea Station Express","c":"Temple City","cs":"temple-city","s":"tea-station-express-temple-city"},{"n":"Tea Station","c":"Gardena","cs":"gardena","s":"tea-station-gardena"},{"n":"Tea Station","c":"Irvine","cs":"irvine","s":"tea-station-irvine"},{"n":"Tea Station","c":"San Diego","cs":"san-diego","s":"tea-station-san-diego"},{"n":"Tea Station","c":"San Gabriel","cs":"san-gabriel","s":"tea-station-san-gabriel"},{"n":"Tea Time Express","c":"Rowland Heights","cs":"rowland-heights","s":"tea-time-express-rowland-heights"},{"n":"Tea Time","c":"Temecula","cs":"temecula","s":"tea-time-temecula"},{"n":"Tealicious","c":"Diamond Bar","cs":"diamond-bar","s":"tealicious-diamond-bar"},{"n":"Tebo Tebo Tea Express","c":"Garden Grove","cs":"garden-grove","s":"tebo-tebo-tea-express-garden-grove"},{"n":"Tebo Tebo Tea Express","c":"Westminster","cs":"westminster","s":"tebo-tebo-tea-express-westminster"},{"n":"Tebo Tebo Tea Lounge","c":"Irvine","cs":"irvine","s":"tebo-tebo-tea-lounge-irvine"},{"n":"Tebo Tebo Tea Lounge","c":"Westminster","cs":"westminster","s":"tebo-tebo-tea-lounge-westminster"},{"n":"Ten Ren Tea","c":"Anaheim","cs":"anaheim","s":"ten-ren-tea-anaheim"},{"n":"Ten Ren's Tea Time","c":"Arcadia","cs":"arcadia","s":"ten-rens-tea-time-arcadia"},{"n":"Ten Ren's Tea Time","c":"Fullerton","cs":"fullerton","s":"ten-rens-tea-time-fullerton"},{"n":"Ten Ren's Tea Time","c":"Los Angeles","cs":"los-angeles","s":"ten-rens-tea-time-los-angeles"},{"n":"Ten Ren's Tea Time","c":"Monterey Park","cs":"monterey-park","s":"ten-rens-tea-time-monterey-park"},{"n":"Ten Ren's Tea Time","c":"Riverside","cs":"riverside","s":"ten-rens-tea-time-riverside"},{"n":"Ten Ren's Tea Time","c":"Walnut","cs":"walnut","s":"ten-rens-tea-time-walnut"},{"n":"The Boba Promenade Cafe","c":"Santa Monica","cs":"santa-monica","s":"the-boba-promenade-cafe-santa-monica"},{"n":"The Vounge","c":"El Monte","cs":"el-monte","s":"the-vounge-el-monte"},{"n":"TLight Boba","c":"Santa Monica","cs":"santa-monica","s":"tlight-boba-santa-monica"},{"n":"Trinitea","c":"San Diego","cs":"san-diego","s":"trinitea-san-diego"},{"n":"Twinkle Brown Sugar","c":"Los Angeles","cs":"los-angeles","s":"twinkle-brown-sugar-los-angeles"},{"n":"Up2you Cafe","c":"San Diego","cs":"san-diego","s":"up2you-cafe-san-diego"},{"n":"Urban Location","c":"Garden Grove","cs":"garden-grove","s":"urban-location-garden-grove"},{"n":"VaniTea Cafe","c":"San Diego","cs":"san-diego","s":"vanitea-cafe-san-diego"},{"n":"Volcano Tea House","c":"Los Angeles","cs":"los-angeles","s":"volcano-tea-house-los-angeles"},{"n":"Yo! Boba","c":"Los Angeles","cs":"los-angeles","s":"yo-boba-los-angeles"},{"n":"Yoshantea Tea House","c":"Arcadia","cs":"arcadia","s":"yoshantea-tea-house-arcadia"},{"n":"You & Me Cafe","c":"Diamond Bar","cs":"diamond-bar","s":"you-and-me-cafe-diamond-bar"},{"n":"Zero Degrees","c":"Westminster","cs":"westminster","s":"zero-degrees-westminster"}];
+var FALLBACK=[{n:"Pearl Milk Tea",d:"Black milk tea with chewy tapioca pearls. The classic order."},{n:"Taro Milk Tea",d:"Real taro root. Sweet, nutty, and naturally purple."},{n:"Thai Tea",d:"Spiced Thai tea, sweet and creamy over ice."},{n:"Matcha Milk Tea",d:"Stone-ground matcha with milk. Grassy and rich."},{n:"Wintermelon Tea",d:"Caramel-like wintermelon. Sweet and caffeine-free."},{n:"Okinawa Pearl Milk Tea",d:"Roasted brown sugar milk tea with pearls."}];
+var DRINKS=(window.SOCIETY && window.SOCIETY.drinks) ? window.SOCIETY.drinks.map(d=>({n:d.n,d:d.sum})) : FALLBACK;
 
-const FALLBACK = [
-  {n:"Pearl Milk Tea", d:"Black milk tea with chewy tapioca pearls. The classic order."},
-  {n:"Taro Milk Tea", d:"Real taro root. Sweet, nutty, and naturally purple."},
-  {n:"Thai Tea", d:"Spiced Thai tea, sweet and creamy over ice."},
-  {n:"Matcha Milk Tea", d:"Stone-ground matcha with milk. Grassy and rich."},
-  {n:"Wintermelon Tea", d:"Caramel-like wintermelon. Sweet and caffeine-free."},
-  {n:"Okinawa Pearl Milk Tea", d:"Roasted brown sugar milk tea with pearls."}
-];
-const DRINKS = (window.SOCIETY && window.SOCIETY.drinks) ? window.SOCIETY.drinks.map(d=>({n:d.n,d:d.sum})) : FALLBACK;
+var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var $=function(id){return document.getElementById(id)};
+var wrapYang=$('wrap-yang'), wrapYin=$('wrap-yin'), cup=$('cup'),
+    tease=$('tease'), cta=$('cta'), go=$('go'), again=$('again'),
+    veil=$('veil'), beam=$('beam'),
+    plateYang=$('plate-yang'), plateYin=$('plate-yin');
 
-const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const rand = a => a[Math.floor(Math.random()*a.length)];
+var state={ stage:0, busy:false, shop:null, drink:null };
 
-/* sound: WebAudio, opt-out, fires only on user action */
-const SFX = (function(){
-  let ctx=null, on=true;
-  function ac(){ if(!ctx){ try{ctx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){ctx=null;} } if(ctx&&ctx.state==='suspended') ctx.resume(); return ctx; }
-  function env(g,t,a,d,p){ g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(p,t+a); g.gain.exponentialRampToValueAtTime(.0001,t+a+d); }
-  function tone(f,t,dur,type,p){ const c=ac(); if(!c)return; const o=c.createOscillator(),g=c.createGain(); o.type=type||'sine'; o.frequency.setValueAtTime(f,t); o.connect(g); g.connect(c.destination); env(g,t,.008,dur,p||.2); o.start(t); o.stop(t+dur+.05); }
-  function noise(t,dur,p,freq,q){ const c=ac(); if(!c)return; const s=c.createBufferSource(); const b=c.createBuffer(1,Math.max(1,c.sampleRate*dur),c.sampleRate); const d=b.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1; s.buffer=b; const f=c.createBiquadFilter(); f.type='bandpass'; f.frequency.value=freq||1600; f.Q.value=q||.9; const g=c.createGain(); s.connect(f); f.connect(g); g.connect(c.destination); env(g,t,.005,dur,p||.12); s.start(t); s.stop(t+dur+.02); }
-  return {
-    get on(){return on;},
-    toggle(){ on=!on; if(on) ac(); return on; },
-    turn(){ if(!on)return; const c=ac(); if(!c)return; const t=c.currentTime; noise(t,.16,.12,1400,.7); tone(320,t,.14,'sine',.14); tone(480,t+.05,.14,'sine',.12); },
-    reveal(){ if(!on)return; const c=ac(); if(!c)return; const t=c.currentTime; tone(880,t,.2,'triangle',.2); tone(1320,t+.006,.18,'sine',.12); tone(1760,t+.02,.16,'sine',.07); },
-    sparkle(){ if(!on)return; const c=ac(); if(!c)return; const t=c.currentTime; [784,1047,1319,1568].forEach((f,i)=>tone(f,t+i*.06,.22,'sine',.14)); }
-  };
-})();
+function rand(a,b){ return a+Math.random()*(b-a); }
 
-const el = id => document.getElementById(id);
-const card1=el('card1'), card2=el('card2');
-let stage=0, chosenSpot=null, chosenDrink=null, busy=false;
-
-function litReveal(card){ card.classList.remove('lit'); void card.offsetWidth; card.classList.add('lit'); setTimeout(()=>card.classList.remove('lit'), 1000); }
-
-function revealPlace(){
-  if(busy || stage!==0) return; busy=true;
-  chosenSpot = rand(SHOPS);
-  SFX.turn(); litReveal(card1);
-  el('prompt').textContent = 'Reading the card';
-  setTimeout(()=>{
-    el('r1n').textContent = chosenSpot.n;
-    el('r1m').textContent = chosenSpot.c + ', CA';
-    card1.classList.add('revealed');
-    SFX.reveal();
-    stage=1; busy=false;
-    card2.classList.remove('locked'); card2.disabled=false;
-    el('prompt').innerHTML = 'Landed on <b></b>. Now turn the next card.';
-    el('prompt').querySelector('b').textContent = chosenSpot.n;
-  }, reduce?0:280);
-}
-function revealDrink(){
-  if(busy || stage!==1) return; busy=true;
-  chosenDrink = rand(DRINKS);
-  SFX.turn(); litReveal(card2);
-  setTimeout(()=>{
-    el('r2n').textContent = chosenDrink.n;
-    el('r2m').textContent = chosenDrink.d;
-    card2.classList.add('revealed');
-    SFX.reveal();
-    stage=2; busy=false;
-    showPlan();
-  }, reduce?0:280);
-}
-function showPlan(){
-  el('planSpotName').textContent = chosenSpot.n;
-  el('planSpotCity').textContent = chosenSpot.c + ', CA';
-  el('planDrinkName').textContent = chosenDrink.n;
-  el('planDrinkNote').textContent = chosenDrink.d;
-  el('seeSpot').setAttribute('href', '/boba/ca/'+chosenSpot.cs+'/'+chosenSpot.s+'/');
-  el('planScrim').classList.add('show');
-  el('plan').classList.add('show'); el('plan').setAttribute('aria-hidden','false');
-  el('prompt').textContent = "You're set for the night";
-  SFX.sparkle();
-}
-function turnAgain(){
-  if(busy) return;
-  stage=0; chosenSpot=chosenDrink=null;
-  el('planScrim').classList.remove('show');
-  el('plan').classList.remove('show'); el('plan').setAttribute('aria-hidden','true');
-  [card1,card2].forEach(c=>c.classList.remove('revealed','lit'));
-  card2.classList.add('locked'); card2.disabled=true;
-  el('prompt').textContent = 'Turn the first card for a spot';
-}
-
-card1.addEventListener('click', revealPlace);
-card2.addEventListener('click', ()=>{ if(!card2.classList.contains('locked')) revealDrink(); });
-el('turnAgain').addEventListener('click', turnAgain);
-el('planScrim').addEventListener('click', turnAgain);
-
-const sndBtn = el('sndBtn');
-sndBtn.addEventListener('click', ()=>{
-  const on = SFX.toggle();
-  sndBtn.classList.toggle('off', !on);
-  sndBtn.setAttribute('aria-pressed', on?'true':'false');
-  sndBtn.setAttribute('aria-label', on?'Sound on':'Sound off');
-  if(on) SFX.reveal();
+/* ---------- build the orbiting pearls (from the seance halo) ----------
+   Six pearls per card, each on its own lane: varied radius, speed, and
+   size. Negative delays spread the start angles, so even a static
+   screenshot (or ?demo=1) shows them scattered around the glow. */
+document.querySelectorAll('.orbit').forEach(function(orb){
+  for(var i=0;i<6;i++){
+    var lane=document.createElement('span'); lane.className='olane';
+    var dur=16+(i*3.7)%14; /* 16s - 30s per revolution */
+    lane.style.setProperty('--os', dur.toFixed(1)+'s');
+    lane.style.setProperty('--od', (-(i/6)*dur-(i*1.3)%4).toFixed(2)+'s');
+    var m=document.createElement('span'); m.className='opearl';
+    m.style.setProperty('--orad', (35+(i*5.1)%16).toFixed(1)+'%');
+    m.style.setProperty('--sz', (7+(i*2.3)%4).toFixed(1)+'px');
+    m.style.opacity=(0.8+((i*3)%3)/15).toFixed(2);
+    lane.appendChild(m); orb.appendChild(lane);
+  }
 });
+
+/* ---------- sound: the zen kit (ported from the seance table) ----------
+   Soft bowl-like chimes, a gentle air swell on the turn, a low breathing
+   hum while the glow holds, and a deep singing-bowl tone under the CTA.
+   Gesture-gated: nothing can sound before the user's first click/key. */
+var Snd={
+  ctx:null, on:true, unlocked:false, humNodes:null,
+  ensure:function(){
+    if(!this.on || !this.unlocked) return null;
+    try{
+      if(!this.ctx) this.ctx=new (window.AudioContext||window.webkitAudioContext)();
+      if(this.ctx.state==='suspended') this.ctx.resume();
+      return this.ctx;
+    }catch(e){ return null; }
+  },
+  /* the turn: a soft breath of air, not a slash */
+  whoosh:function(){
+    var c=this.ensure(); if(!c) return;
+    var t=c.currentTime, len=Math.floor(c.sampleRate*0.9),
+        buf=c.createBuffer(1,len,c.sampleRate), d=buf.getChannelData(0);
+    for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2);
+    var src=c.createBufferSource(); src.buffer=buf;
+    var bp=c.createBiquadFilter(); bp.type='bandpass'; bp.Q.value=1.1;
+    bp.frequency.setValueAtTime(220,t); bp.frequency.exponentialRampToValueAtTime(900,t+0.6);
+    var g=c.createGain(); g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(0.14,t+0.18); g.gain.exponentialRampToValueAtTime(0.0001,t+0.88);
+    src.connect(bp); bp.connect(g); g.connect(c.destination); src.start(t); src.stop(t+0.9);
+  },
+  /* the reveal: pentatonic bowl strikes, slow attack, long ring */
+  chime:function(){
+    var c=this.ensure(); if(!c) return;
+    var t=c.currentTime, notes=[392,523.25,587.33,783.99];
+    notes.forEach(function(f,i){
+      var o=c.createOscillator(), g=c.createGain();
+      o.type='sine'; o.frequency.value=f*(1+(Math.random()-0.5)*0.003);
+      var at=t+i*0.13;
+      g.gain.setValueAtTime(0.0001,at);
+      g.gain.exponentialRampToValueAtTime(0.075,at+0.06);
+      g.gain.exponentialRampToValueAtTime(0.0001,at+2.4);
+      o.connect(g); g.connect(c.destination); o.start(at); o.stop(at+2.5);
+    });
+  },
+  /* the final CTA: one deep singing-bowl tone, gentle swell */
+  bowl:function(){
+    var c=this.ensure(); if(!c) return;
+    var t=c.currentTime;
+    [[196,0.06],[196*2.76,0.018]].forEach(function(pair){
+      var o=c.createOscillator(), g=c.createGain();
+      o.type='sine'; o.frequency.value=pair[0];
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.exponentialRampToValueAtTime(pair[1],t+0.45);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+4.5);
+      o.connect(g); g.connect(c.destination); o.start(t); o.stop(t+4.6);
+    });
+  },
+  /* the glow: a low hum that breathes while a card burns bright */
+  startHum:function(){
+    var c=this.ensure(); if(!c||this.humNodes) return;
+    var o=c.createOscillator(), g=c.createGain(), lfo=c.createOscillator(), lg=c.createGain();
+    o.type='sine'; o.frequency.value=64;
+    g.gain.setValueAtTime(0.0001,c.currentTime);
+    g.gain.setTargetAtTime(0.045,c.currentTime,1.4);
+    lfo.type='sine'; lfo.frequency.value=0.22; lg.gain.value=0.02;
+    lfo.connect(lg); lg.connect(g.gain);
+    o.connect(g); g.connect(c.destination); o.start(); lfo.start();
+    this.humNodes={osc:o,gain:g,lfo:lfo};
+  },
+  stopHum:function(){
+    var h=this.humNodes; if(!h) return; this.humNodes=null;
+    try{
+      var t=this.ctx.currentTime;
+      h.gain.gain.cancelScheduledValues(t);
+      h.gain.gain.setTargetAtTime(0.0001,t,0.25);
+      h.osc.stop(t+1.4); h.lfo.stop(t+1.4);
+    }catch(e){}
+  }
+};
+document.addEventListener('pointerdown',function(){ Snd.unlocked=true; },{once:true});
+document.addEventListener('keydown',function(){ Snd.unlocked=true; },{once:true});
+$('snd').addEventListener('click',function(){
+  Snd.on=!Snd.on;
+  this.setAttribute('aria-pressed', Snd.on?'true':'false');
+  if(!Snd.on){ Snd.stopHum(); }
+  else{
+    Snd.ensure();
+    if(state.stage>=1 && !reduced) Snd.startHum();
+  }
+});
+
+/* ---------- spotlight ---------- */
+function aimSpot(wrap){
+  var r=wrap.getBoundingClientRect();
+  var cx=r.left+r.width/2, cy=r.top+r.height/2;
+  var inner=Math.max(r.width,r.height)*0.72;
+  veil.style.background='radial-gradient(circle at '+cx+'px '+cy+'px, rgba(5,9,7,0) '+inner+'px, rgba(4,7,6,0.9) '+(inner+240)+'px)';
+  beam.style.left=(cx-r.width*0.85)+'px';
+  beam.style.width=(r.width*1.7)+'px';
+  beam.style.height=(cy+r.height*0.1)+'px';
+}
+
+/* ---------- smoke plumes (from the seance table) ---------- */
+function spawnPlumes(wrap){
+  if(reduced) return;
+  for(var i=0;i<6;i++){
+    var p=document.createElement('span'); p.className='plume';
+    p.style.setProperty('--x', rand(-18,58).toFixed(0)+'%');
+    p.style.setProperty('--y', rand(12,66).toFixed(0)+'%');
+    p.style.setProperty('--dx', rand(-55,55).toFixed(0)+'px');
+    p.style.setProperty('--rot', rand(-48,48).toFixed(0)+'deg');
+    p.style.setProperty('--dur', rand(1.3,2.1).toFixed(2)+'s');
+    p.style.setProperty('--delay', rand(0,0.3).toFixed(2)+'s');
+    p.addEventListener('animationend',function(){ this.remove(); });
+    wrap.appendChild(p);
+  }
+}
+
+/* the altar's side smoke thickens for a moment on each reveal */
+function surgeSmoke(){
+  if(reduced) return;
+  document.body.classList.add('smoke-surge');
+  document.querySelectorAll('.side-smoke').forEach(function(col){
+    for(var i=0;i<2;i++){
+      var s=document.createElement('span'); s.className='sm sm-once';
+      s.style.setProperty('--dur', rand(2.4,3.4).toFixed(2)+'s');
+      s.style.setProperty('--delay', rand(0,0.3).toFixed(2)+'s');
+      s.style.setProperty('--dx', rand(-32,32).toFixed(0)+'px');
+      s.style.setProperty('--rot', rand(-20,20).toFixed(0)+'deg');
+      s.style.setProperty('--o', '.5');
+      s.addEventListener('animationend',function(){ this.remove(); });
+      col.appendChild(s);
+    }
+  });
+  setTimeout(function(){ document.body.classList.remove('smoke-surge'); },2200);
+}
+
+/* ---------- burst (stars, sparks, falling pearls) ---------- */
+function burst(wrap){
+  var layer=wrap.querySelector('.burst');
+  for(var i=0;i<30;i++){
+    var p=document.createElement('i');
+    var kind=(i%6===0)?'pearl':(i%4===0?'spark':'star');
+    p.className='p '+kind;
+    var a=Math.random()*Math.PI*2, r=60+Math.random()*140;
+    var ty=Math.sin(a)*r + (kind==='pearl'?45:0);
+    p.style.setProperty('--tx',(Math.cos(a)*r).toFixed(0)+'px');
+    p.style.setProperty('--ty',ty.toFixed(0)+'px');
+    p.style.setProperty('--d',(0.7+Math.random()*0.7).toFixed(2)+'s');
+    p.style.setProperty('--s',(0.6+Math.random()*1.1).toFixed(2));
+    p.addEventListener('animationend',function(){ this.remove(); });
+    layer.appendChild(p);
+  }
+}
+
+/* ---------- landings ---------- */
+function setPlate(plate,big,small){
+  plate.querySelector('b').textContent=big;
+  plate.querySelector('small').textContent=small;
+}
+function landYang(){
+  state.shop=state.shop||SHOPS[Math.floor(Math.random()*SHOPS.length)];
+  setPlate(plateYang,state.shop.n,state.shop.c);
+  wrapYang.classList.remove('charging');
+  wrapYang.classList.add('landed');
+  cup.classList.add('has-tea');
+  tease.textContent='Tonight starts in '+state.shop.c+'.';
+  tease.classList.add('show');
+  state.stage=1;
+  if(!reduced) Snd.startHum();
+  var wake=function(){
+    wrapYin.classList.add('awake');
+    wrapYin.setAttribute('aria-disabled','false');
+    wrapYin.setAttribute('aria-label','Turn the moon card for a drink');
+  };
+  if(reduced) wake(); else setTimeout(wake,600);
+}
+function landYin(){
+  state.drink=state.drink||DRINKS[Math.floor(Math.random()*DRINKS.length)];
+  setPlate(plateYin,state.drink.n,state.drink.d);
+  wrapYin.classList.remove('charging');
+  wrapYin.classList.add('landed');
+  cup.classList.add('has-pearls');
+  state.stage=2;
+  go.href='/boba/ca/'+state.shop.cs+'/'+state.shop.s+'/';
+  var finish=function(){
+    cup.classList.add('has-steam');
+    cta.classList.add('show');
+  };
+  if(reduced) finish();
+  else setTimeout(function(){ finish(); Snd.bowl(); },700);
+}
+
+/* ---------- turn sequence: smoke first, burst through it ---------- */
+function turn(side){
+  if(state.busy) return;
+  if(side==='yang' && state.stage!==0) return;
+  if(side==='yin' && state.stage!==1) return;
+  var wrap=(side==='yang')?wrapYang:wrapYin;
+  state.busy=true;
+  if(side==='yin') wrapYin.classList.remove('sealed');
+
+  if(reduced){
+    if(side==='yang') landYang(); else landYin();
+    state.busy=false;
+    return;
+  }
+  Snd.whoosh();
+  aimSpot(wrap);
+  document.body.classList.add('dimmed');
+  wrap.classList.add('charging');
+  setTimeout(function(){
+    document.body.classList.remove('dimmed');
+    spawnPlumes(wrap);
+    surgeSmoke();
+    setTimeout(function(){ burst(wrap); },160);
+    Snd.chime();
+    if(side==='yang') landYang(); else landYin();
+    setTimeout(function(){ state.busy=false; },700);
+  },1600);
+}
+
+wrapYang.addEventListener('click',function(){ turn('yang'); });
+wrapYin.addEventListener('click',function(){ turn('yin'); });
+function keyTurn(side){ return function(e){
+  if(e.key==='Enter'||e.key===' '){ e.preventDefault(); turn(side); }
+};}
+wrapYang.addEventListener('keydown',keyTurn('yang'));
+wrapYin.addEventListener('keydown',keyTurn('yin'));
+
+/* ---------- reset ---------- */
+function reset(){
+  document.documentElement.classList.remove('instant');
+  document.body.classList.remove('dimmed');
+  state.stage=0; state.busy=false; state.shop=null; state.drink=null;
+  Snd.stopHum();
+  wrapYang.classList.remove('landed','charging');
+  wrapYin.classList.remove('landed','charging','awake');
+  wrapYin.classList.add('sealed');
+  wrapYin.setAttribute('aria-disabled','true');
+  wrapYin.setAttribute('aria-label','The moon card stays sealed until the spot lands');
+  cup.classList.remove('has-tea','has-pearls','has-steam');
+  tease.classList.remove('show');
+  cta.classList.remove('show');
+  setPlate(plateYang,'',''); setPlate(plateYin,'','');
+  tease.textContent='';
+}
+again.addEventListener('click',reset);
+
+/* ---------- demo mode ---------- */
+var q=new URLSearchParams(window.location.search);
+if(q.get('demo')==='1'){
+  document.documentElement.classList.add('instant');
+  state.shop=SHOPS[0];   /* first shop in the pool */
+  state.drink=DRINKS[1]; /* second drink in the pool */
+  wrapYin.classList.remove('sealed');
+  landYang();
+  wrapYin.classList.add('awake');
+  landYin();
+  cup.classList.add('has-steam');
+  cta.classList.add('show');
+  state.busy=false;
+}
+})();
 </script>
-</body></html>
+</body>
+</html>

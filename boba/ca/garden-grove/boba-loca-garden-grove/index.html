@@ -163,12 +163,14 @@ details.acc .hours{border:0;border-top:1px solid var(--line-2);border-radius:0}
 /* map — champagne-hairline lacquer frame; the address is the default layer
    so a failed or coord-less map still reads as intentional, never a black box */
 .map{border:1px solid rgba(197,164,109,.30);border-radius:2px;overflow:hidden;background:var(--smoked)}
-#map-canvas{height:300px;background:var(--smoked);position:relative;z-index:1}
+#map-canvas{height:380px;background:var(--smoked);position:relative;z-index:1}
+@media(max-width:560px){#map-canvas{height:280px}}
 .map-cap{display:flex;justify-content:space-between;align-items:center;gap:.8rem 1rem;flex-wrap:wrap;
   padding:.8rem 1rem;border-top:1px solid var(--line-2);background:var(--smoked-2);
   font-size:.85rem;position:relative;z-index:2}
 .map-cap .adr{color:var(--pearl)}.map-cap .adr b{color:var(--porcelain);font-weight:500}
 .map-cap a{color:var(--champagne);border-bottom:1px solid var(--line);flex:none}
+.map-cap .map-note{flex:1 1 100%;color:var(--muted);font-size:.78rem}
 .map-empty{min-height:216px;display:grid;place-items:center;text-align:center;padding:1.6rem 1.2rem}
 .map-empty .moongate{width:76px;height:76px;border-radius:50%;border:1px solid var(--champagne);
   display:grid;place-items:center;margin:0 auto .75rem;
@@ -338,7 +340,7 @@ body.closed .medallion{border-color:var(--muted-dk);box-shadow:inset 0 0 0 5px v
 <p class="epitaph">This shop is marked closed in our records as of 18 JUL 2026. We keep the page so an old link still lands somewhere honest instead of a dead end.</p>
 </section>
 <div class="grid"><div class="g-main">
-<section class="sec"><h2>Find it</h2><div class="map"><div id="map-canvas" aria-label="Map of Boba Loca"></div><div class="map-cap"><span class="adr"><b>Boba Loca</b> · 9520 Garden Grove Blvd, Garden Grove, CA</span><a href="https://www.google.com/maps/search/?api=1&query=33.7735431%2C-117.9667575" rel="nofollow noopener" target="_blank">Directions</a></div></div></section>
+<section class="sec"><h2>Find it</h2><div class="map"><div id="map-canvas" aria-label="Map of Boba Loca"></div><div class="map-cap"><span class="adr"><b>Boba Loca</b> · 9520 Garden Grove Blvd, Garden Grove, CA</span><a href="https://www.google.com/maps/search/?api=1&query=33.7735431%2C-117.9667575" rel="nofollow noopener" target="_blank">Directions</a><span class="map-note">Gold pearls are other spots nearby. Tap one to jump over.</span></div></div></section>
 
 <section class="sec"><h2>What to order</h2><p class="order-empty">We list what we can verify. Menu link above, nothing invented here.</p></section>
 <section class="sec"><h2>Still pouring nearby</h2><ul class="nearby-rail"><li class="nb-card"><a href="/boba/ca/garden-grove/crave-garden-grove/"><span class="boba-motif" data-motif="jelly" aria-label="Lychee jelly motif"></span><span class="nb-nm">Crave</span><span class="nb-meta">0.5 mi</span></a></li><li class="nb-card"><a href="/boba/ca/garden-grove/tebo-tebo-tea-express-garden-grove/"><span class="boba-motif" data-motif="egg-tart" aria-label="Egg tart motif"></span><span class="nb-nm">Tebo Tebo Tea Express</span><span class="nb-meta">1.0 mi</span></a></li><li class="nb-card"><a href="/boba/ca/westminster/tebo-tebo-tea-express-westminster/"><span class="boba-motif" data-motif="taro" aria-label="Taro swirl motif"></span><span class="nb-nm">Tebo Tebo Tea Express</span><span class="nb-meta">1.0 mi</span></a></li><li class="nb-card"><a href="/boba/ca/garden-grove/roasting-water-garden-grove/"><span class="boba-motif" data-motif="taro" aria-label="Taro swirl motif"></span><span class="nb-nm">Roasting Water</span><span class="nb-meta">1.2 mi</span></a></li><li class="nb-card"><a href="/boba/ca/garden-grove/tastea-garden-grove/"><span class="boba-motif" data-motif="egg-tart" aria-label="Egg tart motif"></span><span class="nb-nm">Tastea</span><span class="nb-meta">1.3 mi</span></a></li></ul></section>

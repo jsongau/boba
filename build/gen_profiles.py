@@ -20,7 +20,7 @@ Two template states:
              tonight strip, "Still pouring nearby" rail, permanentlyClosed schema,
              always noindex.
 """
-import json, re, os, html, math, datetime, sys
+import json, re, os, html, math, datetime, sys, urllib.parse
 
 # Bake the site's unified nav directly into every profile (no separate
 # apply_nav pass needed). render_header() returns the canonical header partial
@@ -301,12 +301,14 @@ details.acc .hours{border:0;border-top:1px solid var(--line-2);border-radius:0}
 /* map — champagne-hairline lacquer frame; the address is the default layer
    so a failed or coord-less map still reads as intentional, never a black box */
 .map{border:1px solid rgba(197,164,109,.30);border-radius:2px;overflow:hidden;background:var(--smoked)}
-#map-canvas{height:300px;background:var(--smoked);position:relative;z-index:1}
+#map-canvas{height:380px;background:var(--smoked);position:relative;z-index:1}
+@media(max-width:560px){#map-canvas{height:280px}}
 .map-cap{display:flex;justify-content:space-between;align-items:center;gap:.8rem 1rem;flex-wrap:wrap;
   padding:.8rem 1rem;border-top:1px solid var(--line-2);background:var(--smoked-2);
   font-size:.85rem;position:relative;z-index:2}
 .map-cap .adr{color:var(--pearl)}.map-cap .adr b{color:var(--porcelain);font-weight:500}
 .map-cap a{color:var(--champagne);border-bottom:1px solid var(--line);flex:none}
+.map-cap .map-note{flex:1 1 100%;color:var(--muted);font-size:.78rem}
 .map-empty{min-height:216px;display:grid;place-items:center;text-align:center;padding:1.6rem 1.2rem}
 .map-empty .moongate{width:76px;height:76px;border-radius:50%;border:1px solid var(--champagne);
   display:grid;place-items:center;margin:0 auto .75rem;
@@ -648,6 +650,11 @@ def render(shop, shops):
             acts.append(f'<a class="btn" href="tel:{tel}">Call</a>')
         if website:
             acts.append(f'<a class="btn" href="{esc(website)}" rel="nofollow noopener" target="_blank">Website</a>')
+        # reviews live on Google, not here — link out, store nothing (open shops only)
+        if status == "open":
+            rq = urllib.parse.quote_plus(f"{name} {city} CA reviews")
+            acts.append(f'<a class="btn" href="https://www.google.com/search?q={rq}" '
+                        f'rel="nofollow noopener" target="_blank">Read reviews on Google</a>')
         actions = '<div class="actions">' + "".join(acts) + '</div>'
         # tonight strip
         if has_hours:
@@ -718,8 +725,12 @@ def render(shop, shops):
 
     # -- map (champagne-hairline frame; address is the always-there default) --
     dir_label = "Open in Maps" if not has_coords else "Directions"
+    # caption only when a live map renders (gold pearls exist only there)
+    map_note = ('<span class="map-note">Gold pearls are other spots nearby. Tap one to jump over.</span>'
+                if has_coords else "")
     map_cap = (f'<div class="map-cap"><span class="adr"><b>{esc(name)}</b> · {esc(addr)}, {esc(city)}, CA</span>'
-               f'<a href="{dirn}" rel="nofollow noopener" target="_blank">{dir_label}</a></div>')
+               f'<a href="{dirn}" rel="nofollow noopener" target="_blank">{dir_label}</a>'
+               f'{map_note}</div>')
     if has_coords:
         map_body = f'<div id="map-canvas" aria-label="Map of {esc(name)}"></div>'
         map_js = (MAP_JS.replace("%LAT%", repr(lat)).replace("%LNG%", repr(lng))
