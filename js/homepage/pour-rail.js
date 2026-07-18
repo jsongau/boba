@@ -1,7 +1,9 @@
-/* Sticky pour rail — a slim bar pinned to the viewport that rotates through
-   real sourced drinks as you browse. Each links to a shop. Dismissible and
-   remembered; no auto-rotate under prefers-reduced-motion. Desktop only
-   (mobile already has the bottom bar). Degrades to nothing without JS. */
+/* The night guide — a slim bar pinned to the viewport that rotates through
+   real sourced drinks as you browse, each linking to a shop, with a second
+   micro-line of honest house facts. Styles live in index.html <style id="pourrail">.
+   Dismissible and remembered; no auto-rotate under prefers-reduced-motion.
+   Desktop only (mobile already has the bottom bar). Degrades to nothing
+   without JS. */
 (function () {
   "use strict";
   var KEY = "bobanight_rail_v1";
@@ -10,6 +12,14 @@
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var tries = 0;
   function ready() { return window.CBS && window.CBS.S && window.CBS.S.drinks && window.CBS.S.drinks.length; }
+
+  // Honest house facts only — every line traces to a claim already on the page.
+  var HINTS = [
+    "Turn the cards above for tonight's pick",
+    "334 rooms across 46 cities, checked and current",
+    "Every drink here comes from an official menu",
+    "No shop pays to appear in this rotation"
+  ];
 
   function build() {
     var CBS = window.CBS;
@@ -26,26 +36,28 @@
 
     var bar = document.createElement("aside");
     bar.className = "pour-rail";
-    bar.setAttribute("aria-label", "Rotating drink picks");
+    bar.setAttribute("aria-label", "The night guide, rotating drink picks");
     bar.innerHTML =
-      '<span class="pr-kick">The pours</span>' +
-      '<a class="pr-body" href="#"><span class="pr-motif boba-motif" data-motif="pearl" aria-hidden="true"></span>' +
-      '<span class="pr-text"><b class="pr-name"></b><span class="pr-where"></span></span></a>' +
+      '<span class="pr-kick"><span class="pr-led" aria-hidden="true"></span>The night guide</span>' +
+      '<a class="pr-body" href="#">' +
+      '<span class="pr-text"><b class="pr-name"></b><span class="pr-at"> at </span><span class="pr-where"></span></span>' +
+      '<span class="pr-hint"></span></a>' +
       '<div class="pr-controls"><button class="pr-next" type="button" aria-label="Next drink">Next</button>' +
-      '<button class="pr-x" type="button" aria-label="Hide the pour rail">&times;</button></div>';
+      '<button class="pr-x" type="button" aria-label="Hide the night guide">&times;</button></div>';
     document.body.appendChild(bar);
     document.body.classList.add("has-pour-rail");
 
     var idx = 0, timer = null;
-    var nameEl = bar.querySelector(".pr-name"), whereEl = bar.querySelector(".pr-where"), link = bar.querySelector(".pr-body");
+    var nameEl = bar.querySelector(".pr-name"), whereEl = bar.querySelector(".pr-where"),
+        hintEl = bar.querySelector(".pr-hint"), link = bar.querySelector(".pr-body");
     function paint(animate) {
       var p = pours[idx % pours.length], d = p.d, shop = p.shop;
       var apply = function () {
         nameEl.textContent = d.n;
-        whereEl.textContent = " at " + shop.name + ", " + shop.city;
+        whereEl.textContent = shop.name + ", " + shop.city;
+        hintEl.textContent = HINTS[idx % HINTS.length];
         link.setAttribute("href", CBS.profileUrl(shop));
         if (animate && !reduce) { bar.classList.remove("is-in"); void bar.offsetWidth; bar.classList.add("is-in"); }
-        if (window.BobaMotif && window.BobaMotif.refresh) window.BobaMotif.refresh();
       };
       apply();
     }
