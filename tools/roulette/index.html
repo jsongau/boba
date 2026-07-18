@@ -1,243 +1,297 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Boba Night Roulette</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Boba Night, turn a card for tonight | pick a spot and a drink</title>
+<meta name="description" content="Can't decide where to get boba tonight? Turn a card for a real SoCal shop, then turn the next for a drink to order. Two cards and you're out the door.">
+<link rel="canonical" href="https://www.bobanight.com/tools/roulette/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&family=Ephesis&display=swap" rel="stylesheet">
+<script src="/js/homepage/society-data.js"></script>
 <style>
-:root{--ink:#151218;--brown:#21142B;--syrup:#FF4F87;--milk:#FFF3E6;--paper:#FFFCF8;--matcha:#6F8F4E;--taro:#9A7BFF;--line:#EADFCE;--ink60:rgba(21,18,24,.6)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--milk);color:var(--ink);font-family:"Inter Tight",system-ui,sans-serif;line-height:1.5;
-  background-image:radial-gradient(120% 90% at 15% 0%,rgba(166,113,60,.10),transparent 55%),radial-gradient(90% 80% at 100% 5%,rgba(111,143,78,.09),transparent 50%);min-height:100vh}
-.wrap{max-width:640px;margin:0 auto;padding:24px 18px 60px}
-h1,h2,.shop{font-family:"Fraunces",Georgia,serif;color:var(--brown);letter-spacing:-.01em}
-.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.brand{font-family:"Fraunces",serif;font-weight:700;font-size:1.5rem;color:var(--brown)}
-.brand b{color:var(--syrup)}
-.kicker{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--syrup);display:inline-flex;align-items:center;gap:.5em;margin-top:14px}
-.kicker::before{content:"";width:.5em;height:.5em;border-radius:50%;background:var(--syrup)}
-h1{font-size:clamp(2rem,7vw,2.9rem);font-weight:700;margin:.2rem 0 .3rem;line-height:1.05}
-.sub{color:var(--ink);font-size:1.02rem;max-width:44ch}
-.honesty{font-size:.82rem;color:var(--ink60);margin-top:.5rem}
-.honesty b{color:var(--brown)}
-.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:18px}
-.lbl{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink60);margin-bottom:8px}
-.chips{display:flex;flex-wrap:wrap;gap:7px}
-.chip{font-family:"Inter Tight",sans-serif;font-size:.9rem;font-weight:600;padding:.5rem .85rem;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:.4em}
-.chip:hover{border-color:var(--syrup)}
-.chip[aria-pressed="true"]{background:var(--brown);color:var(--milk);border-color:var(--brown)}
-.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;background:#fff}
-.seg button{font-family:"Inter Tight",sans-serif;font-size:.86rem;font-weight:600;padding:.5rem .9rem;border:0;background:transparent;color:var(--ink);cursor:pointer}
-.seg button[aria-pressed="true"]{background:var(--matcha);color:#fff}
-.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:14px}
-.small{font-size:.8rem;color:var(--ink60)}
-.locknote{font-size:.78rem;color:var(--ink60);margin-top:10px;display:flex;align-items:center;gap:.4em}
-.spinwrap{text-align:center;margin:22px 0 6px}
-.cup{width:96px;height:120px;margin:0 auto 6px;position:relative}
-.cup svg{width:100%;height:100%;display:block}
-.pearl{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--brown);opacity:0}
-.spinning .pearl{animation:drop .8s linear infinite}
-@keyframes drop{0%{transform:translateY(-30px);opacity:0}30%{opacity:1}100%{transform:translateY(46px);opacity:.2}}
-.spinbtn{font-family:"Fraunces",serif;font-weight:700;font-size:1.25rem;color:var(--milk);background:var(--brown);border:0;border-radius:999px;padding:.85rem 2.4rem;cursor:pointer;box-shadow:0 14px 26px -12px rgba(61,40,23,.5);transition:transform .12s}
-.spinbtn:hover{transform:translateY(-2px)}
-.spinbtn:active{transform:translateY(1px)}
-.spinbtn:disabled{opacity:.6;cursor:default;transform:none}
-.result{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:16px;position:relative;overflow:hidden}
-.result::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--syrup),var(--matcha))}
-.rk{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--syrup)}
-.shop{font-size:clamp(1.5rem,5.5vw,2.1rem);font-weight:700;margin:.15rem 0 .1rem;line-height:1.1}
-.where{color:var(--ink60);font-size:.98rem}
-.where b{color:var(--brown)}
-.badges{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
-.tag{font-size:.62rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.25em .6em;border-radius:5px}
-.tag-v{color:#3a4a26;background:rgba(111,143,78,.16);border:1px solid rgba(111,143,78,.4)}
-.tag-ind{color:#6a4a86;background:rgba(142,111,176,.14);border:1px solid rgba(142,111,176,.4)}
-.tag-ch{color:#7a5a2e;background:rgba(166,113,60,.14);border:1px solid rgba(166,113,60,.4)}
-.why{font-size:.95rem;color:var(--ink);border-left:3px solid var(--syrup);padding-left:.8rem;margin:6px 0 14px}
-.pending{background:#fff;border:1px dashed var(--line);border-radius:12px;padding:11px 13px;margin:12px 0;display:flex;gap:10px;align-items:flex-start}
-.pending .em{font-size:1.1rem}
-.pending .txt{font-size:.86rem;color:var(--ink60)}
-.pending .txt b{color:var(--brown)}
-.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-.btn{font-family:"Inter Tight",sans-serif;font-weight:600;font-size:.92rem;padding:.6rem 1.1rem;border-radius:999px;cursor:pointer;border:1.5px solid var(--line);background:#fff;color:var(--brown);transition:.15s;display:inline-flex;align-items:center;gap:.4em}
-.btn:hover{border-color:var(--syrup)}
-.btn-p{background:var(--brown);color:var(--milk);border-color:var(--brown)}
-.btn-p:hover{background:#2c1c10}
-.backup{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
-.backup .bk{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink60);margin-bottom:4px}
-.backup .bname{font-family:"Fraunces",serif;font-weight:600;font-size:1.15rem;color:var(--brown)}
-.backup .bwhere{font-size:.85rem;color:var(--ink60)}
-.backup a{color:var(--syrup);font-weight:600;font-size:.85rem;text-decoration:none}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--brown);color:var(--milk);padding:.6rem 1.1rem;border-radius:999px;font-size:.9rem;font-weight:600;opacity:0;transition:.25s;pointer-events:none}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.foot{text-align:center;font-size:.78rem;color:var(--ink60);margin-top:22px}
-.hidden{display:none}
-select{font-family:"Inter Tight",sans-serif;font-size:.9rem;padding:.5rem .7rem;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
-
-/* Liquid Night Market dark-frame overrides */
-body{background:#21142B;background-image:radial-gradient(80% 45% at 8% 0%,rgba(154,123,255,.20),transparent 55%),radial-gradient(70% 45% at 100% 6%,rgba(255,79,135,.16),transparent 52%)}
-.brand{color:#FFFCF8}.brand b{color:#FF4F87}
-h1{color:#FFFCF8}
-.sub{color:#FFF3E6}
-.honesty{color:rgba(255,243,230,.62)}.honesty b{color:#FFC83D}
-.spinbtn{background:#FF4F87;color:#fff}
-.chip[aria-pressed="true"]{background:#FF4F87;color:#fff;border-color:#FF4F87}
-.seg button[aria-pressed="true"]{background:#B9EE63;color:#151218}
-.startbtn{background:#FF4F87;color:#fff}
-.btn-p{background:#FF4F87;color:#fff;border-color:#FF4F87}.btn-p:hover{background:#ff2f70}
+  :root{
+    --lacquer:#08070a; --lacquer-2:#160f14; --pearl:#F4EFE7; --brass:#b09a86;
+    --gold:#C5A46D; --gilt:#F4DDA2; --neon:#ff2f6d; --jade:#123F35; --jade-lt:#2C6B5C;
+    --orchid:#b46bd6; --imperial:#5c2c86; --velvet:#2a0b12;
+    --line:rgba(217,183,121,.20); --gold-line:rgba(197,164,109,.42);
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+    --ease:cubic-bezier(.2,.8,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(1100px 520px at 84% -6%, rgba(255,47,109,.13), transparent 58%),
+      radial-gradient(860px 660px at 2% 5%, rgba(92,44,134,.17), transparent 60%),
+      radial-gradient(900px 900px at 50% 120%, rgba(18,63,53,.11), transparent 62%),
+      var(--lacquer);
+    background-attachment:fixed; color:var(--pearl); font-family:var(--sans);
+    line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh; overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px 60px}
+  /* header */
+  .site-head{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:1px solid var(--line)}
+  .wordmark{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--pearl)}
+  .wordmark b{color:var(--neon);font-weight:600}
+  .head-right{display:flex;align-items:center;gap:14px}
+  .kicker{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:.5em}
+  .kicker::before{content:"";width:.5em;height:.5em;border-radius:50%;background:var(--gold)}
+  .snd{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--gold);cursor:pointer;display:grid;place-items:center;padding:0;transition:border-color .18s,color .18s,opacity .18s}
+  .snd svg{width:17px;height:17px;fill:currentColor}
+  .snd:hover{border-color:var(--gold);color:var(--gilt)}
+  .snd.off{color:var(--brass);opacity:.55}
+  .snd.off .wv{display:none}
+  /* hero */
+  .hero{text-align:center;padding:38px 0 30px}
+  .eyebrow{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  .hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,6vw,3.4rem);line-height:1.02;color:var(--pearl)}
+  .hero h1 em{font-style:italic;color:var(--gilt)}
+  .sub{color:var(--brass);margin:14px auto 0;font-size:1rem;max-width:460px}
+  /* cards */
+  .deck{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,3vw,26px);max-width:660px;margin:22px auto 0}
+  .tcard{
+    position:relative;aspect-ratio:2/3;border-radius:18px;overflow:hidden;cursor:pointer;
+    border:1px solid var(--gold-line);background:var(--lacquer-2);
+    box-shadow:0 24px 60px rgba(0,0,0,.5), inset 0 0 0 1px rgba(0,0,0,.4);
+    transition:transform .2s var(--ease), box-shadow .2s var(--ease), opacity .3s var(--ease), filter .3s var(--ease);
+    text-align:left;font-family:var(--sans);color:var(--pearl);
+  }
+  .tcard:not(.locked):not(.revealed):hover{transform:translateY(-4px);box-shadow:0 30px 70px rgba(0,0,0,.55), 0 0 0 1px var(--gold-line)}
+  .tcard.locked{opacity:.42;filter:grayscale(.4) saturate(.7);cursor:not-allowed}
+  /* card art (placeholder — swap .art background-image with the maiden PNG) */
+  .art{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden}
+  .art .halo{position:absolute;width:64%;aspect-ratio:1;border-radius:50%;top:20%;filter:blur(2px);opacity:.5}
+  .art .glyph{font-family:var(--serif);font-size:clamp(5rem,17vw,8.5rem);line-height:1;opacity:.9;position:relative;z-index:1}
+  .art .seed{position:absolute;bottom:16%;width:14px;height:14px;border-radius:50%;z-index:1}
+  .yang .art{background:#120b08 url('card-yang.jpg') center/cover no-repeat}
+  .yang .art .halo{background:radial-gradient(circle, rgba(244,221,162,.9), transparent 62%)}
+  .yang .art .glyph{color:var(--gilt);text-shadow:0 0 26px rgba(244,221,162,.5)}
+  .yang .art .seed{background:var(--jade-lt);box-shadow:0 0 12px rgba(44,107,92,.9)}
+  .yin .art{background:#0a0b12 url('card-yin.jpg') center/cover no-repeat}
+  .yin .art .halo{background:radial-gradient(circle, rgba(210,225,255,.75), transparent 62%)}
+  .yin .art .glyph{color:#dfe7f2;text-shadow:0 0 26px rgba(120,150,220,.5)}
+  .yin .art .seed{background:var(--gilt);box-shadow:0 0 12px rgba(244,221,162,.9)}
+  /* gilded frame */
+  .art .glyph,.art .halo,.art .seed{display:none}
+  .frame{display:none}
+  .frame::before,.frame::after{content:"";position:absolute;width:20px;height:20px;border:1px solid var(--gold);opacity:.55}
+  .frame::before{top:12px;left:12px;border-right:0;border-bottom:0}
+  .frame::after{bottom:12px;right:12px;border-left:0;border-top:0}
+  /* labels + hint + result */
+  .clabel{position:absolute;top:14px;left:50%;transform:translateX(-50%);padding:4px 13px;border-radius:999px;background:rgba(6,5,8,.5);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gilt);z-index:3;white-space:nowrap}
+  .chint{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);padding:5px 14px;border-radius:999px;background:rgba(6,5,8,.5);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);font-size:.82rem;color:var(--pearl);z-index:3;transition:opacity .3s var(--ease);white-space:nowrap}
+  .chint .lock{display:inline-flex;align-items:center;gap:.4em;color:var(--brass)}
+  .chint svg{width:12px;height:12px;fill:var(--brass)}
+  .cresult{position:absolute;left:0;right:0;bottom:0;padding:26px 18px 20px;z-index:3;
+    background:linear-gradient(to top, rgba(6,5,8,.92) 30%, rgba(6,5,8,.55) 68%, transparent);
+    opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease) .12s, transform .5s var(--ease) .12s;pointer-events:none;text-align:center}
+  .cresult .rn{display:block;font-family:var(--serif);font-size:1.5rem;font-weight:600;line-height:1.14;color:var(--gilt)}
+  .cresult .rm{display:block;font-size:.82rem;color:var(--brass);margin-top:5px;line-height:1.4}
+  .tcard.revealed .chint{opacity:0}
+  .tcard.revealed .cresult{opacity:1;transform:none}
+  /* the light-up reveal (from the slot effect) */
+  .lit-ring{position:absolute;inset:0;border-radius:18px;border:1px solid transparent;pointer-events:none;z-index:4}
+  .tcard.lit .lit-ring{animation:cardflash 1s var(--ease)}
+  @keyframes cardflash{
+    0%{border-color:var(--neon);box-shadow:0 0 0 1px var(--neon), 0 0 46px 8px rgba(255,47,109,.6), inset 0 0 44px rgba(255,47,109,.28)}
+    55%{border-color:var(--gilt);box-shadow:0 0 0 1px var(--gilt), 0 0 34px 4px rgba(244,221,162,.45), inset 0 0 26px rgba(244,221,162,.18)}
+    100%{border-color:transparent;box-shadow:0 0 0 0 transparent, inset 0 0 0 transparent}
+  }
+  .sweep{position:absolute;inset:0;z-index:4;pointer-events:none;transform:translateX(-130%);
+    background:linear-gradient(115deg,transparent 34%, rgba(244,221,162,.4) 50%, transparent 66%)}
+  .tcard.lit .sweep{animation:sweep .95s var(--ease)}
+  @keyframes sweep{to{transform:translateX(130%)}}
+  .prompt{text-align:center;margin-top:20px;min-height:22px;color:var(--pearl);font-size:.94rem}
+  .prompt b{color:var(--gilt);font-weight:600}
+  /* plan overlay (fixed so nothing grows the page) */
+  .plan-scrim{position:fixed;inset:0;z-index:70;background:rgba(6,5,8,.68);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
+  .plan-scrim.show{opacity:1;pointer-events:auto}
+  .plan{position:fixed;left:50%;top:50%;z-index:75;width:min(640px,92vw);max-height:88vh;overflow:auto;
+    border-radius:20px;padding:30px 30px 26px;
+    background:radial-gradient(120% 90% at 100% 0%, rgba(180,107,214,.12), transparent 55%), linear-gradient(160deg,#191016 0%, #14161b 100%);
+    box-shadow:inset 0 0 0 1px rgba(197,164,109,.28), 0 40px 90px rgba(0,0,0,.6);
+    opacity:0;transform:translate(-50%,-44%) scale(.97);pointer-events:none;transition:opacity .5s var(--ease), transform .5s var(--ease)}
+  .plan.show{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
+  .peyebrow{font-family:'Ephesis',cursive;color:var(--gilt);font-size:2rem;line-height:1;text-align:center;margin-bottom:4px}
+  .ptag{text-align:center;color:var(--brass);font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;margin-bottom:16px}
+  .pair{display:grid;grid-template-columns:1fr 1fr}
+  .pcol{padding:6px 18px}
+  .pcol + .pcol{border-left:1px solid rgba(197,164,109,.22)}
+  .pcap{font-size:.64rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+  .pname{font-family:var(--serif);font-size:1.55rem;font-weight:600;line-height:1.08;color:var(--pearl)}
+  .pmeta{font-size:.82rem;color:var(--brass);margin-top:5px;line-height:1.5}
+  .plan-actions{display:flex;gap:14px;justify-content:center;align-items:center;margin-top:24px;flex-wrap:wrap}
+  .btn{font-family:var(--sans);font-weight:600;font-size:.95rem;padding:13px 24px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:transform .16s var(--ease), box-shadow .16s}
+  .btn.solid{background:linear-gradient(180deg,#ff5b86,var(--neon));color:#2a0410;box-shadow:0 10px 30px rgba(255,47,109,.32)}
+  .btn.solid:hover{transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--gilt);border-color:var(--gold-line)}
+  .btn.ghost:hover{border-color:var(--gold)}
+  footer{margin-top:34px;color:var(--brass);font-size:.74rem;letter-spacing:.04em;opacity:.75;text-align:center;line-height:1.5}
+  @media (max-width:520px){
+    .pair{grid-template-columns:1fr}
+    .pcol + .pcol{border-left:0;border-top:1px solid rgba(197,164,109,.22);margin-top:6px;padding-top:14px}
+    .kicker{display:none}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{transition-duration:.001ms !important;animation-duration:.001ms !important}
+  }
 </style></head>
-<body><div class="wrap">
-<a href="/tools/" style="display:inline-block;color:#FFF3E6;font-size:.82rem;font-weight:600;margin-bottom:8px;text-decoration:none">&lsaquo; All Boba Night tools</a>
-
-<div class="top"><span class="brand">Boba <b>Night</b></span></div>
-<div class="kicker">Can''t decide?</div>
-<h1>Boba Roulette</h1>
-<p class="sub">Set the area, hit spin, and let it choose a real boba shop for you. Reroll until it feels right.</p>
-<p class="honesty">Every shop here is <b>real</b>, pulled from our SoCal list. Hours and what-to-order show as <b>Verifying</b> until we confirm each shop, so nothing on this card is made up.</p>
-
-<div class="panel">
-  <div class="lbl">Area</div>
-  <div class="chips" id="areaChips"></div>
-  <div class="row">
-    <div>
-      <div class="lbl">Vibe</div>
-      <div class="seg" id="modeSeg">
-        <button data-mode="Either" aria-pressed="true">Either</button>
-        <button data-mode="Familiar">Familiar</button>
-        <button data-mode="Adventurous">Adventurous</button>
-        <button data-mode="Dessert">Dessert run</button>
-      </div>
+<body>
+<div class="wrap">
+  <header class="site-head">
+    <a class="wordmark" href="/">Boba <b>Night</b></a>
+    <div class="head-right">
+      <span class="kicker">The night deck</span>
+      <button class="snd" id="sndBtn" type="button" aria-label="Sound on" aria-pressed="true" title="Sound">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="wv" d="M16 8.5c1.4 1.3 1.4 5.7 0 7M18.6 6c2.6 2.3 2.6 9.7 0 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
     </div>
-    <div>
-      <div class="lbl">City (optional)</div>
-      <select id="citySel"><option value="All">All cities in area</option></select>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">Can't decide?</div>
+    <h1>Let the night <em>pick</em>.</h1>
+    <p class="sub">Turn a card for a spot, then turn the next for a drink. One place, one order, and you're out the door.</p>
+  </section>
+
+  <div class="deck">
+    <button class="tcard yang" id="card1" type="button" aria-label="Turn the card for a spot">
+      <span class="art"><span class="halo"></span><span class="glyph">&#38525;</span><span class="seed"></span></span>
+      <span class="frame"></span>
+      <span class="clabel">The place</span>
+      <span class="chint" id="hint1">Turn for a spot</span>
+      <span class="cresult" id="res1"><span class="rn" id="r1n"></span><span class="rm" id="r1m"></span></span>
+      <span class="sweep"></span><span class="lit-ring"></span>
+    </button>
+
+    <button class="tcard yin locked" id="card2" type="button" aria-label="Turn the card for a drink" disabled>
+      <span class="art"><span class="halo"></span><span class="glyph">&#38452;</span><span class="seed"></span></span>
+      <span class="frame"></span>
+      <span class="clabel">The drink</span>
+      <span class="chint" id="hint2"><span class="lock"><svg viewBox="0 0 24 24"><path d="M6 10V8a6 6 0 1112 0v2h1v12H5V10h1zm2 0h8V8a4 4 0 10-8 0v2z"/></svg>Turn the first card</span></span>
+      <span class="cresult" id="res2"><span class="rn" id="r2n"></span><span class="rm" id="r2m"></span></span>
+      <span class="sweep"></span><span class="lit-ring"></span>
+    </button>
+  </div>
+
+  <div class="prompt" id="prompt">Turn the first card for a spot</div>
+
+  <div class="plan-scrim" id="planScrim"></div>
+  <div class="plan" id="plan" aria-live="polite" aria-hidden="true">
+    <div class="peyebrow">Tonight's plan</div>
+    <div class="ptag">Set. Grab your keys.</div>
+    <div class="pair">
+      <div class="pcol"><div class="pcap">The place</div><div class="pname" id="planSpotName"></div><div class="pmeta" id="planSpotCity"></div></div>
+      <div class="pcol"><div class="pcap">The drink</div><div class="pname" id="planDrinkName"></div><div class="pmeta" id="planDrinkNote"></div></div>
+    </div>
+    <div class="plan-actions">
+      <a class="btn solid" id="seeSpot" href="#">See the spot</a>
+      <button class="btn ghost" id="turnAgain" type="button">Turn again</button>
     </div>
   </div>
-  <div class="small" style="margin-top:8px">Familiar = chains · Adventurous = independents · Dessert run = taro balls, grass jelly, shaved ice &amp; soft serve houses</div>
-  <label class="locknote"><input type="checkbox" id="lockArea"> Lock the area so reroll stays here</label>
-  <div class="locknote">More filters (open now, flavor, caffeine, sweetness) turn on as each shop is verified.</div>
-</div>
 
-<div class="spinwrap">
-  <div class="cup" id="cup">
-    <span class="pearl" style="left:32px;animation-delay:0s"></span>
-    <span class="pearl" style="left:46px;animation-delay:.25s"></span>
-    <span class="pearl" style="left:58px;animation-delay:.5s"></span>
-    <svg viewBox="0 0 96 120" fill="none">
-      <path d="M20 34 h56 l-6 74 a8 8 0 0 1 -8 7 H34 a8 8 0 0 1 -8 -7 Z" fill="#fff" stroke="#E4D8C7" stroke-width="2"/>
-      <path d="M20 34 h56 l-1.4 18 H21.4 Z" fill="#9A7BFF" opacity=".22"/>
-      <rect x="16" y="26" width="64" height="9" rx="4.5" fill="#3D2817"/>
-      <line x1="56" y1="10" x2="66" y2="30" stroke="#3D2817" stroke-width="3" stroke-linecap="round"/>
-      <circle cx="38" cy="104" r="4" fill="#3D2817"/><circle cx="52" cy="108" r="4" fill="#3D2817"/><circle cx="60" cy="100" r="4" fill="#3D2817"/>
-    </svg>
-  </div>
-  <div class="small" id="poolCount"></div>
-  <div style="margin-top:12px"><button class="spinbtn" id="spinBtn">Spin</button></div>
+  <footer>Real SoCal shops, real drinks. The cards just settle the argument so you can get moving.</footer>
 </div>
-
-<div id="resultSlot"></div>
-
-<p class="foot">A Boba Night prototype · real shops, honest gaps · the fun part fills in after verification</p>
-</div>
-<div class="toast" id="toast"></div>
 
 <script>
-const SHOPS = [{"n":"It's Boba Time","c":"Los Angeles","ar":"Greater LA","ad":"6660 Sunset Blvd","ch":true,"loc":5},{"n":"House of Boba","c":"Los Angeles","ar":"Greater LA","ad":"5930 S Main St","ch":false,"loc":1},{"n":"Quickly","c":"Los Angeles","ar":"Greater LA","ad":"2717 W Olympic Blvd","ch":true,"loc":9},{"n":"Yo! Boba","c":"Los Angeles","ar":"Greater LA","ad":"3525 W 3rd St","ch":false,"loc":1},{"n":"Ten Ren's Tea Time","c":"Los Angeles","ar":"Greater LA","ad":"726 N Hill St","ch":true,"loc":7},{"n":"Lollicup","c":"Los Angeles","ar":"Greater LA","ad":"988 N Hill St","ch":true,"loc":7},{"n":"Boba Time","c":"Los Angeles","ar":"Greater LA","ad":"11207 National Blvd","ch":true,"loc":2},{"n":"Formosa Boba Men","c":"Los Angeles","ar":"Greater LA","ad":"7000 W Manchester Ave","ch":false,"loc":1},{"n":"Volcano Tea House","c":"Los Angeles","ar":"Greater LA","ad":"3019 S Figueroa St","ch":false,"loc":1},{"n":"Boba Bear","c":"Los Angeles","ar":"Greater LA","ad":"414 S Western Ave","ch":true,"loc":3},{"n":"Bon Bon Tea House","c":"Los Angeles","ar":"Greater LA","ad":"9663 Reseda Blvd","ch":false,"loc":1},{"n":"Cafe Home","c":"Los Angeles","ar":"Greater LA","ad":"3377 Wilshire Blvd","ch":false,"loc":1},{"n":"Honeyboba","c":"Los Angeles","ar":"Greater LA","ad":"11573 Santa Monica Blvd","ch":true,"loc":4},{"n":"Twinkle Brown Sugar","c":"Los Angeles","ar":"Greater LA","ad":"131 S Central Ave","ch":false,"loc":1},{"n":"I Love Boba","c":"Los Angeles","ar":"Greater LA","ad":"3512 W 8th St","ch":false,"loc":1},{"n":"Berlins","c":"Los Angeles","ar":"Greater LA","ad":"8474 W 3rd St","ch":false,"loc":1},{"n":"Hashtag Coffee & Tea","c":"Los Angeles","ar":"Greater LA","ad":"2321 S Hoover St","ch":false,"loc":1},{"n":"Cantaloop","c":"Los Angeles","ar":"Greater LA","ad":"7095 Hollywood Blvd","ch":true,"loc":2},{"n":"Mr. Boba","c":"Los Angeles","ar":"Greater LA","ad":"3805 W 6th St","ch":false,"loc":1},{"n":"Honeybee's","c":"Long Beach","ar":"Greater LA","ad":"301 Loma Ave","ch":false,"loc":1},{"n":"Hiccups","c":"Long Beach","ar":"Greater LA","ad":"1946 N Lakewood Blvd","ch":false,"loc":1},{"n":"Cha For Tea","c":"Long Beach","ar":"Greater LA","ad":"5720 E 7th St","ch":true,"loc":3},{"n":"Roasting Water","c":"Long Beach","ar":"Greater LA","ad":"7561 Carson Blvd","ch":true,"loc":3},{"n":"Boba Tea House","c":"Long Beach","ar":"Greater LA","ad":"1336 W Willow St","ch":true,"loc":2},{"n":"Snow Monster","c":"Long Beach","ar":"Greater LA","ad":"5211 E 2nd St","ch":true,"loc":4,"ds":true},{"n":"Boba Lab","c":"Santa Monica","ar":"Greater LA","ad":"711 Pico Blvd","ch":false,"loc":1},{"n":"Bubble Boba","c":"Santa Monica","ar":"Greater LA","ad":"2829 Ocean Park Blvd","ch":false,"loc":1},{"n":"TLight Boba","c":"Santa Monica","ar":"Greater LA","ad":"1709 Pico Blvd","ch":false,"loc":1},{"n":"The Boba Promenade Cafe","c":"Santa Monica","ar":"Greater LA","ad":"321 Santa Monica Blvd","ch":false,"loc":1},{"n":"Boba Tea & Me Truck","c":"Santa Monica","ar":"Greater LA","ad":"1300 Ocean Ave","ch":false,"loc":1},{"n":"Nest Tea House","c":"Arcadia","ar":"The 626","ad":"556 Las Tunas Dr","ch":false,"loc":1},{"n":"Half And Half Tea Express","c":"Arcadia","ar":"The 626","ad":"145 E Foothill Blvd","ch":false,"loc":1},{"n":"Yoshantea Tea House","c":"Arcadia","ar":"The 626","ad":"30 E Duarte Rd","ch":false,"loc":1},{"n":"AU79 Tea House","c":"Arcadia","ar":"The 626","ad":"815 W Naomi Ave","ch":false,"loc":1},{"n":"Bearology","c":"Arcadia","ar":"The 626","ad":"400 S Baldwin Ave","ch":false,"loc":1},{"n":"BAMBU","c":"Arcadia","ar":"The 626","ad":"651 W Duarte Rd","ch":true,"loc":5},{"n":"Ten Ren's Tea Time","c":"Arcadia","ar":"The 626","ad":"846 W Duarte Rd","ch":true,"loc":7},{"n":"Tapioca Express","c":"Arcadia","ar":"The 626","ad":"160 E Duarte Rd","ch":true,"loc":9},{"n":"Boba Ave Express","c":"Arcadia","ar":"The 626","ad":"1437 S Baldwin Ave","ch":false,"loc":1},{"n":"Spiceology","c":"Arcadia","ar":"The 626","ad":"142 E Duarte Rd","ch":false,"loc":1},{"n":"BYOB A Boba Company","c":"Covina","ar":"The 626","ad":"963 S Glendora Ave","ch":false,"loc":1},{"n":"Black & White","c":"Covina","ar":"The 626","ad":"2550 E Amar Rd","ch":false,"loc":1},{"n":"Jin Teahouse","c":"Covina","ar":"The 626","ad":"3648 Nogales St","ch":false,"loc":1},{"n":"Cha2o","c":"Covina","ar":"The 626","ad":"1525 E Amar Rd","ch":true,"loc":2},{"n":"Tapioca Express","c":"Covina","ar":"The 626","ad":"1019 S Glendora Ave","ch":true,"loc":9},{"n":"Lollicup","c":"Covina","ar":"The 626","ad":"9108 Plaza Drive","ch":true,"loc":7},{"n":"Boba Tea Lounge","c":"Covina","ar":"The 626","ad":"453 S Citrus Ave","ch":false,"loc":1},{"n":"Home Brewed Bar","c":"Pasadena","ar":"The 626","ad":"39 N Arroyo Pkwy","ch":false,"loc":1},{"n":"T Pumps","c":"Pasadena","ar":"The 626","ad":"524 S Lake Ave","ch":false,"loc":1},{"n":"Tea Spots","c":"Pasadena","ar":"The 626","ad":"1443 E Colorado Blvd","ch":false,"loc":1},{"n":"Half and Half Tea Express","c":"Pasadena","ar":"The 626","ad":"3007 Huntington Dr","ch":false,"loc":1},{"n":"Jin Tea Shop","c":"Pasadena","ar":"The 626","ad":"18 W Green St","ch":false,"loc":1},{"n":"Boba Time","c":"Walnut","ar":"The 626","ad":"19820 E Colima Rd","ch":true,"loc":2},{"n":"$1 Drink","c":"Walnut","ar":"The 626","ad":"20747-8C Amar Rd","ch":false,"loc":1},{"n":"Boba V Cafe","c":"Walnut","ar":"The 626","ad":"376 N Lemon Ave","ch":false,"loc":1},{"n":"Ten Ren's Tea Time","c":"Walnut","ar":"The 626","ad":"515 Grand Ave","ch":true,"loc":7},{"n":"MJ Cafe & Teahouse","c":"Walnut","ar":"The 626","ad":"20747 Amar Rd","ch":true,"loc":2},{"n":"Tea Block","c":"Rowland Heights","ar":"The 626","ad":"18311 Colima Rd","ch":false,"loc":1},{"n":"Dragonfly Tea Bar","c":"Rowland Heights","ar":"The 626","ad":"19208 Colima Rd","ch":true,"loc":2},{"n":"Tastea","c":"Rowland Heights","ar":"The 626","ad":"1737 Fullerton Rd","ch":true,"loc":3},{"n":"Boba Bear","c":"Rowland Heights","ar":"The 626","ad":"18414 E Colima Rd","ch":true,"loc":3},{"n":"Half & Half Tea Express","c":"Rowland Heights","ar":"The 626","ad":"17575 Colima Rd","ch":true,"loc":2},{"n":"Boba Gogo","c":"Rowland Heights","ar":"The 626","ad":"18414 Colima Road","ch":false,"loc":1},{"n":"Lollicup Fresh","c":"Rowland Heights","ar":"The 626","ad":"1380 S. Fullerton Rd","ch":true,"loc":2},{"n":"MJ Cafe & Teahouse","c":"Rowland Heights","ar":"The 626","ad":"17521 Colima Rd","ch":true,"loc":2},{"n":"Tea Time Express","c":"Rowland Heights","ar":"The 626","ad":"19725 E. Colima Rd","ch":true,"loc":2},{"n":"Quickly","c":"Rowland Heights","ar":"The 626","ad":"18353 E Colima Rd","ch":true,"loc":9},{"n":"Bobee 5","c":"Rowland Heights","ar":"The 626","ad":"1756 S Nogales St","ch":false,"loc":1},{"n":"Tea Brick","c":"Monterey Park","ar":"The 626","ad":"501 W Garvey Ave","ch":false,"loc":1},{"n":"Boba Ave","c":"Monterey Park","ar":"The 626","ad":"2089 S Atlantic Blvd","ch":false,"loc":1},{"n":"Half & Half Tea Express","c":"Monterey Park","ar":"The 626","ad":"141 N Atlantic Blvd","ch":true,"loc":2},{"n":"Got Boba?!","c":"Monterey Park","ar":"The 626","ad":"421 N Atlantic Blvd","ch":false,"loc":1},{"n":"Ten Ren's Tea Time","c":"Monterey Park","ar":"The 626","ad":"500 N. Atlantic Blvd","ch":true,"loc":7},{"n":"Quickly","c":"Monterey Park","ar":"The 626","ad":"2095 S Atlantic Blvd","ch":true,"loc":9},{"n":"Boba Tea Zone","c":"Pomona","ar":"Greater LA","ad":"961 E Mission Blvd","ch":false,"loc":1},{"n":"Cha For Tea","c":"Pomona","ar":"Greater LA","ad":"3560 W Temple Ave","ch":true,"loc":3},{"n":"Cha Cafe","c":"El Monte","ar":"The 626","ad":"10308 Lower Azusa Rd","ch":false,"loc":1},{"n":"Tea Republic","c":"El Monte","ar":"The 626","ad":"923 E Las Tunas Dr","ch":true,"loc":3},{"n":"The Vounge","c":"El Monte","ar":"The 626","ad":"10602 Lower Azusa Rd","ch":false,"loc":1},{"n":"Tea Garden Cafe","c":"Diamond Bar","ar":"The 626","ad":"1395 S Diamond Bar Blvd","ch":false,"loc":1},{"n":"Tealicious","c":"Diamond Bar","ar":"The 626","ad":"1155 S Diamond Bar Blvd","ch":false,"loc":1},{"n":"Lollicup","c":"Diamond Bar","ar":"The 626","ad":"1122 South Diamond Bar Blvd","ch":true,"loc":7},{"n":"Health Station","c":"Diamond Bar","ar":"The 626","ad":"20657 Golden Spring Dr","ch":false,"loc":1},{"n":"Mimi 5 Bobee","c":"Diamond Bar","ar":"The 626","ad":"333 S Diamond Bar Blvd","ch":false,"loc":1},{"n":"You & Me Cafe","c":"Diamond Bar","ar":"The 626","ad":"1241 S Diamond Bar Blvd","ch":false,"loc":1},{"n":"Tea Station","c":"Gardena","ar":"Greater LA","ad":"1610 W Redondo Beach Blvd # 3","ch":true,"loc":7},{"n":"Neighbors Tea House","c":"Rosemead","ar":"The 626","ad":"4213 Rosemead Blvd","ch":false,"loc":1},{"n":"Quickly","c":"Rosemead","ar":"The 626","ad":"8930 Mission Dr","ch":true,"loc":9},{"n":"Boba Corner","c":"Rosemead","ar":"The 626","ad":"8150 Garvey Ave","ch":false,"loc":1},{"n":"Cha Bei Bei Tea House","c":"Rosemead","ar":"The 626","ad":"7637 Garvey Ave","ch":false,"loc":1},{"n":"Tea Republic","c":"San Gabriel","ar":"The 626","ad":"923 E Las Tunas Dr","ch":true,"loc":3},{"n":"T4U Cafe","c":"San Gabriel","ar":"The 626","ad":"417 S San Gabriel","ch":false,"loc":1},{"n":"Half & Half Tea House","c":"San Gabriel","ar":"The 626","ad":"120 N San Gabriel Blvd","ch":false,"loc":1},{"n":"Fresh Roast","c":"San Gabriel","ar":"The 626","ad":"308 S San Gabriel Blvd","ch":false,"loc":1},{"n":"Half & Half Good Old Time","c":"San Gabriel","ar":"The 626","ad":"704 W Las Tunas Dr","ch":false,"loc":1},{"n":"Share Tea","c":"San Gabriel","ar":"The 626","ad":"709 W Las Tunas Dr","ch":true,"loc":4},{"n":"Milk & Honey","c":"San Gabriel","ar":"The 626","ad":"534 E Valley Blvd","ch":false,"loc":1},{"n":"Oh My Pan Bakery & Tea","c":"San Gabriel","ar":"The 626","ad":"801 E Valley Blvd","ch":false,"loc":1},{"n":"Tapioca Express","c":"San Gabriel","ar":"The 626","ad":"980 E Las Tunas Dr","ch":true,"loc":9},{"n":"Tea Station","c":"San Gabriel","ar":"The 626","ad":"158 W Valley Blvd","ch":true,"loc":7},{"n":"Boba Ave 8090","c":"San Gabriel","ar":"The 626","ad":"140 W Valley Blvd","ch":false,"loc":1},{"n":"Quickly","c":"San Gabriel","ar":"The 626","ad":"119 S Gabriel Blvd","ch":true,"loc":9},{"n":"Labobatory","c":"San Gabriel","ar":"The 626","ad":"819 W Las Tunas Dr","ch":false,"loc":1},{"n":"Miss Tea","c":"Baldwin Park","ar":"The 626","ad":"14317 Ramona Blvd","ch":false,"loc":1},{"n":"Bobana","c":"Huntington Park","ar":"Greater LA","ad":"2667 E Florence Ave","ch":false,"loc":1},{"n":"Hola Coffee & Boba","c":"Huntington Park","ar":"Greater LA","ad":"3047 E Gage Ave","ch":false,"loc":1},{"n":"Quickly","c":"Temple City","ar":"The 626","ad":"9445 Las Tunas Dr","ch":true,"loc":9},{"n":"Tea Station Express","c":"Temple City","ar":"The 626","ad":"5700 Las Tunas Dr","ch":false,"loc":1},{"n":"Meet Fresh","c":"Temple City","ar":"The 626","ad":"9055 Las Tunas Dr","ch":false,"loc":1,"ds":true},{"n":"Boba Loca","c":"Burbank","ar":"Greater LA","ad":"148 N San Fernando Blvd","ch":true,"loc":4},{"n":"Tea Pop","c":"Burbank","ar":"Greater LA","ad":"5050 Vineland Ave","ch":false,"loc":1},{"n":"It's Boba Time","c":"Hollywood","ar":"Greater LA","ad":"6660 Sunset Blvd","ch":true,"loc":5},{"n":"Cantaloop","c":"Hollywood","ar":"Greater LA","ad":"7095 Hollywood Blvd","ch":true,"loc":2},{"n":"Hollywood Rock Cafe","c":"Hollywood","ar":"Greater LA","ad":"6511 Hollywood Blvd","ch":false,"loc":1},{"n":"Alfred Tea","c":"Hollywood","ar":"Greater LA","ad":"705 N Alfred St","ch":false,"loc":1},{"n":"Share Tea","c":"Cerritos","ar":"Greater LA","ad":"11900 South St","ch":true,"loc":4},{"n":"BAMBU","c":"Cerritos","ar":"Greater LA","ad":"11408 South St","ch":true,"loc":5},{"n":"Tapioca Express","c":"Cerritos","ar":"Greater LA","ad":"12751 Towne Center Dr","ch":true,"loc":9},{"n":"Class 302","c":"Cerritos","ar":"Greater LA","ad":"11446 South St","ch":true,"loc":3,"ds":true},{"n":"It's Boba Time","c":"Artesia","ar":"Greater LA","ad":"17901 Pioneer Blvd","ch":true,"loc":5},{"n":"Dolphin Bay","c":"Artesia","ar":"Greater LA","ad":"17806 Pioneer Blvd","ch":false,"loc":1},{"n":"Lollicup","c":"Artesia","ar":"Greater LA","ad":"17901 Pioneer Blvd","ch":true,"loc":7},{"n":"Roasting Water","c":"Westminster","ar":"Orange County","ad":"7925 Westminster Blvd","ch":true,"loc":3},{"n":"Bloomz Tea","c":"Westminster","ar":"Orange County","ad":"8532 Westminster Blvd","ch":false,"loc":1},{"n":"3 Blossoms Cafe","c":"Westminster","ar":"Orange County","ad":"10495 Bolsa Ave","ch":false,"loc":1},{"n":"Dingtea Bolsa","c":"Westminster","ar":"Orange County","ad":"9615 Bolsa Ave","ch":false,"loc":1},{"n":"Zero Degrees","c":"Westminster","ar":"Orange County","ad":"9822 Bolsa Ave","ch":true,"loc":2},{"n":"Lollicup","c":"Westminster","ar":"Orange County","ad":"9550 Bolsa Avenue","ch":true,"loc":7},{"n":"Boba Corner 2","c":"Westminster","ar":"Orange County","ad":"15440 Beach Blvd","ch":false,"loc":1},{"n":"Kung Fu Tea","c":"Westminster","ar":"Orange County","ad":"9709 Bolsa Ave","ch":true,"loc":3},{"n":"Tapioca Express","c":"Westminster","ar":"Orange County","ad":"9922 Bolsa Ave","ch":true,"loc":9},{"n":"Tebo Tebo Tea Lounge","c":"Westminster","ar":"Orange County","ad":"15556 Brookhurst St","ch":true,"loc":2},{"n":"Tebo Tebo Tea Express","c":"Westminster","ar":"Orange County","ad":"13916 Brookhurst St","ch":true,"loc":2},{"n":"7 Leaves Cafe","c":"Garden Grove","ar":"Orange County","ad":"13481 Euclid St","ch":true,"loc":7},{"n":"Tastea","c":"Garden Grove","ar":"Orange County","ad":"10189 Westminster Ave","ch":true,"loc":3},{"n":"Roasting Water","c":"Garden Grove","ar":"Orange County","ad":"9783 Chapman Ave","ch":true,"loc":3},{"n":"Crave","c":"Garden Grove","ar":"Orange County","ad":"8939 W Garden Grove Blvd","ch":false,"loc":1},{"n":"Urban Location","c":"Garden Grove","ar":"Orange County","ad":"10872 Westminster Ave","ch":false,"loc":1},{"n":"Tebo Tebo Tea Express","c":"Garden Grove","ar":"Orange County","ad":"13916 Brookhurst St","ch":true,"loc":2},{"n":"Ten Ren Tea","c":"Anaheim","ar":"Orange County","ad":"665 N Euclid St","ch":false,"loc":1},{"n":"Mini Monster","c":"Anaheim","ar":"Orange County","ad":"440 S Anaheim Blvd","ch":false,"loc":1},{"n":"OMG! Dessert Lounge","c":"Anaheim","ar":"Orange County","ad":"301 S Anaheim Blvd","ch":false,"loc":1},{"n":"7 Leaves Cafe","c":"Huntington Beach","ar":"Orange County","ad":"7225 Edinger Ave","ch":true,"loc":7},{"n":"Snow Monster","c":"Huntington Beach","ar":"Orange County","ad":"17406 Beach Blvd","ch":true,"loc":4,"ds":true},{"n":"Share Tea","c":"Fullerton","ar":"Orange County","ad":"2445 E Chapman Ave","ch":true,"loc":4},{"n":"Ice Bomb","c":"Fullerton","ar":"Orange County","ad":"107 W Amerige Ave","ch":false,"loc":1},{"n":"Ten Ren's Tea Time","c":"Fullerton","ar":"Orange County","ad":"1327 S Harbor Blvd","ch":true,"loc":7},{"n":"Cha2o","c":"Fullerton","ar":"Orange County","ad":"100 S Harbor Blvd","ch":true,"loc":2},{"n":"Pink Boba","c":"Fullerton","ar":"Orange County","ad":"109 W Orangethorpe Ave","ch":false,"loc":1},{"n":"Quickly","c":"Fullerton","ar":"Orange County","ad":"2510 E Chapman Ave","ch":true,"loc":9},{"n":"Kung Fu Tea","c":"Fullerton","ar":"Orange County","ad":"729 N Placentia Ave","ch":true,"loc":3},{"n":"7 Leaves Cafe","c":"Irvine","ar":"Orange County","ad":"14845 Jeffrey Road","ch":true,"loc":7},{"n":"Quickly","c":"Irvine","ar":"Orange County","ad":"16277 Laguna Canyon Rd","ch":true,"loc":9},{"n":"Tapioca Express","c":"Irvine","ar":"Orange County","ad":"5408 Walnut Ave","ch":true,"loc":9},{"n":"Tea Station","c":"Irvine","ar":"Orange County","ad":"15333 Culver Dr","ch":true,"loc":7},{"n":"Cha For Tea","c":"Irvine","ar":"Orange County","ad":"4187 Campus Dr","ch":true,"loc":3},{"n":"Class 302","c":"Irvine","ar":"Orange County","ad":"18090 Culver Dr","ch":true,"loc":3,"ds":true},{"n":"Tebo Tebo Tea Lounge","c":"Irvine","ar":"Orange County","ad":"14120 Culver Dr","ch":true,"loc":2},{"n":"85C Bakery Cafe","c":"Irvine","ar":"Orange County","ad":"2700 Alton Pkwy #123 (Diamond Jamboree)","ch":false,"loc":1},{"n":"85C Bakery Cafe (Diamond Jamboree)","c":"Irvine","ar":"Orange County","ad":"2700 Alton Pkwy #123","ch":false,"loc":1},{"n":"Harmony Tea Bar","c":"Mission Viejo","ar":"Orange County","ad":"25380 Marguerite Pkwy","ch":false,"loc":1},{"n":"Tastea","c":"Costa Mesa","ar":"Orange County","ad":"1175 Baker St","ch":true,"loc":3},{"n":"7 Leaves Cafe","c":"Costa Mesa","ar":"Orange County","ad":"2800 Harbor Blvd","ch":true,"loc":7},{"n":"Sweetea Cafe","c":"Costa Mesa","ar":"Orange County","ad":"1460 Baker St","ch":false,"loc":1},{"n":"Dragonfly Tea Bar","c":"Orange","ar":"Orange County","ad":"3533 E Chapman Ave","ch":true,"loc":2},{"n":"H2SNOW","c":"Orange","ar":"Orange County","ad":"1315 E Katella Ave","ch":false,"loc":1},{"n":"It's Boba Time","c":"Tustin","ar":"Orange County","ad":"2481 Park Ave (The District)","ch":true,"loc":5},{"n":"7 Leaves","c":"Tustin","ar":"Orange County","ad":"13771 Newport Ave","ch":false,"loc":1},{"n":"Leaf N Cream","c":"Tustin","ar":"Orange County","ad":"14089 Newport Ave","ch":false,"loc":1},{"n":"Sharetea","c":"Santa Ana","ar":"Orange County","ad":"3940 S Bristol St","ch":false,"loc":1},{"n":"Class 302","c":"Santa Ana","ar":"Orange County","ad":"1945 E 17th St","ch":true,"loc":3,"ds":true},{"n":"Lantern Grill","c":"Santa Ana","ar":"Orange County","ad":"1722 W 1st St","ch":false,"loc":1},{"n":"Milk Bar","c":"Fountain Valley","ar":"Orange County","ad":"16051 Brookhurst St. Ste D","ch":false,"loc":1},{"n":"7 Leaves Cafe","c":"Fountain Valley","ar":"Orange County","ad":"9475 Warner Ave","ch":true,"loc":7},{"n":"7 Leaves Cafe","c":"Cypress","ar":"Orange County","ad":"9111 Valley View St Suite 101","ch":true,"loc":7},{"n":"Boba Tea House","c":"Riverside","ar":"Inland Empire","ad":"767 W Blaine St","ch":true,"loc":2},{"n":"Boba Fiend Tea House","c":"Riverside","ar":"Inland Empire","ad":"3375 Iowa Ave","ch":true,"loc":2},{"n":"5s' Teas","c":"Riverside","ar":"Inland Empire","ad":"6930 Indiana Ave","ch":false,"loc":1},{"n":"Bobaloca","c":"Riverside","ar":"Inland Empire","ad":"19009 Van Buren Blvd","ch":false,"loc":1},{"n":"Lollicup Fresh","c":"Riverside","ar":"Inland Empire","ad":"3740 Iowa Ave","ch":true,"loc":2},{"n":"Ten Ren's Tea Time","c":"Riverside","ar":"Inland Empire","ad":"1400 University Ave","ch":true,"loc":7},{"n":"Boba Cafe","c":"Riverside","ar":"Inland Empire","ad":"1223 University Ave","ch":false,"loc":1},{"n":"Cha2O","c":"Riverside","ar":"Inland Empire","ad":"1400 University Ave","ch":true,"loc":2},{"n":"Tea Time","c":"Temecula","ar":"Inland Empire","ad":"31333 Temecula Pkwy","ch":false,"loc":1},{"n":"Chill Zone","c":"Temecula","ar":"Inland Empire","ad":"40315 Winchester Rd","ch":false,"loc":1},{"n":"Snow & Crab","c":"Temecula","ar":"Inland Empire","ad":"32965 Temecula Pkwy #100","ch":false,"loc":1},{"n":"Juice Bar","c":"Temecula","ar":"Inland Empire","ad":"27520 Ynez Rd D1","ch":false,"loc":1},{"n":"Cafe Gossip","c":"Moreno Valley","ar":"Inland Empire","ad":"23663 Sunnymead Blvd","ch":false,"loc":1},{"n":"Better Be Donuts","c":"Moreno Valley","ar":"Inland Empire","ad":"25960 Iris Ave","ch":false,"loc":1},{"n":"Boba Express","c":"Moreno Valley","ar":"Inland Empire","ad":"22500 Town Cir","ch":true,"loc":2},{"n":"7 Leaves Cafe","c":"Chino","ar":"Inland Empire","ad":"13920 City Center Dr #4015","ch":true,"loc":7},{"n":"Boba Fiend Tea House","c":"Rancho Cucamonga","ar":"Inland Empire","ad":"10590 Base Line Rd","ch":true,"loc":2},{"n":"Square Bar Cafe","c":"San Diego","ar":"San Diego","ad":"4488 Convoy Street # H","ch":false,"loc":1},{"n":"Tapioca Express","c":"San Diego","ar":"San Diego","ad":"4646 Convoy St #106B","ch":true,"loc":9},{"n":"Bobalicious","c":"San Diego","ar":"San Diego","ad":"8155 Mira Mesa Blvd #4","ch":false,"loc":1},{"n":"Cafe Hue","c":"San Diego","ar":"San Diego","ad":"3860 Convoy St","ch":false,"loc":1},{"n":"Trinitea","c":"San Diego","ar":"San Diego","ad":"8680 Navajo Rd #109","ch":false,"loc":1},{"n":"Lollicup Tea Zone","c":"San Diego","ar":"San Diego","ad":"1550 E H St","ch":false,"loc":1},{"n":"VaniTea Cafe","c":"San Diego","ar":"San Diego","ad":"525 Telegraph Canyon Rd","ch":false,"loc":1},{"n":"Tastea Grill","c":"San Diego","ar":"San Diego","ad":"1392 E Palomar St #305","ch":false,"loc":1},{"n":"Tea Station","c":"San Diego","ar":"San Diego","ad":"7315 Clairemont Mesa Blvd","ch":true,"loc":7},{"n":"It's Boba Time","c":"San Diego","ar":"San Diego","ad":"Suite A, 4344 Convoy St","ch":true,"loc":5},{"n":"Tea N More","c":"San Diego","ar":"San Diego","ad":"7380 Clairemont Mesa Blvd #111","ch":false,"loc":1},{"n":"Up2you Cafe","c":"San Diego","ar":"San Diego","ad":"7770 Vickers St #101","ch":false,"loc":1},{"n":"SD Boba Tea","c":"San Diego","ar":"San Diego","ad":"1105 E Plaza Blvd","ch":false,"loc":1},{"n":"Share Tea","c":"San Diego","ar":"San Diego","ad":"4917 Convoy St","ch":true,"loc":4},{"n":"Kung Fu Tea","c":"San Diego","ar":"San Diego","ad":"4869 Convoy St","ch":true,"loc":3},{"n":"OO Tea","c":"San Diego","ar":"San Diego","ad":"7330 Clairemont Mesa Blvd #106","ch":false,"loc":1},{"n":"Guiltea Cravings","c":"San Diego","ar":"San Diego","ad":"7330 Clairemont Mesa Blvd #106","ch":false,"loc":1},{"n":"Boba Bar (OG Location)","c":"San Diego","ar":"San Diego","ad":"7655 Clairemont Mesa Blvd","ch":false,"loc":1},{"n":"Snoice","c":"San Diego","ar":"San Diego","ad":"8423 Paradise Valley Rd B","ch":false,"loc":1},{"n":"Boba Bar and Desserts","c":"San Diego","ar":"San Diego","ad":"4619 Convoy St f","ch":false,"loc":1},{"n":"Camellia Rd. Tea Bar","c":"San Diego","ar":"San Diego","ad":"8199 Clairemont Mesa Blvd Suite H","ch":false,"loc":1},{"n":"Tea Republic","c":"San Diego","ar":"San Diego","ad":"923 E Las Tunas Dr","ch":true,"loc":3},{"n":"Somisomi","c":"Brea","ar":"Orange County","ad":"110 W Birch St","ch":true,"loc":1,"ds":true},{"n":"Chicha San Chen","c":"San Gabriel","ar":"The 626","ad":"301 W Valley Blvd Ste 116","ch":true,"loc":1},{"n":"Molly Tea","c":"San Gabriel","ar":"The 626","ad":"425 W Valley Blvd","ch":true,"loc":1},{"n":"Sunright Tea Studio","c":"Irvine","ar":"Orange County","ad":"2700 Alton Pkwy","ch":true,"loc":1},{"n":"One Zo Boba","c":"Irvine","ar":"Orange County","ad":"6376 Irvine Blvd","ch":false,"loc":1},{"n":"Meet Fresh","c":"Irvine","ar":"Orange County","ad":"2710 Alton Pkwy","ch":true,"loc":1,"ds":true},{"n":"Taro Yuan","c":"City of Industry","ar":"The 626","ad":"18246 Gale Ave A","ch":false,"loc":1,"ds":true},{"n":"Birdie Bowl and Juicery","c":"Costa Mesa","ar":"Orange County","ad":"3313 Hyland Ave Ste A17","ch":false,"loc":1,"ds":true},{"n":"Ubatuba Acai","c":"Brea","ar":"Orange County","ad":"1623 E Imperial Hwy","ch":false,"loc":1,"ds":true},{"n":"Acai Joint","c":"Arcadia","ar":"The 626","ad":"733 W Naomi Ave","ch":false,"loc":1,"ds":true},{"n":"Paradise Bowls","c":"Irvine","ar":"Orange County","ad":"3972 Barranca Pkwy","ch":false,"loc":1,"ds":true},{"n":"Acai Republic","c":"Fullerton","ar":"Orange County","ad":"1109 N Harbor Blvd","ch":true,"loc":1,"ds":true},{"n":"Berry Brand","c":"Tustin","ar":"Orange County","ad":"12932 Newport Ave","ch":false,"loc":1,"ds":true}];
-const AREAS = ["Anywhere","The 626","Orange County","San Diego","Greater LA","Inland Empire"];
-const state = {area:"Anywhere", mode:"Either", city:"All", locked:false, spinning:false, current:null};
+const SHOPS = [{"n":"$1 Drink","c":"Walnut","cs":"walnut","s":"1-drink-walnut"},{"n":"3 Blossoms Cafe","c":"Westminster","cs":"westminster","s":"3-blossoms-cafe-westminster"},{"n":"5s' Teas","c":"Riverside","cs":"riverside","s":"5s-teas-riverside"},{"n":"7 Leaves Cafe","c":"Chino","cs":"chino","s":"7-leaves-cafe-chino"},{"n":"7 Leaves Cafe","c":"Costa Mesa","cs":"costa-mesa","s":"7-leaves-cafe-costa-mesa"},{"n":"7 Leaves Cafe","c":"Cypress","cs":"cypress","s":"7-leaves-cafe-cypress"},{"n":"7 Leaves Cafe","c":"Fountain Valley","cs":"fountain-valley","s":"7-leaves-cafe-fountain-valley"},{"n":"7 Leaves Cafe","c":"Garden Grove","cs":"garden-grove","s":"7-leaves-cafe-garden-grove"},{"n":"7 Leaves Cafe","c":"Huntington Beach","cs":"huntington-beach","s":"7-leaves-cafe-huntington-beach"},{"n":"7 Leaves Cafe","c":"Irvine","cs":"irvine","s":"7-leaves-cafe-irvine"},{"n":"7 Leaves","c":"Tustin","cs":"tustin","s":"7-leaves-tustin"},{"n":"85C Bakery Cafe (Diamond Jamboree)","c":"Irvine","cs":"irvine","s":"85c-bakery-cafe-diamond-jamboree-irvine"},{"n":"85C Bakery Cafe","c":"Irvine","cs":"irvine","s":"85c-bakery-cafe-irvine"},{"n":"Alfred Tea","c":"Hollywood","cs":"hollywood","s":"alfred-tea-hollywood"},{"n":"AU79 Tea House","c":"Arcadia","cs":"arcadia","s":"au79-tea-house-arcadia"},{"n":"BAMBU","c":"Arcadia","cs":"arcadia","s":"bambu-arcadia"},{"n":"BAMBU","c":"Cerritos","cs":"cerritos","s":"bambu-cerritos"},{"n":"Bearology","c":"Arcadia","cs":"arcadia","s":"bearology-arcadia"},{"n":"Berlins","c":"Los Angeles","cs":"los-angeles","s":"berlins-los-angeles"},{"n":"Better Be Donuts","c":"Moreno Valley","cs":"moreno-valley","s":"better-be-donuts-moreno-valley"},{"n":"Black & White","c":"Covina","cs":"covina","s":"black-and-white-covina"},{"n":"Bloomz Tea","c":"Westminster","cs":"westminster","s":"bloomz-tea-westminster"},{"n":"Boba Ave 8090","c":"San Gabriel","cs":"san-gabriel","s":"boba-ave-8090-san-gabriel"},{"n":"Boba Ave Express","c":"Arcadia","cs":"arcadia","s":"boba-ave-express-arcadia"},{"n":"Boba Ave","c":"Monterey Park","cs":"monterey-park","s":"boba-ave-monterey-park"},{"n":"Boba Bar and Desserts","c":"San Diego","cs":"san-diego","s":"boba-bar-and-desserts-san-diego"},{"n":"Boba Bar (OG Location)","c":"San Diego","cs":"san-diego","s":"boba-bar-og-location-san-diego"},{"n":"Boba Bear","c":"Los Angeles","cs":"los-angeles","s":"boba-bear-los-angeles"},{"n":"Boba Bear","c":"Rowland Heights","cs":"rowland-heights","s":"boba-bear-rowland-heights"},{"n":"Boba Cafe","c":"Riverside","cs":"riverside","s":"boba-cafe-riverside"},{"n":"Boba Corner 2","c":"Westminster","cs":"westminster","s":"boba-corner-2-westminster"},{"n":"Boba Corner","c":"Rosemead","cs":"rosemead","s":"boba-corner-rosemead"},{"n":"Boba Express","c":"Moreno Valley","cs":"moreno-valley","s":"boba-express-moreno-valley"},{"n":"Boba Fiend Tea House","c":"Rancho Cucamonga","cs":"rancho-cucamonga","s":"boba-fiend-tea-house-rancho-cucamonga"},{"n":"Boba Fiend Tea House","c":"Riverside","cs":"riverside","s":"boba-fiend-tea-house-riverside"},{"n":"Boba Gogo","c":"Rowland Heights","cs":"rowland-heights","s":"boba-gogo-rowland-heights"},{"n":"Boba Lab","c":"Santa Monica","cs":"santa-monica","s":"boba-lab-santa-monica"},{"n":"Boba Loca","c":"Burbank","cs":"burbank","s":"boba-loca-burbank"},{"n":"Boba Tea & Me Truck","c":"Santa Monica","cs":"santa-monica","s":"boba-tea-and-me-truck-santa-monica"},{"n":"Boba Tea House","c":"Long Beach","cs":"long-beach","s":"boba-tea-house-long-beach"},{"n":"Boba Tea House","c":"Riverside","cs":"riverside","s":"boba-tea-house-riverside"},{"n":"Boba Tea Lounge","c":"Covina","cs":"covina","s":"boba-tea-lounge-covina"},{"n":"Boba Tea Zone","c":"Pomona","cs":"pomona","s":"boba-tea-zone-pomona"},{"n":"Boba Time","c":"Los Angeles","cs":"los-angeles","s":"boba-time-los-angeles"},{"n":"Boba Time","c":"Walnut","cs":"walnut","s":"boba-time-walnut"},{"n":"Boba V Cafe","c":"Walnut","cs":"walnut","s":"boba-v-cafe-walnut"},{"n":"Bobalicious","c":"San Diego","cs":"san-diego","s":"bobalicious-san-diego"},{"n":"Bobaloca","c":"Riverside","cs":"riverside","s":"bobaloca-riverside"},{"n":"Bobana","c":"Huntington Park","cs":"huntington-park","s":"bobana-huntington-park"},{"n":"Bobee 5","c":"Rowland Heights","cs":"rowland-heights","s":"bobee-5-rowland-heights"},{"n":"Bon Bon Tea House","c":"Los Angeles","cs":"los-angeles","s":"bon-bon-tea-house-los-angeles"},{"n":"Bubble Boba","c":"Santa Monica","cs":"santa-monica","s":"bubble-boba-santa-monica"},{"n":"BYOB A Boba Company","c":"Covina","cs":"covina","s":"byob-a-boba-company-covina"},{"n":"Cafe Gossip","c":"Moreno Valley","cs":"moreno-valley","s":"cafe-gossip-moreno-valley"},{"n":"Cafe Home","c":"Los Angeles","cs":"los-angeles","s":"cafe-home-los-angeles"},{"n":"Cafe Hue","c":"San Diego","cs":"san-diego","s":"cafe-hue-san-diego"},{"n":"Camellia Rd. Tea Bar","c":"San Diego","cs":"san-diego","s":"camellia-rd-tea-bar-san-diego"},{"n":"Cantaloop","c":"Hollywood","cs":"hollywood","s":"cantaloop-hollywood"},{"n":"Cantaloop","c":"Los Angeles","cs":"los-angeles","s":"cantaloop-los-angeles"},{"n":"Cha Bei Bei Tea House","c":"Rosemead","cs":"rosemead","s":"cha-bei-bei-tea-house-rosemead"},{"n":"Cha Cafe","c":"El Monte","cs":"el-monte","s":"cha-cafe-el-monte"},{"n":"Cha For Tea","c":"Irvine","cs":"irvine","s":"cha-for-tea-irvine"},{"n":"Cha For Tea","c":"Long Beach","cs":"long-beach","s":"cha-for-tea-long-beach"},{"n":"Cha For Tea","c":"Pomona","cs":"pomona","s":"cha-for-tea-pomona"},{"n":"Cha2o","c":"Covina","cs":"covina","s":"cha2o-covina"},{"n":"Cha2o","c":"Fullerton","cs":"fullerton","s":"cha2o-fullerton"},{"n":"Cha2O","c":"Riverside","cs":"riverside","s":"cha2o-riverside"},{"n":"Chill Zone","c":"Temecula","cs":"temecula","s":"chill-zone-temecula"},{"n":"Class 302","c":"Cerritos","cs":"cerritos","s":"class-302-cerritos"},{"n":"Class 302","c":"Irvine","cs":"irvine","s":"class-302-irvine"},{"n":"Class 302","c":"Santa Ana","cs":"santa-ana","s":"class-302-santa-ana"},{"n":"Crave","c":"Garden Grove","cs":"garden-grove","s":"crave-garden-grove"},{"n":"Dingtea Bolsa","c":"Westminster","cs":"westminster","s":"dingtea-bolsa-westminster"},{"n":"Dolphin Bay","c":"Artesia","cs":"artesia","s":"dolphin-bay-artesia"},{"n":"Dragonfly Tea Bar","c":"Orange","cs":"orange","s":"dragonfly-tea-bar-orange"},{"n":"Dragonfly Tea Bar","c":"Rowland Heights","cs":"rowland-heights","s":"dragonfly-tea-bar-rowland-heights"},{"n":"Formosa Boba Men","c":"Los Angeles","cs":"los-angeles","s":"formosa-boba-men-los-angeles"},{"n":"Fresh Roast","c":"San Gabriel","cs":"san-gabriel","s":"fresh-roast-san-gabriel"},{"n":"Got Boba?!","c":"Monterey Park","cs":"monterey-park","s":"got-boba-monterey-park"},{"n":"Guiltea Cravings","c":"San Diego","cs":"san-diego","s":"guiltea-cravings-san-diego"},{"n":"H2SNOW","c":"Orange","cs":"orange","s":"h2snow-orange"},{"n":"Half & Half Good Old Time","c":"San Gabriel","cs":"san-gabriel","s":"half-and-half-good-old-time-san-gabriel"},{"n":"Half And Half Tea Express","c":"Arcadia","cs":"arcadia","s":"half-and-half-tea-express-arcadia"},{"n":"Half & Half Tea Express","c":"Monterey Park","cs":"monterey-park","s":"half-and-half-tea-express-monterey-park"},{"n":"Half and Half Tea Express","c":"Pasadena","cs":"pasadena","s":"half-and-half-tea-express-pasadena"},{"n":"Half & Half Tea Express","c":"Rowland Heights","cs":"rowland-heights","s":"half-and-half-tea-express-rowland-heights"},{"n":"Half & Half Tea House","c":"San Gabriel","cs":"san-gabriel","s":"half-and-half-tea-house-san-gabriel"},{"n":"Harmony Tea Bar","c":"Mission Viejo","cs":"mission-viejo","s":"harmony-tea-bar-mission-viejo"},{"n":"Hashtag Coffee & Tea","c":"Los Angeles","cs":"los-angeles","s":"hashtag-coffee-and-tea-los-angeles"},{"n":"Health Station","c":"Diamond Bar","cs":"diamond-bar","s":"health-station-diamond-bar"},{"n":"Hiccups","c":"Long Beach","cs":"long-beach","s":"hiccups-long-beach"},{"n":"Hola Coffee & Boba","c":"Huntington Park","cs":"huntington-park","s":"hola-coffee-and-boba-huntington-park"},{"n":"Hollywood Rock Cafe","c":"Hollywood","cs":"hollywood","s":"hollywood-rock-cafe-hollywood"},{"n":"Home Brewed Bar","c":"Pasadena","cs":"pasadena","s":"home-brewed-bar-pasadena"},{"n":"Honeybee's","c":"Long Beach","cs":"long-beach","s":"honeybees-long-beach"},{"n":"Honeyboba","c":"Los Angeles","cs":"los-angeles","s":"honeyboba-los-angeles"},{"n":"House of Boba","c":"Los Angeles","cs":"los-angeles","s":"house-of-boba-los-angeles"},{"n":"I Love Boba","c":"Los Angeles","cs":"los-angeles","s":"i-love-boba-los-angeles"},{"n":"Ice Bomb","c":"Fullerton","cs":"fullerton","s":"ice-bomb-fullerton"},{"n":"It's Boba Time","c":"Artesia","cs":"artesia","s":"its-boba-time-artesia"},{"n":"It's Boba Time","c":"Hollywood","cs":"hollywood","s":"its-boba-time-hollywood"},{"n":"It's Boba Time","c":"Los Angeles","cs":"los-angeles","s":"its-boba-time-los-angeles"},{"n":"It's Boba Time","c":"San Diego","cs":"san-diego","s":"its-boba-time-san-diego"},{"n":"It's Boba Time","c":"Tustin","cs":"tustin","s":"its-boba-time-tustin"},{"n":"Jin Tea Shop","c":"Pasadena","cs":"pasadena","s":"jin-tea-shop-pasadena"},{"n":"Jin Teahouse","c":"Covina","cs":"covina","s":"jin-teahouse-covina"},{"n":"Juice Bar","c":"Temecula","cs":"temecula","s":"juice-bar-temecula"},{"n":"Kung Fu Tea","c":"Fullerton","cs":"fullerton","s":"kung-fu-tea-fullerton"},{"n":"Kung Fu Tea","c":"San Diego","cs":"san-diego","s":"kung-fu-tea-san-diego"},{"n":"Kung Fu Tea","c":"Westminster","cs":"westminster","s":"kung-fu-tea-westminster"},{"n":"Labobatory","c":"San Gabriel","cs":"san-gabriel","s":"labobatory-san-gabriel"},{"n":"Lantern Grill","c":"Santa Ana","cs":"santa-ana","s":"lantern-grill-santa-ana"},{"n":"Leaf N Cream","c":"Tustin","cs":"tustin","s":"leaf-n-cream-tustin"},{"n":"Lollicup","c":"Artesia","cs":"artesia","s":"lollicup-artesia"},{"n":"Lollicup","c":"Covina","cs":"covina","s":"lollicup-covina"},{"n":"Lollicup","c":"Diamond Bar","cs":"diamond-bar","s":"lollicup-diamond-bar"},{"n":"Lollicup Fresh","c":"Riverside","cs":"riverside","s":"lollicup-fresh-riverside"},{"n":"Lollicup Fresh","c":"Rowland Heights","cs":"rowland-heights","s":"lollicup-fresh-rowland-heights"},{"n":"Lollicup","c":"Los Angeles","cs":"los-angeles","s":"lollicup-los-angeles"},{"n":"Lollicup Tea Zone","c":"San Diego","cs":"san-diego","s":"lollicup-tea-zone-san-diego"},{"n":"Lollicup","c":"Westminster","cs":"westminster","s":"lollicup-westminster"},{"n":"Meet Fresh","c":"Temple City","cs":"temple-city","s":"meet-fresh-temple-city"},{"n":"Milk & Honey","c":"San Gabriel","cs":"san-gabriel","s":"milk-and-honey-san-gabriel"},{"n":"Milk Bar","c":"Fountain Valley","cs":"fountain-valley","s":"milk-bar-fountain-valley"},{"n":"Mimi 5 Bobee","c":"Diamond Bar","cs":"diamond-bar","s":"mimi-5-bobee-diamond-bar"},{"n":"Mini Monster","c":"Anaheim","cs":"anaheim","s":"mini-monster-anaheim"},{"n":"Miss Tea","c":"Baldwin Park","cs":"baldwin-park","s":"miss-tea-baldwin-park"},{"n":"MJ Cafe & Teahouse","c":"Rowland Heights","cs":"rowland-heights","s":"mj-cafe-and-teahouse-rowland-heights"},{"n":"MJ Cafe & Teahouse","c":"Walnut","cs":"walnut","s":"mj-cafe-and-teahouse-walnut"},{"n":"Mr. Boba","c":"Los Angeles","cs":"los-angeles","s":"mr-boba-los-angeles"},{"n":"Neighbors Tea House","c":"Rosemead","cs":"rosemead","s":"neighbors-tea-house-rosemead"},{"n":"Nest Tea House","c":"Arcadia","cs":"arcadia","s":"nest-tea-house-arcadia"},{"n":"Oh My Pan Bakery & Tea","c":"San Gabriel","cs":"san-gabriel","s":"oh-my-pan-bakery-and-tea-san-gabriel"},{"n":"OMG! Dessert Lounge","c":"Anaheim","cs":"anaheim","s":"omg-dessert-lounge-anaheim"},{"n":"OO Tea","c":"San Diego","cs":"san-diego","s":"oo-tea-san-diego"},{"n":"Pink Boba","c":"Fullerton","cs":"fullerton","s":"pink-boba-fullerton"},{"n":"Quickly","c":"Fullerton","cs":"fullerton","s":"quickly-fullerton"},{"n":"Quickly","c":"Irvine","cs":"irvine","s":"quickly-irvine"},{"n":"Quickly","c":"Los Angeles","cs":"los-angeles","s":"quickly-los-angeles"},{"n":"Quickly","c":"Monterey Park","cs":"monterey-park","s":"quickly-monterey-park"},{"n":"Quickly","c":"Rosemead","cs":"rosemead","s":"quickly-rosemead"},{"n":"Quickly","c":"Rowland Heights","cs":"rowland-heights","s":"quickly-rowland-heights"},{"n":"Quickly","c":"San Gabriel","cs":"san-gabriel","s":"quickly-san-gabriel"},{"n":"Quickly","c":"Temple City","cs":"temple-city","s":"quickly-temple-city"},{"n":"Roasting Water","c":"Garden Grove","cs":"garden-grove","s":"roasting-water-garden-grove"},{"n":"Roasting Water","c":"Long Beach","cs":"long-beach","s":"roasting-water-long-beach"},{"n":"Roasting Water","c":"Westminster","cs":"westminster","s":"roasting-water-westminster"},{"n":"SD Boba Tea","c":"San Diego","cs":"san-diego","s":"sd-boba-tea-san-diego"},{"n":"Share Tea","c":"Cerritos","cs":"cerritos","s":"share-tea-cerritos"},{"n":"Share Tea","c":"Fullerton","cs":"fullerton","s":"share-tea-fullerton"},{"n":"Share Tea","c":"San Diego","cs":"san-diego","s":"share-tea-san-diego"},{"n":"Share Tea","c":"San Gabriel","cs":"san-gabriel","s":"share-tea-san-gabriel"},{"n":"Sharetea","c":"Santa Ana","cs":"santa-ana","s":"sharetea-santa-ana"},{"n":"Snoice","c":"San Diego","cs":"san-diego","s":"snoice-san-diego"},{"n":"Snow & Crab","c":"Temecula","cs":"temecula","s":"snow-and-crab-temecula"},{"n":"Snow Monster","c":"Huntington Beach","cs":"huntington-beach","s":"snow-monster-huntington-beach"},{"n":"Snow Monster","c":"Long Beach","cs":"long-beach","s":"snow-monster-long-beach"},{"n":"Spiceology","c":"Arcadia","cs":"arcadia","s":"spiceology-arcadia"},{"n":"Square Bar Cafe","c":"San Diego","cs":"san-diego","s":"square-bar-cafe-san-diego"},{"n":"Sweetea Cafe","c":"Costa Mesa","cs":"costa-mesa","s":"sweetea-cafe-costa-mesa"},{"n":"T Pumps","c":"Pasadena","cs":"pasadena","s":"t-pumps-pasadena"},{"n":"T4U Cafe","c":"San Gabriel","cs":"san-gabriel","s":"t4u-cafe-san-gabriel"},{"n":"Tapioca Express","c":"Arcadia","cs":"arcadia","s":"tapioca-express-arcadia"},{"n":"Tapioca Express","c":"Cerritos","cs":"cerritos","s":"tapioca-express-cerritos"},{"n":"Tapioca Express","c":"Covina","cs":"covina","s":"tapioca-express-covina"},{"n":"Tapioca Express","c":"Irvine","cs":"irvine","s":"tapioca-express-irvine"},{"n":"Tapioca Express","c":"San Diego","cs":"san-diego","s":"tapioca-express-san-diego"},{"n":"Tapioca Express","c":"San Gabriel","cs":"san-gabriel","s":"tapioca-express-san-gabriel"},{"n":"Tapioca Express","c":"Westminster","cs":"westminster","s":"tapioca-express-westminster"},{"n":"Taro Yuan","c":"City of Industry","cs":"city-of-industry","s":"taro-yuan-city-of-industry"},{"n":"Tastea","c":"Costa Mesa","cs":"costa-mesa","s":"tastea-costa-mesa"},{"n":"Tastea","c":"Garden Grove","cs":"garden-grove","s":"tastea-garden-grove"},{"n":"Tastea Grill","c":"San Diego","cs":"san-diego","s":"tastea-grill-san-diego"},{"n":"Tastea","c":"Rowland Heights","cs":"rowland-heights","s":"tastea-rowland-heights"},{"n":"Tea Block","c":"Rowland Heights","cs":"rowland-heights","s":"tea-block-rowland-heights"},{"n":"Tea Brick","c":"Monterey Park","cs":"monterey-park","s":"tea-brick-monterey-park"},{"n":"Tea Garden Cafe","c":"Diamond Bar","cs":"diamond-bar","s":"tea-garden-cafe-diamond-bar"},{"n":"Tea N More","c":"San Diego","cs":"san-diego","s":"tea-n-more-san-diego"},{"n":"Tea Pop","c":"Burbank","cs":"burbank","s":"tea-pop-burbank"},{"n":"Tea Republic","c":"El Monte","cs":"el-monte","s":"tea-republic-el-monte"},{"n":"Tea Republic","c":"San Diego","cs":"san-diego","s":"tea-republic-san-diego"},{"n":"Tea Republic","c":"San Gabriel","cs":"san-gabriel","s":"tea-republic-san-gabriel"},{"n":"Tea Spots","c":"Pasadena","cs":"pasadena","s":"tea-spots-pasadena"},{"n":"Tea Station Express","c":"Temple City","cs":"temple-city","s":"tea-station-express-temple-city"},{"n":"Tea Station","c":"Gardena","cs":"gardena","s":"tea-station-gardena"},{"n":"Tea Station","c":"Irvine","cs":"irvine","s":"tea-station-irvine"},{"n":"Tea Station","c":"San Diego","cs":"san-diego","s":"tea-station-san-diego"},{"n":"Tea Station","c":"San Gabriel","cs":"san-gabriel","s":"tea-station-san-gabriel"},{"n":"Tea Time Express","c":"Rowland Heights","cs":"rowland-heights","s":"tea-time-express-rowland-heights"},{"n":"Tea Time","c":"Temecula","cs":"temecula","s":"tea-time-temecula"},{"n":"Tealicious","c":"Diamond Bar","cs":"diamond-bar","s":"tealicious-diamond-bar"},{"n":"Tebo Tebo Tea Express","c":"Garden Grove","cs":"garden-grove","s":"tebo-tebo-tea-express-garden-grove"},{"n":"Tebo Tebo Tea Express","c":"Westminster","cs":"westminster","s":"tebo-tebo-tea-express-westminster"},{"n":"Tebo Tebo Tea Lounge","c":"Irvine","cs":"irvine","s":"tebo-tebo-tea-lounge-irvine"},{"n":"Tebo Tebo Tea Lounge","c":"Westminster","cs":"westminster","s":"tebo-tebo-tea-lounge-westminster"},{"n":"Ten Ren Tea","c":"Anaheim","cs":"anaheim","s":"ten-ren-tea-anaheim"},{"n":"Ten Ren's Tea Time","c":"Arcadia","cs":"arcadia","s":"ten-rens-tea-time-arcadia"},{"n":"Ten Ren's Tea Time","c":"Fullerton","cs":"fullerton","s":"ten-rens-tea-time-fullerton"},{"n":"Ten Ren's Tea Time","c":"Los Angeles","cs":"los-angeles","s":"ten-rens-tea-time-los-angeles"},{"n":"Ten Ren's Tea Time","c":"Monterey Park","cs":"monterey-park","s":"ten-rens-tea-time-monterey-park"},{"n":"Ten Ren's Tea Time","c":"Riverside","cs":"riverside","s":"ten-rens-tea-time-riverside"},{"n":"Ten Ren's Tea Time","c":"Walnut","cs":"walnut","s":"ten-rens-tea-time-walnut"},{"n":"The Boba Promenade Cafe","c":"Santa Monica","cs":"santa-monica","s":"the-boba-promenade-cafe-santa-monica"},{"n":"The Vounge","c":"El Monte","cs":"el-monte","s":"the-vounge-el-monte"},{"n":"TLight Boba","c":"Santa Monica","cs":"santa-monica","s":"tlight-boba-santa-monica"},{"n":"Trinitea","c":"San Diego","cs":"san-diego","s":"trinitea-san-diego"},{"n":"Twinkle Brown Sugar","c":"Los Angeles","cs":"los-angeles","s":"twinkle-brown-sugar-los-angeles"},{"n":"Up2you Cafe","c":"San Diego","cs":"san-diego","s":"up2you-cafe-san-diego"},{"n":"Urban Location","c":"Garden Grove","cs":"garden-grove","s":"urban-location-garden-grove"},{"n":"VaniTea Cafe","c":"San Diego","cs":"san-diego","s":"vanitea-cafe-san-diego"},{"n":"Volcano Tea House","c":"Los Angeles","cs":"los-angeles","s":"volcano-tea-house-los-angeles"},{"n":"Yo! Boba","c":"Los Angeles","cs":"los-angeles","s":"yo-boba-los-angeles"},{"n":"Yoshantea Tea House","c":"Arcadia","cs":"arcadia","s":"yoshantea-tea-house-arcadia"},{"n":"You & Me Cafe","c":"Diamond Bar","cs":"diamond-bar","s":"you-and-me-cafe-diamond-bar"},{"n":"Zero Degrees","c":"Westminster","cs":"westminster","s":"zero-degrees-westminster"}];
 
-const mapsUrl = s => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(s.n+" "+s.ad+" "+s.c+" CA");
+const FALLBACK = [
+  {n:"Pearl Milk Tea", d:"Black milk tea with chewy tapioca pearls. The classic order."},
+  {n:"Taro Milk Tea", d:"Real taro root. Sweet, nutty, and naturally purple."},
+  {n:"Thai Tea", d:"Spiced Thai tea, sweet and creamy over ice."},
+  {n:"Matcha Milk Tea", d:"Stone-ground matcha with milk. Grassy and rich."},
+  {n:"Wintermelon Tea", d:"Caramel-like wintermelon. Sweet and caffeine-free."},
+  {n:"Okinawa Pearl Milk Tea", d:"Roasted brown sugar milk tea with pearls."}
+];
+const DRINKS = (window.SOCIETY && window.SOCIETY.drinks) ? window.SOCIETY.drinks.map(d=>({n:d.n,d:d.sum})) : FALLBACK;
 
-function pool(){
-  return SHOPS.filter(s=>{
-    if(state.area!=="Anywhere" && s.ar!==state.area) return false;
-    if(state.city!=="All" && s.c!==state.city) return false;
-    if(state.mode==="Familiar" && !s.ch) return false;
-    if(state.mode==="Adventurous" && s.ch) return false;
-    if(state.mode==="Dessert" && !s.ds) return false;
-    return true;
-  });
-}
-function refreshCount(){
-  const n=pool().length;
-  document.getElementById("poolCount").textContent = "Spinning across " + n + " shop" + (n===1?"":"s");
-  document.getElementById("spinBtn").disabled = n===0 || state.spinning;
-}
-function whyLine(s){
-  if(s.ch) return s.loc + " locations across SoCal, a familiar pick in " + s.c + ".";
-  return "An independent shop in " + s.c + ", " + s.ar + ".";
-}
-function card(s, isReroll){
-  const other = pool().filter(x=>x.n!==s.n || x.c!==s.c);
-  const bk = other.length ? other[Math.floor(Math.random()*other.length)] : null;
-  return `
-  <div class="result">
-    <div class="rk">Tonight you''re going to</div>
-    <div class="shop">${esc(s.n)}</div>
-    <div class="where"><b>${esc(s.c)}</b> · ${esc(s.ar)}</div>
-    <div class="badges">
-      ${s.ch?`<span class="tag tag-ch">${s.loc} locations</span>`:`<span class="tag tag-ind">Independent</span>`}
-      <span class="tag tag-v">Hours · verifying</span>
-      <span class="tag tag-v">What to order · verifying</span>
-    </div>
-    <div class="why">${esc(whyLine(s))}</div>
-    <div class="pending"><span class="em">🧋</span><span class="txt">We haven''t verified <b>${esc(s.n)}</b>''s hours or menu yet, so we won''t guess them. The address below is real, use it to check Google''s live hours. Our own picks appear here once this shop is verified.</span></div>
-    <div class="where" style="margin-bottom:10px">📍 ${esc(s.ad)}, ${esc(s.c)}, CA</div>
-    <div class="acts">
-      <button class="btn btn-p" id="dirBtn">Get directions</button>
-      <button class="btn" id="rerollBtn">Reroll</button>
-      <button class="btn" id="shareBtn">Share this plan</button>
-    </div>
-    ${bk?`<div class="backup"><div class="bk">If not, then</div><div class="bname">${esc(bk.n)}</div><div class="bwhere">${esc(bk.c)} · ${esc(bk.ar)} &nbsp; <a href="${mapsUrl(bk)}" target="_blank" rel="noopener">directions ›</a></div></div>`:``}
-  </div>`;
-}
-function esc(t){return (t||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const rand = a => a[Math.floor(Math.random()*a.length)];
 
-function spin(){
-  const p=pool(); if(!p.length||state.spinning) return;
-  state.spinning=true; refreshCount();
-  const cup=document.getElementById("cup"); cup.classList.add("spinning");
-  const slot=document.getElementById("resultSlot");
-  const btn=document.getElementById("spinBtn"); btn.textContent="Spinning";
-  let t=0;
-  const iv=setInterval(()=>{
-    const r=p[Math.floor(Math.random()*p.length)];
-    slot.innerHTML=`<div class="result" style="text-align:center"><div class="rk">&nbsp;</div><div class="shop" style="opacity:.5">${esc(r.n)}</div><div class="where">${esc(r.c)}</div></div>`;
-    t++;
-  },70);
+/* sound: WebAudio, opt-out, fires only on user action */
+const SFX = (function(){
+  let ctx=null, on=true;
+  function ac(){ if(!ctx){ try{ctx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){ctx=null;} } if(ctx&&ctx.state==='suspended') ctx.resume(); return ctx; }
+  function env(g,t,a,d,p){ g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(p,t+a); g.gain.exponentialRampToValueAtTime(.0001,t+a+d); }
+  function tone(f,t,dur,type,p){ const c=ac(); if(!c)return; const o=c.createOscillator(),g=c.createGain(); o.type=type||'sine'; o.frequency.setValueAtTime(f,t); o.connect(g); g.connect(c.destination); env(g,t,.008,dur,p||.2); o.start(t); o.stop(t+dur+.05); }
+  function noise(t,dur,p,freq,q){ const c=ac(); if(!c)return; const s=c.createBufferSource(); const b=c.createBuffer(1,Math.max(1,c.sampleRate*dur),c.sampleRate); const d=b.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1; s.buffer=b; const f=c.createBiquadFilter(); f.type='bandpass'; f.frequency.value=freq||1600; f.Q.value=q||.9; const g=c.createGain(); s.connect(f); f.connect(g); g.connect(c.destination); env(g,t,.005,dur,p||.12); s.start(t); s.stop(t+dur+.02); }
+  return {
+    get on(){return on;},
+    toggle(){ on=!on; if(on) ac(); return on; },
+    turn(){ if(!on)return; const c=ac(); if(!c)return; const t=c.currentTime; noise(t,.16,.12,1400,.7); tone(320,t,.14,'sine',.14); tone(480,t+.05,.14,'sine',.12); },
+    reveal(){ if(!on)return; const c=ac(); if(!c)return; const t=c.currentTime; tone(880,t,.2,'triangle',.2); tone(1320,t+.006,.18,'sine',.12); tone(1760,t+.02,.16,'sine',.07); },
+    sparkle(){ if(!on)return; const c=ac(); if(!c)return; const t=c.currentTime; [784,1047,1319,1568].forEach((f,i)=>tone(f,t+i*.06,.22,'sine',.14)); }
+  };
+})();
+
+const el = id => document.getElementById(id);
+const card1=el('card1'), card2=el('card2');
+let stage=0, chosenSpot=null, chosenDrink=null, busy=false;
+
+function litReveal(card){ card.classList.remove('lit'); void card.offsetWidth; card.classList.add('lit'); setTimeout(()=>card.classList.remove('lit'), 1000); }
+
+function revealPlace(){
+  if(busy || stage!==0) return; busy=true;
+  chosenSpot = rand(SHOPS);
+  SFX.turn(); litReveal(card1);
+  el('prompt').textContent = 'Reading the card';
   setTimeout(()=>{
-    clearInterval(iv); cup.classList.remove("spinning");
-    const final=p[Math.floor(Math.random()*p.length)];
-    state.current=final; state.spinning=false;
-    btn.textContent="Spin again"; refreshCount();
-    slot.innerHTML=card(final);
-    slot.querySelector("#dirBtn").onclick=()=>window.open(mapsUrl(final),"_blank");
-    slot.querySelector("#rerollBtn").onclick=spin;
-    slot.querySelector("#shareBtn").onclick=()=>share(final);
-    slot.scrollIntoView({behavior:"smooth",block:"nearest"});
-  },1150);
+    el('r1n').textContent = chosenSpot.n;
+    el('r1m').textContent = chosenSpot.c + ', CA';
+    card1.classList.add('revealed');
+    SFX.reveal();
+    stage=1; busy=false;
+    card2.classList.remove('locked'); card2.disabled=false;
+    el('prompt').innerHTML = 'Landed on <b></b>. Now turn the next card.';
+    el('prompt').querySelector('b').textContent = chosenSpot.n;
+  }, reduce?0:280);
 }
-function share(s){
-  const txt="🧋 Boba Night roulette picked: "+s.n+" at "+s.c+", "+s.ar+"\n"+mapsUrl(s);
-  if(navigator.share){navigator.share({title:"Boba Night",text:txt}).catch(()=>{});}
-  else{navigator.clipboard.writeText(txt).then(()=>toast("Plan copied to clipboard")).catch(()=>toast("Couldn''t copy"));}
+function revealDrink(){
+  if(busy || stage!==1) return; busy=true;
+  chosenDrink = rand(DRINKS);
+  SFX.turn(); litReveal(card2);
+  setTimeout(()=>{
+    el('r2n').textContent = chosenDrink.n;
+    el('r2m').textContent = chosenDrink.d;
+    card2.classList.add('revealed');
+    SFX.reveal();
+    stage=2; busy=false;
+    showPlan();
+  }, reduce?0:280);
 }
-function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}
+function showPlan(){
+  el('planSpotName').textContent = chosenSpot.n;
+  el('planSpotCity').textContent = chosenSpot.c + ', CA';
+  el('planDrinkName').textContent = chosenDrink.n;
+  el('planDrinkNote').textContent = chosenDrink.d;
+  el('seeSpot').setAttribute('href', '/boba/ca/'+chosenSpot.cs+'/'+chosenSpot.s+'/');
+  el('planScrim').classList.add('show');
+  el('plan').classList.add('show'); el('plan').setAttribute('aria-hidden','false');
+  el('prompt').textContent = "You're set for the night";
+  SFX.sparkle();
+}
+function turnAgain(){
+  if(busy) return;
+  stage=0; chosenSpot=chosenDrink=null;
+  el('planScrim').classList.remove('show');
+  el('plan').classList.remove('show'); el('plan').setAttribute('aria-hidden','true');
+  [card1,card2].forEach(c=>c.classList.remove('revealed','lit'));
+  card2.classList.add('locked'); card2.disabled=true;
+  el('prompt').textContent = 'Turn the first card for a spot';
+}
 
-function buildCities(){
-  const sel=document.getElementById("citySel");
-  const inArea = state.area==="Anywhere"?SHOPS:SHOPS.filter(s=>s.ar===state.area);
-  const cities=[...new Set(inArea.map(s=>s.c))].sort();
-  sel.innerHTML='<option value="All">All cities in area</option>'+cities.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
-  state.city="All";
-}
-// area chips
-const ac=document.getElementById("areaChips");
-AREAS.forEach(a=>{const b=document.createElement("button");b.className="chip";b.textContent=a;b.setAttribute("aria-pressed",a===state.area);b.onclick=()=>{if(state.locked&&a!==state.area){toast("Area is locked");return;}state.area=a;[...ac.children].forEach(c=>c.setAttribute("aria-pressed",c.textContent===a));buildCities();refreshCount();};ac.appendChild(b);});
-// mode
-document.querySelectorAll("#modeSeg button").forEach(b=>b.onclick=()=>{state.mode=b.dataset.mode;document.querySelectorAll("#modeSeg button").forEach(x=>x.setAttribute("aria-pressed",x===b));refreshCount();});
-// city
-document.getElementById("citySel").onchange=e=>{state.city=e.target.value;refreshCount();};
-// lock
-document.getElementById("lockArea").onchange=e=>{state.locked=e.target.checked;};
-document.getElementById("spinBtn").onclick=spin;
-buildCities();refreshCount();
-</script></body></html>
+card1.addEventListener('click', revealPlace);
+card2.addEventListener('click', ()=>{ if(!card2.classList.contains('locked')) revealDrink(); });
+el('turnAgain').addEventListener('click', turnAgain);
+el('planScrim').addEventListener('click', turnAgain);
+
+const sndBtn = el('sndBtn');
+sndBtn.addEventListener('click', ()=>{
+  const on = SFX.toggle();
+  sndBtn.classList.toggle('off', !on);
+  sndBtn.setAttribute('aria-pressed', on?'true':'false');
+  sndBtn.setAttribute('aria-label', on?'Sound on':'Sound off');
+  if(on) SFX.reveal();
+});
+</script>
+</body></html>
