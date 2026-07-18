@@ -176,6 +176,18 @@ details.acc .hours{border:0;border-top:1px solid var(--line-2);border-radius:0}
 .map-empty .moongate i{width:9px;height:9px;border-radius:50%;background:var(--champagne);display:block}
 .map-empty strong{display:block;font-size:1.02rem;color:var(--porcelain)}
 .map-empty span{color:var(--muted);font-size:.88rem}
+.bn-pin{background:none;border:none}
+.bn-pin svg{filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}
+.bn-pin-main svg{filter:drop-shadow(0 0 10px rgba(255,47,109,.55)) drop-shadow(0 3px 6px rgba(0,0,0,.6))}
+.leaflet-popup-content-wrapper{background:#160f14;color:var(--pearl);border:1px solid rgba(197,164,109,.42);border-radius:10px;box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.leaflet-popup-tip{background:#160f14;border:1px solid rgba(197,164,109,.42)}
+.leaflet-popup-content{margin:12px 14px;font-family:var(--sans)}
+.bn-pop b{display:block;font-family:var(--serif);font-weight:500;font-size:1.05rem;color:var(--porcelain);line-height:1.2}
+.bn-pop span{display:block;font-size:.78rem;color:var(--muted);margin:3px 0 8px}
+.bn-pop a{display:inline-block;font-size:.8rem;font-weight:600;color:#2a0410;background:linear-gradient(180deg,#ff5b86,var(--neon));padding:6px 12px;border-radius:999px;text-decoration:none}
+.leaflet-container{background:#0B0C0E}
+.leaflet-control-attribution{background:rgba(11,12,14,.7) !important;color:var(--muted) !important;font-size:.62rem !important}
+.leaflet-control-attribution a{color:var(--champagne) !important}
 
 /* nearby — a scroll-snap rail of motif-accented cards with a peeking next card */
 .nearby-rail{display:flex;gap:.7rem;list-style:none;margin:0;padding:.15rem .15rem 1rem;
@@ -389,8 +401,30 @@ body.closed .medallion{border-color:var(--muted-dk);box-shadow:inset 0 0 0 5px v
 (function(){
   var host = document.getElementById('map-canvas');
   if(!host) return;
-  var lat = 34.098745, lng = -118.090751;
+  var lat = 34.098745, lng = -118.090751, SELF = "fresh-roast-san-gabriel";
   var loaded = false;
+
+  function pearlPin(main){
+    /* a boba-pearl pin: teardrop with a dark pearl core and gold rim */
+    var core = main ? '#ff2f6d' : '#1c120a';
+    var rim  = main ? '#F4DDA2' : '#C5A46D';
+    var glow = main ? '<circle cx="17" cy="15" r="13" fill="#ff2f6d" opacity=".28"><animate attributeName="r" values="11;15;11" dur="2.6s" repeatCount="indefinite"/><animate attributeName="opacity" values=".34;.12;.34" dur="2.6s" repeatCount="indefinite"/></circle>' : '';
+    var w = main ? 34 : 24, h = main ? 44 : 31;
+    return L.divIcon({
+      className:'bn-pin'+(main?' bn-pin-main':''),
+      iconSize:[w,h], iconAnchor:[w/2,h], popupAnchor:[0,-h+6],
+      html:'<svg width="'+w+'" height="'+h+'" viewBox="0 0 34 44">'+glow
+        +'<path d="M17 43C17 43 4 27 4 16a13 13 0 1 1 26 0c0 11-13 27-13 27z" fill="#120b08" stroke="'+rim+'" stroke-width="2"/>'
+        +'<circle cx="17" cy="15.5" r="6.5" fill="'+core+'" stroke="'+rim+'" stroke-width="1.4"/>'
+        +'<circle cx="14.8" cy="13.4" r="1.8" fill="rgba(244,239,231,.55)"/>'
+        +'</svg>'
+    });
+  }
+  function dist(a,b,c,d){
+    var R=3959,p=Math.PI/180;
+    var x=Math.sin((c-a)*p/2),y=Math.sin((d-b)*p/2);
+    return 2*R*Math.asin(Math.sqrt(x*x+Math.cos(a*p)*Math.cos(c*p)*y*y));
+  }
   function load(){
     if(loaded) return; loaded = true;
     var css = document.createElement('link'); css.rel='stylesheet';
@@ -399,11 +433,29 @@ body.closed .medallion{border-color:var(--muted-dk);box-shadow:inset 0 0 0 5px v
     var js = document.createElement('script');
     js.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
     js.onload=function(){
-      var map = L.map(host,{scrollWheelZoom:false,attributionControl:true}).setView([lat,lng],16);
+      var map = L.map(host,{scrollWheelZoom:false,attributionControl:true}).setView([lat,lng],15);
       L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
         attribution:'&copy; OpenStreetMap &copy; CARTO', subdomains:'abcd', maxZoom:20
       }).addTo(map);
-      L.circleMarker([lat,lng],{radius:7,color:'#C5A46D',weight:2,fillColor:'#ff3f6f',fillOpacity:.9}).addTo(map);
+      L.marker([lat,lng],{icon:pearlPin(true),zIndexOffset:1000}).addTo(map);
+      /* nearby spots from the shared index (same source the near-me finder uses) */
+      fetch('/js/near-index.json').then(function(r){return r.json();}).then(function(d){
+        var rows = Array.isArray(d) ? d : (d.shops||[]);
+        var near = [];
+        rows.forEach(function(s){
+          if(!s || !s.vf || s.s===SELF || s.la==null) return;
+          var m = dist(lat,lng,s.la,s.lo);
+          if(m <= 3) near.push({s:s,m:m});
+        });
+        near.sort(function(a,b){return a.m-b.m;});
+        near.slice(0,14).forEach(function(n){
+          var s=n.s;
+          var mk = L.marker([s.la,s.lo],{icon:pearlPin(false)}).addTo(map);
+          mk.bindPopup('<div class="bn-pop"><b>'+s.n+'</b><span>'+s.c+' &middot; '
+            + (n.m<0.15 ? 'steps away' : n.m.toFixed(1)+' mi')
+            + '</span><a href="/boba/ca/'+s.cs+'/'+s.s+'/">See the spot</a></div>');
+        });
+      }).catch(function(){});
     };
     document.body.appendChild(js);
   }
