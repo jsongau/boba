@@ -248,3 +248,36 @@ q.addEventListener("input",function(){var n=q.value.trim();
   res.hidden=false;});
 q.addEventListener("keydown",function(e){if(e.key==="Escape"){q.value="";res.hidden=true;}});
 })();
+
+/* --- per-region featured house (Supabase-driven, lazy, cached) --- */
+(function(){
+  var SB="https://uqefyfqwwkkvydkgepgf.supabase.co";
+  var KEY="sb_publishable_0Y-o-QD73luyTYUcjWRWzQ_7b9ogFLs";
+  var panel=document.getElementById("bnpanel-shops"); if(!panel) return;
+  var feat=panel.querySelector(".bn-feat"); if(!feat) return;
+  var tEl=feat.querySelector(".bn-feat-t"), sEl=feat.querySelector(".bn-feat-s");
+  var MAP=null, pending=false;
+  function apply(region){
+    var r=MAP&&MAP[region]; if(!r) return;
+    if(r.shop_path) feat.setAttribute("href", r.shop_path);
+    if(tEl&&r.shop_name) tEl.textContent=r.shop_name;
+    if(sEl) sEl.textContent=(r.shop_city?r.shop_city+" · ":"")+(r.blurb||"");
+  }
+  function current(){
+    var sel=panel.querySelector('.bn-rail-b[aria-selected="true"]');
+    return sel?sel.getAttribute("data-region"):"the-626";
+  }
+  function load(){
+    if(MAP||pending) return; pending=true;
+    fetch(SB+"/rest/v1/boba_region_featured?select=region_key,shop_name,shop_city,shop_path,blurb",
+      {headers:{apikey:KEY,Authorization:"Bearer "+KEY}})
+      .then(function(r){return r.ok?r.json():[];})
+      .then(function(rows){MAP={};(rows||[]).forEach(function(x){MAP[x.region_key]=x;});apply(current());})
+      .catch(function(){});
+  }
+  panel.addEventListener("click",function(e){
+    var b=e.target.closest(".bn-rail-b[data-region]"); if(b){load();apply(b.getAttribute("data-region"));}
+  });
+  var trig=document.querySelector('.bn-trigger[aria-controls="bnpanel-shops"]');
+  if(trig){["mouseenter","focus","click"].forEach(function(ev){trig.addEventListener(ev,load);});}
+})();
