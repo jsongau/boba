@@ -1240,11 +1240,11 @@ body:has(.bn-item[data-open]) .ty-float,body:has(#dock.on) .ty-float{opacity:0;p
 @media(prefers-reduced-motion:reduce){#tyFloat{animation:none}}
 
 /* --- sitewide fit overrides (finder header must never overflow a content page) --- */
-html{overflow-x:clip}
 .fuse .bn-bar{gap:6px}
-.finder-inline .mb-field{width:132px!important}
+.finder-inline .mb-field{width:122px!important}
 .finder-inline .mb-field:focus-within{width:188px!important}
 @media(max-width:1520px){.fuse .bn-saved{display:none}}
+@media(max-width:1500px){.finder-inline .mb-field{width:112px!important}.fuse .bn-word{margin-right:2px}}
 @media(max-width:1340px){.finder-inline .mb-sort{display:none}}
 @media(max-width:1200px){.meter-chip,.finder-inline .meter{display:none}}
 @media(max-width:1120px){.bn-nav{display:none}}
