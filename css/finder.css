@@ -1254,7 +1254,8 @@ body:has(.bn-item[data-open]) .ty-float,body:has(#dock.on) .ty-float{opacity:0;p
 .bn-panel{z-index:50}
 #sug,.mb-suggest,.finder-inline .sug{z-index:60}
 
-/* ===== NAV V3 "NEON CUP" (base + skin) ===== */
+
+/* ===== NAV V1 "PEARL RISE" (base + skin) ===== */
 
 .finder-inline .mb-field{width:230px!important}
 .finder-inline .mb-field:focus-within{width:270px!important}
@@ -1290,68 +1291,231 @@ body:has(.bn-item[data-open]) .ty-float,body:has(#dock.on) .ty-float{opacity:0;p
 }
 
 
-/* ================= V3 SKIN — NEON UNDERLINE + CUP GAUGE ================= */
+/* ============ V1 SKIN — "PEARL RISE" ============ */
 
-/* 1 · caret removed; the affordance is a neon underline that draws from center */
-.fuse .bn-caret{display:none!important}
-.fuse .bn-trigger{transition:color .16s var(--bn-ease),transform .18s var(--bn-ease)}
-.fuse .bn-trigger::after{content:"";position:absolute;left:.55rem;right:.55rem;bottom:14px;
-  height:2px;border-radius:2px;background:#C5A46D;box-shadow:none;
-  transform:scaleX(0);transform-origin:center;
-  transition:transform 220ms cubic-bezier(.22,1,.36,1),background-color .18s ease,box-shadow .18s ease}
-.fuse .bn-trigger:hover::after,
-.fuse .bn-trigger:focus-visible::after{transform:scaleX(1);transform-origin:center}
-.fuse .bn-item[data-open] .bn-trigger::after,
-.fuse .bn-trigger[aria-expanded="true"]::after{
-  transform:scaleX(1);transform-origin:center;background:#ff2f6d;
-  box-shadow:0 0 10px rgba(255,47,109,.45),0 0 3px rgba(255,47,109,.7)}
-.fuse .bn-item[data-open] .bn-trigger,
-.fuse .bn-trigger[aria-expanded="true"]{transform:translateY(-1px)}
-
-/* 2 · panel motion: fade + 6px rise on the inner mega; neon hairline up top */
-.fuse .bn-panel .bn-mega{opacity:0;transform:translateY(6px);
-  transition:opacity 160ms ease-out,transform 160ms ease-out}
-.fuse .bn-item[data-open] .bn-panel .bn-mega{opacity:1;transform:translateY(0)}
-.fuse .bn-item[data-open] .bn-panel{border-top-color:rgba(255,47,109,.5)}
-
-/* 3 · radius popover: the boba-cup gauge replaces the cream meter (hidden, not removed) */
-#radPop .meter{display:none!important}
-#radPop .rad-row{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;
-  column-gap:12px;row-gap:8px;align-items:center;justify-items:center}
-#radPop .rad-mid{grid-column:1;grid-row:1/3;display:flex;align-items:center;gap:16px;min-width:0}
-#radPop #radMinus{grid-column:2;grid-row:1}
-#radPop #radPlus{grid-column:2;grid-row:2}
-.v3-cupwrap{flex:0 0 auto;line-height:0}
-#v3cup{display:block;cursor:ns-resize;touch-action:none;-webkit-user-select:none;user-select:none}
-#v3cup .v3-fill{transition:transform 200ms ease-out;will-change:transform}
-#radPop .rad-read{display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin:0;
-  text-align:left;font:500 11.5px "Inter Tight",sans-serif;color:#a49b88;line-height:1.35}
-#radPop .rad-read b{font:600 46px "Fraunces",serif;color:#F4DDA2;line-height:.95;letter-spacing:.01em}
-@media(prefers-reduced-motion:reduce){
-  .fuse .bn-trigger::after,.fuse .bn-panel .bn-mega,#v3cup .v3-fill{transition:none}
+/* 1) Caret -> pearl. Kill the chevron borders, paint a 5px pearl. */
+.fuse .bn-caret{
+  border:none;
+  width:5px;height:5px;flex:0 0 auto;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #FFFDF6 0%, #F4DDA2 48%, #C5A46D 100%);
+  opacity:.85;
+  transform:translateY(-1px);
+  box-shadow:0 0 0 0 rgba(244,221,162,0);
+  transition:transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s cubic-bezier(.22,1,.36,1), opacity .22s ease;
+}
+.fuse .bn-trigger:hover .bn-caret{
+  transform:translateY(-3px);            /* the pearl rises 2px */
+  opacity:1;
+  box-shadow:0 0 7px 1px rgba(244,221,162,.55);
+}
+/* open state: neon pearl, stronger glow (covers both the item flag and aria) */
+.fuse .bn-item[data-open] .bn-caret,
+.fuse .bn-trigger[aria-expanded="true"] .bn-caret{
+  transform:translateY(-3px);
+  opacity:1;
+  background:radial-gradient(circle at 35% 30%, #ffd9e4 0%, #ff2f6d 55%, #b70c44 100%);
+  box-shadow:0 0 10px 2px rgba(255,47,109,.65), 0 0 2px rgba(255,47,109,.9);
 }
 
-/* 4 · mobile search-in-bar: pill field, magnifier visible, 40px tall */
-@media(max-width:920px){
-  .finder-inline .mb-pin{display:none}
-  /* let the pill shrink with its flex track instead of bleeding under the CTA;
-     .mb-snd was meant to be hidden here (base rule loses on specificity) */
-  .finder-inline .mb-field{min-width:0!important}
-  .finder-inline .mb-snd{display:none}
-  .fuse .bn-cta{padding:0 .6rem}
-  .fuse .bn-burger{margin-left:-.55rem}
-  .finder-inline .mb-input{box-sizing:border-box;height:40px;border-radius:999px;padding:0 30px 0 36px;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b5637' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M16.4 16.4 21 21'/%3E%3C/svg%3E"),linear-gradient(180deg,#fdf6ea,#f7ead9);
-    background-repeat:no-repeat,no-repeat;background-position:13px 50%,0 0;background-size:15px 15px,auto auto}
-  .finder-inline .mb-gps{right:7px}
+/* 2) Panel motion — "pour" in. Panel fades; the INNER mega slides so we never
+      fight the base JS's inline left/transform centering on .bn-panel. */
+@media (prefers-reduced-motion: no-preference){
+  .fuse .bn-panel{
+    transition:opacity .2s cubic-bezier(.22,1,.36,1), transform .2s cubic-bezier(.22,1,.36,1), visibility .2s;
+  }
+  .fuse .bn-panel .bn-mega{
+    transform:translateY(-8px);
+    transition:transform .2s cubic-bezier(.22,1,.36,1);
+    will-change:transform;
+  }
+  .fuse .bn-item[data-open] .bn-panel .bn-mega{transform:translateY(0)}
 }
-@media(max-width:480px){
-  .fuse .bn-bar{padding:0 14px}
-  .fuse .bn-cta{padding:0 .55rem}
-  .fuse .bn-cta .uic{display:none}
+@media (prefers-reduced-motion: reduce){
+  .fuse .bn-caret{transition:none}
+  .fuse .bn-panel .bn-mega{transform:none;transition:none}
 }
 
-/* keep the mi chip reachable at mid widths now that the meter lives in a popover */
+/* 3) Radius popover — jewel-box */
+.fuse #radPop{
+  border-radius:14px;
+  border:1px solid rgba(197,164,109,.65);            /* outer gilt hairline */
+  box-shadow:
+    inset 0 0 0 1px rgba(244,221,162,.18),            /* inner gilt hairline (double) */
+    inset 0 1px 0 rgba(244,221,162,.22),
+    0 26px 60px -18px rgba(0,0,0,.88),
+    0 0 34px -12px rgba(197,164,109,.35);
+  overflow:hidden;
+}
+/* thin champagne top accent line */
+.fuse #radPop::before{
+  content:"";position:absolute;top:0;left:18px;right:18px;height:1px;
+  background:linear-gradient(90deg, rgba(197,164,109,0), #C5A46D 30%, #F4DDA2 50%, #C5A46D 70%, rgba(197,164,109,0));
+  pointer-events:none;
+}
+/* 20 tiny champagne ticks under the cream meter (~6px strip) */
+.fuse #radPop .rad-mid .meter::after{
+  content:"";position:absolute;left:6px;right:6px;bottom:-1px;height:6px;
+  background:repeating-linear-gradient(to right,
+    rgba(197,164,109,.7) 0, rgba(197,164,109,.7) 1px,
+    transparent 1px, transparent 5%);
+  background-size:calc(100% - 1px) 100%;              /* land the 20th tick on the right edge */
+  opacity:.75;pointer-events:none;
+}
+/* readout pulse (class added by v1-skin-js) */
+.fuse #radPop #radVal{display:inline-block}
+@media (prefers-reduced-motion: no-preference){
+  .fuse #radPop #radVal.pulse{animation:v1RadPulse .24s cubic-bezier(.22,1,.36,1)}
+  @keyframes v1RadPulse{0%{transform:scale(1)}45%{transform:scale(1.15)}100%{transform:scale(1)}}
+}
+/* pressable minus / plus */
+.fuse #radPop .rad-btn{transition:transform .12s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease}
+.fuse #radPop .rad-btn:hover{box-shadow:0 0 0 3px rgba(244,221,162,.18)}
+.fuse #radPop .rad-btn:active{transform:translateY(1px);box-shadow:0 0 0 2px rgba(244,221,162,.12)}
+
+/* 4) Mobile polish — in-bar search reads as the primary control */
+@media (max-width:920px){
+  .fuse .finder-inline .mb-input{
+    border:1px solid #C5A46D;
+    height:40px;box-sizing:border-box;
+  }
+}
+
+/* ---- V1 production extras ---- */
+/* sort toggle gone (results are always nearest-first) */
+.finder-inline .mb-sort{display:none!important}
+/* freed space -> longer search */
+.finder-inline .mb-field{width:260px!important}
+.finder-inline .mb-field:focus-within{width:300px!important}
+@media(max-width:1500px){.finder-inline .mb-field{width:210px!important}}
+@media(max-width:1340px){.finder-inline .mb-field{width:170px!important}}
 @media(max-width:1380px){.rad-anchor .meter-chip{display:inline-flex!important}}
 @media(max-width:1200px){.rad-anchor .meter-chip{display:inline-flex!important}}
 @media(max-width:920px){.rad-anchor .meter-chip{display:none!important}}
+/* Set range button in the popover */
+.rad-set{display:block;width:100%;margin-top:12px;height:40px;border-radius:10px;border:0;cursor:pointer;
+  font:600 13px "Inter Tight",sans-serif;letter-spacing:.02em;color:#fff;background:#ff2f6d;transition:filter .15s}
+.rad-set:hover{filter:brightness(1.08)}
+/* dock filter chips (cream card) */
+.dock-filters{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 22px 2px}
+.dock-filters .dfl{font:700 9.5px "Inter Tight",sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#8a6a55;margin-right:2px}
+.dfc{font:600 12px "Inter Tight",sans-serif;padding:6px 12px;border-radius:999px;cursor:pointer;
+  border:1px solid rgba(43,26,16,.28);background:transparent;color:#2b1a10;transition:.14s}
+.dfc:hover{border-color:#2b1a10}
+.dfc[aria-pressed="true"]{background:#2b1a10;color:#fdf6ea;border-color:#2b1a10}
+.dfc .ct{opacity:.65;font-weight:500;margin-left:4px}
+
+/* ===== NAV F3 BEACON base fixes (no Up next, roomy dropdown) ===== */
+
+/* no more "Up next" */
+.updeck{display:none!important}
+/* suggestion panel: never clip — size to content, roomy rows, count fully visible */
+.mb-sug{left:0;right:auto!important;width:max-content;min-width:380px;max-width:min(480px,92vw)}
+.mb-sug button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;white-space:nowrap}
+.mb-sug button>span{display:flex;flex-direction:column;min-width:0}
+.mb-sug .rc{margin-left:auto;flex:0 0 auto;white-space:nowrap}
+
+/* ===== NAV F3 BEACON skin (crystal boba, sweep, chip, LED pill) ===== */
+
+/* ===================== F3 SKIN — "NEON BEACON" ===================== */
+@property --f3a{syntax:"<angle>";initial-value:0deg;inherits:false}
+
+/* ---- 1. empty-state CTA: neon border sweep on the cream field ---- */
+.f3-sweep{position:absolute;inset:-3px;border-radius:14px;pointer-events:none;opacity:0;z-index:4;padding:2px;
+  background:conic-gradient(from var(--f3a,0deg),transparent 0 74%,rgba(255,47,109,.85) 86%,#F4DDA2 93%,transparent 99%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;
+  transition:opacity .25s ease}
+.mb-field.f3-empty .f3-sweep{opacity:.9}
+@media(prefers-reduced-motion:no-preference){
+  .mb-field.f3-empty .f3-sweep{animation:f3sweep 3s linear infinite}
+  @keyframes f3sweep{to{--f3a:360deg}}
+}
+.mb-field.f3-empty .mb-input::placeholder{color:#7d5f34;font-weight:700}
+
+/* ---- 1b. pin beacon button, right of the field ---- */
+.f3-beacon{flex:0 0 auto;width:36px;height:36px;border-radius:50%;cursor:pointer;position:relative;
+  border:2px solid #C5A46D;background:radial-gradient(circle at 32% 28%,#2a1f10,#0B0C0E 78%);
+  color:#F4DDA2;display:grid;place-items:center;padding:0;
+  box-shadow:0 4px 10px -4px #000;transition:border-color .15s,color .15s,box-shadow .2s}
+.f3-beacon svg{width:16px;height:16px}
+.f3-beacon:hover{border-color:#F4DDA2;color:#fff}
+.f3-beacon:focus-visible{outline:2px solid #F4DDA2;outline-offset:2px}
+@media(prefers-reduced-motion:no-preference){
+  .f3-beacon{animation:f3pulse 2.6s ease-in-out infinite}
+  @keyframes f3pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,47,109,0),0 4px 10px -4px #000}
+    50%{box-shadow:0 0 0 5px rgba(255,47,109,.14),0 0 15px rgba(255,47,109,.4),0 4px 10px -4px #000}}
+}
+.f3-beacon.f3-err{border-color:#ff2f6d;color:#ff2f6d}
+@media(prefers-reduced-motion:no-preference){
+  .f3-beacon.f3-err{animation:f3err .5s ease 2}
+  @keyframes f3err{50%{box-shadow:0 0 0 6px rgba(255,47,109,.5),0 0 18px #ff2f6d}}
+}
+@media(max-width:1100px){.f3-beacon{display:none}}
+
+/* ---- 1c. helper strip under the empty, focused field ---- */
+.f3-helper{position:absolute;top:calc(100% + 7px);left:0;z-index:59;display:none;white-space:nowrap;
+  background:linear-gradient(180deg,#16120b,#0B0C0E);border:1px solid rgba(197,164,109,.55);border-radius:10px;
+  padding:7px 12px;font:600 11.5px "Inter Tight",sans-serif;color:#f7ead9;
+  box-shadow:0 18px 40px -18px rgba(0,0,0,.9)}
+.f3-helper::before{content:"";display:inline-block;width:11px;height:11px;margin-right:8px;vertical-align:-2px;background:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%2235%25%22%20cy%3D%2230%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ffffff%22/%3E%3Cstop%20offset%3D%2245%25%22%20stop-color%3D%22%23e6f6f1%22%20stop-opacity%3D%220.92%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fd9c6%22%20stop-opacity%3D%220.7%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%225%22%20fill%3D%22url%28%23g%29%22/%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%225%22%20fill%3D%22none%22%20stroke%3D%22rgba%28244%2C221%2C162%2C0.75%29%22%20stroke-width%3D%220.6%22/%3E%3Ccircle%20cx%3D%224.3%22%20cy%3D%223.5%22%20r%3D%221.15%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.95%22/%3E%3C/svg%3E') no-repeat center/contain;animation:f3crystal 2.2s ease-in-out infinite}
+.mb-field.f3-hint .f3-helper{display:block}
+
+/* ---- 2. Open-now LED status pill, mounted in the card header zone ---- */
+.f3-lednest{position:absolute;top:9px;right:54px;z-index:6}
+.f3-lednest .dfc[data-open]{display:inline-flex;align-items:center;gap:7px;margin:0;
+  background:#14100a;color:#f7ead9;border:1px solid rgba(197,164,109,.5);border-radius:99px;
+  padding:5px 12px;font:700 11px "Inter Tight",sans-serif;letter-spacing:.03em;cursor:pointer;
+  box-shadow:0 3px 8px -3px rgba(0,0,0,.45)}
+.f3-lednest .dfc[data-open]::before{content:"";width:8px;height:8px;border-radius:50%;flex:0 0 auto;
+  background:#5a5347;box-shadow:inset 0 1px 1px rgba(0,0,0,.55);transition:background .15s,box-shadow .15s}
+.f3-lednest .dfc[data-open]:hover{border-color:#F4DDA2}
+.f3-lednest .dfc[data-open][aria-pressed="true"]{background:#14100a;color:#eafff4;border-color:#3fbf8f}
+.f3-lednest .dfc[data-open][aria-pressed="true"]::before{background:#3fbf8f;box-shadow:0 0 8px #3fbf8f,0 0 2px #3fbf8f}
+
+/* ---- 3. cohesive selected-location chip inside the field ---- */
+.mb-field.f3-haschip .mb-input{color:transparent}
+.f3-chip{position:absolute;inset:2px;z-index:5;display:flex;align-items:center;gap:7px;cursor:text;overflow:hidden;
+  background:linear-gradient(180deg,#fdf6ea,#f7ead9);border-radius:9px;padding:0 4px 0 10px}
+.f3-chip>svg{flex:0 0 auto;width:13px;height:13px;color:#c92a4e}
+.f3-chip .fc-city{font:600 13px "Inter Tight",sans-serif;color:#2b1a10;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;min-width:0}
+.f3-chip .fc-zip{flex:0 0 auto;font:700 10.5px "Inter Tight",sans-serif;color:#8a6a2e;
+  border:1px solid rgba(197,164,109,.8);border-radius:99px;padding:2px 7px;letter-spacing:.04em}
+.f3-chipx{flex:0 0 auto;margin-left:auto;width:22px;height:22px;border-radius:50%;border:0;background:none;
+  cursor:pointer;color:#8a6a55;font-size:14px;line-height:1;display:grid;place-items:center;padding:0}
+.f3-chipx:hover{background:#191309;color:#F4DDA2}
+
+/* ---- 4. dropdown polish ---- */
+.mb-sug{border-radius:12px;max-height:340px;overflow:auto;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.9),0 4px 0 rgba(0,0,0,.2)}
+.mb-sug .cap{display:flex;align-items:center;gap:8px;text-transform:none;
+  font:700 12px/1 "Inter Tight",sans-serif;font-variant:all-small-caps;letter-spacing:.14em;color:#8a6a2e}
+.mb-sug .cap::before{content:"";width:11px;height:11px;flex:0 0 auto;background:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%2235%25%22%20cy%3D%2230%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ffffff%22/%3E%3Cstop%20offset%3D%2245%25%22%20stop-color%3D%22%23e6f6f1%22%20stop-opacity%3D%220.92%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fd9c6%22%20stop-opacity%3D%220.7%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%225%22%20fill%3D%22url%28%23g%29%22/%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%225%22%20fill%3D%22none%22%20stroke%3D%22rgba%28244%2C221%2C162%2C0.75%29%22%20stroke-width%3D%220.6%22/%3E%3Ccircle%20cx%3D%224.3%22%20cy%3D%223.5%22%20r%3D%221.15%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.95%22/%3E%3C/svg%3E') no-repeat center/contain;animation:f3crystal 2.2s ease-in-out infinite}
+.mb-sug button{position:relative;transition:padding-left .18s ease,background .15s ease}
+.mb-sug button::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,#F4DDA2,#C5A46D);opacity:0;transition:opacity .15s}
+.mb-sug button:hover,.mb-sug button.act{padding-left:23px;background:rgba(197,164,109,.18)}
+.mb-sug button:hover::before,.mb-sug button.act::before{opacity:1}
+.mb-sug .rs{font-size:12px;color:#8a6a55}
+.mb-sug .rn{font-weight:700}
+.mb-sug .rn.f3-zip{font-weight:800;color:#9c7b40;letter-spacing:.04em}
+.mb-sug .rc{margin-left:auto;flex:0 0 auto;white-space:nowrap;background:#1b140b;color:#F4DDA2;
+  border:1px solid rgba(197,164,109,.35);padding:3px 9px;border-radius:99px;
+  font:700 10.5px "Inter Tight",sans-serif}
+.mb-sug .rc.z{color:#cbb896;background:#191512}
+
+
+/* crystal boba: 3-frame squash & stretch bounce with a glow pop */
+@keyframes f3crystal{
+  0%{background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%2235%25%22%20cy%3D%2230%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ffffff%22/%3E%3Cstop%20offset%3D%2245%25%22%20stop-color%3D%22%23e6f6f1%22%20stop-opacity%3D%220.92%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fd9c6%22%20stop-opacity%3D%220.7%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%225%22%20fill%3D%22url%28%23g%29%22/%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%225%22%20fill%3D%22none%22%20stroke%3D%22rgba%28244%2C221%2C162%2C0.75%29%22%20stroke-width%3D%220.6%22/%3E%3Ccircle%20cx%3D%224.3%22%20cy%3D%223.5%22%20r%3D%221.15%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.95%22/%3E%3C/svg%3E');transform:translateY(0) scale(1);filter:drop-shadow(0 0 2px rgba(143,217,198,.65))}
+  18%{background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g3%22%20cx%3D%2235%25%22%20cy%3D%2226%25%22%20r%3D%2278%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ffffff%22/%3E%3Cstop%20offset%3D%2245%25%22%20stop-color%3D%22%23eaf8f4%22%20stop-opacity%3D%220.94%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%239fe2cf%22%20stop-opacity%3D%220.75%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Cellipse%20cx%3D%226%22%20cy%3D%225.6%22%20rx%3D%224.3%22%20ry%3D%225.4%22%20fill%3D%22url%28%23g3%29%22/%3E%3Cellipse%20cx%3D%226%22%20cy%3D%225.6%22%20rx%3D%224.3%22%20ry%3D%225.4%22%20fill%3D%22none%22%20stroke%3D%22rgba%28244%2C221%2C162%2C0.8%29%22%20stroke-width%3D%220.6%22/%3E%3Cellipse%20cx%3D%224.5%22%20cy%3D%223%22%20rx%3D%221.0%22%20ry%3D%221.35%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.97%22/%3E%3C/svg%3E');transform:translateY(-3px) scale(1.02);filter:drop-shadow(0 0 4px rgba(143,217,198,.8))}
+  38%{background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%2235%25%22%20cy%3D%2230%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ffffff%22/%3E%3Cstop%20offset%3D%2245%25%22%20stop-color%3D%22%23e6f6f1%22%20stop-opacity%3D%220.92%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fd9c6%22%20stop-opacity%3D%220.7%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%225%22%20fill%3D%22url%28%23g%29%22/%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%225%22%20fill%3D%22none%22%20stroke%3D%22rgba%28244%2C221%2C162%2C0.75%29%22%20stroke-width%3D%220.6%22/%3E%3Ccircle%20cx%3D%224.3%22%20cy%3D%223.5%22%20r%3D%221.15%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.95%22/%3E%3C/svg%3E');transform:translateY(-5px) scale(1.14);filter:drop-shadow(0 0 9px rgba(163,231,212,1))}
+  56%{background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g3%22%20cx%3D%2235%25%22%20cy%3D%2226%25%22%20r%3D%2278%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ffffff%22/%3E%3Cstop%20offset%3D%2245%25%22%20stop-color%3D%22%23eaf8f4%22%20stop-opacity%3D%220.94%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%239fe2cf%22%20stop-opacity%3D%220.75%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Cellipse%20cx%3D%226%22%20cy%3D%225.6%22%20rx%3D%224.3%22%20ry%3D%225.4%22%20fill%3D%22url%28%23g3%29%22/%3E%3Cellipse%20cx%3D%226%22%20cy%3D%225.6%22%20rx%3D%224.3%22%20ry%3D%225.4%22%20fill%3D%22none%22%20stroke%3D%22rgba%28244%2C221%2C162%2C0.8%29%22%20stroke-width%3D%220.6%22/%3E%3Cellipse%20cx%3D%224.5%22%20cy%3D%223%22%20rx%3D%221.0%22%20ry%3D%221.35%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.97%22/%3E%3C/svg%3E');transform:translateY(-2px) scale(1.03);filter:drop-shadow(0 0 5px rgba(143,217,198,.85))}
+  72%{background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g2%22%20cx%3D%2235%25%22%20cy%3D%2238%25%22%20r%3D%2280%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ffffff%22/%3E%3Cstop%20offset%3D%2245%25%22%20stop-color%3D%22%23e6f6f1%22%20stop-opacity%3D%220.92%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fd9c6%22%20stop-opacity%3D%220.72%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Cellipse%20cx%3D%226%22%20cy%3D%227%22%20rx%3D%225.6%22%20ry%3D%224.1%22%20fill%3D%22url%28%23g2%29%22/%3E%3Cellipse%20cx%3D%226%22%20cy%3D%227%22%20rx%3D%225.6%22%20ry%3D%224.1%22%20fill%3D%22none%22%20stroke%3D%22rgba%28244%2C221%2C162%2C0.75%29%22%20stroke-width%3D%220.6%22/%3E%3Cellipse%20cx%3D%224.2%22%20cy%3D%225.2%22%20rx%3D%221.25%22%20ry%3D%220.95%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.95%22/%3E%3C/svg%3E');transform:translateY(0) scale(1);filter:drop-shadow(0 0 3px rgba(143,217,198,.7))}
+  84%{background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g2%22%20cx%3D%2235%25%22%20cy%3D%2238%25%22%20r%3D%2280%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ffffff%22/%3E%3Cstop%20offset%3D%2245%25%22%20stop-color%3D%22%23e6f6f1%22%20stop-opacity%3D%220.92%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fd9c6%22%20stop-opacity%3D%220.72%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Cellipse%20cx%3D%226%22%20cy%3D%227%22%20rx%3D%225.6%22%20ry%3D%224.1%22%20fill%3D%22url%28%23g2%29%22/%3E%3Cellipse%20cx%3D%226%22%20cy%3D%227%22%20rx%3D%225.6%22%20ry%3D%224.1%22%20fill%3D%22none%22%20stroke%3D%22rgba%28244%2C221%2C162%2C0.75%29%22%20stroke-width%3D%220.6%22/%3E%3Cellipse%20cx%3D%224.2%22%20cy%3D%225.2%22%20rx%3D%221.25%22%20ry%3D%220.95%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.95%22/%3E%3C/svg%3E');transform:translateY(0) scaleX(1.06) scaleY(.94);filter:drop-shadow(0 0 2px rgba(143,217,198,.65))}
+  100%{background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%2235%25%22%20cy%3D%2230%25%22%20r%3D%2275%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ffffff%22/%3E%3Cstop%20offset%3D%2245%25%22%20stop-color%3D%22%23e6f6f1%22%20stop-opacity%3D%220.92%22/%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238fd9c6%22%20stop-opacity%3D%220.7%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%225%22%20fill%3D%22url%28%23g%29%22/%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%225%22%20fill%3D%22none%22%20stroke%3D%22rgba%28244%2C221%2C162%2C0.75%29%22%20stroke-width%3D%220.6%22/%3E%3Ccircle%20cx%3D%224.3%22%20cy%3D%223.5%22%20r%3D%221.15%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.95%22/%3E%3C/svg%3E');transform:translateY(0) scale(1);filter:drop-shadow(0 0 2px rgba(143,217,198,.65))}
+}
+.f3-helper::before,.mb-sug .cap::before{animation:f3crystal 1.7s cubic-bezier(.34,1.3,.5,1) infinite;will-change:transform,filter}
+@media(prefers-reduced-motion:reduce){.f3-helper::before,.mb-sug .cap::before{animation:none}}

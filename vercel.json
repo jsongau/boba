@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/how-we-rank", "destination": "/", "permanent": true },
+    { "source": "/how-we-rank/", "destination": "/", "permanent": true },
+    { "source": "/how-we-make-money", "destination": "/", "permanent": true },
+    { "source": "/how-we-make-money/", "destination": "/", "permanent": true }
+  ]
+}
