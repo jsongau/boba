@@ -101,6 +101,9 @@ def main(spots_path):
         website = f'<a class="btn btn-ghost" href="{html.escape(sp["website"])}" rel="noopener" target="_blank">Official site</a>' if sp.get("website") else ""
         pg = f'''<!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>{nm}, {ct}: Hours, Menu &amp; Map (2026) | Boba Night</title>
 <meta name="description" content="{nm} at {ad}, {ct}. Directions, what to order, and verified details as they land. Boba Night.">
 <link rel="canonical" href="https://www.bobanight.com/boba/ca/{sp["cs"]}/{sp["slug"]}/"><meta name="robots" content="noindex,follow">

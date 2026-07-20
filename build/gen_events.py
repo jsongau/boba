@@ -614,6 +614,9 @@ PAGE_TEMPLATE = """<!doctype html>
 <meta name="description" content="Run clubs, mahjong nights, book clubs, and cupsleeve events that meet at SoCal boba shops. Every listing sourced and linked to the organizer. Boba Night.">
 <link rel="canonical" href="https://www.bobanight.com/meetups/">
 <meta name="theme-color" content="#0B0C0E">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="alternate" type="text/calendar" title="Boba Night events" href="/meetups/ics/bobanight-events.ics">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1158,6 +1161,9 @@ CALENDAR_TEMPLATE = """<!doctype html>
 <meta name="description" content="A month-by-month calendar of dated boba meetups across Southern California. Every date links to the venue profile and the organizer, with .ics files to import. Boba Night.">
 <link rel="canonical" href="https://www.bobanight.com/meetups/calendar/">
 <meta name="theme-color" content="#0B0C0E">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="robots" content="index,follow">
 <link rel="alternate" type="text/calendar" title="Boba Night events" href="/meetups/ics/bobanight-events.ics">
 <link rel="preconnect" href="https://fonts.googleapis.com">

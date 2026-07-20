@@ -103,6 +103,9 @@ def head(title, desc, canonical, noindex=False):
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{canonical}">{robots}
 <meta name="theme-color" content="#0B0C0E">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 {FONTS}
 <link rel="stylesheet" href="/css/site.css">
 <link rel="stylesheet" href="/css/nav-midnight.css">
