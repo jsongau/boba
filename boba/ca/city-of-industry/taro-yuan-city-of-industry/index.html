@@ -6,6 +6,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="/css/motif.css">
+<link rel="stylesheet" href="/css/sound.css">
 <link rel="stylesheet" href="/css/nav-midnight.css">
 <link rel="stylesheet" href="/css/finder.css">
 <link rel="stylesheet" href="/css/profile-v4.css">
@@ -311,42 +313,17 @@ Taro Yuan is Taiwan&#x27;s taro specialist, a dessert house built around fresh-m
 </div><div class="footer-bottom">
 <span>&copy; 2026 Boba Night</span><span class="note">We don't take payment for placement on our best-for lists.</span>
 </div></footer>
-<!-- TPL:order -->
-<button class="od-cap" id="odCap" type="button" data-order-open hidden>
-<svg class="od-capart" viewBox="0 0 24 24" aria-hidden="true"><path class="k" d="M7.2 9.4h9.6l-1.1 10.4a1.5 1.5 0 0 1-1.5 1.3h-4.4a1.5 1.5 0 0 1-1.5-1.3L7.2 9.4z"/><path class="k" d="M7.6 9.2a4.6 4.6 0 0 1 8.8 0"/><path class="k" d="M13.1 8.2l2.3-5.4"/><circle class="p" cx="10.2" cy="17.6" r="1"/><circle class="p" cx="13.4" cy="18.4" r="1"/></svg>Order it to go
-</button>
-<div class="od-modal" id="odModal" role="dialog" aria-modal="true" aria-labelledby="odTitle" hidden>
-  <div class="od-scrim" data-order-close></div>
-  <div class="od-box" role="document">
-    <button class="od-x" type="button" data-order-close aria-label="Close order dialog">&times;</button>
-    <p class="od-kick">To go</p>
-    <h2 class="od-title" id="odTitle">Order Taro Yuan</h2>
-    <p class="od-sub">Delivery or pickup through the service you already use.</p>
-    <div class="od-links">
-      <a class="od-svc" href="https://www.ubereats.com/search?q=Taro%20Yuan" target="_blank" rel="nofollow sponsored noopener">
-<svg class="od-art" viewBox="0 0 28 28" aria-hidden="true"><path d="M8.6 11h10.8l-1.2 11.6a1.7 1.7 0 0 1-1.7 1.5h-5a1.7 1.7 0 0 1-1.7-1.5L8.6 11z" fill="rgba(6,193,103,.16)"/><path class="k" d="M8.6 11h10.8l-1.2 11.6a1.7 1.7 0 0 1-1.7 1.5h-5a1.7 1.7 0 0 1-1.7-1.5L8.6 11z"/><path class="k" d="M9 10.8a5.2 5.2 0 0 1 10 0"/><path class="k" d="M15.3 9.6l2.6-6.2"/><circle class="p" cx="12" cy="20.2" r="1.1"/><circle class="p" cx="15.6" cy="21" r="1.1"/><circle class="p" cx="13.8" cy="17.6" r="1.1"/></svg>
-<span class="od-n">Uber Eats</span>
-<svg class="od-gate" viewBox="0 0 20 20" aria-hidden="true"><path class="k" d="M12.6 2.6a7.6 7.6 0 1 0 0 14.8"/><circle class="pearl" cx="15.4" cy="10" r="2.1"/><circle cx="14.7" cy="9.2" r=".6" fill="rgba(255,252,244,.85)"/></svg>
-</a>
-      <a class="od-svc" href="https://www.doordash.com/search/store/Taro%20Yuan/" target="_blank" rel="nofollow sponsored noopener">
-<svg class="od-art" viewBox="0 0 28 28" aria-hidden="true"><path d="M6.4 10.4h15.2l-1.4 12.4a1.8 1.8 0 0 1-1.8 1.6H9.6a1.8 1.8 0 0 1-1.8-1.6L6.4 10.4z" fill="rgba(255,48,8,.13)"/><path class="k" d="M6.4 10.4h15.2l-1.4 12.4a1.8 1.8 0 0 1-1.8 1.6H9.6a1.8 1.8 0 0 1-1.8-1.6L6.4 10.4z"/><path class="k" d="M10.2 10.2V8.6a3.8 3.8 0 0 1 7.6 0v1.6"/><path class="k" d="M9 14.6h10"/><circle class="p" cx="11.6" cy="19.2" r="1"/><circle class="p" cx="14" cy="20.6" r="1"/><circle class="p" cx="16.4" cy="19.2" r="1"/></svg>
-<span class="od-n">DoorDash</span>
-<svg class="od-gate" viewBox="0 0 20 20" aria-hidden="true"><path class="k" d="M12.6 2.6a7.6 7.6 0 1 0 0 14.8"/><circle class="pearl" cx="15.4" cy="10" r="2.1"/><circle cx="14.7" cy="9.2" r=".6" fill="rgba(255,252,244,.85)"/></svg>
-</a>
-    </div>
-    <p class="od-note">Menus, prices, and delivery are handled by the service.</p>
+<!-- TPL:order-rail -->
+<nav class="od-rail" aria-label="Order Taro Yuan to go">
+  <span class="od-rail-lead"><svg class="od-cup" viewBox="0 0 24 24" aria-hidden="true"><path class="k" d="M7.2 9.4h9.6l-1.1 10.4a1.5 1.5 0 0 1-1.5 1.3h-4.4a1.5 1.5 0 0 1-1.5-1.3L7.2 9.4z"/><path class="k" d="M7.6 9.2a4.6 4.6 0 0 1 8.8 0"/><path class="k" d="M13.1 8.2l2.3-5.4"/><circle class="p" cx="10.2" cy="17.6" r="1"/><circle class="p" cx="13.4" cy="18.4" r="1"/></svg><span class="od-rail-t">Order <b>Taro Yuan</b> to go</span></span>
+  <div class="od-rail-acts">
+    <a class="od-svc od-svc--ue" href="https://www.ubereats.com/search?q=Taro%20Yuan" target="_blank" rel="nofollow sponsored noopener"><svg class="od-art" viewBox="0 0 28 28" aria-hidden="true"><path d="M8.6 11h10.8l-1.2 11.6a1.7 1.7 0 0 1-1.7 1.5h-5a1.7 1.7 0 0 1-1.7-1.5L8.6 11z" fill="rgba(6,193,103,.18)"/><path class="k" d="M8.6 11h10.8l-1.2 11.6a1.7 1.7 0 0 1-1.7 1.5h-5a1.7 1.7 0 0 1-1.7-1.5L8.6 11z"/><path class="k" d="M9 10.8a5.2 5.2 0 0 1 10 0"/><path class="k" d="M15.3 9.6l2.6-6.2"/><circle class="p" cx="12" cy="20.2" r="1.1"/><circle class="p" cx="15.6" cy="21" r="1.1"/><circle class="p" cx="13.8" cy="17.6" r="1.1"/></svg><span class="od-n">Uber&nbsp;Eats</span></a>
+    <a class="od-svc od-svc--dd" href="https://www.doordash.com/search/store/Taro%20Yuan/" target="_blank" rel="nofollow sponsored noopener"><svg class="od-art" viewBox="0 0 28 28" aria-hidden="true"><path d="M6.4 10.4h15.2l-1.4 12.4a1.8 1.8 0 0 1-1.8 1.6H9.6a1.8 1.8 0 0 1-1.8-1.6L6.4 10.4z" fill="rgba(255,48,8,.15)"/><path class="k" d="M6.4 10.4h15.2l-1.4 12.4a1.8 1.8 0 0 1-1.8 1.6H9.6a1.8 1.8 0 0 1-1.8-1.6L6.4 10.4z"/><path class="k" d="M10.2 10.2V8.6a3.8 3.8 0 0 1 7.6 0v1.6"/><path class="k" d="M9 14.6h10"/><circle class="p" cx="11.6" cy="19.2" r="1"/><circle class="p" cx="14" cy="20.6" r="1"/><circle class="p" cx="16.4" cy="19.2" r="1"/></svg><span class="od-n">DoorDash</span></a>
+    <a class="od-dir" href="https://www.google.com/maps/search/?api=1&query=Taro%20Yuan%2018246%20Gale%20Ave%20A%20City%20of%20Industry%20CA" rel="nofollow noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="k" d="M12 21c-4-4.5-7-8-7-11a7 7 0 0 1 14 0c0 3-3 6.5-7 11z"/><circle class="k" cx="12" cy="10" r="2.6"/></svg><span>Directions</span></a>
   </div>
-</div>
-<!-- /TPL:order -->
-<!-- TPL:actionbar -->
-<nav class="ps-bar" aria-label="Taro Yuan quick actions">
-<button class="ps-bb ps-bb--order" type="button" data-order-open><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1.5 13a1.6 1.6 0 0 1-1.6 1.4H9.1A1.6 1.6 0 0 1 7.5 20L6 7z"/><path d="M6.8 7 8 3.6h8L17.2 7"/><circle cx="10" cy="15" r="1.1"/><circle cx="14" cy="16.5" r="1.1"/></svg><span>Order</span></button>
-<a class="ps-bb" href="https://www.google.com/maps/search/?api=1&query=Taro%20Yuan%2018246%20Gale%20Ave%20A%20City%20of%20Industry%20CA" rel="nofollow noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c-4-4.5-7-8-7-11a7 7 0 0 1 14 0c0 3-3 6.5-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg><span>Directions</span></a>
-<a class="ps-bb" href="tel:+16268101914"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>Call</span></a>
-<button class="ps-bb ps-bb--share" type="button" data-share-open><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2.6"/><circle cx="17.5" cy="5.5" r="2.6"/><circle cx="17.5" cy="18.5" r="2.6"/><path d="M8.3 10.8 15.2 6.8M8.3 13.2l6.9 4"/></svg><span>Share</span></button>
-<button class="ps-bb js-save" type="button" aria-pressed="false" aria-label="Save Taro Yuan to your blackbook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-9.2-8.4A5 5 0 0 1 12 6a5 5 0 0 1 9.2 5.6C19 15.6 12 20 12 20z"/></svg><span>Save</span></button>
 </nav>
-<!-- /TPL:actionbar -->
+<p class="od-rail-note">Delivery by Uber Eats or DoorDash. Menus and prices set by the service.</p>
+<!-- /TPL:order-rail -->
 <!-- TPL:share-modal -->
 <div class="ps-modal" id="psModal" role="dialog" aria-modal="true" aria-labelledby="psTitle" hidden>
   <div class="ps-scrim" data-share-close></div>
@@ -389,6 +366,8 @@ Taro Yuan is Taiwan&#x27;s taro specialist, a dessert house built around fresh-m
 </script>
 <!-- /TPL:shop-data -->
 <script src="/js/nav-midnight.js" defer></script>
+<script src="/js/motif.js" defer></script>
+<script src="/js/sound.js" defer></script>
 <script defer src="/js/finder-data.js"></script>
 <script defer src="/js/finder.js"></script>
 <script defer src="/js/profile-v4.js"></script>

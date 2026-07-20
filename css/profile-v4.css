@@ -8,8 +8,9 @@
 .tag-chain{color:var(--silver);background:rgba(244,239,231,.06);border:1px solid var(--line-strong)}
 
 /* --- header finder (visual only in this preview; internals simplified) --- */
-.finder-inline{display:none}
-@media(min-width:1080px){.finder-inline{display:flex;align-items:center;gap:.5rem;flex:1;max-width:330px;margin-left:.6rem}}
+/* finder-inline styling belongs to finder.css / nav-midnight.css (the nav's own
+   sheets), same as every other page. No override here — that caused the nav's
+   right cluster to collide on profile pages only. */
 .mb-field{display:flex;align-items:center;gap:.55rem;flex:1;background:var(--bn-surface);border:1px solid var(--bn-line);border-radius:2px;padding:.42rem .7rem;transition:border-color .16s var(--bn-ease)}
 .mb-field:hover{border-color:var(--bn-line-strong)}
 .mb-pin{width:15px;height:15px;color:var(--bn-muted);flex:none}
@@ -520,3 +521,41 @@ main#main .hero{max-width:none;margin:0;padding:0;text-align:left;
 .od-x{position:absolute;top:.55rem;right:.7rem;background:none;border:0;color:var(--muted,#a89f92);font-size:1.35rem;cursor:pointer;padding:.2rem}
 .od-x:hover{color:var(--porcelain,#F4EFE7)}
 .od-modal[hidden]{display:none}
+
+/* ==== persistent sticky ORDER RAIL (od-rail) : desktop + mobile ==== */
+.od-rail{position:fixed;left:0;right:0;bottom:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:.7rem clamp(.8rem,3vw,1.6rem);padding-bottom:calc(.7rem + env(safe-area-inset-bottom));
+  background:linear-gradient(0deg,rgba(9,6,12,.98),rgba(16,11,20,.96));
+  border-top:1px solid var(--gold-line,rgba(197,164,109,.35));
+  box-shadow:0 -10px 30px rgba(0,0,0,.5)}
+.od-rail-lead{display:flex;align-items:center;gap:.65rem;min-width:0;color:var(--muted,#a89f92);font-size:.9rem}
+.od-rail-t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.od-rail-t b{color:var(--porcelain,#F4EFE7);font-weight:600}
+.od-cup{width:22px;height:22px;flex:none}
+.od-cup .k{fill:none;stroke:var(--champagne,#C5A46D);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.od-cup .p{fill:var(--champagne,#C5A46D)}
+.od-rail-acts{display:flex;align-items:center;gap:.55rem;flex:none}
+.od-rail .od-svc{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem .9rem;text-decoration:none;
+  border-radius:999px;border:1px solid var(--line,rgba(244,239,231,.14));background:rgba(244,239,231,.03);
+  transition:border-color .18s,background .18s,transform .18s}
+.od-rail .od-art{width:26px;height:26px;flex:none}
+.od-rail .od-n{font:600 .92rem "Inter Tight",sans-serif;color:var(--porcelain,#F4EFE7);white-space:nowrap}
+.od-svc--ue:hover{border-color:rgba(6,193,103,.6);background:rgba(6,193,103,.08);transform:translateY(-1px)}
+.od-svc--dd:hover{border-color:rgba(255,48,8,.55);background:rgba(255,48,8,.07);transform:translateY(-1px)}
+.od-svc:focus-visible,.od-dir:focus-visible{outline:2px solid var(--champagne,#C5A46D);outline-offset:2px}
+.od-dir{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem .85rem;text-decoration:none;
+  border-radius:999px;border:1px solid transparent;color:var(--muted,#a89f92);font:600 .9rem "Inter Tight",sans-serif}
+.od-dir svg{width:19px;height:19px}
+.od-dir .k{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.od-dir:hover{color:var(--porcelain,#F4EFE7)}
+.od-rail-note{display:none}
+main#main,.wrap{padding-bottom:96px} /* clear the fixed rail */
+@media(max-width:720px){
+  .od-rail-lead{display:none}
+  .od-rail{gap:.5rem;justify-content:stretch}
+  .od-rail-acts{flex:1;gap:.45rem}
+  .od-rail .od-svc{flex:1;justify-content:center;padding:.7rem .5rem}
+  .od-dir{padding:.7rem .6rem}
+  .od-dir span{display:none} /* icon-only Directions on phones */
+}
