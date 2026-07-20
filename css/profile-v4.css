@@ -1,0 +1,522 @@
+/* ========================================================================
+   PASSALONG variant (v4) — profile template additions.
+   Same OBSIDIAN grammar: hairlines, 2px radii, champagne accents,
+   transform/opacity motion behind prefers-reduced-motion.
+   ======================================================================== */
+.tag-featured{color:#d9c6f5;background:rgba(122,74,168,.22);border:1px solid rgba(168,85,247,.45);font-weight:700}
+.tag-orig{color:var(--champagne);background:rgba(197,164,109,.12);border:1px solid var(--gold-line)}
+.tag-chain{color:var(--silver);background:rgba(244,239,231,.06);border:1px solid var(--line-strong)}
+
+/* --- header finder (visual only in this preview; internals simplified) --- */
+.finder-inline{display:none}
+@media(min-width:1080px){.finder-inline{display:flex;align-items:center;gap:.5rem;flex:1;max-width:330px;margin-left:.6rem}}
+.mb-field{display:flex;align-items:center;gap:.55rem;flex:1;background:var(--bn-surface);border:1px solid var(--bn-line);border-radius:2px;padding:.42rem .7rem;transition:border-color .16s var(--bn-ease)}
+.mb-field:hover{border-color:var(--bn-line-strong)}
+.mb-pin{width:15px;height:15px;color:var(--bn-muted);flex:none}
+.mb-input{flex:1;min-width:0;background:none;border:0;color:var(--bn-pearl);font-family:var(--bn-sans);font-size:.82rem}
+.mb-input::placeholder{color:var(--bn-muted)}
+.mb-input:focus{outline:none}
+.mb-chip{font-size:.72rem;color:var(--bn-champagne);border:1px solid var(--gold-line);border-radius:2px;padding:.12rem .45rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* --------------------------------------------------------- hours table --- */
+.hours-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:0 0 1.1rem}
+.hours-head h2{margin:0}
+.hours-wrap{border:1px solid var(--line);border-radius:2px;overflow:hidden;background:var(--surface)}
+.hours-t{width:100%;border-collapse:collapse;font-size:.95rem}
+.hours-t th,.hours-t td{text-align:left;padding:.66rem 1.1rem;border-top:1px solid var(--line)}
+.hours-t tr:first-child th,.hours-t tr:first-child td{border-top:0}
+.hours-t th{font-weight:500;color:var(--silver);width:10rem}
+.hours-t td{color:var(--silver);font-variant-numeric:tabular-nums}
+.hours-t tr.is-today{background:rgba(197,164,109,.08);box-shadow:inset 2px 0 0 var(--champagne)}
+.hours-t tr.is-today th,.hours-t tr.is-today td{color:var(--porcelain);font-weight:600}
+.hours-today-tag{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--champagne);margin-left:.55rem;vertical-align:1px}
+
+/* --------------------------------------------------------- save heart --- */
+.ps-heart{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;flex:none;background:var(--surface);border:1px solid var(--line-strong);border-radius:2px;color:var(--silver);cursor:pointer;padding:0;
+  transition:border-color .16s var(--ease),color .16s var(--ease),background .16s var(--ease)}
+.ps-heart svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7}
+.ps-heart:hover{border-color:var(--champagne);color:var(--pearl)}
+.ps-heart[aria-pressed="true"]{color:var(--neon);border-color:rgba(255,47,109,.45)}
+.ps-heart[aria-pressed="true"] svg{fill:currentColor;stroke:currentColor;animation:ps-pop .34s var(--ease)}
+@keyframes ps-pop{0%{transform:scale(.6)}55%{transform:scale(1.22)}100%{transform:scale(1)}}
+
+/* --------------------------------------------- nearby shop cards (corridor) */
+.ps-shops{display:grid;grid-template-columns:1fr;gap:.7rem;margin-top:1.1rem}
+@media(min-width:660px){.ps-shops{grid-template-columns:1fr 1fr}}
+.ps-shop{position:relative;display:block;background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:.95rem 1.1rem;overflow:hidden;
+  transition:transform .16s var(--ease),border-color .16s var(--ease),background .16s var(--ease)}
+.ps-shop::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--gold-line);transform:scaleX(0);transform-origin:left center;transition:transform .22s var(--ease)}
+.ps-shop:hover{transform:translateY(-2px);border-color:var(--line-strong);background:var(--surface-2)}
+.ps-shop:hover::before{transform:scaleX(1)}
+.ps-shop .n{font-family:var(--serif);font-size:1.08rem;color:var(--pearl);display:block;line-height:1.2}
+.ps-shop .m{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-top:.4rem;font-size:.8rem;color:var(--muted)}
+.ps-mi{color:var(--champagne);font-weight:600;font-variant-numeric:tabular-nums}
+.ps-live{font-size:.78rem;color:var(--muted)}
+.ps-live.is-open{color:var(--champagne)}
+.ps-live.is-closed{color:var(--muted)}
+
+/* ------------------------------------------------------ nearby city loop --- */
+.ps-cities{display:grid;grid-template-columns:1fr;gap:.7rem;margin-top:1.1rem}
+@media(min-width:700px){.ps-cities{grid-template-columns:1fr 1fr}}
+.ps-city{background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:1rem 1.15rem;
+  transition:border-color .16s var(--ease),background .16s var(--ease)}
+.ps-city:hover{border-color:var(--line-strong);background:var(--surface-2)}
+.ps-city .row1{display:flex;justify-content:space-between;align-items:baseline;gap:.8rem}
+.ps-city .cl{font-family:var(--serif);font-size:1.1rem;color:var(--pearl);transition:color .15s var(--ease)}
+.ps-city .cl:hover{color:var(--champagne)}
+.ps-city .ct{font-size:.78rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ps-city .pick{margin:.45rem 0 0;font-size:.86rem;color:var(--silver);line-height:1.5}
+.ps-city .pick a{color:var(--champagne);font-weight:500}
+.ps-city .pick a:hover{color:var(--porcelain)}
+
+/* ------------------------------------------------- pass it along section --- */
+.ps-pass{background:var(--surface);border:1px solid var(--line);border-left:2px solid var(--champagne);border-radius:2px;padding:1.4rem 1.5rem}
+.ps-pass p{margin:.2rem 0 1.1rem;color:var(--silver);max-width:58ch}
+.ps-pass .btn{min-height:46px}
+
+/* ----------------------------------------------- sticky action bar, mobile */
+.ps-bar{display:none}
+@media(max-width:899px){
+  .ps-bar{position:fixed;left:0;right:0;bottom:0;z-index:240;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;
+    background:rgba(11,12,14,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-top:1px solid var(--gold-line);padding-bottom:env(safe-area-inset-bottom)}
+  .wrap{padding-bottom:calc(4rem + 64px + env(safe-area-inset-bottom))}
+  .site-footer{padding-bottom:calc(2rem + 64px + env(safe-area-inset-bottom))}
+}
+.ps-bb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:56px;
+  color:var(--silver);background:none;border:0;cursor:pointer;font-family:var(--sans);font-size:11px;letter-spacing:.02em;padding:0;text-decoration:none;
+  transition:color .15s var(--ease)}
+.ps-bb svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7}
+.ps-bb span{line-height:1}
+.ps-bb:hover,.ps-bb:active{color:var(--pearl)}
+.ps-bb--share{color:var(--neon)}
+.ps-bb.js-save[aria-pressed="true"]{color:var(--neon)}
+.ps-bb.js-save[aria-pressed="true"] svg{fill:currentColor;animation:ps-pop .34s var(--ease)}
+
+/* ------------------------------------------------------------ share modal */
+.ps-modal{position:fixed;inset:0;z-index:320;display:flex;justify-content:center;align-items:flex-end}
+@media(min-width:640px){.ps-modal{align-items:center;padding:2rem 1rem}}
+.ps-modal[hidden]{display:none}
+.ps-scrim{position:absolute;inset:0;background:var(--bn-scrim);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.ps-box{position:relative;width:min(560px,100%);max-height:min(92vh,760px);overflow-y:auto;background:var(--bn-panel);
+  border:1px solid var(--line-strong);border-top:1px solid var(--champagne);border-radius:2px;
+  padding:1.3rem 1.3rem 1.4rem;transform:translateY(8px);opacity:0;animation:bn-pop .2s var(--ease) forwards}
+.ps-mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin:0 0 .4rem}
+.ps-mtitle{font-family:var(--serif);font-size:1.45rem;color:var(--porcelain);margin:0;line-height:1.15}
+.ps-msub{font-size:.86rem;color:var(--muted);margin:.35rem 0 0;line-height:1.5}
+.ps-x{width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--line);border-radius:2px;color:var(--silver);font-size:1.5rem;line-height:1;cursor:pointer;transition:color .15s var(--ease),border-color .15s var(--ease)}
+.ps-x:hover{color:var(--pearl);border-color:var(--line-strong)}
+.ps-lbl{display:block;font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--champagne);margin:1.15rem 0 .55rem}
+.ps-chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.ps-chip{min-height:44px;display:inline-flex;align-items:center;gap:.4rem;padding:.5rem .95rem;font-family:var(--sans);font-size:.88rem;font-weight:500;color:var(--silver);
+  background:var(--surface);border:1px solid var(--line);border-radius:2px;cursor:pointer;
+  transition:color .15s var(--ease),border-color .15s var(--ease),background .15s var(--ease)}
+.ps-chip:hover{color:var(--pearl);border-color:var(--line-strong)}
+.ps-chip[aria-pressed="true"]{background:var(--champagne);color:var(--obsidian);border-color:var(--champagne);font-weight:600}
+.ps-chip .mi{font-size:.76rem;color:var(--muted)}
+.ps-chip[aria-pressed="true"] .mi{color:rgba(11,12,14,.62)}
+.ps-hint{font-size:.78rem;color:var(--muted);margin:.45rem 0 0;min-height:1.2em}
+.ps-preview{margin-top:.15rem;background:var(--surface-2);border:1px solid var(--line);border-left:2px solid var(--champagne);border-radius:2px;
+  padding:.95rem 1.05rem;font-size:.92rem;line-height:1.55;color:var(--pearl);white-space:pre-wrap;word-break:break-word}
+.ps-mact{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:1.15rem}
+.ps-mact .btn{min-height:46px;width:100%}
+.ps-mnote{font-size:.78rem;color:var(--muted);margin:.8rem 0 0}
+@media(prefers-reduced-motion:reduce){.ps-box{animation:none;opacity:1;transform:none}.ps-heart svg,.ps-bb svg{animation:none!important}}
+
+/* ==== line-break hygiene (final QA pass) ====
+   balance: multi-line headings split evenly, never 10-words-then-1.
+   pretty: body text avoids a lone orphan word on the last line.
+   nowrap tokens: times, distances, and status pills never split internally. */
+.hero-titlerow h1,.sec h2,.faq h3,.ps-shop .n,.ps-city .cl,.ps-pass h2,.hero-sub{text-wrap:balance}
+.p-summary,.sec p,.ps-city .pick,.note-line,.faq p{text-wrap:pretty}
+.ps-mi,.ps-live,.status,.js-status-pill,#factsToday{white-space:nowrap}
+.btn{white-space:nowrap}
+.ps-chip{max-width:100%}
+.dl dd,.ps-preview{overflow-wrap:break-word}
+.dl dd a{overflow-wrap:anywhere}
+
+/* stop min-content propagation: a wide table or flex row must never widen
+   the whole column past the viewport */
+.g-main,.g-aside{min-width:0}
+.hero-inner{min-width:0;max-width:100%}
+.hero-body{flex:1 1 260px;min-width:0}
+.hours-wrap{overflow-x:auto}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ps-city .row1{flex-wrap:wrap}
+.ps-mact{flex-wrap:wrap}
+
+@media(max-width:374px){.ps-mact{grid-template-columns:1fr}}
+@media(max-width:340px){.status,.js-status-pill{font-size:.72rem;letter-spacing:.01em}}
+/* ============================================================================
+   BOBA NIGHT — shop avatar, variant C "PEARL ORBIT"
+   The medallion as a tiny night sky: the disc is a moonlit planet with a
+   starfield speckle and a moon-phase terminator; a crystal boba pearl lives
+   on a hairline orbit track and travels it once every 72 seconds; a second
+   Saturn ellipse tilts behind the monogram; the glyph catches a slow sheen.
+   Featured shops gain a gilt ring and a champagne comet-trail on the orbit.
+
+   MARKUP CONTRACT (generator-friendly — built from letter/store_type/featured):
+
+     <span class="av-orb[ av-orb--chain][ av-orb--featured]" aria-hidden="true">
+       <span class="av-disc"><span class="av-sheen"></span></span>
+       <svg class="av-ell" viewBox="0 0 120 120" focusable="false">
+         <ellipse cx="60" cy="60" rx="56" ry="19" transform="rotate(-16 60 60)"/>
+       </svg>
+       <span class="av-track"></span>
+       <span class="av-sat"></span>
+       <span class="av-mono">T</span>
+       <span class="av-badge"></span>
+     </span>
+
+     - .av-mono text     = shop initial (one character, from `letter`)
+     - av-orb--chain     = store_type "chain"  (silver/pewter register)
+     - (no modifier)     = store_type "specialty" (champagne, the original)
+     - av-orb--featured  = featured flag (gilt ring + comet trail; may combine
+                           with --chain, featured wins the ring)
+     - Everything inside the root except the letter is a FIXED skeleton;
+       the whole medallion is decorative: keep aria-hidden="true" and put the
+       shop name in the adjacent heading.
+
+   Motion contract: exactly two animated properties, transform and opacity,
+   both inside prefers-reduced-motion: no-preference. Static fallback parks
+   the pearl at the original top-right position and freezes the comet.
+   No images, no JS. Tokens resolve from site.css with fallbacks.
+   ========================================================================== */
+
+.av-orb{
+  /* -------- knobs -------------------------------------------------------- */
+  --av-size:clamp(94px,15vw,126px);
+  --av-obsidian:var(--obsidian,#0B0C0E);
+  --av-smoked:var(--surface,#17191D);
+  --av-smoked-2:var(--surface-2,#1F2228);
+  --av-porcelain:var(--porcelain,#FCF9F3);
+  --av-serif:var(--serif,"Fraunces",Georgia,serif);
+
+  --av-ring:var(--champagne,#C5A46D);              /* champagne ring (original) */
+  --av-ring-soft:rgba(197,164,109,.32);
+  --av-track:rgba(197,164,109,.38);                /* orbit hairline */
+  --av-ell:rgba(197,164,109,.34);                  /* Saturn ellipse */
+  --av-aura:rgba(92,44,134,.38);                   /* imperial purple aura */
+  --av-aura-far:rgba(92,44,134,.16);
+  --av-star:rgba(252,249,243,.9);
+  --av-pearl-glow:rgba(255,63,111,.62);            /* guava pearl light */
+  --av-pearl-halo:rgba(255,63,111,.18);
+  --av-badge-dot:var(--champagne,#C5A46D);
+
+  --av-orbit-inset:7px;                            /* track sits here */
+  --av-pearl:13px;                                 /* crystal pearl diameter */
+
+  position:relative;flex:none;
+  width:var(--av-size);height:var(--av-size);
+  display:inline-grid;place-items:center;
+  border-radius:50%;
+  isolation:isolate;
+}
+
+/* purple aura — the original's night glow, breathing behind the whole orrery */
+.av-orb::before{
+  content:"";position:absolute;inset:4px;border-radius:50%;z-index:0;
+  box-shadow:0 0 26px 2px var(--av-aura),0 0 58px 10px var(--av-aura-far);
+  pointer-events:none;
+}
+
+/* -------- the planet disc ------------------------------------------------ */
+.av-disc{
+  position:absolute;inset:13px;border-radius:50%;overflow:hidden;z-index:1;
+  background:radial-gradient(circle at 50% 36%,var(--av-smoked-2),var(--av-obsidian) 74%);
+  border:1px solid var(--av-ring);
+  box-shadow:
+    inset 0 0 0 4px var(--av-obsidian),
+    inset 0 0 0 5px var(--av-ring-soft),
+    inset 0 -10px 22px rgba(0,0,0,.45);
+}
+
+/* starfield speckle — a dozen fixed stars, two of them champagne */
+.av-disc::before{
+  content:"";position:absolute;inset:0;border-radius:50%;opacity:.6;
+  background-image:
+    radial-gradient(1.4px 1.4px at 21% 26%,var(--av-star),transparent 100%),
+    radial-gradient(1px 1px at 34% 14%,rgba(252,249,243,.55),transparent 100%),
+    radial-gradient(1px 1px at 68% 18%,rgba(252,249,243,.7),transparent 100%),
+    radial-gradient(1.6px 1.6px at 80% 38%,rgba(252,249,243,.45),transparent 100%),
+    radial-gradient(1px 1px at 12% 52%,rgba(252,249,243,.5),transparent 100%),
+    radial-gradient(1px 1px at 26% 74%,rgba(252,249,243,.4),transparent 100%),
+    radial-gradient(1.3px 1.3px at 58% 82%,rgba(252,249,243,.5),transparent 100%),
+    radial-gradient(1px 1px at 84% 66%,rgba(252,249,243,.35),transparent 100%),
+    radial-gradient(1px 1px at 46% 40%,rgba(252,249,243,.28),transparent 100%),
+    radial-gradient(1.4px 1.4px at 74% 8%,rgba(197,164,109,.55),transparent 100%),
+    radial-gradient(1.2px 1.2px at 8% 34%,rgba(197,164,109,.45),transparent 100%),
+    radial-gradient(1px 1px at 40% 90%,rgba(252,249,243,.4),transparent 100%);
+}
+
+/* moon-phase terminator — night creeping over the lower-left limb */
+.av-disc::after{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 67% 31%,
+    transparent 42%,rgba(4,5,7,.04) 58%,rgba(4,5,7,.42) 86%,rgba(4,5,7,.6) 100%);
+}
+
+/* sheen bar — clipped by the disc; only moves under no-preference */
+.av-sheen{
+  position:absolute;top:-18%;bottom:-18%;left:-34%;width:34%;
+  background:linear-gradient(100deg,transparent,rgba(252,249,243,.09) 48%,transparent);
+  transform:translateX(0) skewX(-16deg);
+  opacity:0;pointer-events:none;
+}
+
+/* -------- Saturn ellipse (SVG hairline, tilted) -------------------------- */
+.av-ell{
+  position:absolute;inset:0;width:100%;height:100%;z-index:2;
+  pointer-events:none;overflow:visible;
+}
+.av-ell ellipse{
+  fill:none;stroke:var(--av-ell);stroke-width:1;
+  vector-effect:non-scaling-stroke;
+}
+
+/* -------- orbit track + travelling crystal pearl ------------------------- */
+.av-track{
+  position:absolute;inset:var(--av-orbit-inset);border-radius:50%;z-index:2;
+  border:1px solid var(--av-track);
+  pointer-events:none;
+}
+.av-sat{
+  position:absolute;inset:var(--av-orbit-inset);border-radius:50%;z-index:3;
+  transform:rotate(45deg);       /* static park: pearl at the original top-right */
+  pointer-events:none;
+}
+/* the crystal boba pearl: translucent body, glossy highlight, guava core */
+.av-sat::after{
+  content:"";position:absolute;
+  top:calc(var(--av-pearl) / -2);left:50%;margin-left:calc(var(--av-pearl) / -2);
+  width:var(--av-pearl);height:var(--av-pearl);border-radius:50%;
+  background:
+    radial-gradient(circle at 32% 27%,rgba(255,255,255,.95) 0 12%,rgba(252,249,243,.38) 32%,transparent 46%),
+    radial-gradient(circle at 50% 58%,var(--av-pearl-glow) 0 22%,rgba(180,107,214,.22) 58%,rgba(252,249,243,.07) 100%);
+  border:1px solid rgba(252,249,243,.5);
+  box-shadow:
+    0 0 0 3px var(--av-pearl-halo),
+    0 0 12px 2px var(--av-pearl-glow),
+    inset -2px -2px 3px rgba(11,12,14,.35);
+}
+
+/* -------- monogram ------------------------------------------------------- */
+.av-mono{
+  position:relative;z-index:4;
+  font-family:var(--av-serif);font-weight:400;line-height:1;
+  letter-spacing:-.02em;
+  font-size:calc(var(--av-size) * .30);
+  color:var(--av-porcelain);
+  transform:translateY(2%);      /* optical centre for serif caps */
+  text-shadow:0 1px 12px rgba(11,12,14,.6);
+  user-select:none;
+}
+
+/* -------- bottom motif badge — a boba pearl trio, orrery register -------- */
+.av-badge{
+  position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);z-index:5;
+  width:26px;height:26px;border-radius:50%;
+  background:var(--av-obsidian);
+  border:1px solid rgba(197,164,109,.42);
+}
+.av-badge::before{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background-image:
+    radial-gradient(2.4px 2.4px at 50% 32%,var(--av-badge-dot),transparent 100%),
+    radial-gradient(2.4px 2.4px at 35% 62%,var(--av-badge-dot),transparent 100%),
+    radial-gradient(2.4px 2.4px at 65% 62%,var(--av-badge-dot),transparent 100%);
+}
+
+/* ==========================================================================
+   HIERARCHY
+   ========================================================================== */
+
+/* chain — silver/pewter register, cooler and quieter */
+.av-orb--chain{
+  --av-ring:rgba(200,198,193,.66);
+  --av-ring-soft:rgba(200,198,193,.24);
+  --av-track:rgba(200,198,193,.30);
+  --av-ell:rgba(200,198,193,.26);
+  --av-aura:rgba(92,44,134,.24);
+  --av-aura-far:rgba(92,44,134,.10);
+  --av-pearl-glow:rgba(200,198,193,.55);
+  --av-pearl-halo:rgba(200,198,193,.14);
+  --av-badge-dot:rgba(200,198,193,.85);
+}
+.av-orb--chain .av-badge{border-color:rgba(200,198,193,.34)}
+.av-orb--chain .av-disc::before{opacity:.42}
+
+/* featured — gilt ring, brighter sky, comet-trail on the orbit */
+.av-orb--featured{
+  --av-ring:var(--gilt,#F4DDA2);
+  --av-ring-soft:rgba(244,221,162,.34);
+  --av-track:rgba(244,221,162,.5);
+  --av-ell:rgba(244,221,162,.4);
+  --av-aura:rgba(92,44,134,.46);
+  --av-aura-far:rgba(180,107,214,.14);
+  --av-pearl-glow:rgba(255,63,111,.75);
+  --av-pearl-halo:rgba(255,63,111,.22);
+  --av-badge-dot:var(--gilt,#F4DDA2);
+}
+.av-orb--featured .av-badge{border-color:rgba(244,221,162,.5)}
+.av-orb--featured .av-disc::before{opacity:.75}
+/* the comet trail rides the rotating carrier on its own layer (::before),
+   masked to a thin annulus — masking the carrier itself would eat the pearl */
+.av-orb--featured .av-sat::before{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(
+    transparent 0deg 236deg,
+    rgba(244,221,162,.03) 244deg,
+    rgba(244,221,162,.55) 350deg,
+    rgba(244,221,162,0) 356deg);
+  -webkit-mask:radial-gradient(closest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));
+          mask:radial-gradient(closest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));
+}
+
+/* ==========================================================================
+   MOTION — transform + opacity only; static build above is the fallback
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference){
+  .av-sat{
+    animation:av-orbit 72s linear infinite;
+    will-change:transform;
+  }
+  .av-sheen{
+    animation:av-sheen 14s cubic-bezier(.16,1,.3,1) infinite;
+  }
+}
+@keyframes av-orbit{
+  from{transform:rotate(45deg)}
+  to{transform:rotate(405deg)}
+}
+@keyframes av-sheen{
+  0%    {transform:translateX(0) skewX(-16deg);opacity:0}
+  55%   {transform:translateX(0) skewX(-16deg);opacity:0}
+  60%   {opacity:.9}
+  74%   {transform:translateX(480%) skewX(-16deg);opacity:0}
+  100%  {transform:translateX(480%) skewX(-16deg);opacity:0}
+}
+
+/* finder.css ships its own .hero (for /nearby/) with text-align:center, max-width
+   and 92px padding; it loads after site.css and hijacks profile heroes.
+   Re-assert the profile hero here (this sheet loads last). */
+main#main .hero{max-width:none;margin:0;padding:0;text-align:left;
+  border:1px solid var(--line);border-radius:2px;overflow:hidden;background:var(--surface);
+  background-image:radial-gradient(120% 140% at 8% 0%,rgba(197,164,109,.10),transparent 55%),
+    radial-gradient(90% 120% at 100% 0%,rgba(255,63,111,.08),transparent 50%)}
+
+/* ==== Find-it near-me map (mp-) ==== */
+.mp-wrap{overflow:visible}
+.mp-face{position:relative;height:clamp(280px,38vw,380px);overflow:hidden;border-radius:2px;
+  background:
+    radial-gradient(70% 60% at 50% 46%,rgba(197,164,109,.07),transparent 70%),
+    linear-gradient(rgba(244,239,231,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(244,239,231,.045) 1px,transparent 1px),
+    radial-gradient(120% 100% at 50% 0%,rgba(122,74,168,.10),transparent 60%),
+    var(--surface-2,#141019);
+  background-size:auto,34px 34px,34px 34px,auto,auto}
+.mp-face::after{content:"";position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 70px 24px rgba(10,7,14,.75)}
+.mp-stage{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);aspect-ratio:1/1;height:100%}
+.mp-ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;
+  border:1px dashed rgba(197,164,109,.24);pointer-events:none}
+.mp-ring i{position:absolute;top:-.65em;left:50%;transform:translateX(-50%);font-style:normal;
+  font-size:.62rem;letter-spacing:.08em;color:rgba(197,164,109,.55);background:var(--surface-2,#141019);padding:0 .45em;white-space:nowrap}
+.mp-spot{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;display:grid;place-items:center;z-index:2}
+.mp-dot{width:11px;height:11px;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,#fff8e8 0%,#e8cd93 34%,#C5A46D 62%,#8a6f45 100%);
+  box-shadow:0 0 8px 1px rgba(197,164,109,.55),0 1px 2px rgba(0,0,0,.6);
+  transition:transform .18s ease}
+.mp-chain .mp-dot{background:radial-gradient(circle at 34% 30%,#f6f6f8 0%,#c9ccd4 40%,#9DA0A6 66%,#5d6066 100%);
+  box-shadow:0 0 6px 1px rgba(157,160,166,.4),0 1px 2px rgba(0,0,0,.6)}
+.mp-spot:hover .mp-dot,.mp-spot:focus-visible .mp-dot{transform:scale(1.45)}
+.mp-spot:focus-visible{outline:2px solid var(--champagne,#C5A46D);outline-offset:2px;border-radius:50%}
+.mp-center{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-40px 0 0 -22px;
+  background:none;border:0;padding:0;cursor:pointer;z-index:3;color:#ff3f6f}
+.mp-center svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.9;
+  filter:drop-shadow(0 0 8px rgba(255,63,111,.65)) drop-shadow(0 2px 3px rgba(0,0,0,.7))}
+.mp-center:focus-visible{outline:2px solid var(--champagne,#C5A46D);outline-offset:3px;border-radius:8px}
+@media (prefers-reduced-motion:no-preference){
+  .mp-focus .mp-center svg{animation:mpPulse 1.6s ease-in-out 3}
+  @keyframes mpPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.22)}}
+}
+.mp-card{position:absolute;z-index:5;min-width:190px;max-width:230px;padding:.8rem .9rem;
+  background:rgba(16,12,20,.97);border:1px solid rgba(197,164,109,.4);border-radius:2px;
+  box-shadow:0 12px 34px rgba(0,0,0,.55)}
+.mp-card .t{font-family:var(--serif,serif);font-size:1.02rem;color:var(--porcelain,#F4EFE7);margin:0 0 .15rem;text-wrap:balance}
+.mp-card .m{font-size:.78rem;color:var(--muted,#a89f92);margin:0 0 .55rem}
+.mp-card .st{display:inline-flex;align-items:center;gap:.4rem;font-size:.74rem;margin:0 0 .6rem;color:var(--muted,#a89f92)}
+.mp-card .st .led{width:7px;height:7px;border-radius:50%;background:#7dd087;flex:none}
+.mp-card .st.is-closed .led{background:#c96a6a}
+.mp-card .go{display:inline-block;font-size:.8rem;font-weight:600;color:var(--champagne,#C5A46D);text-decoration:none;border-bottom:1px solid rgba(197,164,109,.4);padding-bottom:1px}
+.mp-card .go:hover{color:#e8cd93}
+.mp-card .x{position:absolute;top:.3rem;right:.45rem;background:none;border:0;color:var(--muted,#a89f92);font-size:1rem;cursor:pointer;padding:.15rem}
+@media(max-width:480px){.mp-face{height:250px}.mp-card{min-width:170px}}
+.mp-card .golinks{display:flex;gap:1rem;flex-wrap:wrap}
+
+/* tiles layer: hidden until leaflet actually mounts; grid chart is the fallback */
+.mp-leaf{position:absolute;inset:0;z-index:1;display:none}
+.mp-has-tiles .mp-leaf{display:block}
+.mp-leaf .leaflet-container{background:transparent;width:100%;height:100%;font:inherit}
+.mp-stage{z-index:2}
+.mp-has-tiles .mp-stage{pointer-events:none}
+.mp-has-tiles .mp-ring{visibility:hidden}
+.mp-has-tiles .mp-spot,.mp-has-tiles .mp-center{opacity:0;pointer-events:none}
+.mp-card{pointer-events:auto;z-index:1200}
+.mp-leafspot{display:grid;place-items:center;cursor:pointer}
+.mp-leafcenter{color:#ff3f6f;cursor:pointer}
+.mp-leafcenter svg{width:40px;height:40px;fill:none;stroke:currentColor;stroke-width:1.9;
+  filter:drop-shadow(0 0 9px rgba(255,63,111,.7)) drop-shadow(0 2px 3px rgba(0,0,0,.7))}
+.mp-open{position:absolute;right:.8rem;bottom:.8rem;z-index:3;font-size:.78rem;font-weight:600;
+  color:var(--porcelain,#F4EFE7);background:rgba(16,12,20,.88);border:1px solid rgba(197,164,109,.45);
+  border-radius:2px;padding:.5rem .8rem;text-decoration:none;white-space:nowrap}
+.mp-open:hover{border-color:var(--champagne,#C5A46D);color:#fff}
+.mp-leaf .leaflet-control-attribution{background:rgba(10,7,14,.7);color:#6f6a63;font-size:.58rem}
+.mp-leaf .leaflet-control-attribution a{color:#8d867c}
+.mp-face{cursor:pointer}
+
+/* ==== Order it to go (od-) : sticky capsule + service sheet ==== */
+.od-cap{position:fixed;right:1.4rem;bottom:1.4rem;z-index:900;display:inline-flex;align-items:center;gap:.6rem;
+  font:600 .86rem "Inter Tight",sans-serif;letter-spacing:.02em;color:var(--porcelain,#F4EFE7);
+  background:linear-gradient(160deg,rgba(30,22,36,.97),rgba(14,10,18,.97));
+  border:1px solid rgba(197,164,109,.5);border-radius:999px;padding:.78rem 1.25rem;cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,.55),inset 0 1px 0 rgba(244,239,231,.06);
+  transform:translateY(12px);opacity:0;pointer-events:none;
+  transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.od-cap.is-on{transform:translateY(0);opacity:1;pointer-events:auto}
+.od-cap:hover{border-color:var(--champagne,#C5A46D)}
+.od-cap:focus-visible{outline:2px solid var(--champagne,#C5A46D);outline-offset:3px}
+.od-capart{width:20px;height:20px;flex:none}
+.od-capart .k{fill:none;stroke:var(--champagne,#C5A46D);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.od-capart .p{fill:var(--champagne,#C5A46D)}
+@media(max-width:880px){.od-cap{display:none}} /* the mobile bar carries Order */
+.ps-bb--order{color:var(--champagne,#C5A46D)}
+.ps-bb--order svg{stroke:currentColor}
+
+.od-modal{position:fixed;inset:0;z-index:1300;display:grid;place-items:center;padding:1.2rem}
+.od-scrim{position:absolute;inset:0;background:rgba(8,5,12,.72);backdrop-filter:blur(3px)}
+.od-box{position:relative;width:min(400px,94vw);background:linear-gradient(165deg,#171019,#0e0a12 70%);
+  border:1px solid rgba(197,164,109,.4);border-radius:2px;padding:1.7rem 1.6rem 1.35rem;
+  box-shadow:0 24px 70px rgba(0,0,0,.65)}
+.od-box::before{content:"";position:absolute;inset:5px;border:1px solid rgba(197,164,109,.16);border-radius:1px;pointer-events:none}
+.od-kick{margin:0 0 .3rem;font:600 .66rem "Inter Tight",sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--champagne,#C5A46D)}
+.od-title{margin:0 0 .3rem;font-family:var(--serif,serif);font-weight:500;font-size:1.5rem;color:var(--porcelain,#F4EFE7);text-wrap:balance}
+.od-sub{margin:0 0 1.15rem;font-size:.88rem;color:var(--muted,#a89f92);text-wrap:pretty}
+.od-links{display:grid;gap:.6rem}
+.od-svc{display:flex;align-items:center;gap:.85rem;padding:.95rem 1.05rem;text-decoration:none;
+  background:rgba(244,239,231,.03);border:1px solid var(--line,rgba(244,239,231,.12));border-radius:2px;
+  transition:border-color .18s,background .18s}
+.od-svc:hover{border-color:rgba(197,164,109,.6);background:rgba(197,164,109,.06)}
+.od-svc:focus-visible{outline:2px solid var(--champagne,#C5A46D);outline-offset:2px}
+.od-art{width:30px;height:30px;flex:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+.od-art .k{fill:none;stroke:var(--champagne,#C5A46D);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.od-art .p{fill:#7a5f3a}
+.od-gate{width:19px;height:19px;flex:none;opacity:.85;transition:transform .2s,opacity .2s}
+.od-gate .k{fill:none;stroke:var(--champagne,#C5A46D);stroke-width:1.3;stroke-linecap:round}
+.od-gate .pearl{fill:#e8cd93}
+.od-svc:hover .od-gate{opacity:1;transform:translateX(3px)}
+.od-n{font:600 1rem "Inter Tight",sans-serif;color:var(--porcelain,#F4EFE7);flex:1}
+.od-note{margin:1rem 0 0;font-size:.72rem;color:#726c63;text-wrap:pretty}
+.od-x{position:absolute;top:.55rem;right:.7rem;background:none;border:0;color:var(--muted,#a89f92);font-size:1.35rem;cursor:pointer;padding:.2rem}
+.od-x:hover{color:var(--porcelain,#F4EFE7)}
+.od-modal[hidden]{display:none}

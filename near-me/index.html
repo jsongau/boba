@@ -1159,6 +1159,27 @@ let tT;function toast(m){const t=el("toast");t.textContent=m;t.classList.add("sh
 function boot(){
   if(HAS_L){initLeaflet();}else{el("svgmap").hidden=false;}
   renderList();
+  /* deep link from profile pages: /near-me/?shop=<slug>&lat=&lng=&n=
+     known slug: center the map on the shop and open it selected.
+     unknown slug (not on the night map yet): center on its verified corner. */
+  const q=new URLSearchParams(location.search);
+  const qs=q.get("shop");
+  if(qs){
+    const ds=bySlug(qs);
+    if(ds){
+      setCenter(ds.lat,ds.lng,(ds.name||"Boba")+(ds.city?(" \u00b7 "+ds.city):""),false);
+      /* land past the cluster threshold so cup pins render, then select */
+      if(HAS_L&&MAP)MAP.setView([ds.lat,ds.lng],15.2,{animate:false});
+      setTimeout(()=>selectShop(qs),HAS_L?380:0);
+    } else {
+      const la=parseFloat(q.get("lat")),ln=parseFloat(q.get("lng"));
+      if(isFinite(la)&&isFinite(ln)){
+        setCenter(la,ln,q.get("n")||"That corner",false);
+        if(HAS_L&&MAP)flyGuard([la,ln],15.2);
+        toast((q.get("n")||"This spot")+" joins the night map soon. Showing its corner.");
+      }
+    }
+  }
   const m=location.hash.match(/#\/shop\/(.+)$/);if(m)openProfile(decodeURIComponent(m[1]));
   if(HAS_L)setTimeout(()=>MAP.invalidateSize(),120);
 }
