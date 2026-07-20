@@ -69,8 +69,11 @@
       el.appendChild(document.createTextNode(text));
     });
     var today = findPeriod(D.periods, now.day);
+    var todayTxt = today ? (fmt(today[1]) + " to " + fmt(today[3])) : "Closed today";
     var facts = document.getElementById("factsToday");
-    if (facts) facts.textContent = today ? (fmt(today[1]) + " to " + fmt(today[3])) : "Closed today";
+    if (facts) facts.textContent = todayTxt;
+    var qf = document.getElementById("qfToday");
+    if (qf) qf.textContent = todayTxt;
     Array.prototype.forEach.call(document.querySelectorAll(".hours-t tr"), function (tr) {
       var isToday = parseInt(tr.getAttribute("data-day"), 10) === now.day;
       tr.classList.toggle("is-today", isToday);
@@ -125,30 +128,25 @@
   var state = { when: "tonight", stops: [] };
   var lastFocus = null;
 
-  function hoursLine() {
-    var now = laParts();
+  function hoursTail() {
+    /* short, friendly "open till X" tail — only when we actually know hours */
     if (state.when === "weekend") {
       var sat = findPeriod(D.periods, 6);
-      return sat ? ("Open till " + fmt(sat[3]) + " on Saturday.") : "";
+      return sat ? (", open till " + fmt(sat[3]) + " Saturday") : "";
     }
-    var p = findPeriod(D.periods, now.day);
-    if (!p) return "";
-    return "Open till " + fmt(p[3]) + (state.when === "tonight" ? " tonight." : ".");
+    var p = findPeriod(D.periods, laParts().day);
+    return p ? (", open till " + fmt(p[3])) : "";
   }
   function compose() {
-    var whenTxt = { tonight: "tonight", sevenpm: "at 7pm", weekend: "this weekend" }[state.when];
-    var parts = ["Boba run " + whenTxt + ": " + D.name + ", " + D.addr + ", " + D.city + "."];
-    if (D.orderLine) parts.push(D.orderLine);
-    var hl = hoursLine(); if (hl) parts.push(hl);
+    /* an actual invitation, warm and short — never a menu recommendation */
+    var lead = { tonight: "Boba tonight?", sevenpm: "Boba at 7?", weekend: "Boba this weekend?" }[state.when];
+    var msg = lead + " Let's go to " + D.name + " in " + D.city + hoursTail() + ".";
     if (state.stops.length === 1) {
-      var s = D.stops[state.stops[0]];
-      parts.push("Then " + s.n + ", " + s.mi + " mi away.");
+      msg += " Then " + D.stops[state.stops[0]].n + ", a few steps away.";
     } else if (state.stops.length === 2) {
-      var a = D.stops[state.stops[0]], b = D.stops[state.stops[1]];
-      parts.push("Then " + a.n + " (" + a.mi + " mi) and " + b.n + " (" + b.mi + " mi).");
+      msg += " Then " + D.stops[state.stops[0]].n + " and " + D.stops[state.stops[1]].n + ", both a short walk.";
     }
-    parts.push(D.url);
-    var msg = parts.join(" ");
+    msg += " " + D.url;
     preview.textContent = msg;
     smsLink.setAttribute("href", "sms:?&body=" + encodeURIComponent(msg));
     return msg;
@@ -237,7 +235,6 @@
     try { document.execCommand("copy"); flash(btn, "Copied"); } catch (e) {}
     document.body.removeChild(ta);
   }
-  document.getElementById("psCopyLink").addEventListener("click", function () { copyText(D.url, this); });
   document.getElementById("psCopyMsg").addEventListener("click", function () { copyText(compose(), this); });
   var nativeBtn = document.getElementById("psNative");
   if (navigator.share) {
@@ -360,10 +357,12 @@
     var Lf = window.L;
     var center = stage.querySelector(".mp-center");
     var clat = parseFloat(center.getAttribute("data-lat")), clng = parseFloat(center.getAttribute("data-lng"));
-    var map = Lf.map(leafBox, { zoomControl: false, dragging: false, scrollWheelZoom: false,
-      doubleClickZoom: false, touchZoom: false, boxZoom: false, keyboard: false, tap: false });
+    var map = Lf.map(leafBox, { zoomControl: false, attributionControl: false, dragging: false,
+      scrollWheelZoom: false, doubleClickZoom: false, touchZoom: false, boxZoom: false, keyboard: false, tap: false });
+    /* overlay attribution control off; a discreet credit sits under the map (TPL:map)
+       to satisfy the OpenStreetMap + CARTO tile license without the busy badge. */
     Lf.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-      { maxZoom: 19, attribution: "&copy; OpenStreetMap &copy; CARTO" }).addTo(map);
+      { maxZoom: 19 }).addTo(map);
     var pts = [[clat, clng]];
     var spots = stage.querySelectorAll(".mp-spot");
     Array.prototype.forEach.call(spots, function (a) {

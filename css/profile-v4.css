@@ -559,3 +559,23 @@ main#main,.wrap{padding-bottom:96px} /* clear the fixed rail */
   .od-dir{padding:.7rem .6rem}
   .od-dir span{display:none} /* icon-only Directions on phones */
 }
+.mp-credit{color:#5c574f;font-size:.68rem}
+.mp-credit a{color:#6f6960;text-decoration:none;border-bottom:1px solid rgba(197,164,109,.2)}
+.mp-credit a:hover{color:var(--champagne,#C5A46D)}
+
+/* ==== Wave 1 entity core (qf- / xp-) ==== */
+.qf-entity{font-size:1.06rem;line-height:1.65;color:var(--porcelain,#F4EFE7);max-width:68ch;margin:0 0 1.1rem;text-wrap:pretty}
+.qf-grid{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:700px){.qf-grid{grid-template-columns:1fr 1fr;column-gap:2.2rem}}
+.qf-from{margin:.8rem 0 0;font-size:.9rem;color:var(--muted,#a89f92);text-wrap:pretty}
+.qf-from a{color:var(--champagne,#C5A46D)}
+.xp-list a{color:var(--champagne,#C5A46D)}
+.xp-list li{border-bottom:1px solid var(--line,rgba(244,239,231,.1))}
+.qf-grid > div{border-top:1px solid var(--line,rgba(244,239,231,.1))}
+.hero-rating{display:inline-flex;align-items:center;gap:.35rem;font-size:.88rem;color:var(--silver,#cfc9bf)}
+.hero-rating .star{color:var(--champagne,#C5A46D)}
+.hero-rating a{color:var(--silver,#cfc9bf);border-bottom:1px solid rgba(197,164,109,.35);text-decoration:none}
+.hero-rating a:hover{color:var(--porcelain,#F4EFE7)}
+
+/* Wave 2 fix: Area row — one link per line, no separators */
+.qf-stack a{display:block;width:max-content;max-width:100%}
