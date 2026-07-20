@@ -281,3 +281,118 @@ q.addEventListener("keydown",function(e){if(e.key==="Escape"){q.value="";res.hid
   var trig=document.querySelector('.bn-trigger[aria-controls="bnpanel-shops"]');
   if(trig){["mouseenter","focus","click"].forEach(function(ev){trig.addEventListener(ev,load);});}
 })();
+
+/* ===== NAV V3 base behavior (panel clamp, radius popover) ===== */
+
+(function(){
+  function clampPanels(){
+    document.querySelectorAll(".fuse .bn-item").forEach(function(it){
+      var p=it.querySelector(".bn-panel"); if(!p) return;
+      p.style.left="50%"; p.style.transform="translateX(-50%)";
+      var r=p.getBoundingClientRect();
+      var pad=12, shift=0;
+      if(r.left<pad) shift=pad-r.left;
+      if(r.right>innerWidth-pad) shift=(innerWidth-pad)-r.right;
+      if(shift) p.style.transform="translateX(calc(-50% + "+shift+"px))";
+    });
+  }
+  addEventListener("resize",clampPanels);
+  document.querySelectorAll(".fuse .bn-trigger").forEach(function(t){
+    t.addEventListener("mouseenter",function(){requestAnimationFrame(clampPanels);});
+    t.addEventListener("click",function(){requestAnimationFrame(clampPanels);});
+  });
+  setTimeout(clampPanels,300);
+  var chip=document.getElementById("meterChip"), pop=document.getElementById("radPop");
+  function radius(){ return (window.__demo&&__demo.state&&__demo.state.radius)||5; }
+  function paint(){ var v=document.getElementById("radVal"); if(v) v.textContent=radius();
+    var cv=document.getElementById("chipVal"); if(cv) cv.textContent=radius()+" mi"; }
+  if(chip&&pop){
+    chip.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();
+      pop.hidden=!pop.hidden; var fi=document.querySelector(".finder-inline"); if(fi)fi.classList.remove("meter-open");
+      if(!pop.hidden){paint(); if(window.__demo&&__demo.setRadius)__demo.setRadius(radius());}},true);
+    document.addEventListener("click",function(e){ if(!pop.hidden && !e.target.closest("#radAnchor")) pop.hidden=true; });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape") pop.hidden=true; });
+  }
+  var mi=document.getElementById("radMinus"), pl=document.getElementById("radPlus");
+  if(mi) mi.addEventListener("click",function(){ if(window.__demo)__demo.setRadius(Math.max(1,radius()-1)); paint(); });
+  if(pl) pl.addEventListener("click",function(){ if(window.__demo)__demo.setRadius(Math.min(20,radius()+1)); paint(); });
+  var mv=document.getElementById("mVal");
+  if(mv){ new MutationObserver(paint).observe(mv,{childList:true,characterData:true,subtree:true}); }
+})();
+
+/* ===== NAV V3 skin (underline + cup gauge) ===== */
+
+(function(){
+  var mid=document.querySelector("#radPop .rad-mid");
+  if(!mid) return;
+  /* ---- inject the boba-cup gauge (cream #meter stays in the DOM, hidden by CSS) ---- */
+  var wrap=document.createElement("div");
+  wrap.className="v3-cupwrap"; wrap.id="v3cupwrap";
+  wrap.innerHTML=
+    '<svg id="v3cup" viewBox="0 0 90 130" width="90" height="130" role="slider" tabindex="0"'
+   +' aria-label="Search radius — drag up for farther" aria-valuemin="1" aria-valuemax="20" aria-valuenow="5">'
+   +'<defs>'
+   +'<clipPath id="v3clip"><path d="M23.8 32 L31.2 111 q.6 5.2 5.4 5.2 h16.8 q4.8 0 5.4-5.2 L66.2 32 Z"/></clipPath>'
+   +'<linearGradient id="v3milk" x1="0" y1="0" x2="0" y2="1">'
+   +'<stop offset="0" stop-color="#f7ead9"/><stop offset="1" stop-color="#d9b98c"/></linearGradient>'
+   +'</defs>'
+   +'<g clip-path="url(#v3clip)">'
+   +'<g class="v3-fill" id="v3fill">'
+   +'<path fill="url(#v3milk)" d="M-20 5 Q-13 1 -6 5 T8 5 T22 5 T36 5 T50 5 T64 5 T78 5 T92 5 T106 5 L106 150 L-20 150 Z"/>'
+   +'<path fill="none" stroke="#fffaf0" stroke-width="1.4" opacity=".75" d="M-20 5 Q-13 1 -6 5 T8 5 T22 5 T36 5 T50 5 T64 5 T78 5 T92 5 T106 5"/>'
+   +'</g>'
+   +'<g fill="#241307" stroke="rgba(247,234,217,.18)" stroke-width="1">'
+   +'<circle cx="34.5" cy="111.8" r="4.1"/><circle cx="39.8" cy="109.8" r="4.1"/>'
+   +'<circle cx="45" cy="112" r="4.1"/><circle cx="50.2" cy="109.9" r="4.1"/>'
+   +'<circle cx="55.5" cy="111.7" r="4.1"/>'
+   +'</g>'
+   +'</g>'
+   +'<path d="M22 30 L29.6 111.6 Q30.3 118 36.3 118 L53.7 118 Q59.7 118 60.4 111.6 L68 30" fill="none" stroke="#C5A46D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'
+   +'<path d="M18.5 30 H71.5" fill="none" stroke="#C5A46D" stroke-width="1.5" stroke-linecap="round"/>'
+   +'<rect x="50" y="-2" width="7.5" height="48" rx="3.6" transform="rotate(20 53.75 22)" fill="none" stroke="#C5A46D" stroke-width="1.5" opacity=".9"/>'
+   +'</svg>';
+  mid.insertBefore(wrap,mid.firstChild);
+
+  var cup=wrap.querySelector("#v3cup"), fill=wrap.querySelector("#v3fill");
+  /* interior geometry (viewBox units): top y=32, bottom y=116, usable height 84 */
+  var BOT=116, SPAN=84, CREST=4;
+  function radius(){return (window.__demo&&__demo.state&&__demo.state.radius)||5;}
+  /* fill height rides (radius-1)/19 over a 12px floor so pearls stay steeped */
+  function paintCup(){
+    var r=radius(), h=12+72*((r-1)/19), t=(BOT-h)-CREST;
+    fill.style.transform="translateY("+t+"px)";
+    cup.setAttribute("aria-valuenow",r);
+  }
+  function setR(v){
+    v=Math.max(1,Math.min(20,Math.round(v)));
+    if(window.__demo&&__demo.setRadius)__demo.setRadius(v);
+    paintCup();
+  }
+  /* vertical drag: top of the cup = 20 mi, bottom = 1 mi */
+  function setFromY(cy){
+    var rc=cup.getBoundingClientRect(); if(!rc.height)return;
+    var y=(cy-rc.top)*(130/rc.height);
+    var t=(BOT-y)/SPAN; t=Math.max(0,Math.min(1,t));
+    setR(1+t*19);
+  }
+  var dragging=false;
+  cup.addEventListener("pointerdown",function(e){dragging=true;
+    try{cup.setPointerCapture(e.pointerId);}catch(_){}
+    setFromY(e.clientY);e.preventDefault();});
+  cup.addEventListener("pointermove",function(e){if(dragging)setFromY(e.clientY);});
+  cup.addEventListener("pointerup",function(){dragging=false;});
+  cup.addEventListener("pointercancel",function(){dragging=false;});
+  /* wheel over the cup steps ±1 */
+  cup.addEventListener("wheel",function(e){e.preventDefault();
+    setR(radius()+(e.deltaY<0?1:-1));},{passive:false});
+  cup.addEventListener("keydown",function(e){
+    if(e.key==="ArrowUp"||e.key==="ArrowRight"){setR(radius()+1);e.preventDefault();}
+    if(e.key==="ArrowDown"||e.key==="ArrowLeft"){setR(radius()-1);e.preventDefault();}});
+  /* repaint on ANY radius change: −/+, cream meter, chip, search — all funnel into #radVal */
+  var rv=document.getElementById("radVal");
+  if(rv) new MutationObserver(paintCup).observe(rv,{childList:true,characterData:true,subtree:true});
+  var chip=document.getElementById("meterChip");
+  if(chip) chip.addEventListener("click",function(){paintCup();});
+  paintCup();
+})();
+
