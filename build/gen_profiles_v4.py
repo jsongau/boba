@@ -27,7 +27,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://www.bobanight.com"
 STAMP = "July 20, 2026"
 SKIP_SLUGS = {"taro-yuan-city-of-industry"}
-COLS = ("slug,name,city,county,address,zip,store_type,is_featured,status,phone,website,"
+COLS = ("slug,name,city,county,state,address,zip,store_type,is_featured,status,phone,website,"
         "latitude,longitude,google_place_id,google_rating,google_review_count,price_level,"
         "seed_verify_needed,hours")
 
@@ -65,10 +65,14 @@ SGV_CITIES = {"Arcadia","Covina","Pasadena","Walnut","Rowland Heights","Monterey
     "City of Industry","El Monte","Diamond Bar","Rosemead","San Gabriel","Baldwin Park",
     "Temple City","Monrovia","Alhambra","South El Monte","Hacienda Heights","West Covina",
     "San Dimas","La Puente","Montebello","Duarte","Glendora","Azusa"}
-REGION_LABEL = {"sgv":"San Gabriel Valley","greater-la":"Greater LA","orange-county":"Orange County",
+REGION_LABEL = {"las-vegas":"Las Vegas Valley","sgv":"San Gabriel Valley","greater-la":"Greater LA","orange-county":"Orange County",
                 "san-diego":"San Diego","inland-empire":"Inland Empire"}
+def st_ab(state):
+    return {"California": "CA", "Nevada": "NV"}.get((state or "California").strip() or "California", "CA")
+
 def region_slug(county, city):
     c = (county or "").replace(" County","").strip()
+    if c == "Clark": return "las-vegas"
     if c == "Orange": return "orange-county"
     if c == "San Diego": return "san-diego"
     if c in ("Riverside","San Bernardino"): return "inland-empire"
@@ -89,9 +93,9 @@ def monogram(name):
         if ch.isalnum(): return ch.upper()
     return "B"
 
-def maps_href(name, addr, city):
+def maps_href(name, addr, city, st="CA"):
     clean = re.sub(r"[^0-9A-Za-z ]", " ", name or "")   # live pages strip punctuation from the maps query
-    return "https://www.google.com/maps/search/?api=1&query=" + uq(f"{clean} {addr} {city} CA")
+    return "https://www.google.com/maps/search/?api=1&query=" + uq(f"{clean} {addr} {city} {st}")
 
 def t12(hhmm):
     """'1900'->'7:00 PM', '0000'->'12:00 AM', '1200'->'12:00 PM'."""
@@ -221,13 +225,14 @@ def build_page(shop, opens, chrome):
     addr = ((shop.get("address") or "").split(",")[0]).strip()   # street-only (drop ", City, CA zip, USA")
     lat, lng = shop["lat"], shop["lng"]
     slug, cs = shop["slug"], slugify(city)
+    ST = st_ab(shop.get("state")); stp = ST.lower()
     reg = region_slug(shop.get("county"), city); reglab = REGION_LABEL[reg]
     tb = type_bits(shop.get("store_type"))
     periods = shop.get("periods") or []
     has_hours = bool(periods)
-    url = f"{SITE}/boba/ca/{cs}/{slug}/"
-    dirn = maps_href(name, addr, city)
-    full_addr = addr + (", " + city if city else "") + ", CA" + ((" " + zipc) if zipc else "")
+    url = f"{SITE}/boba/{stp}/{cs}/{slug}/"
+    dirn = maps_href(name, addr, city, ST)
+    full_addr = addr + (", " + city if city else "") + ", " + ST + ((" " + zipc) if zipc else "")
     if lat is not None and lng is not None:
         import base64 as _b64
         _pl = {"address": full_addr, "latitude": lat, "longitude": lng,
@@ -279,7 +284,7 @@ def build_page(shop, opens, chrome):
     # ---- breadcrumb ----
     crumb = (f'<nav class="crumb" aria-label="Breadcrumb">\n<a href="/">Home</a><span class="sep">/</span>\n'
              f'<a href="/area/{reg}/">{nbsp(reglab)}</a><span class="sep">/</span>\n'
-             f'<a href="/boba/ca/{cs}/">{nbsp(esc(city))}</a><span class="sep">/</span>\n'
+             f'<a href="/boba/{stp}/{cs}/">{nbsp(esc(city))}</a><span class="sep">/</span>\n'
              f'<span aria-current="page">{E}</span>\n</nav>\n')
 
     # ---- hero ----
@@ -318,10 +323,10 @@ def build_page(shop, opens, chrome):
     if shop.get("price_level") in PRICE:
         price_row = f'<div><dt>Price</dt><dd>{PRICE[shop["price_level"]]}</dd></div>\n'
     quickfacts = ('<!-- TPL:quickfacts -->\n<section class="sec" id="facts">\n'
-        f'<p class="qf-entity">{E} is {tb["ent"]} at {esc(addr)} in {esc(city)}, California, in the {reglab}.{ent_hours}</p>\n'
+        f'<p class="qf-entity">{E} is {tb["ent"]} at {esc(addr)} in {esc(city)}, {esc(shop.get("state") or "California")}, in the {reglab}.{ent_hours}</p>\n'
         '<dl class="dl qf-grid">\n'
         f'<div><dt>Type</dt><dd>{tb["qf"]}</dd></div>\n'
-        f'<div><dt>Area</dt><dd class="qf-stack"><a href="/boba/ca/{cs}/">{nbsp(esc(city))}</a>{county_link}<a href="/area/{reg}/">{nbsp(reglab)}</a></dd></div>\n'
+        f'<div><dt>Area</dt><dd class="qf-stack"><a href="/boba/{stp}/{cs}/">{nbsp(esc(city))}</a>{county_link}<a href="/area/{reg}/">{nbsp(reglab)}</a></dd></div>\n'
         f'{tonight_row}'
         f'<div><dt>To go</dt><dd><a href="{hh(ue)}" rel="nofollow sponsored noopener" target="_blank">Uber&nbsp;Eats</a> and <a href="{hh(dd)}" rel="nofollow sponsored noopener" target="_blank">DoorDash</a></dd></div>\n'
         f'{price_row}</dl>\n\n</section>\n<!-- /TPL:quickfacts -->\n')
@@ -375,7 +380,7 @@ def build_page(shop, opens, chrome):
             L, T = project(lat, lng, s["lat"], s["lng"], ppm)
             nm = hh(f"/near-me/?shop={s['slug']}&lat={s['lat']}&lng={s['lng']}&n={uq(s['name'])}")
             per = f" data-per='{json.dumps(data_per(s.get('periods')), separators=(chr(44),chr(58)))}'" if s.get("periods") else ""
-            spots += (f'<a class="mp-spot {stb["mp"]}" href="/boba/ca/{slugify(s["city"])}/{s["slug"]}/#map" style="left:{L}%;top:{T}%" '
+            spots += (f'<a class="mp-spot {stb["mp"]}" href="/boba/{st_ab(s.get("state")).lower()}/{slugify(s["city"])}/{s["slug"]}/#map" style="left:{L}%;top:{T}%" '
                       f'data-n="{esc(s["name"])}" data-c="{esc(s["city"])}" data-mi="{fmt_mi(d)}" data-nm="{nm}" '
                       f'data-lat="{s["lat"]}" data-lng="{s["lng"]}"{per}><span class="mp-dot" aria-hidden="true"></span>'
                       f'<span class="bn-sr">{esc(s["name"])}, {fmt_mi(d)} miles away</span></a>\n')
@@ -388,7 +393,7 @@ def build_page(shop, opens, chrome):
     mapsec = ('<section class="sec" id="map"><h2>Find it on the Boba Night Map</h2>\n<!-- TPL:map -->\n'
               '<div class="map-main mp-wrap"><div class="mp-face">\n<div class="mp-leaf" id="mpLeaf" aria-hidden="true"></div>\n'
               f'<div class="mp-stage">\n{rings}\n{spots}{center}\n<div class="mp-card" id="mpCard" hidden></div>\n</div>\n</div>\n'
-              f'<div class="map-foot"><div class="addr"><strong>{esc(addr)}</strong><span>{esc(city)}, CA {esc(zipc)}</span></div>\n'
+              f'<div class="map-foot"><div class="addr"><strong>{esc(addr)}</strong><span>{esc(city)}, {ST} {esc(zipc)}</span></div>\n'
               f'<a class="btn btn-primary" href="{open_map}">Open the Boba Night Map</a>\n'
               f'<a class="btn btn-ghost" href="{dirn}" rel="nofollow noopener" target="_blank">Get directions</a></div></div>\n'
               '<p class="note-line">Coordinates are geocoded and verified before this profile is indexed, so the pin never drifts from the real address. '
@@ -406,7 +411,7 @@ def build_page(shop, opens, chrome):
             stb = type_bits(s.get("store_type"))
             live = (f' <span class="ps-live" data-per=\'{json.dumps(data_per(s.get("periods")), separators=(chr(44),chr(58)))}\'></span>'
                     if s.get("periods") else "")
-            ps += (f'<a class="ps-shop" href="/boba/ca/{slugify(s["city"])}/{s["slug"]}/"><span class="n">{esc(s["name"])}</span>'
+            ps += (f'<a class="ps-shop" href="/boba/{st_ab(s.get("state")).lower()}/{slugify(s["city"])}/{s["slug"]}/"><span class="n">{esc(s["name"])}</span>'
                    f'<span class="m"><span class="ps-mi">{fmt_mi(d)}&nbsp;mi</span><span>{esc(s["city"])}</span>'
                    f'<span class="tag {stb["tag_cls"]}">{stb["tag"]}</span>{live}</span></a>\n')
         intro = f'{within1} more shops pour within a mile, {len(shown)} within {fmt_mi(shown[-1][0])}&nbsp;miles. If the line is long, the next counter is close.'
@@ -425,9 +430,9 @@ def build_page(shop, opens, chrome):
             ptb = type_bits(pick.get("store_type"))
             db = ", an original tea house." if ptb["tag"] == "Original" else "."
             unit = "shop" if cnt == 1 else "shops"
-            rows += (f'<div class="ps-city"><div class="row1"><a class="cl" href="/boba/ca/{slugify(cty)}/">Boba in {nbsp(esc(cty))}</a>'
+            rows += (f'<div class="ps-city"><div class="row1"><a class="cl" href="/boba/{st_ab(pick.get("state")).lower()}/{slugify(cty)}/">Boba in {nbsp(esc(cty))}</a>'
                      f'<span class="ct">{cnt}&nbsp;{unit}, {fmt_mi(dist)}&nbsp;mi</span></div>'
-                     f'<p class="pick">{lead} in {nbsp(esc(cty))}: <a href="/boba/ca/{slugify(cty)}/{pick["slug"]}/">{esc(pick["name"])}</a>{db}</p></div>\n')
+                     f'<p class="pick">{lead} in {nbsp(esc(cty))}: <a href="/boba/{st_ab(pick.get("state")).lower()}/{slugify(cty)}/{pick["slug"]}/">{esc(pick["name"])}</a>{db}</p></div>\n')
         nearby_cities = ('<!-- TPL:nearby-cities -->\n<section class="sec" id="cities">\n<p class="eyebrow">Keep browsing</p>\n'
                          f'<h2>Boba towns around {esc(city)}</h2>\n<div class="ps-cities">\n{rows}</div>\n</section>\n<!-- /TPL:nearby-cities -->\n')
 
@@ -442,13 +447,13 @@ def build_page(shop, opens, chrome):
     else:
         open_a = f'We&#x27;re verifying {E}&#x27;s current hours against the shop&#x27;s listing. Use the Get directions button for live Google hours in the meantime.'
     faq = ('<!-- TPL:faq -->\n<section class="sec faq"><h2>FAQ</h2>\n'
-           f'<h3>Where is {E}?</h3><p>{E} is at {esc(addr)} in {esc(city)}, CA {esc(zipc)}, in {esc(reglab)}.</p>\n'
+           f'<h3>Where is {E}?</h3><p>{E} is at {esc(addr)} in {esc(city)}, {ST} {esc(zipc)}, in {esc(reglab)}.</p>\n'
            f'<h3>Is {E} open right now?</h3><p>{open_a}</p></section>\n<!-- /TPL:faq -->\n')
 
     # ---- explore ----
     explore = ('<!-- TPL:explore -->\n<section class="sec" id="keep-exploring">\n<p class="eyebrow">Keep exploring</p>\n'
                '<h2>Where to next</h2>\n<ul class="nearby-list xp-list">\n'
-               f'<li><a href="/boba/ca/{cs}/">All boba in {esc(city)}</a></li>\n'
+               f'<li><a href="/boba/{stp}/{cs}/">All boba in {esc(city)}</a></li>\n'
                '<li><a href="/best/open-late/">Boba open late across SoCal</a></li>\n'
                f'<li><a href="/area/{reg}/">All of the {esc(reglab)}</a></li>\n'
                '<li><a href="/best/brown-sugar/">Best brown sugar boba</a></li>\n'
@@ -459,7 +464,7 @@ def build_page(shop, opens, chrome):
     today_row = '<div><dt>Today</dt><dd id="factsToday">See hours</dd></div>\n' if has_hours else ""
     facts = ('<!-- TPL:facts -->\n<aside class="g-aside"><div class="facts-card">\n'
              f'<p class="fc-title">Find {E}</p>\n<dl class="dl">\n'
-             f'<div><dt>Address</dt><dd><a href="{dirn}" rel="nofollow noopener" target="_blank">{esc(addr)},<br>{nbsp(esc(city))}, CA&nbsp;{esc(zipc)}</a></dd></div>\n'
+             f'<div><dt>Address</dt><dd><a href="{dirn}" rel="nofollow noopener" target="_blank">{esc(addr)},<br>{nbsp(esc(city))}, {ST}&nbsp;{esc(zipc)}</a></dd></div>\n'
              f'<div><dt>Area</dt><dd><a href="/area/{reg}/">{esc(reglab)}</a></dd></div>\n'
              f'<div><dt>Type</dt><dd>{tb["aside"]}</dd></div>\n{today_row}</dl>\n'
              f'<p class="card-line">Checked {STAMP} &middot; hours from the shop\'s public listing</p>\n'
@@ -471,18 +476,18 @@ def build_page(shop, opens, chrome):
                "url":url,"servesCuisine":"Bubble Tea"}
     if shop.get("price_level"): shop_ld["priceRange"] = "$" * int(shop["price_level"])
     shop_ld["address"] = {"@type":"PostalAddress","streetAddress":addr,"addressLocality":city,
-                          "addressRegion":"CA","postalCode":zipc,"addressCountry":"US"}
+                          "addressRegion":ST,"postalCode":zipc,"addressCountry":"US"}
     shop_ld["geo"] = {"@type":"GeoCoordinates","latitude":lat,"longitude":lng}
     if has_hours: shop_ld["openingHoursSpecification"] = ld_hours(periods)
     bc = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
         {"@type":"ListItem","position":1,"name":"Home","item":f"{SITE}/"},
         {"@type":"ListItem","position":2,"name":reglab,"item":f"{SITE}/area/{reg}/"},
-        {"@type":"ListItem","position":3,"name":city,"item":f"{SITE}/boba/ca/{cs}/"},
+        {"@type":"ListItem","position":3,"name":city,"item":f"{SITE}/boba/{stp}/{cs}/"},
         {"@type":"ListItem","position":4,"name":name,"item":url}]}
     def plain(s): return re.sub("&#x27;","'", re.sub("&nbsp;"," ", s))
     faqld = {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
         {"@type":"Question","name":f"Where is {name}?","acceptedAnswer":{"@type":"Answer",
-            "text":f"{name} is at {addr} in {city}, CA {zipc}, in {reglab}."}},
+            "text":f"{name} is at {addr} in {city}, {ST} {zipc}, in {reglab}."}},
         {"@type":"Question","name":f"Is {name} open right now?","acceptedAnswer":{"@type":"Answer",
             "text":plain(open_a).replace(name, name)}}]}
     wp = {"@context":"https://schema.org","@type":"WebPage","@id":url+"#webpage","url":url,
@@ -579,7 +584,7 @@ def norm(r):
     h = r.get("hours") or {}
     return {"slug":r["slug"],"name":r["name"],"city":r.get("city") or "","county":r.get("county"),
             "address":r.get("address"),"zip":r.get("zip"),"store_type":r.get("store_type"),
-            "status":r.get("status"),"lat":fnum(r.get("latitude")),"lng":fnum(r.get("longitude")),
+            "status":r.get("status"),"state":r.get("state"),"lat":fnum(r.get("latitude")),"lng":fnum(r.get("longitude")),
             "rating":r.get("google_rating"),"reviews":r.get("google_review_count"),"place_id":r.get("google_place_id"),
             "price_level":r.get("price_level"),"periods":h.get("periods") or []}
 
@@ -597,7 +602,7 @@ def main(argv):
     wrote = 0
     for s in targets:
         page = build_page(s, opens, chrome)
-        dest = os.path.join(ROOT, "boba", "ca", slugify(s["city"]), s["slug"], "index.html")
+        dest = os.path.join(ROOT, "boba", st_ab(s.get("state")).lower(), slugify(s["city"]), s["slug"], "index.html")
         if dry:
             if wrote < 3: print("  would write", os.path.relpath(dest, ROOT), "(%d bytes)" % len(page))
         else:
