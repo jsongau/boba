@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>This page moved on — Boba Night</title>
+<meta name="description" content="That link goes nowhere, but the tea is still pouring. Search 998 SoCal boba shops or open the map.">
+<meta name="robots" content="noindex,follow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/components/footer.css">
+<style>
+:root{--bg:#0B0C0E;--cream:#f6ead8;--champ:#C5A46D;--gilt:#F4DDA2;--pink:#ff2f6d;--jade:#2e7d5b;--muted:#a8998a;--line:rgba(197,164,109,.3)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font:16px/1.65 "Inter",system-ui,sans-serif;overflow-x:clip}
+.p404{max-width:1060px;margin:0 auto;padding:150px 22px 90px}
+.p404 .kick{font:600 10.5px/1 "Inter",sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--champ)}
+
+/* ---- hero: the number, the line, the art ---- */
+.hero404{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;margin-bottom:72px}
+.n404{display:flex;align-items:center;gap:6px;margin:16px 0 18px;user-select:none}
+.n404 b{font:300 clamp(96px,14vw,150px)/1 "Fraunces",serif;color:var(--gilt);letter-spacing:-.02em}
+.n404 .pearlcup{width:clamp(78px,11vw,120px);height:clamp(78px,11vw,120px);flex:0 0 auto;margin:0 6px}
+.pearlcup .ring{animation:spin404 26s linear infinite;transform-origin:50% 50%}
+@keyframes spin404{to{transform:rotate(360deg)}}
+.pearlcup .steam{animation:steam404 3.2s ease-in-out infinite;opacity:.7}
+@keyframes steam404{0%,100%{transform:translateY(0);opacity:.35}50%{transform:translateY(-3px);opacity:.8}}
+@media(prefers-reduced-motion:reduce){.pearlcup .ring,.pearlcup .steam{animation:none}}
+.hero404 h1{font:600 clamp(26px,3.6vw,38px)/1.15 "Fraunces",serif;text-wrap:balance;margin-bottom:12px}
+.hero404 .sub{color:var(--muted);max-width:46ch;margin-bottom:26px}
+.hero404 .sub b{color:var(--cream);font-weight:600}
+
+/* search bar that hands off to the real finder in the nav */
+.f404{display:flex;gap:10px;max-width:520px}
+.f404 input{flex:1;min-width:0;height:54px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(180deg,#fdf6ea,#f3e2c6);
+  color:#1c0f08;font:600 15px "Inter",sans-serif;padding:0 18px;outline:none;box-shadow:0 14px 34px -18px rgba(0,0,0,.9)}
+.f404 input::placeholder{color:#8a6a55;font-weight:500}
+.f404 input:focus{border-color:var(--gilt);box-shadow:0 0 0 3px rgba(244,221,162,.22),0 14px 34px -18px rgba(0,0,0,.9)}
+.f404 button{height:54px;border:0;border-radius:16px;padding:0 22px;cursor:pointer;flex:0 0 auto;
+  background:linear-gradient(180deg,#ff5d8b,var(--pink) 55%,#d61c53);color:#fff;font:600 14.5px "Inter",sans-serif;
+  box-shadow:0 12px 30px -10px rgba(255,47,109,.75), inset 0 1px 0 rgba(255,255,255,.35);transition:filter .15s,transform .1s}
+.f404 button:hover{filter:brightness(1.07)}
+.f404 button:active{transform:translateY(1px)}
+.chips404{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chips404 span{font:600 10px/1 "Inter";letter-spacing:.16em;text-transform:uppercase;color:var(--muted);align-self:center;margin-right:2px}
+.chips404 button{border:1px solid var(--line);background:rgba(197,164,109,.08);color:var(--cream);border-radius:99px;
+  padding:8px 14px;font:600 12.5px "Inter";cursor:pointer;transition:border-color .15s,background .15s}
+.chips404 button:hover{border-color:var(--gilt);background:rgba(197,164,109,.16)}
+.cta404{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.cta404 .map{display:inline-flex;align-items:center;gap:9px;text-decoration:none;border-radius:14px;padding:14px 22px;
+  border:1px solid var(--line);color:var(--gilt);font:600 14px "Inter";transition:border-color .15s,background .15s}
+.cta404 .map:hover{border-color:var(--gilt);background:rgba(197,164,109,.1)}
+.cta404 .map svg{width:16px;height:16px}
+
+/* the art frame (generated image drops in at /img/404-teahouse.png) */
+.art404{position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(197,164,109,.55);
+  box-shadow:0 40px 90px -30px rgba(0,0,0,.95), 0 0 0 5px #14100a, 0 0 0 6px rgba(197,164,109,.35);aspect-ratio:4/5;background:#101014}
+.art404 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.art404.noimg img{display:none}
+.art404 .ph{position:absolute;inset:0;display:none}
+.art404.noimg .ph{display:block}
+.art404 .plate{position:absolute;left:14px;bottom:14px;right:14px;background:rgba(11,12,14,.72);backdrop-filter:blur(6px);
+  border:1px solid var(--line);border-radius:12px;padding:10px 14px;font:500 12px/1.5 "Inter";color:#d9c9b4}
+.art404 .plate b{color:var(--gilt);font-weight:600}
+
+/* ---- the story: one leaf to the night pour ---- */
+.story404{margin:0 0 72px}
+.story404 h2{font:600 clamp(22px,3vw,30px)/1.2 "Fraunces",serif;margin:10px 0 8px}
+.story404 .lede{color:var(--muted);max-width:64ch;margin-bottom:34px}
+.tline{position:relative;display:grid;gap:0}
+.tline::before{content:"";position:absolute;left:19px;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(180deg,transparent,var(--champ) 12%,var(--champ) 88%,transparent)}
+.chap{position:relative;display:grid;grid-template-columns:40px 92px 1fr;gap:0 18px;padding:20px 0;align-items:baseline}
+.chap+.chap{border-top:1px solid rgba(197,164,109,.14)}
+.chap .dot{position:relative;width:40px;display:grid;place-items:center;align-self:start;padding-top:5px}
+.chap .dot i{width:11px;height:11px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff7e6,var(--champ) 60%,#7a5f35);
+  box-shadow:0 0 0 3px #0B0C0E,0 0 0 4px rgba(197,164,109,.5),0 0 12px rgba(197,164,109,.45)}
+.chap .era{font:600 12px/1.5 "Inter";letter-spacing:.1em;text-transform:uppercase;color:var(--champ)}
+.chap h3{font:600 17.5px/1.35 "Fraunces",serif;color:var(--cream);margin-bottom:4px}
+.chap p{color:#cbbba6;font-size:14.5px;max-width:62ch}
+.chap p b{color:var(--gilt);font-weight:600}
+
+/* ---- keep pouring row ---- */
+.keep404{border-top:1px solid var(--line);padding-top:30px}
+.keep404 h2{font:600 20px "Fraunces",serif;margin-bottom:16px}
+.keep404 .row{display:flex;flex-wrap:wrap;gap:10px}
+.keep404 a{text-decoration:none;color:var(--cream);border:1px solid var(--line);border-radius:99px;padding:10px 18px;
+  font:600 13px "Inter";transition:border-color .15s,color .15s}
+.keep404 a:hover{border-color:var(--gilt);color:var(--gilt)}
+
+@media(max-width:900px){
+  .p404{padding-top:118px}
+  .hero404{grid-template-columns:1fr;gap:34px}
+  .art404{max-width:420px;aspect-ratio:4/3}
+  .chap{grid-template-columns:40px 1fr}
+  .chap .dot{grid-row:1/span 2}
+  .chap .era{grid-column:2}
+  .chap>div{grid-column:2}
+}
+</style>
+</head>
+<body>
+<div id="bn-nav"></div>
+
+<main class="p404">
+  <section class="hero404">
+    <div>
+      <p class="kick">Wrong door · Right house</p>
+      <div class="n404" aria-hidden="true">
+        <b>4</b>
+        <svg class="pearlcup" viewBox="0 0 120 120" fill="none">
+          <circle class="ring" cx="60" cy="60" r="54" stroke="#C5A46D" stroke-width="1.6" stroke-dasharray="4 7" stroke-linecap="round"/>
+          <circle cx="60" cy="60" r="46" stroke="rgba(197,164,109,.4)" stroke-width="1"/>
+          <g class="steam" stroke="#F4DDA2" stroke-width="1.6" stroke-linecap="round">
+            <path d="M52 30c0-3.5 3-3.5 3-7"/><path d="M65 30c0-3.5 3-3.5 3-7"/>
+          </g>
+          <path d="M42 44h36l-4.6 36a5.4 5.4 0 0 1-5.3 4.6H51.9a5.4 5.4 0 0 1-5.3-4.6L42 44Z" stroke="#F4DDA2" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M43.5 56h33" stroke="rgba(244,221,162,.55)" stroke-width="1.4"/>
+          <circle cx="52" cy="74" r="3.4" fill="#ff2f6d"/><circle cx="61" cy="77" r="3.4" fill="#C5A46D"/><circle cx="68" cy="72" r="3.4" fill="#ff2f6d"/>
+          <path d="M69 41 79 22" stroke="#F4DDA2" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+        <b>4</b>
+      </div>
+      <h1>This page poured its last cup.</h1>
+      <p class="sub">The link you followed leads nowhere now — a shop moved, a page was renamed, or the address never existed. The rest of the house is open: <b>998 boba shops across 169 Southern California cities</b>, hours checked and current.</p>
+      <form class="f404" id="f404">
+        <input id="q404" type="text" autocomplete="off" placeholder="Try a city or ZIP, like Rowland Heights or 91748" aria-label="Search for boba by city or ZIP code">
+        <button type="submit">Find boba</button>
+      </form>
+      <div class="chips404" id="chips404">
+        <span>Tonight</span>
+        <button type="button" data-c="Rowland Heights">Rowland Heights</button>
+        <button type="button" data-c="Cypress">Cypress</button>
+        <button type="button" data-c="San Gabriel">San Gabriel</button>
+        <button type="button" data-c="Irvine">Irvine</button>
+      </div>
+      <div class="cta404">
+        <a class="map" href="/near-me/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></svg>
+          Open the boba map
+        </a>
+        <a class="map" href="/best/open-late/">See who&rsquo;s open late</a>
+      </div>
+    </div>
+    <figure class="art404" id="art404">
+      <img src="/img/404-teahouse.png" alt="A lantern-lit teahouse at night, its door glowing gold, a boba cup steaming on the counter" onerror="document.getElementById('art404').classList.add('noimg')">
+      <svg class="ph" viewBox="0 0 400 500" aria-hidden="true">
+        <rect width="400" height="500" fill="#101014"/>
+        <circle cx="200" cy="150" r="72" fill="none" stroke="rgba(197,164,109,.5)" stroke-width="1.5"/>
+        <circle cx="200" cy="150" r="60" fill="rgba(244,221,162,.08)"/>
+        <path d="M164 300h72l-9 74a10 10 0 0 1-10 9h-34a10 10 0 0 1-10-9l-9-74Z" stroke="#C5A46D" stroke-width="2.5" fill="none"/>
+        <circle cx="185" cy="352" r="6" fill="#ff2f6d"/><circle cx="202" cy="358" r="6" fill="#C5A46D"/><circle cx="216" cy="349" r="6" fill="#ff2f6d"/>
+        <path d="M218 293l20-38" stroke="#C5A46D" stroke-width="3" stroke-linecap="round"/>
+        <text x="200" y="452" text-anchor="middle" fill="#8a6a55" font-family="Georgia,serif" font-size="15" font-style="italic">The night teahouse — portrait arriving soon</text>
+      </svg>
+      <figcaption class="plate"><b>The night teahouse.</b> Every dead end in this house opens onto the counter.</figcaption>
+    </figure>
+  </section>
+
+  <section class="story404" aria-label="A short history of tea and boba">
+    <p class="kick">While you're here</p>
+    <h2>How tea became boba: the short history</h2>
+    <p class="lede">You found a missing page; here's how a missing-page story usually goes in tea. Every era below started with someone pouring something nobody asked for yet.</p>
+    <div class="tline">
+      <div class="chap">
+        <span class="dot"><i></i></span>
+        <span class="era">The legend</span>
+        <div><h3>A leaf falls into hot water</h3>
+        <p>Chinese legend credits Emperor <b>Shennong</b>, nearly five thousand years ago: leaves drifted into his boiling water, he drank it anyway, and preferred it. A story, not a record — but every cup since has kept its side of the bargain.</p></div>
+      </div>
+      <div class="chap">
+        <span class="dot"><i></i></span>
+        <span class="era">8th century</span>
+        <div><h3>Tea gets its book</h3>
+        <p>In Tang-dynasty China, <b>Lu Yu</b> wrote the Cha Jing — the Classic of Tea — and turned a drink into a discipline: which water, which fire, which cup. Tea houses spread along the trade roads, and drinking tea together became its own reason to gather.</p></div>
+      </div>
+      <div class="chap">
+        <span class="dot"><i></i></span>
+        <span class="era">1980s Taiwan</span>
+        <div><h3>Someone drops pearls in</h3>
+        <p>In the 1980s, tapioca pearls met cold milk tea in Taiwan — and two tearooms, <b>Chun Shui Tang in Taichung and Hanlin in Tainan</b>, still both claim the first cup. The argument was never settled. The drink didn't wait for a verdict.</p></div>
+      </div>
+      <div class="chap">
+        <span class="dot"><i></i></span>
+        <span class="era">1990s California</span>
+        <div><h3>The pearls cross the Pacific</h3>
+        <p>Taiwanese families brought boba to Southern California, and the <b>San Gabriel Valley</b> became its American home — tea houses open past midnight, full of students, first dates, and the debrief after dinner. The 626 has poured it nightly ever since.</p></div>
+      </div>
+      <div class="chap">
+        <span class="dot"><i></i></span>
+        <span class="era">Tonight</span>
+        <div><h3>The densest tea corridor in the country</h3>
+        <p>SoCal now holds <b>998 boba shops across 169 cities</b>, from Ventura to San Diego — brown sugar strips, fruit-tea houses, 2 AM counters. This site keeps their hours checked so your night doesn't end at a locked door. Or a missing page.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="keep404">
+    <h2>Keep the night going</h2>
+    <div class="row">
+      <a href="/">Tonight&rsquo;s selection</a>
+      <a href="/directory/">The full directory</a>
+      <a href="/best/date-night/">Date night picks</a>
+      <a href="/pantry/">Every topping, explained</a>
+      <a href="/tools/roulette/">Spin for a shop</a>
+      <a href="/meetups/">Boba events this week</a>
+    </div>
+  </section>
+</main>
+
+<div id="bn-footer"></div>
+<script src="/components/nav.js" defer></script>
+<script src="/components/footer.js" defer></script>
+<script>
+/* the big bar and the city chips hand off to the real finder in the nav */
+(function(){
+'use strict';
+function navQ(){return document.getElementById('q');}
+function toNav(v){
+  var q=navQ(); if(!q) return;
+  window.scrollTo({top:0,behavior:'smooth'});
+  q.focus();
+  q.value=v;
+  q.dispatchEvent(new Event('input',{bubbles:true}));
+}
+document.getElementById('f404').addEventListener('submit',function(e){
+  e.preventDefault();
+  var v=document.getElementById('q404').value.trim();
+  if(!v){ toNav(''); return; }
+  if(window.__demo&&window.__demo.pick){ window.scrollTo({top:0,behavior:'smooth'}); window.__demo.pick(v); }
+  else toNav(v);
+});
+document.getElementById('chips404').addEventListener('click',function(e){
+  var b=e.target.closest('button[data-c]'); if(!b) return;
+  if(window.__demo&&window.__demo.pick){ window.scrollTo({top:0,behavior:'smooth'}); window.__demo.pick(b.getAttribute('data-c')); }
+  else toNav(b.getAttribute('data-c'));
+});
+})();
+</script>
+</body>
+</html>

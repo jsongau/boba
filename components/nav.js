@@ -4,8 +4,7 @@
    Optionally place <div id="bn-nav"></div> where the header should mount
    (defaults to the top of <body>). The loader injects components/nav.html,
    attaches the required stylesheets, then loads the nav behavior scripts in
-   order (incl. finder-data + finder, which dress the search pill AFTER the
-   nav exists - kit pages must not load those two themselves). Pages that already contain a baked header (the homepage) are
+   order. Pages that already contain a baked header (the homepage) are
    detected and skipped, so including this everywhere is always safe.
    PREVIEWS AND OFF-SITE PAGES: load this script with an absolute URL —
      <script src="https://www.bobanight.com/components/nav.js" defer></script>
@@ -40,10 +39,10 @@ function mount(){
       if(document.querySelector('script[src*="'+src+'"]'))return res();
       var s=document.createElement('script');s.src=BASE+src;s.onload=res;s.onerror=res;document.body.appendChild(s);});}
     load('/js/nav-midnight.js')
-      .then(function(){return load('/js/homepage/near-me.js');})
-      .then(function(){return load('/js/sound.js');})
       .then(function(){return load('/js/finder-data.js');})
-      .then(function(){return load('/js/finder.js');});
+      .then(function(){return load('/js/finder.js');})
+      .then(function(){return load('/js/homepage/near-me.js');})
+      .then(function(){return load('/js/sound.js');});
   }).catch(function(){});
 }
 if(document.readyState!=='loading')mount();
