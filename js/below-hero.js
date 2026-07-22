@@ -416,9 +416,9 @@ function beltifyAll(){beltify('trendTrack',BELT_SPEEDS[0]);beltify('worthTrack',
   function paint(){btns.forEach(b=>{
     b.setAttribute('aria-pressed',String(chainsIn));
     const t=b.querySelector('.ctTxt'),u=b.querySelector('.ctSub');
-    if(t)t.textContent=chainsIn?'Full counter':'Omakase';
-    if(u)u.textContent=chainsIn?'chains included':'independents only';
-    b.title=chainsIn?'Chains are included here. Tap for independents only.':'Chains are off the menu here. Tap to add them.';});}
+    if(t)t.textContent=chainsIn?'Chains included':'Independents only';
+    if(u)u.textContent=chainsIn?'tap for independents only':'tap to include chains';
+    b.title=chainsIn?'Chains are included. Tap for independents only.':'Showing independent shops only. Tap to include chains.';});}
   btns.forEach(b=>b.addEventListener('click',()=>{
     chainsIn=!chainsIn;paint();
     renderOpenNear();renderTrending();renderWorth();renderAfterTen();beltifyAll();
