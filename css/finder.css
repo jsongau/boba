@@ -1630,3 +1630,39 @@ body:has(.bn-item[data-open]) .ty-float,body:has(#dock.on) .ty-float{opacity:0;p
 /* keep the pills and hours clear of the miles + rating column */
 .spot-meta{margin-right:100px}
 .spot-hours{margin-right:100px}
+
+/* ===== lamp legibility + rating by the name + pour modes (2026-07-22 eve) ===== */
+/* unmistakable off/on: label swaps All hours <-> Open now, track floods jade, knob dims when unlit */
+.df-lamp .lm-tint{transition:opacity .26s ease-out .1s}
+.df-lamp[aria-pressed="true"] .lm-tint{opacity:.3}
+.df-lamp:not([aria-pressed="true"]) .lm-knob{opacity:.85;filter:saturate(.75)}
+.df-lamp .lab{color:#6b5844;min-width:64px;text-align:left}
+.df-lamp[aria-pressed="true"] .lab{color:#1e7a52;text-shadow:0 0 6px rgba(46,125,91,.35)}
+
+/* rating sits with the name, always reserving its line */
+.spot-rate{display:flex;align-items:baseline;gap:8px;margin:-2px 100px 8px 0;min-height:1.35em;white-space:nowrap;overflow:hidden}
+.spot-rate b{font:700 15px "Inter Tight",sans-serif;color:#8a6a2e;letter-spacing:.01em}
+.spot-rate span{font-size:11px;color:var(--mutedOnCream);letter-spacing:.03em}
+.spot-rate .nr{font-style:italic;color:#b8a58f}
+.spot-dist .sd-rate,.spot-dist .sd-rv{display:none}
+
+/* pour modes: nearby-in-order vs surprise dice, next to the pour button */
+.pour-modes{display:inline-flex;gap:4px;margin-left:auto;background:rgba(43,26,16,.08);
+  border:1px solid rgba(197,164,109,.5);border-radius:99px;padding:3px}
+.pour-modes .pm{width:30px;height:30px;border:0;border-radius:50%;cursor:pointer;display:grid;place-items:center;
+  background:none;color:#8a6a55;padding:0;transition:background .18s,color .18s,box-shadow .18s}
+.pour-modes .pm svg{width:16px;height:16px}
+.pour-modes .pm[aria-pressed="true"]{background:linear-gradient(180deg,#2b1a10,#1c1207);color:#F4DDA2;
+  box-shadow:0 2px 6px -2px rgba(0,0,0,.6),0 0 8px 1px rgba(197,164,109,.35)}
+.pour-modes .pm:hover{color:#2b1a10}
+.pour-modes .pm[aria-pressed="true"]:hover{color:#F4DDA2}
+.dock-foot .nextb{margin-left:10px}
+@media(max-width:640px){
+  .dock-foot{flex-wrap:wrap}
+  .dock-foot .counter{flex:1 1 100%;order:0}
+  .pour-modes{order:1;margin-left:0}
+  .dock-foot .nextb{order:2}
+}
+/* rating moved up beside the name, so the pills and hours get their full width back */
+.spot-meta{margin-right:0}
+.spot-hours{margin-right:0}

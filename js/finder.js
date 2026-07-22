@@ -2,7 +2,7 @@ var DATA=(window.FINDER_DATA||{shops:[],locations:[]});
 (function(){
 "use strict";
 var SHOPS=DATA.shops, LOCS=DATA.locations;
-var state={origin:null,label:"",radius:8,sort:"closest",list:[],idx:0,sound:true,cityLock:null,scope:"all",scopeCounts:null};
+var state={origin:null,label:"",radius:8,sort:"closest",list:[],idx:0,sound:true,cityLock:null,scope:"all",scopeCounts:null,pour:"seq"};
 var $=function(id){return document.getElementById(id);};
 var fuse=$("fuse"),q=$("q"),sug=$("sug"),dock=$("dock"),head=$("dockHead"),body=$("dockBody"),foot=$("dockFoot");
 
@@ -163,10 +163,11 @@ function reveal(fresh){
   var up=state.list.slice(state.idx+1,state.idx+3).map(function(y){return '<span class="nm">'+esc(y.s.n)+'</span>';}).join('<span>·</span>');
   var typ=s.f?'★ Featured':(s.ty==="specialty"?"Original":"Chain");
   var other=state.cityLock&&s.c!==state.cityLock;
-  var rate=s.r?'<div class="sd-rate">★ '+s.r+'</div><div class="sd-rv">'+(s.rv||0)+' on Google</div>':'';
+  var rate=s.r?('<b>★ '+s.r+'</b><span>'+(s.rv||0)+' on Google</span>'):'<span class="nr">No Google rating yet</span>';
   body.innerHTML='<div class="spot re-a">'
-    +'<div class="spot-dist"><div class="mi">'+(x.d<0.1?"0.1":x.d.toFixed(1))+'</div><div class="u">MILES</div>'+rate+'</div>'
+    +'<div class="spot-dist"><div class="mi">'+(x.d<0.1?"0.1":x.d.toFixed(1))+'</div><div class="u">MILES</div></div>'
     +'<h3 class="spot-name">'+esc(s.n)+'</h3>'
+    +'<div class="spot-rate">'+rate+'</div>'
     +'<div class="spot-meta"><span class="tag city'+(other?' oth':'')+'"><span class="tc">'+esc(s.c)+'</span><b class="ty'+(s.f?' fe':'')+'">'+typ+'</b></span>'+badge+'</div>'
     +'<p class="spot-hours">'+(x.tl?'<span>Today:</span> '+esc(x.tl):'<span class="sh-vg">Hours being verified</span>')+'</p>'
     +'<div class="spot-actions"><a class="sbtn go" target="_blank" rel="noopener" href="'+maps+'">Directions</a>'
@@ -175,11 +176,28 @@ function reveal(fresh){
   foot.innerHTML='<span class="counter"><b>'+(state.idx+1)+'</b> of <b>'+state.list.length+'</b> '
     +(state.scope==="city"&&state.cityLock?('in '+esc(state.cityLock)):('within '+state.radius+' mi'))+' · '
     +(state.sort==="closest"?"closest first":"open now first")+'</span>'
-    +'<button class="nextb" id="nextb">Pour another</button>';
+    +'<span class="pour-modes" role="group" aria-label="Pour order">'
+    +'<button type="button" class="pm" id="pmSeq" title="Closest first, in order" aria-label="Pour in order, closest first"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 10h11M10 5.5 14.5 10 10 14.5"/><circle cx="4" cy="10" r="1.3" fill="currentColor" stroke="none"/></svg></button>'
+    +'<button type="button" class="pm" id="pmRand" title="Surprise me, random order" aria-label="Pour at random"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="3.5" stroke="currentColor" stroke-width="1.7"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/><circle cx="13" cy="13" r="1.5" fill="currentColor"/><circle cx="13" cy="7" r="1.5" fill="currentColor"/><circle cx="7" cy="13" r="1.5" fill="currentColor"/><circle cx="10" cy="10" r="1.5" fill="#ff2f6d"/></svg></button></span>'
+    +'<button class="nextb" id="nextb">'+(state.pour==="rand"?"Surprise pour":"Pour another")+'</button>';
   $("nextb").onclick=next;
+  function pourSet(m){state.pour=m;pourUI();}
+  function pourUI(){var sq=$("pmSeq"),rd=$("pmRand"),nb=$("nextb");
+    if(sq)sq.setAttribute("aria-pressed",String(state.pour!=="rand"));
+    if(rd)rd.setAttribute("aria-pressed",String(state.pour==="rand"));
+    if(nb)nb.textContent=state.pour==="rand"?"Surprise pour":"Pour another";}
+  $("pmSeq").onclick=function(){pourSet("seq");};
+  $("pmRand").onclick=function(){pourSet("rand");};
+  pourUI();
   if(fresh)SND.reveal(state.idx);}
 function next(){if(!state.list.length)return;
-  state.idx=(state.idx+1)%state.list.length;
+  if(state.pour==="rand"&&state.list.length>1){
+    var n=state.idx;
+    while(n===state.idx){n=Math.floor(Math.random()*state.list.length);}
+    state.idx=n;
+  }else{
+    state.idx=(state.idx+1)%state.list.length;
+  }
   SND.next(state.idx);reveal(false);
   var sp=body.querySelector(".spot");if(sp){sp.classList.remove("re-a");void sp.offsetWidth;sp.classList.add("re-a");}}
 function setRadius(v,doSearch){v=Math.max(1,Math.min(20,Math.round(v)));
@@ -259,7 +277,6 @@ window.__demo={pick:function(name){q.value=name;q.dispatchEvent(new Event("input
   setScope:function(v){if(v!=="city"&&v!=="all")return;if(state.scope===v)return;state.scope=v;if(state.origin)search(false);}};
 })();
 (function(){var f=document.getElementById('fuse'),d=document.getElementById('dock');
-if(!f||!d)return;
 function fit(){d.style.top=f.getBoundingClientRect().bottom+'px';}
 addEventListener('scroll',fit,{passive:true});addEventListener('resize',fit);fit();
 var mo=new MutationObserver(fit);mo.observe(f,{attributes:true});})();
@@ -402,6 +419,7 @@ q.addEventListener("keydown",function(e){if(e.key==="Escape"){q.value="";res.hid
     +'<defs><linearGradient id="lmTrack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#101214"/><stop offset="1" stop-color="#1c1f24"/></linearGradient>'
     +'<radialGradient id="lmKnob" cx=".33" cy=".3" r=".95"><stop offset="0" stop-color="#f4e3c2"/><stop offset=".45" stop-color="#C5A46D"/><stop offset="1" stop-color="#7a5f35"/></radialGradient></defs>'
     +'<rect x="1" y="1" width="62" height="30" rx="15" fill="url(#lmTrack)" stroke="rgba(197,164,109,.4)"/>'
+    +'<rect class="lm-tint" x="1" y="1" width="62" height="30" rx="15" fill="#2e7d5b" opacity="0"/>'
     +'<rect x="2.5" y="2.5" width="59" height="27" rx="13.5" fill="none" stroke="rgba(0,0,0,.55)"/>'
     +'<g class="lm-knob"><circle cx="16" cy="16" r="11" fill="url(#lmKnob)"/>'
     +'<circle cx="16" cy="16" r="11" fill="none" stroke="rgba(122,95,53,.85)"/>'
@@ -416,7 +434,7 @@ q.addEventListener("keydown",function(e){if(e.key==="Escape"){q.value="";res.hid
     +'<span class="df-seg df-seg--scope" id="dfScopeSeg" style="display:none"><span class="df-ind" aria-hidden="true"></span>'
     +'<button type="button" class="dfc" data-s="city" aria-pressed="true"><span class="sc-city">This city</span><span class="ct"></span></button>'
     +'<button type="button" class="dfc" data-s="all" aria-pressed="false">Within <b class="sc-mi">8</b> mi<span class="ct"></span></button></span>'
-    +'<button type="button" class="dfc df-lamp" data-open aria-pressed="false">'+LAMP+'<span class="lab">Open now</span></button>';
+    +'<button type="button" class="dfc df-lamp" data-open aria-pressed="false">'+LAMP+'<span class="lab">All hours</span></button>';
   body.parentNode.insertBefore(bar, body);
   function segUI(){ bar.querySelectorAll(".df-seg").forEach(function(seg){
     var b=seg.querySelector('.dfc[aria-pressed="true"]'), ind=seg.querySelector(".df-ind");
@@ -454,7 +472,8 @@ q.addEventListener("keydown",function(e){if(e.key==="Escape"){q.value="";res.hid
   bar.addEventListener("click",function(e){
     var b=e.target.closest(".dfc"); if(!b) return;
     if(b.hasAttribute("data-s")){ window.__demo.setScope(b.getAttribute("data-s")); scopeUI(); segUI(); return; }
-    if(b.hasAttribute("data-open")){ F.open=!F.open; b.setAttribute("aria-pressed",String(F.open)); }
+    if(b.hasAttribute("data-open")){ F.open=!F.open; b.setAttribute("aria-pressed",String(F.open));
+      var lb=b.querySelector(".lab"); if(lb)lb.textContent=F.open?"Open now":"All hours"; }
     else{ F.kind=b.getAttribute("data-k");
       bar.querySelectorAll(".dfc[data-k]").forEach(function(x){x.setAttribute("aria-pressed",String(x===b));});
       segUI(); }
