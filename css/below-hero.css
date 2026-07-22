@@ -80,6 +80,8 @@
 #bh .belt-tog .bt-sub{display:block;font-weight:400;font-size:.66rem;color:var(--muted-lt)}
 #bh .belt-tog[aria-pressed="true"]{background:transparent;color:var(--pearl);border-color:rgba(244,239,231,.35)}
 #bh .belt-tog:hover{border-color:#F4DDA2;box-shadow:0 0 16px rgba(244,221,162,.12)}
+#bh .belt-tog--sm{padding:.45rem .9rem;font-size:.76rem}
+#bh .belt-tog--sm svg{width:20px;height:20px}
 #bh .belt-label{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
 #bh .bl-name{font-family:var(--sans);font-weight:600;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--champagne)}
 #bh .bl-sub{font-size:.78rem;color:var(--muted-lt)}

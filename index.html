@@ -639,7 +639,13 @@
     <div class="sec-head">
       <div><p class="kick" style="color:var(--gilt)" id="onKick">Open right now</p>
         <h2 id="onHead">What&rsquo;s open right now.</h2></div>
-      <a class="more" style="color:var(--gilt);border-color:var(--line-hi)" href="/near-me/">Open the boba map</a>
+      <div class="belt-side">
+        <button class="belt-tog belt-tog--sm" data-tog="chains" type="button" aria-pressed="false" title="Chains are off the menu here. Tap to add them.">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#kx-nigiri"/></svg>
+          <span><span class="ctTxt">Omakase</span><span class="bt-sub ctSub">independents only</span></span>
+        </button>
+        <a class="more" style="color:var(--gilt);border-color:var(--line-hi)" href="/near-me/">Open the boba map</a>
+      </div>
     </div>
     <p class="hint" id="onHint">Turn on your location above and we&rsquo;ll show the closest shops first.</p>
     <div class="fchips" id="onFilters" role="group" aria-label="Filter suggestions"></div>
@@ -677,9 +683,9 @@
         <h2>What SoCal is drinking right now.</h2>
         <p class="lede">Top belt: trending shops, ranked by rating and repeat visits. Bottom belt: top-rated shops worth a longer drive. Hover to pause either one.</p></div>
       <div class="belt-side">
-        <button class="belt-tog" id="chainTog" type="button" aria-pressed="false" title="Chains are off the belt. Tap to add them.">
+        <button class="belt-tog" data-tog="chains" type="button" aria-pressed="false" title="Chains are off the belt. Tap to add them.">
           <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#kx-nigiri"/></svg>
-          <span><span id="chainTogTxt">Omakase</span><span class="bt-sub" id="chainTogSub">independent houses only</span></span>
+          <span><span class="ctTxt">Omakase</span><span class="bt-sub ctSub">independent houses only</span></span>
         </button>
         <a class="more" href="/directory/">The full directory</a>
       </div>
@@ -769,7 +775,13 @@
       <div><p class="kick" style="color:var(--orchid)">After ten</p>
         <h2>Open late.</h2>
         <p class="lede">The shops still serving after 10pm, sorted by closing time. Some pour past midnight.</p></div>
-      <a class="more" style="color:var(--orchid);border-color:rgba(180,107,214,.4)" href="/best/open-late/">All late night spots</a>
+      <div class="belt-side">
+        <button class="belt-tog belt-tog--sm" data-tog="chains" type="button" aria-pressed="false" title="Chains are off the menu here. Tap to add them.">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#kx-nigiri"/></svg>
+          <span><span class="ctTxt">Omakase</span><span class="bt-sub ctSub">independents only</span></span>
+        </button>
+        <a class="more" style="color:var(--orchid);border-color:rgba(180,107,214,.4)" href="/best/open-late/">All late night spots</a>
+      </div>
     </div>
     <div class="rail" id="lateRail"></div>
   </div>
@@ -895,7 +907,7 @@
   <p class="ff-kick"><span class="ff-led" aria-hidden="true"></span>Party &amp; event planning</p>
   <p class="ff-name">Boba for the whole crew</p>
   <p class="ff-where">One jug pours the whole table.</p>
-  <a class="ff-go" href="https://gotastea.com/parteajugs" target="_blank" rel="sponsored noopener">Order Partea Jugs</a>
+  <a class="ff-go" href="https://gotastea.com/parteajugs" target="_blank" rel="sponsored noopener">Order at Tastea</a>
 </aside>
 <script>
 (function(){

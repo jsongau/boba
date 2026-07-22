@@ -198,7 +198,7 @@ function renderOnFilters(){
 }
 function renderOpenNear(){
   const rail=$('#onRail');if(!rail)return;
-  let list=SHOPS.filter(s=>isOpenNow(s,NOW));
+  let list=beltPool().filter(s=>isOpenNow(s,NOW));
   if(onRegion!=='all')list=list.filter(s=>regionOf(s)===onRegion);
   if(onVibe!=='all')list=list.filter(s=>vibeOf(s).k===onVibe||(onVibe==='owl'&&latestClose(s)>=1320));
   if(userLoc){list.sort((a,b)=>distOf(a)-distOf(b));$('#onKick').textContent='Open near you';$('#onHead').textContent='Open right now, closest first.';$('#onHint').style.display='none';}
@@ -223,7 +223,7 @@ function renderWorth(){const rail=$('#worthRail');if(!rail)return;let list;
 
 /* 6b · after ten */
 function renderAfterTen(){const rail=$('#lateRail');if(!rail)return;rail.innerHTML='';
-  let list=SHOPS.filter(s=>latestClose(s)>=1320);
+  let list=beltPool().filter(s=>latestClose(s)>=1320);
   if(userLoc)list.sort((a,b)=>distOf(a)-distOf(b));else list.sort((a,b)=>latestClose(b)-latestClose(a)||weight(b)-weight(a));
   list.slice(0,12).forEach(s=>{const card=shopCard(s,{});const meta=card.querySelector('.c-meta');const lc=latestClose(s);
     const sp=document.createElement('span');sp.className='pill late';sp.textContent=lc>=1440?'Past midnight':'Til '+fmtClose(lc);meta.appendChild(sp);rail.appendChild(card);});}
@@ -412,15 +412,18 @@ function beltify(trackId,speed){
 }
 function beltifyAll(){beltify('trendTrack',BELT_SPEEDS[0]);beltify('worthTrack',BELT_SPEEDS[1]);}
 (function wireChainTog(){
-  const b=document.getElementById('chainTog');if(!b)return;
-  b.addEventListener('click',()=>{
-    chainsIn=!chainsIn;
+  const btns=[].slice.call(document.querySelectorAll('.belt-tog[data-tog="chains"]'));if(!btns.length)return;
+  function paint(){btns.forEach(b=>{
     b.setAttribute('aria-pressed',String(chainsIn));
-    document.getElementById('chainTogTxt').textContent=chainsIn?'Full counter':'Omakase';
-    document.getElementById('chainTogSub').textContent=chainsIn?'chains on the belt':'independent houses only';
-    b.title=chainsIn?'Chains are on the belt. Tap for houses only.':'Chains are off the belt. Tap to add them.';
-    renderTrending();renderWorth();beltifyAll();
-  });
+    const t=b.querySelector('.ctTxt'),u=b.querySelector('.ctSub');
+    if(t)t.textContent=chainsIn?'Full counter':'Omakase';
+    if(u)u.textContent=chainsIn?'chains included':'independents only';
+    b.title=chainsIn?'Chains are included here. Tap for independents only.':'Chains are off the menu here. Tap to add them.';});}
+  btns.forEach(b=>b.addEventListener('click',()=>{
+    chainsIn=!chainsIn;paint();
+    renderOpenNear();renderTrending();renderWorth();renderAfterTen();beltifyAll();
+  }));
+  paint();
 })();
 
 function renderAll(){NOW=pacificNow();
