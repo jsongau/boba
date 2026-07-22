@@ -4,5 +4,14 @@
     { "source": "/how-we-rank/", "destination": "/", "permanent": true },
     { "source": "/how-we-make-money", "destination": "/", "permanent": true },
     { "source": "/how-we-make-money/", "destination": "/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/components/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET" }
+      ]
+    }
   ]
 }

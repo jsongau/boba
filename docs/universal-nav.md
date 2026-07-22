@@ -16,6 +16,19 @@ At the end of the body, with the page's other scripts:
 
 That is the entire contract. The loader injects the full header from `components/nav.html`, attaches the three stylesheets it needs (`/css/nav-midnight.css`, `/css/finder.css`, `/css/sound.css`) if the page doesn't already link them, then loads the behavior scripts in order: `/js/nav-midnight.js` (panels, drawer, pin animation, bottom bar), `/js/homepage/near-me.js` (search + location beacon behavior), `/js/sound.js` (sound toggle). The placeholder div is optional — without it the header injects at the top of `<body>` — but including it keeps mount position explicit.
 
+## Previews and off-site pages (Downloads, file://, other domains)
+
+A preview file opened from Downloads runs on `file://`, where root-relative paths cannot load. Do NOT solve this by baking a copy of the nav into the preview — a baked copy is a fork that goes stale the day it is created. Instead, load the component with an absolute URL:
+
+    <script src="https://www.bobanight.com/components/nav.js" defer></script>
+
+The loader reads its own script URL and pulls the markup, stylesheets, and behavior scripts from that origin (the `/components/` path serves CORS headers for this), and rewrites the nav's internal links to absolute so they work from anywhere. The same trick works for the footer:
+
+    <link rel="stylesheet" href="https://www.bobanight.com/components/footer.css">
+    <script src="https://www.bobanight.com/components/footer.js" defer></script>
+
+One rule, no exceptions: in the repo use root-relative paths, in previews use the absolute URLs, and in neither case does a page ever contain nav or footer markup of its own.
+
 ## Rules for template prompts
 
 Copy these into any prompt that builds or edits a page template:
