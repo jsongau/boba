@@ -361,3 +361,8 @@ body.bn-lock{overflow:hidden}
   .bn-pin.is-searching .pr1,.bn-pin.is-searching .pr2,.bn-pin.is-searching .pbody,.bn-pin.is-found .pr1{animation:none}
   .bn-pin.is-found .pcheck{animation:none;stroke-dashoffset:0;opacity:1}
 }
+
+/* sparkle-pearl LED replaces the plain pink dots (2026-07-22) */
+.led-svg{width:13px;height:13px;flex:none;display:inline-block;filter:drop-shadow(0 0 6px rgba(255,47,109,.75));animation:ledbreathe 2.6s ease-in-out infinite}
+@keyframes ledbreathe{0%,100%{opacity:.7}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.led-svg{animation:none}}
