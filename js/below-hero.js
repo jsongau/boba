@@ -70,9 +70,10 @@ window.initLocationFinder = function(opts){
   function setGps(on){if(on){gps.setAttribute('disabled','disabled');glabel.textContent='Finding boba around you…';}else{gps.removeAttribute('disabled');glabel.textContent='Find boba near me';}}
   function useGps(){closeL();if(!navigator.geolocation){setStatus('Location isn\'t supported here, type a city or ZIP.','err');input.focus();return;}
     setGps(true);setStatus('Getting your location…','');
-    navigator.geolocation.getCurrentPosition(function(pos){setGps(false);var lat=pos.coords.latitude,lng=pos.coords.longitude;var nr=nearest(lat,lng);if(!nr){setStatus('Couldn\'t match you to a SoCal city, type one.','err');input.focus();return;}var c=nr.c,reg=REG[c.region]||'';input.value=c.name;clr.classList.add('on');setStatus('Near '+c.name+(reg?', '+reg:''),'ok');onPick({lat:lat,lng:lng,label:'your location',city:c.name,region:c.region,source:'gps'});},
+    navigator.geolocation.getCurrentPosition(function(pos){setGps(false);window.__bnApplyGeo(pos.coords.latitude,pos.coords.longitude);},
     function(err){setGps(false);var m='Couldn\'t get your location, type a city or ZIP.';if(err&&err.code===1)m='No problem, type your city or ZIP below.';else if(err&&err.code===3)m='That took a moment, type your city or ZIP.';setStatus(m,'err');input.focus();},
     {enableHighAccuracy:false,timeout:8000,maximumAge:60000});}
+  var __geoT=0;window.__bnApplyGeo=function(lat,lng){var __n=Date.now();if(__n-__geoT<800)return;__geoT=__n;var nr=nearest(lat,lng);if(!nr){setStatus('Couldn\'t match you to a SoCal city, type one.','err');input.focus();return;}var c=nr.c,reg=REG[c.region]||'';input.value=c.name;clr.classList.add('on');setStatus('Near '+c.name+(reg?', '+reg:''),'ok');onPick({lat:lat,lng:lng,label:'your location',city:c.name,region:c.region,source:'gps'});};
   input.addEventListener('input',function(){clr.classList.toggle('on',!!input.value);clearTimeout(dbT);var v=input.value;dbT=setTimeout(function(){render(v);},110);});
   input.addEventListener('focus',function(){if(!listE.classList.contains('on'))render(input.value);});
   input.addEventListener('keydown',function(e){var open=listE.classList.contains('on');

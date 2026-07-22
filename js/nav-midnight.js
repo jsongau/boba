@@ -402,4 +402,4 @@ function pins(st){[].slice.call(document.querySelectorAll(".bn-pin")).forEach(fu
   if(st==="searching")b.classList.add("is-searching");
   if(st==="found")b.classList.add("is-found");});}
 navigator.geolocation.getCurrentPosition=function(ok,err,opt){pins("searching");
-  orig(function(p){pins("found");if(ok)ok(p);},function(e){pins("idle");if(err)err(e);},opt);};})();
+  orig(function(p){pins("found");try{if(window.__bnApplyGeo)window.__bnApplyGeo(p.coords.latitude,p.coords.longitude);}catch(e){}if(ok)ok(p);},function(e){pins("idle");if(err)err(e);},opt);};})();
