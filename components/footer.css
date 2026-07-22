@@ -1,0 +1,42 @@
+/* Boba Night universal footer — components/footer.css
+   Loaded by every page that includes components/footer.js. Self-contained:
+   works on pages that do not load the homepage token sheet. */
+.ft2{position:relative;overflow:hidden;border-top:1px solid rgba(197,164,109,.45);
+  background:radial-gradient(120% 90% at 50% -8%,rgba(180,107,214,.10),transparent 55%),radial-gradient(130% 110% at 50% 118%,rgba(92,44,134,.14),transparent 60%),linear-gradient(180deg,#0f0b13 0%,#0a080d 55%,#070609 100%);
+  padding:3.2rem 0 2rem;color:var(--pearl,#F4EFE7)}
+.ft2::after{content:"";position:absolute;right:-140px;top:-120px;width:420px;height:420px;border-radius:50%;
+  border:1px solid rgba(197,164,109,.16);pointer-events:none}
+.ft2::before{content:"";position:absolute;right:-90px;top:-70px;width:300px;height:300px;border-radius:50%;
+  border:1px solid rgba(197,164,109,.1);pointer-events:none}
+.ft2 .wrap{position:relative;z-index:1}
+.ft2-crest{display:flex;align-items:center;gap:1.1rem;margin-bottom:2.6rem}
+.ft2-hair{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(197,164,109,.5),transparent)}
+.ft2-pearls{display:flex;gap:.55rem;align-items:center}
+.ft2-pearls i{width:4px;height:4px;border-radius:50%;background:rgba(197,164,109,.75)}
+.ft2-pearls i.pk{width:6px;height:6px;background:#ff2f6d;box-shadow:0 0 10px rgba(255,47,109,.7)}
+.ft2-grid{display:grid;gap:2.2rem;margin-bottom:2.6rem}
+@media(min-width:900px){.ft2-grid{grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:2.6rem}}
+@media(min-width:560px) and (max-width:899px){.ft2-grid{grid-template-columns:1fr 1fr}}
+.ft2-tag{margin:1rem 0 0;max-width:34ch;color:#8B8981;font-size:.9rem;line-height:1.55}
+.ft2-stat{display:flex;align-items:center;gap:.55rem;margin:1.1rem 0 0;font-size:.82rem;color:var(--silver,#C8C6C1);letter-spacing:.02em}
+.ft2-stat b{color:var(--gilt,#F4DDA2);font-weight:600;font-variant-numeric:tabular-nums}
+.ft2-dot{width:3px;height:3px;border-radius:50%;background:rgba(197,164,109,.7);flex:none}
+.ft2-late{display:inline-flex;align-items:center;gap:.6rem;margin-top:1.3rem;padding:.55rem 1rem;
+  border:1px solid rgba(255,47,109,.35);border-radius:999px;font-size:.82rem;font-weight:500;color:var(--pearl,#F4EFE7);transition:.2s}
+.ft2-late:hover{border-color:#ff2f6d;box-shadow:0 0 18px rgba(255,47,109,.18)}
+.ft2-led{width:5px;height:5px;border-radius:50%;background:#ff2f6d;box-shadow:0 0 8px rgba(255,47,109,.9);flex:none}
+.ft2-col h5{margin:0 0 .9rem;font-size:.66rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--champagne,#C5A46D)}
+.ft2-col a{display:block;color:var(--silver,#C8C6C1);font-size:.9rem;padding:.26rem 0;transition:color .18s,transform .18s}
+.ft2-col a:hover{color:var(--gilt,#F4DDA2);transform:translateX(3px)}
+.ft2-bottom{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;justify-content:space-between;font-size:.78rem;color:#8B8981;
+  border-top:1px solid rgba(197,164,109,.18);padding-top:1.3rem}
+.ft2-bottom a{color:var(--silver,#C8C6C1)}
+.ft2-bottom a:hover{color:var(--gilt,#F4DDA2)}
+.feat-float{width:max-content!important;max-width:320px!important}
+.feat-float .ff-name{white-space:nowrap;font-size:1.22rem!important;margin-bottom:.3rem!important}
+.feat-float .ff-where{white-space:nowrap;font-size:.78rem!important;margin:0 0 .7rem!important}
+.feat-float .ff-kick{font-size:.6rem!important}
+.ft2 .wordmark{font-family:var(--serif,'Fraunces',Georgia,serif);font-weight:400;color:var(--pearl,#F4EFE7);letter-spacing:.01em;line-height:1.1;display:block}
+.ft2 .wordmark b{font-weight:400;color:#ff2f6d}
+.ft2 .soc{display:block;font-family:var(--sans,'Inter',system-ui,sans-serif);font-size:.6rem;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--champagne,#C5A46D);margin-top:4px}
+.ft2 a{text-decoration:none}
