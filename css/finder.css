@@ -1525,3 +1525,108 @@ body:has(.bn-item[data-open]) .ty-float,body:has(#dock.on) .ty-float{opacity:0;p
 .ty-float{opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .35s ease,transform .35s ease}
 .ty-float.ty-on{opacity:1;transform:none;pointer-events:auto}
 @media (prefers-reduced-motion:reduce){.ty-float{transition:none}}
+
+/* ===================== LOCKED CITY + STABLE CARD + LUXE TOGGLES (2026-07-22) ===================== */
+
+/* ---- A. stable card: name always reserves two lines, controls never move ---- */
+.spot-name{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  min-height:2.16em;line-height:1.08}
+
+/* ---- B. pill row: exactly two pills, one line, never wraps ---- */
+.spot-meta{flex-wrap:nowrap;overflow:hidden}
+.spot-meta .tag{white-space:nowrap;flex:0 0 auto}
+.spot-meta .tag.city{display:inline-flex;align-items:center;gap:7px;flex:0 1 auto;min-width:0}
+.spot-meta .tag.city .tc{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.spot-meta .tag.city .ty{flex:0 0 auto;font-weight:800;font-size:9px;letter-spacing:.08em;text-transform:uppercase;
+  color:#8a6a2e;border-left:1px solid rgba(197,164,109,.55);padding-left:7px;font-style:normal}
+.spot-meta .tag.city .ty.fe{color:#7c3a8e}
+
+/* ---- C. locked-city chip: champagne plate, lock, settle-in animation ---- */
+.f3-chip{background:linear-gradient(180deg,#fdf7ec,#f3e2c6);border:1px solid rgba(169,133,78,.75);
+  border-radius:99px;padding:0 5px 0 12px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 0 10px 2px rgba(197,164,109,.28)}
+.f3-chip>svg{color:#ff2f6d}
+.f3-chip .fc-city{font-weight:700}
+.f3-chip .fc-zip:empty{display:none}
+.f3-chip .fc-lock{flex:0 0 auto;width:11px;height:11px;color:#a9854e;margin-left:2px;opacity:.85}
+@media(prefers-reduced-motion:no-preference){
+  .f3-chip{animation:f3lockin .34s cubic-bezier(.34,1.3,.64,1)}
+  @keyframes f3lockin{from{transform:scale(.94);opacity:0}to{transform:none;opacity:1}}
+}
+/* mobile: leave the animated pin button visible and tappable to the right of the chip */
+@media(max-width:1100px){.f3-chip{right:46px}}
+
+/* ---- D. "Velvet Channel" segmented control: All / Originals / Chains ---- */
+.df-seg{position:relative;display:inline-flex;align-items:center;
+  background:linear-gradient(180deg,#0B0C0E,#16181c);border:1px solid rgba(197,164,109,.4);
+  border-radius:999px;box-shadow:inset 0 2px 4px rgba(0,0,0,.55);padding:3px}
+.df-ind{position:absolute;top:3px;left:0;height:calc(100% - 6px);width:0;border-radius:999px;
+  background:linear-gradient(180deg,#fbf3e4,#ecd9b8);
+  box-shadow:0 1px 3px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.7),0 0 8px 1px rgba(197,164,109,.35);
+  transition:transform .34s cubic-bezier(.22,1,.36,1),width .34s cubic-bezier(.22,1,.36,1);will-change:transform}
+.df-seg .dfc{position:relative;z-index:1;background:none;border:0;border-radius:999px;
+  color:rgba(246,234,216,.6);padding:5px 12px;transition:color .2s ease .08s}
+.df-seg .dfc:hover{border-color:transparent;color:rgba(246,234,216,.9)}
+.df-seg .dfc[aria-pressed="true"]{background:none;border:0;color:#0B0C0E}
+.df-seg .dfc .ct{opacity:.6}
+.df-seg .dfc[aria-pressed="true"] .ct{opacity:.75;color:#5c4726}
+
+/* ---- E. "Lamp Crown" Open-now toggle: brass knob, jade LED, delayed glow ---- */
+.f3-lednest{top:10px;right:48px}
+.f3-lednest .dfc.df-lamp[data-open]{display:inline-flex;align-items:center;gap:8px;margin:0;
+  background:none;border:0;border-radius:999px;padding:2px;cursor:pointer;box-shadow:none}
+.f3-lednest .dfc.df-lamp[data-open]::before{content:none}
+.f3-lednest .dfc.df-lamp[data-open]:hover{border-color:transparent}
+.f3-lednest .dfc.df-lamp[data-open][aria-pressed="true"]{background:none;border:0}
+.df-lamp .lampsvg{display:block;width:50px;height:25px;border-radius:999px;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.5);
+  transition:box-shadow .26s ease-out .12s}
+.df-lamp .lm-knob{transition:transform .32s cubic-bezier(.34,1.3,.64,1)}
+.df-lamp[aria-pressed="true"] .lm-knob{transform:translateX(32px)}
+.df-lamp .lm-led{transition:fill .2s ease-out .12s}
+.df-lamp[aria-pressed="true"] .lm-led{fill:#2e7d5b}
+.df-lamp .lm-core{transition:opacity .2s ease-out .16s}
+.df-lamp[aria-pressed="true"] .lm-core{opacity:1}
+.df-lamp[aria-pressed="true"] .lampsvg{box-shadow:
+  inset 0 1px 2px rgba(0,0,0,.5),
+  0 0 0 1px rgba(46,125,91,.5),
+  0 0 6px 1px rgba(46,125,91,.55),
+  0 0 14px 3px rgba(46,125,91,.28),
+  0 0 26px 6px rgba(197,164,109,.16)}
+.df-lamp .lab{font:700 11px "Inter Tight",sans-serif;letter-spacing:.03em;color:#2b1a10;
+  transition:color .26s ease-out .12s}
+.df-lamp[aria-pressed="true"] .lab{color:#1e7a52;text-shadow:0 0 6px rgba(46,125,91,.35)}
+@media(prefers-reduced-motion:reduce){
+  .df-ind,.df-lamp .lm-knob,.df-lamp .lm-led,.df-lamp .lm-core,.df-lamp .lampsvg,.df-lamp .lab{transition-duration:1ms}
+}
+/* the lamp floats on the dark strip above the cream card head; keep its label legible there */
+/* reserved hours line keeps the action row fixed; hours text never wraps */
+.spot-hours{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:1.2em}
+.spot-hours .sh-vg{color:#b8a58f;font-style:italic}
+/* mobile: lamp leaves the header zone and joins the filter row, right-aligned; SHOW label yields */
+@media(max-width:640px){
+  .f3-lednest{position:static;top:auto;right:auto;margin-left:auto}
+  .dock-filters .dfl{display:none}
+  .dock-filters{gap:6px;padding:10px 16px 2px}
+  .df-seg .dfc{padding:5px 9px}
+}
+.dock-head .dh-t{flex:1 1 auto;min-width:0;line-height:1.45}
+
+/* ===== city-scope toggle + live ratings (2026-07-22 pm) ===== */
+.df-seg--scope .dfc{white-space:nowrap}
+.df-seg--scope .sc-city{max-width:15ch;overflow:hidden;text-overflow:ellipsis;display:inline-block;vertical-align:bottom;white-space:nowrap}
+.df-seg--scope .sc-mi{font-weight:800}
+/* out-of-city shop: the city pill lights champagne so the new city reads instantly */
+.spot-meta .tag.city.oth{background:linear-gradient(180deg,#f6e7c9,#eeD9b2);border-color:#a9854e;color:#2b1a10;
+  box-shadow:0 0 8px 1px rgba(197,164,109,.35)}
+.spot-meta .tag.city.oth .tc{font-weight:800}
+/* rating block under the miles readout, attributed */
+.spot-dist .sd-rate{margin-top:7px;font:700 14px "Inter Tight",sans-serif;color:#8a6a2e;letter-spacing:.01em}
+.spot-dist .sd-rv{font-size:9.5px;color:var(--mutedOnCream);letter-spacing:.04em;margin-top:1px}
+@media(max-width:640px){
+  .df-seg--scope{order:5}
+  .dock-filters{row-gap:7px}
+}
+/* keep the pills and hours clear of the miles + rating column */
+.spot-meta{margin-right:100px}
+.spot-hours{margin-right:100px}

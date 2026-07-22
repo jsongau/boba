@@ -2,7 +2,7 @@ var DATA=(window.FINDER_DATA||{shops:[],locations:[]});
 (function(){
 "use strict";
 var SHOPS=DATA.shops, LOCS=DATA.locations;
-var state={origin:null,label:"",radius:8,sort:"closest",list:[],idx:0,sound:true};
+var state={origin:null,label:"",radius:8,sort:"closest",list:[],idx:0,sound:true,cityLock:null,scope:"all",scopeCounts:null};
 var $=function(id){return document.getElementById(id);};
 var fuse=$("fuse"),q=$("q"),sug=$("sug"),dock=$("dock"),head=$("dockHead"),body=$("dockBody"),foot=$("dockFoot");
 
@@ -19,8 +19,30 @@ function openNow(s,t){var per=s.per;if(!per||!per.length)return null;var wk=1008
     var st=od*1440+(+ot.slice(0,2))*60+(+ot.slice(2)),en=(cd==null?od:cd)*1440+(+ct.slice(0,2))*60+(+ct.slice(2));
     if(en<=st)en+=wk;var sh=[0,wk,-wk];for(var j=0;j<3;j++){if(cur>=st+sh[j]&&cur<en+sh[j])return true;}}
   return false;}
-function todayLine(s,t){var wt=s.wt||[];if(!wt.length)return null;
-  return (wt[(t.day+6)%7]||"").replace(/^[A-Za-z]+:\s*/,"");}
+function fmt12(hm){var h=+hm.slice(0,2),m=hm.slice(2);var ap=h>=12&&h<24?"PM":"AM";h=h%12;if(h===0)h=12;
+  return h+(m==="00"?"":":"+m)+" "+ap;}
+function todayLine(s,t){var wt=s.wt||[];
+  if(wt.length)return (wt[(t.day+6)%7]||"").replace(/^[A-Za-z]+:\s*/,"");
+  var per=s.per;if(!per||!per.length)return null;
+  var out=[];
+  for(var i=0;i<per.length;i++){var p=per[i];
+    if(p[0]===t.day&&p[1]!=null&&p[3]!=null)out.push(fmt12(p[1])+" to "+fmt12(p[3]));}
+  return out.length?out.join(", "):"Closed today";}
+/* live Google ratings + review counts from Supabase (source of truth), cached this visit */
+(function(){
+  var K="bn_rat_v1";
+  function apply(m){for(var i=0;i<SHOPS.length;i++){var r=m[SHOPS[i].sl];if(r){SHOPS[i].r=r[0];SHOPS[i].rv=r[1];}}
+    if(state.origin&&state.list.length)reveal(false);}
+  try{var c=JSON.parse(sessionStorage.getItem(K)||"null");
+    if(c&&c.m&&(Date.now()-c.t)<36e5){setTimeout(function(){apply(c.m);},0);return;}}catch(e){}
+  fetch("https://hfvbeqlefwwjlrbyxpbj.supabase.co/rest/v1/niteboba_finder?select=s,rating,reviews",
+    {headers:{apikey:"sb_publishable_wlfujszvn2logC3KNL3MsA_AW1F42kf"}})
+    .then(function(r){return r.ok?r.json():[];})
+    .then(function(rows){var m={};rows.forEach(function(x){if(x.rating!=null)m[x.s]=[x.rating,x.reviews||0];});
+      try{sessionStorage.setItem(K,JSON.stringify({t:Date.now(),m:m}));}catch(e){}
+      apply(m);})
+    .catch(function(){});
+})();
 
 /* sound — warm brass base, yin-yang alternation on the pour */
 var AC=null;
@@ -79,7 +101,13 @@ function paint(){
 function pick(m){if(!m)return;var L=m.loc;
   q.value=m.zip?(L.city+" "+m.zip):L.city;matches=[];paint();
   state.origin={lat:L.lat,lng:L.lng};state.label=m.zip?(L.city+" "+m.zip):L.city;
+  state.cityLock=L.city;state.scope="city";
+  if(window.__f3Lock)window.__f3Lock(L.city,m.zip||"");
   SND.go();search(true);}
+function nearestCity(lat,lng){var best=null,bd=1e9;
+  for(var i=0;i<LOCS.length;i++){var L=LOCS[i];if(L.lat==null||L.lng==null)continue;
+    var d=miles(lat,lng,L.lat,L.lng);if(d<bd){bd=d;best=L;}}
+  return (best&&bd<=25)?{city:best.city,area:best.area,dist:bd}:null;}
 q.addEventListener("input",function(){var v=q.value.trim();act=-1;
   if(!v){matches=[];paint();return;}
   matches=/^\d/.test(v)?matchZip(v.replace(/\D/g,"")):matchCity(v.toLowerCase());
@@ -95,7 +123,12 @@ document.addEventListener("click",function(e){if(!e.target.closest(".mb-field"))
 $("gps").addEventListener("click",function(e){e.stopPropagation();
   if(!navigator.geolocation)return;
   navigator.geolocation.getCurrentPosition(function(p){
-    state.origin={lat:p.coords.latitude,lng:p.coords.longitude};state.label="your location";q.value="";
+    state.origin={lat:p.coords.latitude,lng:p.coords.longitude};
+    var nc=nearestCity(p.coords.latitude,p.coords.longitude);
+    state.label=nc?nc.city:"your location";q.value=nc?nc.city:"";
+    state.cityLock=nc?nc.city:null;state.scope=nc?"city":"all";
+    matches=[];paint();
+    if(nc&&window.__f3Lock)window.__f3Lock(nc.city,"");
     SND.go();search(true);},function(){},{enableHighAccuracy:true,timeout:9000,maximumAge:60000});});
 
 /* search + pour loop */
@@ -104,13 +137,16 @@ function build(){if(!state.origin)return [];
   var l=SHOPS.filter(function(s){return s.st==="open"||s.st==="seed";})
     .map(function(s){return {s:s,d:miles(state.origin.lat,state.origin.lng,s.lat,s.lng),o:openNow(s,t),tl:todayLine(s,t)};})
     .filter(function(x){return x.d<=state.radius;});
+  var lock=state.cityLock;
+  state.scopeCounts={city:lock?l.filter(function(x){return x.s.c===lock;}).length:0,all:l.length};
+  if(state.scope==="city"&&lock)l=l.filter(function(x){return x.s.c===lock;});
   if(state.sort==="open")l.sort(function(a,b){var ao=a.o===true?0:1,bo=b.o===true?0:1;if(ao!==bo)return ao-bo;return a.d-b.d;});
   else l.sort(function(a,b){return a.d-b.d;});
   return l;}
 function search(fresh){
   state.list=build();state.idx=0;
   dock.classList.add("on");
-  head.innerHTML='Pouring near <b>'+esc(state.label)+'</b> · within '+state.radius+' mi'
+  head.innerHTML='<span class="dh-t">Pouring near <b>'+esc(state.label)+'</b> · within '+state.radius+' mi</span>'
     +'<button class="dock-x" id="dockX" aria-label="Close">&times;</button>';
   $("dockX").onclick=function(){dock.classList.remove("on");};
   if(!state.list.length){
@@ -125,16 +161,19 @@ function reveal(fresh){
   var badge=x.o===null?'<span class="tag">hours verifying</span>':(x.o?'<span class="tag open">● Open now</span>':'<span class="tag shut">Closed now</span>');
   var maps="https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(s.n+" "+(s.ad||"")+" "+s.c+" CA");
   var up=state.list.slice(state.idx+1,state.idx+3).map(function(y){return '<span class="nm">'+esc(y.s.n)+'</span>';}).join('<span>·</span>');
+  var typ=s.f?'★ Featured':(s.ty==="specialty"?"Original":"Chain");
+  var other=state.cityLock&&s.c!==state.cityLock;
+  var rate=s.r?'<div class="sd-rate">★ '+s.r+'</div><div class="sd-rv">'+(s.rv||0)+' on Google</div>':'';
   body.innerHTML='<div class="spot re-a">'
-    +'<div class="spot-dist"><div class="mi">'+(x.d<0.1?"0.1":x.d.toFixed(1))+'</div><div class="u">MILES</div></div>'
+    +'<div class="spot-dist"><div class="mi">'+(x.d<0.1?"0.1":x.d.toFixed(1))+'</div><div class="u">MILES</div>'+rate+'</div>'
     +'<h3 class="spot-name">'+esc(s.n)+'</h3>'
-    +'<div class="spot-meta"><span class="tag city">'+esc(s.c)+'</span>'+(s.f?'<span class="tag feat">★ Featured</span>':'')
-    +'<span class="tag">'+(s.ty==="specialty"?"Original":"Chain")+'</span>'+badge+'</div>'
-    +(x.tl?'<p class="spot-hours"><span>Today:</span> '+esc(x.tl)+'</p>':'')
+    +'<div class="spot-meta"><span class="tag city'+(other?' oth':'')+'"><span class="tc">'+esc(s.c)+'</span><b class="ty'+(s.f?' fe':'')+'">'+typ+'</b></span>'+badge+'</div>'
+    +'<p class="spot-hours">'+(x.tl?'<span>Today:</span> '+esc(x.tl):'<span class="sh-vg">Hours being verified</span>')+'</p>'
     +'<div class="spot-actions"><a class="sbtn go" target="_blank" rel="noopener" href="'+maps+'">Directions</a>'
     +'<a class="sbtn" target="_blank" rel="noopener" href="https://www.bobanight.com'+s.p+'">View shop</a></div>'
     +(up?'<div class="updeck">Up next: '+up+'</div>':'')+'</div>';
-  foot.innerHTML='<span class="counter"><b>'+(state.idx+1)+'</b> of <b>'+state.list.length+'</b> within '+state.radius+' mi · '
+  foot.innerHTML='<span class="counter"><b>'+(state.idx+1)+'</b> of <b>'+state.list.length+'</b> '
+    +(state.scope==="city"&&state.cityLock?('in '+esc(state.cityLock)):('within '+state.radius+' mi'))+' · '
     +(state.sort==="closest"?"closest first":"open now first")+'</span>'
     +'<button class="nextb" id="nextb">Pour another</button>';
   $("nextb").onclick=next;
@@ -216,7 +255,8 @@ renderNear();
 updateRadiusUI();
 
 window.__demo={pick:function(name){q.value=name;q.dispatchEvent(new Event("input"));if(matches.length)pick(matches[0]);},
-  next:next,setRadius:function(v){setRadius(v,true);},setRadiusSilent:function(v){setRadius(v,false);},updateUI:updateRadiusUI,state:state};
+  next:next,setRadius:function(v){setRadius(v,true);},setRadiusSilent:function(v){setRadius(v,false);},updateUI:updateRadiusUI,state:state,nearestCity:nearestCity,
+  setScope:function(v){if(v!=="city"&&v!=="all")return;if(state.scope===v)return;state.scope=v;if(state.origin)search(false);}};
 })();
 (function(){var f=document.getElementById('fuse'),d=document.getElementById('dock');
 function fit(){d.style.top=f.getBoundingClientRect().bottom+'px';}
@@ -357,15 +397,45 @@ q.addEventListener("keydown",function(e){if(e.key==="Escape"){q.value="";res.hid
   if(!dock||!body||!window.__demo) return;
   var F={open:false,kind:"all"}, all=null;
   var bar=document.createElement("div"); bar.className="dock-filters"; bar.id="dockFilters";
+  var LAMP='<svg class="lampsvg" viewBox="0 0 64 32" aria-hidden="true">'
+    +'<defs><linearGradient id="lmTrack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#101214"/><stop offset="1" stop-color="#1c1f24"/></linearGradient>'
+    +'<radialGradient id="lmKnob" cx=".33" cy=".3" r=".95"><stop offset="0" stop-color="#f4e3c2"/><stop offset=".45" stop-color="#C5A46D"/><stop offset="1" stop-color="#7a5f35"/></radialGradient></defs>'
+    +'<rect x="1" y="1" width="62" height="30" rx="15" fill="url(#lmTrack)" stroke="rgba(197,164,109,.4)"/>'
+    +'<rect x="2.5" y="2.5" width="59" height="27" rx="13.5" fill="none" stroke="rgba(0,0,0,.55)"/>'
+    +'<g class="lm-knob"><circle cx="16" cy="16" r="11" fill="url(#lmKnob)"/>'
+    +'<circle cx="16" cy="16" r="11" fill="none" stroke="rgba(122,95,53,.85)"/>'
+    +'<path d="M10.5 12.4h11M10.5 16h11M10.5 19.6h11" stroke="rgba(58,42,16,.3)" stroke-width="1"/>'
+    +'<circle class="lm-led" cx="16" cy="16" r="3.1" fill="#3a3f3d"/>'
+    +'<circle class="lm-core" cx="16" cy="16" r="1.5" fill="#a8e6c8" opacity="0"/></g></svg>';
   bar.innerHTML='<span class="dfl">Show</span>'
+    +'<span class="df-seg" id="dfSeg"><span class="df-ind" aria-hidden="true"></span>'
     +'<button type="button" class="dfc" data-k="all" aria-pressed="true">All</button>'
     +'<button type="button" class="dfc" data-k="orig" aria-pressed="false">Originals<span class="ct"></span></button>'
-    +'<button type="button" class="dfc" data-k="chain" aria-pressed="false">Chains<span class="ct"></span></button>'
-    +'<button type="button" class="dfc" data-open aria-pressed="false">Open now</button>';
+    +'<button type="button" class="dfc" data-k="chain" aria-pressed="false">Chains<span class="ct"></span></button></span>'
+    +'<span class="df-seg df-seg--scope" id="dfScopeSeg" style="display:none"><span class="df-ind" aria-hidden="true"></span>'
+    +'<button type="button" class="dfc" data-s="city" aria-pressed="true"><span class="sc-city">This city</span><span class="ct"></span></button>'
+    +'<button type="button" class="dfc" data-s="all" aria-pressed="false">Within <b class="sc-mi">8</b> mi<span class="ct"></span></button></span>'
+    +'<button type="button" class="dfc df-lamp" data-open aria-pressed="false">'+LAMP+'<span class="lab">Open now</span></button>';
   body.parentNode.insertBefore(bar, body);
+  function segUI(){ bar.querySelectorAll(".df-seg").forEach(function(seg){
+    var b=seg.querySelector('.dfc[aria-pressed="true"]'), ind=seg.querySelector(".df-ind");
+    if(!b||!ind||!b.offsetWidth) return;
+    ind.style.width=b.offsetWidth+"px";
+    ind.style.transform="translateX("+b.offsetLeft+"px)"; }); }
+  function scopeUI(){ var seg=document.getElementById("dfScopeSeg"); if(!seg) return;
+    var st=window.__demo.state, lock=st.cityLock;
+    seg.style.display=lock?"":"none";
+    if(!lock) return;
+    seg.querySelector(".sc-city").textContent=lock;
+    seg.querySelector(".sc-mi").textContent=st.radius;
+    var cs=seg.querySelectorAll(".ct");
+    if(st.scopeCounts){cs[0].textContent=" "+st.scopeCounts.city;cs[1].textContent=" "+st.scopeCounts.all;}
+    seg.querySelectorAll(".dfc[data-s]").forEach(function(x){x.setAttribute("aria-pressed",String(x.getAttribute("data-s")===st.scope));}); }
+  addEventListener("resize",segUI);
   function counts(){ if(!all) return;
     var o=0,c=0; all.forEach(function(x){ if(x.s.ty==="specialty")o++; else if(x.s.ty==="chain")c++; });
-    var els=bar.querySelectorAll(".ct"); els[0].textContent=" "+o; els[1].textContent=" "+c; }
+    var els=bar.querySelectorAll(".ct"); els[0].textContent=" "+o; els[1].textContent=" "+c;
+    requestAnimationFrame(segUI); }
   function apply(){
     if(!all) return;
     var f=all.filter(function(x){
@@ -382,15 +452,19 @@ q.addEventListener("keydown",function(e){if(e.key==="Escape"){q.value="";res.hid
   }
   bar.addEventListener("click",function(e){
     var b=e.target.closest(".dfc"); if(!b) return;
+    if(b.hasAttribute("data-s")){ window.__demo.setScope(b.getAttribute("data-s")); scopeUI(); segUI(); return; }
     if(b.hasAttribute("data-open")){ F.open=!F.open; b.setAttribute("aria-pressed",String(F.open)); }
     else{ F.kind=b.getAttribute("data-k");
-      bar.querySelectorAll(".dfc[data-k]").forEach(function(x){x.setAttribute("aria-pressed",String(x===b));}); }
+      bar.querySelectorAll(".dfc[data-k]").forEach(function(x){x.setAttribute("aria-pressed",String(x===b));});
+      segUI(); }
     apply();
   });
   new MutationObserver(function(){
     var st=window.__demo.state;
     if(st.list&&st.list.length&&!st.list.__f){ all=st.list.slice(); counts(); if(F.open||F.kind!=="all"){apply();} }
     else if(st.list&&!st.list.length&&!st.list.__f){ all=null; }
+    scopeUI();
+    requestAnimationFrame(segUI);
   }).observe(body,{childList:true});
 })();
 
@@ -451,17 +525,23 @@ beacon.addEventListener("click",function(e){
   e.stopPropagation();
   if(!navigator.geolocation||!window.__demo){flashErr();return;}
   navigator.geolocation.getCurrentPosition(function(p){
-    q.value=""; q.dispatchEvent(new Event("input",{bubbles:true}));
     removeChip();
-    window.__demo.state.origin={lat:p.coords.latitude,lng:p.coords.longitude};
-    window.__demo.state.label="Your location";
-    window.__demo.setRadius(window.__demo.state.radius);
+    var st=window.__demo.state;
+    st.origin={lat:p.coords.latitude,lng:p.coords.longitude};
+    var nc=window.__demo.nearestCity&&window.__demo.nearestCity(p.coords.latitude,p.coords.longitude);
+    st.label=nc?nc.city:"Your location";
+    st.cityLock=nc?nc.city:null;st.scope=nc?"city":"all";
+    q.value=nc?nc.city:"";
+    var sg=document.getElementById("sug");
+    if(sg){sg.classList.remove("on");sg.innerHTML="";q.setAttribute("aria-expanded","false");}
+    window.__demo.setRadius(st.radius);
+    if(nc&&window.__f3Lock)window.__f3Lock(nc.city,"");
     syncEmpty();
   },function(){flashErr();},{enableHighAccuracy:true,timeout:9000,maximumAge:60000});
 });
 
-/* ============ 3. cohesive selected-location chip ============ */
-var CHIP_RE=/^(.+) (\d{5})$/;
+/* ============ 3. locked-location chip: city picks, ZIP picks, GPS pins ============ */
+var CHIP_RE=/^(.+) (\d{5})$/, lastLock=null;
 function removeChip(){
   var c=field.querySelector(".f3-chip");
   if(c) c.remove();
@@ -473,13 +553,15 @@ function makeChip(city,zip){
   c.className="f3-chip";
   c.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 21c-4-4.5-7-8-7-11a7 7 0 0 1 14 0c0 3-3 6.5-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>'
     +'<span class="fc-city"></span><span class="fc-zip"></span>'
+    +'<svg class="fc-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>'
     +'<button type="button" class="f3-chipx" aria-label="Clear location">&times;</button>';
   c.querySelector(".fc-city").textContent=city;
-  c.querySelector(".fc-zip").textContent=zip;
+  c.querySelector(".fc-zip").textContent=zip||"";
   c.addEventListener("click",function(e){
     if(e.target.closest(".f3-chipx")){
       e.stopPropagation();
       q.value="";
+      lastLock=null;
       removeChip();
       q.dispatchEvent(new Event("input",{bubbles:true}));
       q.focus();
@@ -494,10 +576,17 @@ function makeChip(city,zip){
   if(sg){sg.classList.remove("on");sg.innerHTML="";q.setAttribute("aria-expanded","false");}
   syncEmpty();
 }
+window.__f3Lock=function(city,zip){
+  lastLock={city:city,zip:zip||""};
+  if(document.activeElement!==q) makeChip(city,zip||"");
+};
 function checkChip(){
   if(document.activeElement===q) return;
-  var m=CHIP_RE.exec(q.value.trim());
-  if(m) makeChip(m[1],m[2]); else removeChip();
+  var v=q.value.trim();
+  var m=CHIP_RE.exec(v);
+  if(m){ makeChip(m[1],m[2]); return; }
+  if(lastLock && v===lastLock.city){ makeChip(lastLock.city,lastLock.zip); return; }
+  removeChip();
 }
 q.addEventListener("blur",function(){setTimeout(checkChip,0);});
 q.addEventListener("focus",function(){removeChip();syncEmpty();});
