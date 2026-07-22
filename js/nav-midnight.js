@@ -371,3 +371,25 @@
     }, { passive: true });
   }
 })();
+
+
+/* Search Boba Night floater: appears after the hero, dismiss lasts the visit (2026-07-22) */
+(function(){function ready(f){if(document.readyState!=="loading")f();else document.addEventListener("DOMContentLoaded",f);}ready(function(){(function(){
+var K="bn_search_float_closed";
+try{localStorage.removeItem(K);}catch(e){}
+var floats=[].slice.call(document.querySelectorAll(".ty-float"));
+if(!floats.length)return;
+var closed=false;try{closed=sessionStorage.getItem(K)==="1";}catch(e){}
+var pastHero=false;
+function apply(){floats.forEach(function(f){f.classList.toggle("ty-on",pastHero&&!closed);});}
+function kill(){closed=true;apply();try{sessionStorage.setItem(K,"1");}catch(_){}}
+document.querySelectorAll(".ty-x").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();kill();});});
+var hero=document.getElementById("tonight");
+function byScroll(){var h=hero?hero.offsetHeight:600;pastHero=window.scrollY>=h*0.9;apply();}
+if(hero&&"IntersectionObserver" in window){
+  new IntersectionObserver(function(en){en.forEach(function(x){pastHero=!x.isIntersecting;apply();});},{threshold:0.05}).observe(hero);
+}else{
+  window.addEventListener("scroll",byScroll,{passive:true});
+}
+byScroll();
+})();});})();

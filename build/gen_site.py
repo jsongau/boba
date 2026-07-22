@@ -423,7 +423,9 @@ def main():
         render_region(region,cm)
     # intent pages
     render_intent_index()
-    for slug,label,desc in INTENTS: render_intent(slug,label,desc)
+    for slug,label,desc in INTENTS:
+        if slug=='open-late': continue  # owned by build/gen_open_late.py
+        render_intent(slug,label,desc)
     # meta
     render_meta_files(cities_by_region)
     print(f"profiles: SKIPPED (owned by build/gen_profiles.py) — rows in CSV: {len(rows)}")

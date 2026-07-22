@@ -1519,3 +1519,9 @@ body:has(.bn-item[data-open]) .ty-float,body:has(#dock.on) .ty-float{opacity:0;p
 }
 .f3-helper::before,.mb-sug .cap::before{animation:f3crystal 1.7s cubic-bezier(.34,1.3,.5,1) infinite;will-change:transform,filter}
 @media(prefers-reduced-motion:reduce){.f3-helper::before,.mb-sug .cap::before{animation:none}}
+
+
+/* gated entrance for the search floater (2026-07-22) */
+.ty-float{opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .35s ease,transform .35s ease}
+.ty-float.ty-on{opacity:1;transform:none;pointer-events:auto}
+@media (prefers-reduced-motion:reduce){.ty-float{transition:none}}
