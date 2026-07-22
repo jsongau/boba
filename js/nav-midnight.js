@@ -403,3 +403,34 @@ function pins(st){[].slice.call(document.querySelectorAll(".bn-pin")).forEach(fu
   if(st==="found")b.classList.add("is-found");});}
 navigator.geolocation.getCurrentPosition=function(ok,err,opt){pins("searching");
   orig(function(p){pins("found");try{if(window.__bnApplyGeo)window.__bnApplyGeo(p.coords.latitude,p.coords.longitude);}catch(e){}if(ok)ok(p);},function(e){pins("idle");if(err)err(e);},opt);};})();
+
+
+/* ===== market toggle: SoCal <-> Las Vegas (2026-07-22) ===== */
+(function(){
+"use strict";
+var LV=/^\/(las-vegas|boba\/nv)(\/|$)/.test(location.pathname)||(document.body&&document.body.getAttribute("data-market")==="lv");
+try{if(LV)localStorage.setItem("bn_market","lv");}catch(e){}
+function bind(){
+  var p=document.getElementById("bnMkt");
+  if(!p||p.__bnb)return !!p;
+  p.__bnb=1;
+  if(LV){p.classList.add("is-lv");p.setAttribute("href","/");p.title="Switch to SoCal";p.setAttribute("aria-label","Switch to Southern California");}
+  else{p.setAttribute("href","/las-vegas/");p.title="Switch to Las Vegas";p.setAttribute("aria-label","Switch to Las Vegas");}
+  p.addEventListener("click",function(){try{localStorage.setItem("bn_market",LV?"sc":"lv");}catch(e){}});
+  return true;
+}
+var tries=0,t=setInterval(function(){if(bind()||++tries>12)clearInterval(t);},350);
+bind();
+if(!LV&&(location.pathname==="/"||/\/index\.html$/.test(location.pathname))){
+  var pref=null,dis=null;
+  try{pref=localStorage.getItem("bn_market");dis=sessionStorage.getItem("bn_mkt_dis");}catch(e){}
+  if(pref==="lv"&&!dis){
+    var r=document.createElement("div");
+    r.className="bn-mktrib";
+    r.innerHTML='<span>You were browsing <b>Las Vegas</b>.</span><a href="/las-vegas/">Back to Las Vegas</a><button type="button" aria-label="Dismiss">&times;</button>';
+    document.body.appendChild(r);
+    r.querySelector("button").addEventListener("click",function(){r.remove();try{sessionStorage.setItem("bn_mkt_dis","1");}catch(e){}});
+    requestAnimationFrame(function(){requestAnimationFrame(function(){r.classList.add("on");});});
+  }
+}
+})();

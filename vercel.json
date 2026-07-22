@@ -1,16 +1,48 @@
 {
   "redirects": [
-    { "source": "/how-we-rank", "destination": "/", "permanent": true },
-    { "source": "/how-we-rank/", "destination": "/", "permanent": true },
-    { "source": "/how-we-make-money", "destination": "/", "permanent": true },
-    { "source": "/how-we-make-money/", "destination": "/", "permanent": true }
+    {
+      "source": "/how-we-rank",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/how-we-rank/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/how-we-make-money",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/how-we-make-money/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/area/las-vegas",
+      "destination": "/las-vegas/",
+      "permanent": true
+    },
+    {
+      "source": "/area/las-vegas/",
+      "destination": "/las-vegas/",
+      "permanent": true
+    }
   ],
   "headers": [
     {
       "source": "/components/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET" }
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET"
+        }
       ]
     }
   ]

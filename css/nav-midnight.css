@@ -368,3 +368,31 @@ body.bn-lock{overflow:hidden}
 .led-svg{width:13px;height:13px;flex:none;display:inline-block;filter:drop-shadow(0 0 6px rgba(255,47,109,.75));animation:ledbreathe 2.6s ease-in-out infinite}
 @keyframes ledbreathe{0%,100%{opacity:.7}50%{opacity:1}}
 @media (prefers-reduced-motion:reduce){.led-svg{animation:none}}
+
+/* ===== market toggle: SoCal <-> Las Vegas (2026-07-22) ===== */
+.bn-mkt{display:inline-flex;align-items:center;flex:0 0 auto;margin-right:10px;border:1px solid rgba(197,164,109,.5);
+  border-radius:99px;padding:2px;text-decoration:none;background:linear-gradient(180deg,#0B0C0E,#16181c);
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.5);transition:border-color .15s}
+.bn-mkt:hover{border-color:#F4DDA2}
+.bn-mkt .mk{font:700 10px/1 "Inter Tight",sans-serif;letter-spacing:.06em;padding:5px 8px;border-radius:99px;
+  color:rgba(246,234,216,.4);transition:background .22s,color .22s,box-shadow .22s}
+.bn-mkt .mk-sc{background:linear-gradient(180deg,#fbf3e4,#ecd9b8);color:#0B0C0E;
+  box-shadow:0 0 8px 1px rgba(197,164,109,.45),inset 0 1px 0 rgba(255,255,255,.7)}
+.bn-mkt.is-lv .mk-sc{background:none;color:rgba(246,234,216,.4);box-shadow:none}
+.bn-mkt.is-lv .mk-lv{background:linear-gradient(180deg,#ffd9e4,#ff8fb0);color:#0B0C0E;
+  box-shadow:0 0 10px 2px rgba(255,47,109,.45),inset 0 1px 0 rgba(255,255,255,.7)}
+@media(max-width:1079px){.bn-mkt{margin-right:7px}.bn-mkt .mk{padding:4px 6px;font-size:9px}}
+
+/* one-tap return ribbon (SoCal homepage, remembered Vegas visitors) */
+.bn-mktrib{position:fixed;left:50%;top:86px;transform:translate(-50%,-14px);z-index:8998;display:flex;gap:12px;
+  align-items:center;background:linear-gradient(180deg,#16120b,#0B0C0E);border:1px solid rgba(197,164,109,.55);
+  border-radius:99px;padding:8px 10px 8px 16px;opacity:0;transition:opacity .3s,transform .3s;
+  box-shadow:0 18px 50px -18px rgba(0,0,0,.95);max-width:calc(100vw - 24px)}
+.bn-mktrib.on{opacity:1;transform:translate(-50%,0)}
+.bn-mktrib span{font:500 12.5px "Inter",sans-serif;color:#e8dcc9;white-space:nowrap}
+.bn-mktrib b{color:#F4DDA2}
+.bn-mktrib a{font:700 12.5px "Inter",sans-serif;color:#fff;background:linear-gradient(180deg,#ff5d8b,#ff2f6d);
+  border-radius:99px;padding:7px 14px;text-decoration:none;white-space:nowrap}
+.bn-mktrib button{background:none;border:0;color:#8a6a55;font-size:16px;cursor:pointer;padding:2px 6px;line-height:1}
+.bn-mktrib button:hover{color:#F4DDA2}
+@media(max-width:560px){.bn-mktrib span{display:none}}
