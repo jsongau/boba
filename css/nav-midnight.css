@@ -339,6 +339,7 @@ body.bn-lock{overflow:hidden}
 }
 .bn-pin{position:relative}
 .bn-pinsvg{width:100%;height:100%;display:block;overflow:visible}
+@media(min-width:1080px){.mb-gps{display:none !important}}
 .mb-gps svg.bn-pinsvg{width:22px !important;height:22px !important}
 .mb-gps{color:#8c2f21;z-index:3}
 .mb-gps .pshell{stroke-width:2}
