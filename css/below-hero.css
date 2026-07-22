@@ -1,4 +1,4 @@
-/* Below-hero redesign, 2026-07-22. All section rules scoped under #bh; footer (.ft2) and
+/* Below-hero redesign, 2026-07-22. Section rules scoped under #bh; footer (.ft2) and
    hero map card (.btn-map) rules are page-chrome and intentionally unscoped. */
 #bh{display:block}
 #bh{

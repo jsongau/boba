@@ -204,7 +204,7 @@ function renderOpenNear(){
   if(userLoc){list.sort((a,b)=>distOf(a)-distOf(b));$('#onKick').textContent='Open near you';$('#onHead').textContent='Open right now, closest first.';$('#onHint').style.display='none';}
   else{list.sort((a,b)=>weight(b)-weight(a));$('#onHint').style.display='flex';}
   rail.innerHTML='';const top=list.slice(0,10);onSlugs=new Set(top.map(s=>s.s));top.forEach(s=>rail.appendChild(shopCard(s,{showLate:true})));
-  if(!list.length)rail.innerHTML='<p class="lede" style="color:#cfe0d6">Nothing pouring with those filters right now. Widen one and the rooms come back.</p>';
+  if(!list.length)rail.innerHTML='<p class="lede" style="color:#cfe0d6">Nothing open with those filters right now. Widen one and more shops come back.</p>';
   renderOnFilters();
 }
 
@@ -326,8 +326,8 @@ function renderDir(){
   const byReg={},byCity={};
   SHOPS.forEach(s=>{const r=regionOf(s);byReg[r]=(byReg[r]||0)+1;(byCity[s.cs]=byCity[s.cs]||{c:s.c,cs:s.cs,n:0}).n++;});
   const total=SHOPS.length, cities=Object.keys(byCity).length, regs=Object.keys(byReg).length;
-  const h=$('#dirH2');if(h){const w=numWords(total);h.textContent=w.charAt(0).toUpperCase()+w.slice(1)+' rooms, sorted by where you are.';}
-  const l=$('#dirLede');if(l)l.textContent=`${total} shops across ${cities} cities and ${numWords(regs)} regions. The full guide lives on its own page. Search by shop or city, filter chains or independents, and keep a list.`;
+  const h=$('#dirH2');if(h){const w=numWords(total);h.textContent=w.charAt(0).toUpperCase()+w.slice(1)+' shops, sorted by where you are.';}
+  const l=$('#dirLede');if(l)l.textContent=`${total} boba shops across ${cities} Southern California cities and ${numWords(regs)} regions. The full guide lives on its own page. Search by shop or city, filter chains or independents, and keep a list.`;
   const ar=$('#dirAreas');if(ar){ar.innerHTML='';
     Object.keys(REGIONS).filter(k=>byReg[k]).sort((a,b)=>byReg[b]-byReg[a]).forEach(k=>{const R=REGIONS[k];
       const a=document.createElement('a');a.className='dirx-area';a.href=BASE+R.path;a.target='_blank';a.rel='noopener';
@@ -373,7 +373,7 @@ function setLocation(loc){userLoc={lat:loc.lat,lng:loc.lng,label:loc.label,regio
   if(cStep>=CQ.length)renderConResult();
   const t=$('#opennear');if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}
 function greeting(){const min=pacificNow().min;return min<300?'Still up.':min<720?'Good morning.':min<1020?'Good afternoon.':'Good evening.';}
-function tonightLine(){const openN=SHOPS.filter(s=>isOpenNow(s,NOW)).length;return `${openN} shops pouring right now across SoCal.`;}
+function tonightLine(){const openN=SHOPS.filter(s=>isOpenNow(s,NOW)).length;return `${openN} boba shops open right now across SoCal.`;}
 
 
 /* Gallery carousel: two walls, one frame */
@@ -440,7 +440,7 @@ loadLive();
 })();
 
 ;
-/* live counts for page chrome (hero, search overlay, footer) */
+/* live counts for page chrome */
 (function(){
 var U="https://hfvbeqlefwwjlrbyxpbj.supabase.co/rest/v1/niteboba_finder?select=c";
 var K="sb_publishable_wlfujszvn2logC3KNL3MsA_AW1F42kf";
