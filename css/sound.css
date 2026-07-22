@@ -30,7 +30,11 @@
 /* On small screens the nav collapses; keep the control visible but compact
    only when it lives inside the actions row (float fallback stays fixed). */
 @media (max-width: 1079px) {
-  .bn-actions .bn-sound-toggle { display: none; }
+  .bn-actions .bn-sound-toggle {
+    width: 34px; height: 34px; padding: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .bn-actions .bn-sound-toggle .bn-sound-label { display: none; }
 }
 
 .bn-sound-toggle:hover {

@@ -393,3 +393,13 @@ if(hero&&"IntersectionObserver" in window){
 }
 byScroll();
 })();});})();
+
+
+/* location pin state machine: any geolocation call animates every .bn-pin (2026-07-22) */
+(function(){var g=navigator.geolocation;if(!g||!g.getCurrentPosition)return;var orig=g.getCurrentPosition.bind(g);
+function pins(st){[].slice.call(document.querySelectorAll(".bn-pin")).forEach(function(b){
+  b.classList.remove("is-searching","is-found");
+  if(st==="searching")b.classList.add("is-searching");
+  if(st==="found")b.classList.add("is-found");});}
+navigator.geolocation.getCurrentPosition=function(ok,err,opt){pins("searching");
+  orig(function(p){pins("found");if(ok)ok(p);},function(e){pins("idle");if(err)err(e);},opt);};})();

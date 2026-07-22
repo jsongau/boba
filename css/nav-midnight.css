@@ -324,3 +324,40 @@ body.bn-lock{overflow:hidden}
     transition:none;animation:none}
   .bn-overlay-box{opacity:1;transform:none}
 }
+
+
+/* ===== 2026-07-22 mobile polish: stacked wordmark, wider search, pinned bottom bar, location pin ===== */
+@media(max-width:1079px){
+  .bn-word{line-height:1.05;font-size:1.02rem;gap:8px}
+  .bn-wordtxt{display:inline-block;line-height:1.05}
+  .bn-wordtxt b{display:block}
+  .bn-logo{height:34px}
+  .mb-field{width:min(430px,62vw)}
+  .mb-gps{display:flex;align-items:center;justify-content:center;width:36px;height:36px}
+  .bn-bottombar.bn-bb-hidden{transform:none}
+}
+.bn-pin{position:relative}
+.bn-pinsvg{width:100%;height:100%;display:block;overflow:visible}
+.mb-gps svg.bn-pinsvg{width:22px !important;height:22px !important}
+.mb-gps{color:#8c2f21;z-index:3}
+.mb-gps .pshell{stroke-width:2}
+.mb-gps:hover{color:#C8372D}
+.bn-pinsvg .pr{fill:none;stroke:#ff2f6d;stroke-width:1.2;opacity:0;transform-origin:12px 10.2px}
+.bn-pinsvg .pcheck{stroke-dasharray:9;stroke-dashoffset:9;opacity:0}
+.bn-pinsvg .pdot{transform-origin:12px 10.2px;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.bn-pinsvg .pbody{transform-origin:12px 21px}
+.bn-pin.is-searching .pr1{animation:bnping 1.3s ease-out infinite}
+.bn-pin.is-searching .pr2{animation:bnping 1.3s ease-out .55s infinite}
+.bn-pin.is-searching .pbody{animation:bnbob 1.1s ease-in-out infinite}
+.bn-pin.is-searching .pdot{fill:#F4DDA2}
+.bn-pin.is-found .pdot{transform:scale(1.75)}
+.bn-pin.is-found .pcheck{opacity:1;animation:bndraw .45s cubic-bezier(.16,1,.3,1) .1s forwards}
+.bn-pin.is-found .pshell{stroke:#F4DDA2}
+.bn-pin.is-found .pr1{animation:bnping .7s ease-out 1}
+@keyframes bnping{0%{transform:scale(.35);opacity:.9}80%{transform:scale(1.9);opacity:0}100%{transform:scale(1.9);opacity:0}}
+@keyframes bnbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
+@keyframes bndraw{to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){
+  .bn-pin.is-searching .pr1,.bn-pin.is-searching .pr2,.bn-pin.is-searching .pbody,.bn-pin.is-found .pr1{animation:none}
+  .bn-pin.is-found .pcheck{animation:none;stroke-dashoffset:0;opacity:1}
+}

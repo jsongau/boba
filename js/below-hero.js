@@ -16,7 +16,7 @@ window.initLocationFinder = function(opts){
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];});}
   function hv(la1,ln1,la2,ln2){var R=3958.8,t=function(d){return d*Math.PI/180;};var dLa=t(la2-la1),dLn=t(ln2-ln1);var a=Math.sin(dLa/2)*Math.sin(dLa/2)+Math.cos(t(la1))*Math.cos(t(la2))*Math.sin(dLn/2)*Math.sin(dLn/2);return 2*R*Math.asin(Math.min(1,Math.sqrt(a)));}
   function nearest(lat,lng,pool){pool=pool||gaz;var b=null,bd=1/0;for(var i=0;i<pool.length;i++){var d=hv(lat,lng,pool[i].lat,pool[i].lng);if(d<bd){bd=d;b=pool[i];}}return b?{c:b,mi:bd}:null;}
-  var PIN='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 8a4 4 0 100 8 4 4 0 000-8zM12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  var PIN='<svg class=\x27bn-pinsvg\x27 viewBox=\x270 0 24 24\x27 aria-hidden=\x27true\x27><circle class=\x27pr pr1\x27 cx=\x2712\x27 cy=\x2710.2\x27 r=\x274.5\x27/><circle class=\x27pr pr2\x27 cx=\x2712\x27 cy=\x2710.2\x27 r=\x274.5\x27/><g class=\x27pbody\x27><path class=\x27pshell\x27 d=\x27M12 21.2c-4.2-4.5-7-7.9-7-11A7 7 0 0 1 19 10.2c0 3.1-2.8 6.5-7 11z\x27 fill=\x27none\x27 stroke=\x27currentColor\x27 stroke-width=\x271.7\x27 stroke-linejoin=\x27round\x27/><circle class=\x27pdot\x27 cx=\x2712\x27 cy=\x2710.2\x27 r=\x272.3\x27 fill=\x27#ff2f6d\x27/></g><path class=\x27pcheck\x27 d=\x27M9.4 10.3l1.9 1.9 3.4-3.6\x27 fill=\x27none\x27 stroke=\x27#0B0C0E\x27 stroke-width=\x271.8\x27 stroke-linecap=\x27round\x27 stroke-linejoin=\x27round\x27/></svg>';
   var LOCK='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2" stroke="currentColor" stroke-width="1.5"/><path d="M8 10.5V8a4 4 0 118 0v2.5" stroke="currentColor" stroke-width="1.5"/></svg>';
   var g=opts.greeting?esc(opts.greeting)+' ':'';
   mount.innerHTML=
@@ -27,7 +27,7 @@ window.initLocationFinder = function(opts){
      '<div class="lf-field"><span class="lf-pin" aria-hidden="true"></span>'+
        '<input id="lfIn" class="lf-input" type="text" role="combobox" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-autocomplete="list" aria-expanded="false" aria-controls="lfList" placeholder="Enter a city or ZIP (e.g. 91748)" aria-describedby="lfStatus">'+
        '<button type="button" class="lf-clear" id="lfClear" aria-label="Clear">&times;</button></div>'+
-     '<button type="button" class="lf-gps" id="lfGps" aria-label="Find boba near me"><span id="lfGpsIcon">'+PIN+'</span><span id="lfGpsLabel">Find boba near me</span></button>'+
+     '<button type="button" class="lf-gps bn-pin" id="lfGps" aria-label="Find boba near me"><span id="lfGpsIcon">'+PIN+'</span><span id="lfGpsLabel">Find boba near me</span></button>'+
    '</div>'+
    '<ul class="lf-list" id="lfList" role="listbox" aria-label="Location suggestions"></ul></div>'+
    '<p class="lf-reassure">'+LOCK+'<span>Used once, in your browser, to sort by distance. Nothing saved or shared.</span></p>'+
@@ -67,7 +67,7 @@ window.initLocationFinder = function(opts){
     if(shops>0){label=c.name+(reg?', '+reg:'');}else{var nr=nearest(c.lat,c.lng,withShops);label=nr?('No shops in '+c.name+', nearest is '+nr.c.name+', '+Math.round(nr.mi)+' mi'):('No shops in '+c.name+' yet');}
     input.value=it.t==='zip'?c.name+' ('+it.zip+')':c.name;clr.classList.add('on');closeL();setStatus(label,shops>0?'ok':'');
     onPick({lat:c.lat,lng:c.lng,label:label,city:c.name,region:c.region,source:src});}
-  function setGps(on){if(on){gps.setAttribute('disabled','disabled');gicon.innerHTML='<span class="lf-spin"></span>';glabel.textContent='Finding boba around you…';}else{gps.removeAttribute('disabled');gicon.innerHTML=PIN;glabel.textContent='Find boba near me';}}
+  function setGps(on){if(on){gps.setAttribute('disabled','disabled');glabel.textContent='Finding boba around you…';}else{gps.removeAttribute('disabled');glabel.textContent='Find boba near me';}}
   function useGps(){closeL();if(!navigator.geolocation){setStatus('Location isn\'t supported here, type a city or ZIP.','err');input.focus();return;}
     setGps(true);setStatus('Getting your location…','');
     navigator.geolocation.getCurrentPosition(function(pos){setGps(false);var lat=pos.coords.latitude,lng=pos.coords.longitude;var nr=nearest(lat,lng);if(!nr){setStatus('Couldn\'t match you to a SoCal city, type one.','err');input.focus();return;}var c=nr.c,reg=REG[c.region]||'';input.value=c.name;clr.classList.add('on');setStatus('Near '+c.name+(reg?', '+reg:''),'ok');onPick({lat:lat,lng:lng,label:'your location',city:c.name,region:c.region,source:'gps'});},
