@@ -216,7 +216,7 @@ function renderTrending(){const rail=$('#trendRail');if(!rail)return;rail.innerH
 /* 4b · worth the drive */
 function renderWorth(){const rail=$('#worthRail');if(!rail)return;let list;
   if(userLoc){list=beltPool().filter(s=>s.r>=4.5&&distOf(s)>=7).sort((a,b)=>(b.r-a.r)||weight(b)-weight(a));
-    const wl=$('#worthLede');if(wl)wl.textContent='Great rooms worth the extra miles from you tonight.';GAL[1].l='Great rooms worth the extra miles from you tonight.';}
+    const wl=$('#worthLede');if(wl)wl.textContent='Top-rated shops worth the extra miles from you tonight.';GAL[1].l='Top-rated shops worth the extra miles from you tonight.';}
   else list=beltPool().filter(s=>s.r>=4.7).sort((a,b)=>weight(b)-weight(a));
   if(list.length<6)list=beltPool().filter(s=>s.r>=4.6).sort((a,b)=>weight(b)-weight(a));
   rail.innerHTML='';list.slice(0,10).forEach(s=>rail.appendChild(shopCard(s,{showLate:true})));}
@@ -326,8 +326,8 @@ function renderDir(){
   const byReg={},byCity={};
   SHOPS.forEach(s=>{const r=regionOf(s);byReg[r]=(byReg[r]||0)+1;(byCity[s.cs]=byCity[s.cs]||{c:s.c,cs:s.cs,n:0}).n++;});
   const total=SHOPS.length, cities=Object.keys(byCity).length, regs=Object.keys(byReg).length;
-  const h=$('#dirH2');if(h){const w=numWords(total);h.textContent=w.charAt(0).toUpperCase()+w.slice(1)+' shops, sorted by where you are.';}
-  const l=$('#dirLede');if(l)l.textContent=`${total} boba shops across ${cities} Southern California cities and ${numWords(regs)} regions. The full guide lives on its own page. Search by shop or city, filter chains or independents, and keep a list.`;
+  const h=$('#dirH2');if(h)h.textContent='Find boba shops near you.';
+  const l=$('#dirLede');if(l)l.textContent=`${total} boba shops across ${cities} Southern California cities, hours checked against official sources. Search by city, shop, or drink, filter chains or independents, and keep a list.`;
   const ar=$('#dirAreas');if(ar){ar.innerHTML='';
     Object.keys(REGIONS).filter(k=>byReg[k]).sort((a,b)=>byReg[b]-byReg[a]).forEach(k=>{const R=REGIONS[k];
       const a=document.createElement('a');a.className='dirx-area';a.href=BASE+R.path;a.target='_blank';a.rel='noopener';
@@ -379,7 +379,7 @@ function tonightLine(){const openN=SHOPS.filter(s=>isOpenNow(s,NOW)).length;retu
 /* Gallery carousel: two walls, one frame */
 const GAL=[
  {k:'Trending tonight',h:'What SoCal is pouring right now.',l:'Ranked by rating and how many people keep coming back. Drag to explore.',p:'No. I \u00b7 Trending tonight'},
- {k:'Worth the drive',h:'The ones people make a trip for.',l:'Top-rated rooms a little farther out, set your location and these become the drive worth taking.',p:'No. II \u00b7 Worth the drive'}
+ {k:'Worth the drive',h:'The ones people make a trip for.',l:'Top-rated shops a little farther out, set your location and these become the drive worth taking.',p:'No. II \u00b7 Worth the drive'}
 ];
 let galIdx=0, chainsIn=false;
 function beltPool(){return SHOPS.filter(s=>chainsIn||s.t!=='chain');}
