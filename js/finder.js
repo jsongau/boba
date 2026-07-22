@@ -259,6 +259,7 @@ window.__demo={pick:function(name){q.value=name;q.dispatchEvent(new Event("input
   setScope:function(v){if(v!=="city"&&v!=="all")return;if(state.scope===v)return;state.scope=v;if(state.origin)search(false);}};
 })();
 (function(){var f=document.getElementById('fuse'),d=document.getElementById('dock');
+if(!f||!d)return;
 function fit(){d.style.top=f.getBoundingClientRect().bottom+'px';}
 addEventListener('scroll',fit,{passive:true});addEventListener('resize',fit);fit();
 var mo=new MutationObserver(fit);mo.observe(f,{attributes:true});})();
