@@ -11,12 +11,6 @@
 /* finder-inline styling belongs to finder.css / nav-midnight.css (the nav's own
    sheets), same as every other page. No override here — that caused the nav's
    right cluster to collide on profile pages only. */
-.mb-field{display:flex;align-items:center;gap:.55rem;flex:1;background:var(--bn-surface);border:1px solid var(--bn-line);border-radius:2px;padding:.42rem .7rem;transition:border-color .16s var(--bn-ease)}
-.mb-field:hover{border-color:var(--bn-line-strong)}
-.mb-pin{width:15px;height:15px;color:var(--bn-muted);flex:none}
-.mb-input{flex:1;min-width:0;background:none;border:0;color:var(--bn-pearl);font-family:var(--bn-sans);font-size:.82rem}
-.mb-input::placeholder{color:var(--bn-muted)}
-.mb-input:focus{outline:none}
 .mb-chip{font-size:.72rem;color:var(--bn-champagne);border:1px solid var(--gold-line);border-radius:2px;padding:.12rem .45rem;white-space:nowrap;font-variant-numeric:tabular-nums}
 
 /* --------------------------------------------------------- hours table --- */
