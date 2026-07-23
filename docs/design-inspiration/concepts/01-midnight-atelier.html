@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Boba Night — Midnight Atelier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --obsidian:#0B0C0E;
+    --obsidian-2:#101215;
+    --pearl:#F4EFE7;
+    --gold:#C5A46D;
+    --muted:rgba(244,239,231,.52);
+    --hair:rgba(197,164,109,.28);
+    --hair-soft:rgba(244,239,231,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--obsidian);
+    color:var(--pearl);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:var(--obsidian)}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 28px;
+    background:linear-gradient(180deg,rgba(11,12,14,.9),rgba(11,12,14,0));
+    backdrop-filter:blur(6px);
+  }
+  .brand{font-family:'Fraunces',serif;font-weight:400;letter-spacing:.02em;font-size:19px}
+  .brand b{color:var(--gold);font-weight:400}
+  .nav-links{display:flex;gap:30px;align-items:center;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .nav-links a{color:inherit;text-decoration:none;transition:color .3s}
+  .nav-links a:hover{color:var(--pearl)}
+  .nav-links .pill{border:1px solid var(--hair);color:var(--pearl);padding:9px 16px;border-radius:40px;transition:.3s}
+  .nav-links .pill:hover{background:var(--gold);color:var(--obsidian);border-color:var(--gold)}
+  @media(max-width:720px){.nav-links a:not(.pill){display:none}}
+
+  /* HERO */
+  header{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    position:relative;padding-top:90px;
+  }
+  .kicker{
+    display:flex;align-items:center;gap:14px;
+    font-size:11.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:34px;
+  }
+  .kicker::before{content:"";width:46px;height:1px;background:var(--gold)}
+  h1{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(52px,10.5vw,150px);
+    line-height:.92;letter-spacing:-.02em;
+    max-width:14ch;
+  }
+  h1 em{font-style:italic;color:var(--gold)}
+  .hero-foot{
+    display:flex;flex-wrap:wrap;gap:40px;align-items:flex-end;justify-content:space-between;
+    margin-top:56px;padding-top:30px;border-top:1px solid var(--hair-soft);
+  }
+  .lede{max-width:42ch;color:var(--muted);font-size:16px}
+  .cta{
+    display:inline-flex;align-items:center;gap:12px;flex-shrink:0;
+    background:var(--pearl);color:var(--obsidian);
+    padding:16px 26px;border-radius:44px;
+    font-size:13px;letter-spacing:.06em;font-weight:500;
+    text-decoration:none;transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s;
+  }
+  .cta:hover{transform:translateY(-3px);background:var(--gold)}
+  .cta .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);transition:.3s}
+  .cta:hover .dot{background:var(--obsidian)}
+
+  .hero-glow{
+    position:absolute;right:-10%;top:14%;width:520px;height:520px;
+    background:radial-gradient(circle,rgba(197,164,109,.16),transparent 66%);
+    filter:blur(20px);pointer-events:none;z-index:-1;
+  }
+
+  /* SECTION LABEL */
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:48px;flex-wrap:wrap}
+  .sec-head h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,5vw,54px);line-height:1;letter-spacing:-.01em}
+  .sec-head span{font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+
+  /* PROXIMITY FINDER — signature interaction */
+  .finder{padding:120px 0 40px}
+  .finder-panel{
+    border:1px solid var(--hair);border-radius:20px;
+    background:linear-gradient(180deg,var(--obsidian-2),var(--obsidian));
+    padding:44px;
+  }
+  .finder-lede{color:var(--muted);max-width:52ch;margin-bottom:34px;font-size:15px}
+  .cities{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:38px}
+  .chip{
+    font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.02em;
+    color:var(--pearl);background:transparent;
+    border:1px solid var(--hair-soft);border-radius:40px;
+    padding:11px 20px;cursor:pointer;transition:.3s;
+  }
+  .chip:hover{border-color:var(--gold)}
+  .chip.active{background:var(--gold);color:var(--obsidian);border-color:var(--gold)}
+  .results{display:grid;gap:1px;background:var(--hair-soft);border-radius:14px;overflow:hidden;border:1px solid var(--hair-soft)}
+  .row{
+    display:grid;grid-template-columns:38px 1fr auto;gap:20px;align-items:center;
+    background:var(--obsidian);padding:22px 26px;
+    transition:background .35s;
+  }
+  .row:hover{background:var(--obsidian-2)}
+  .row .idx{font-family:'Fraunces',serif;font-size:18px;color:var(--gold);font-weight:300}
+  .row .name{font-family:'Fraunces',serif;font-size:21px;font-weight:400;letter-spacing:.01em}
+  .row .meta{font-size:12.5px;color:var(--muted);letter-spacing:.02em;margin-top:3px}
+  .row .dist{text-align:right}
+  .row .dist b{font-family:'Fraunces',serif;font-weight:400;font-size:22px;color:var(--pearl);display:block}
+  .row .dist span{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  @media(max-width:560px){.finder-panel{padding:26px}.row{grid-template-columns:30px 1fr auto;gap:12px;padding:18px}}
+
+  /* EDITORIAL DUO */
+  .duo{padding:120px 0 130px}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  @media(max-width:760px){.cards{grid-template-columns:1fr}}
+  .card{
+    border:1px solid var(--hair-soft);border-radius:20px;padding:40px;
+    position:relative;overflow:hidden;min-height:320px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    transition:border-color .4s,transform .4s;
+  }
+  .card:hover{border-color:var(--hair);transform:translateY(-4px)}
+  .card .no{font-family:'Fraunces',serif;font-size:13px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+  .card h3{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(26px,3.4vw,38px);line-height:1.04;margin:18px 0 14px;letter-spacing:-.01em}
+  .card p{color:var(--muted);font-size:14.5px;max-width:34ch}
+  .card .flourish{position:absolute;right:-40px;bottom:-40px;width:200px;height:200px;border:1px solid var(--hair);border-radius:50%;opacity:.5}
+  .card.feat{background:linear-gradient(150deg,rgba(197,164,109,.1),transparent 60%)}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--hair-soft);padding:48px 0}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:12.5px;letter-spacing:.04em}
+  .foot .brand{font-size:16px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">Boba <b>Night</b></div>
+  <div class="nav-links">
+    <a href="#finder">The Atlas</a>
+    <a href="#duo">After Dark</a>
+    <a href="#finder" class="pill">Find boba near me</a>
+  </div>
+</nav>
+
+<header>
+  <div class="hero-glow"></div>
+  <div class="wrap">
+    <div class="kicker">Southern California — After Dark</div>
+    <h1>The city goes quiet.<br />The <em>boba</em> stays open.</h1>
+    <div class="hero-foot">
+      <p class="lede">A curated atlas of Southern California's finest late-night tea rooms, arranged by nearness so the closest good cup is never a guess.</p>
+      <a href="#finder" class="cta"><span class="dot"></span> Find boba near me</a>
+    </div>
+  </div>
+</header>
+
+<section class="finder" id="finder">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Nearest, from where you stand</h2>
+      <span>001 — The Atlas</span>
+    </div>
+    <div class="finder-panel">
+      <p class="finder-lede">Choose your corner of SoCal. We arrange the room by proximity, closest cup first, so the walk stays short and the tea stays cold.</p>
+      <div class="cities">
+        <button class="chip active" data-city="rowland">Rowland Heights</button>
+        <button class="chip" data-city="cypress">Cypress</button>
+        <button class="chip" data-city="irvine">Irvine</button>
+        <button class="chip" data-city="arcadia">Arcadia</button>
+        <button class="chip" data-city="ktown">Koreatown</button>
+      </div>
+      <div class="results" id="results"></div>
+    </div>
+  </div>
+</section>
+
+<section class="duo" id="duo">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Two ways into the night</h2>
+      <span>002 — After Dark</span>
+    </div>
+    <div class="cards">
+      <div class="card feat">
+        <div class="no">Open Late</div>
+        <div>
+          <h3>Rooms still lit past midnight.</h3>
+          <p>Sunright, Wanpo, Feng Cha. The places that keep the kettle on when everything else has closed the shutters.</p>
+        </div>
+        <div class="flourish"></div>
+      </div>
+      <div class="card">
+        <div class="no">Date Night</div>
+        <div>
+          <h3>A slow table for two.</h3>
+          <p>Quiet corners, warm brown-sugar milk, and a stir that gives you a reason to stay a while longer.</p>
+        </div>
+        <div class="flourish"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div class="brand">Boba <b style="color:var(--gold)">Night</b></div>
+    <div>Curated across Southern California. Brewed after dark.</div>
+    <div>© 2026 Boba Night</div>
+  </div>
+</footer>
+
+<script>
+  // Signature interaction: proximity-ordered finder.
+  // Distances are sample presentation data, closest cup first.
+  const DATA = {
+    rowland: [
+      { name:"Tastea", meta:"Colima Rd — brown sugar, open late", d:0.4 },
+      { name:"Sunright Tea Studio", meta:"Nogales St — cheese foam", d:0.9 },
+      { name:"Wanpo Tea Shop", meta:"Fullerton Rd — Taiwan classics", d:1.6 },
+      { name:"85C Bakery Cafe", meta:"Colima Rd — sea salt coffee", d:2.3 }
+    ],
+    cypress: [
+      { name:"7 Leaves Cafe", meta:"Ball Rd — house sea cream", d:0.6 },
+      { name:"Sharetea", meta:"Valley View St — classic pearls", d:1.1 },
+      { name:"Feng Cha", meta:"Katella Ave — brulee series", d:1.9 },
+      { name:"Half & Half", meta:"Beach Blvd — the honey boba", d:2.7 }
+    ],
+    irvine: [
+      { name:"Meet Fresh", meta:"Culver Dr — taro and grass jelly", d:0.5 },
+      { name:"Tiger Sugar", meta:"Barranca Pkwy — brown sugar tiger", d:1.0 },
+      { name:"Xing Fu Tang", meta:"Jeffrey Rd — stir-fried pearls", d:1.7 },
+      { name:"Kung Fu Tea", meta:"Alton Pkwy — the standby", d:2.4 }
+    ],
+    arcadia: [
+      { name:"Sunright Tea Studio", meta:"Baldwin Ave — cheese foam", d:0.7 },
+      { name:"85C Bakery Cafe", meta:"Duarte Rd — sea salt green", d:1.3 },
+      { name:"Meet Fresh", meta:"Las Tunas Dr — warm taro", d:2.0 },
+      { name:"Sharetea", meta:"Baldwin Ave — winter melon", d:2.6 }
+    ],
+    ktown: [
+      { name:"Boba Guys", meta:"Wilshire Blvd — Straus milk tea", d:0.4 },
+      { name:"Sunright Tea Studio", meta:"6th St — cheese foam", d:0.8 },
+      { name:"Feng Cha", meta:"Western Ave — brulee oolong", d:1.5 },
+      { name:"Kung Fu Tea", meta:"Vermont Ave — the standby", d:2.2 }
+    ]
+  };
+
+  const results = document.getElementById('results');
+
+  function render(city){
+    const list = DATA[city];
+    results.innerHTML = '';
+    list.forEach((s,i)=>{
+      const row = document.createElement('div');
+      row.className = 'row';
+      row.style.opacity = 0;
+      row.style.transform = 'translateY(8px)';
+      row.innerHTML =
+        '<div class="idx">0'+(i+1)+'</div>'+
+        '<div><div class="name">'+s.name+'</div><div class="meta">'+s.meta+'</div></div>'+
+        '<div class="dist"><b>'+s.d.toFixed(1)+'</b><span>miles</span></div>';
+      results.appendChild(row);
+      requestAnimationFrame(()=>{
+        setTimeout(()=>{
+          row.style.transition='opacity .5s ease, transform .5s ease';
+          row.style.opacity=1;
+          row.style.transform='translateY(0)';
+        }, i*70);
+      });
+    });
+  }
+
+  document.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click',()=>{
+      document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      render(chip.dataset.city);
+    });
+  });
+
+  render('rowland');
+</script>
+</body>
+</html>

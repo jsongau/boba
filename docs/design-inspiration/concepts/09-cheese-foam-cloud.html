@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Boba Night — Cheese Foam Cloud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --obsidian:#0B0C0E;
+    --pearl:#F4EFE7;
+    --gold:#C5A46D;
+    --jade:#123F35;
+    --orchid:#b46bd6;
+    --foam:#f7e9d8;
+    --mist:rgba(244,239,231,.62);
+    --edge:rgba(244,239,231,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--obsidian);
+    color:var(--pearl);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* soft atmospheric light bloom behind everything */
+  .aura{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .aura b{
+    position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;
+    mix-blend-mode:screen;animation:drift 22s ease-in-out infinite;
+  }
+  .a1{width:60vw;height:60vw;left:-15vw;top:-20vw;background:radial-gradient(circle,#3a2a4a,transparent 65%)}
+  .a2{width:55vw;height:55vw;right:-18vw;top:8vw;background:radial-gradient(circle,#4a3a24,transparent 65%);animation-delay:-7s}
+  .a3{width:48vw;height:48vw;left:20vw;bottom:-22vw;background:radial-gradient(circle,#123f35,transparent 65%);animation-delay:-13s}
+  @keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(4vw,-3vw) scale(1.12)}}
+
+  .wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 24px}
+
+  /* NAV */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:26px 24px;max-width:1180px;margin:0 auto;position:relative;z-index:2}
+  .brand{font-family:'Fraunces',serif;font-weight:500;font-size:20px;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--foam);box-shadow:0 0 18px 3px rgba(247,233,216,.7)}
+  .navlinks{display:flex;gap:30px;align-items:center}
+  .navlinks a{color:var(--mist);text-decoration:none;font-size:14px;transition:color .3s}
+  .navlinks a:hover{color:var(--pearl)}
+  .navcta{border:1px solid var(--edge);border-radius:100px;padding:9px 18px;font-size:13px;color:var(--pearl);background:rgba(244,239,231,.04);backdrop-filter:blur(8px)}
+  @media(max-width:720px){.navlinks a:not(.navcta){display:none}}
+
+  /* HERO */
+  header{position:relative;text-align:center;padding:70px 24px 40px}
+  .kicker{font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:26px}
+  h1{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(46px,9vw,104px);line-height:.98;letter-spacing:-.02em;
+  }
+  h1 em{font-style:italic;font-weight:400;
+    background:linear-gradient(180deg,#fff 0%,var(--foam) 45%,var(--gold) 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sub{max-width:520px;margin:26px auto 0;color:var(--mist);font-size:17px;font-weight:300}
+  .heroctas{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+  .btn{border:none;cursor:pointer;font-family:inherit;font-size:15px;border-radius:100px;padding:15px 28px;transition:transform .3s,box-shadow .3s}
+  .btn-primary{background:linear-gradient(180deg,#fff,var(--foam));color:#20160a;font-weight:500;box-shadow:0 14px 40px -12px rgba(247,233,216,.6)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 22px 55px -12px rgba(247,233,216,.75)}
+  .btn-ghost{background:transparent;color:var(--pearl);border:1px solid var(--edge)}
+  .btn-ghost:hover{background:rgba(244,239,231,.06)}
+
+  /* the foam cup */
+  .cupwrap{position:relative;width:min(340px,72vw);margin:56px auto 0;height:min(340px,72vw)}
+  .cup{position:absolute;inset:0;border-radius:50%;
+    background:radial-gradient(circle at 38% 32%,#2a2f34,#141619 62%,#0d0f11);
+    box-shadow:inset 0 -30px 60px rgba(0,0,0,.6),0 40px 80px -30px rgba(0,0,0,.9)}
+  .foam{position:absolute;inset:0;border-radius:50%;overflow:hidden}
+  .foam b{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--foam) 55%,#e2c9a6);
+    filter:blur(1px);animation:bob 6s ease-in-out infinite}
+  .pearl{position:absolute;bottom:14%;width:16px;height:16px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#5a4632,#1c1109);animation:rise 5s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes rise{0%,100%{transform:translateY(0);opacity:.9}50%{transform:translateY(-14px);opacity:.6}}
+  .steam{position:absolute;top:-20px;left:50%;font-family:'Fraunces',serif;font-style:italic;
+    font-size:14px;color:var(--mist);transform:translateX(-50%);letter-spacing:.1em}
+
+  /* SECTION shared */
+  section{padding:90px 0 30px;position:relative}
+  .eyebrow{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,5vw,52px);line-height:1.05;letter-spacing:-.01em}
+  .h2 em{font-style:italic;color:var(--foam)}
+  .lead{color:var(--mist);max-width:460px;font-weight:300;margin-top:14px}
+
+  /* NEIGHBORHOOD FINDER (signature interaction) */
+  .finderhead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:34px}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+  .chip{cursor:pointer;border:1px solid var(--edge);background:rgba(244,239,231,.03);color:var(--mist);
+    border-radius:100px;padding:10px 18px;font-size:14px;font-family:inherit;transition:all .35s;backdrop-filter:blur(6px)}
+  .chip:hover{color:var(--pearl);border-color:rgba(244,239,231,.25)}
+  .chip.on{background:linear-gradient(180deg,#fff,var(--foam));color:#20160a;border-color:transparent;font-weight:500;box-shadow:0 10px 30px -10px rgba(247,233,216,.5)}
+  .shops{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+  .card{
+    position:relative;border:1px solid var(--edge);border-radius:22px;padding:24px;
+    background:linear-gradient(180deg,rgba(244,239,231,.05),rgba(244,239,231,.015));
+    backdrop-filter:blur(14px);overflow:hidden;transition:transform .5s,border-color .5s,box-shadow .5s;
+    animation:fadeup .6s ease both;
+  }
+  .card:hover{transform:translateY(-6px);border-color:rgba(247,233,216,.28);box-shadow:0 30px 60px -30px rgba(0,0,0,.9)}
+  .card::before{content:"";position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;
+    background:radial-gradient(circle,rgba(247,233,216,.18),transparent 70%);filter:blur(10px)}
+  .card.feat::before{background:radial-gradient(circle,rgba(180,107,214,.28),transparent 70%)}
+  .cname{font-family:'Fraunces',serif;font-size:23px;font-weight:400;margin-bottom:4px}
+  .cmeta{font-size:13px;color:var(--mist);margin-bottom:16px}
+  .ctags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .ctag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);border:1px solid var(--edge);border-radius:100px;padding:5px 11px}
+  .feat .ctag.p{color:var(--orchid);border-color:rgba(180,107,214,.4)}
+  .dist{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--edge)}
+  .dist b{font-family:'Fraunces',serif;font-weight:500;font-size:18px;color:var(--pearl)}
+  .dist span{font-size:12px;color:var(--mist)}
+  .go{font-size:13px;color:var(--foam)}
+  .empty{grid-column:1/-1;text-align:center;color:var(--mist);padding:40px;font-style:italic;font-family:'Fraunces',serif}
+  @keyframes fadeup{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+  /* RITUAL / cloud strip */
+  .ritual{display:grid;grid-template-columns:1.1fr 1fr;gap:50px;align-items:center}
+  .rituals{display:flex;flex-direction:column;gap:2px;margin-top:28px}
+  .ritem{display:flex;gap:18px;align-items:baseline;padding:18px 0;border-top:1px solid var(--edge)}
+  .ritem span{font-family:'Fraunces',serif;font-style:italic;color:var(--gold);font-size:15px;min-width:34px}
+  .ritem div b{font-family:'Fraunces',serif;font-weight:400;font-size:19px;display:block;margin-bottom:3px}
+  .ritem div p{font-size:14px;color:var(--mist);font-weight:300}
+  .cloudart{position:relative;height:340px;border-radius:26px;overflow:hidden;border:1px solid var(--edge);
+    background:radial-gradient(circle at 50% 120%,#2a2036,#111318 70%)}
+  .cloudart b{position:absolute;border-radius:50%;filter:blur(30px);opacity:.55;mix-blend-mode:screen;animation:bob 8s ease-in-out infinite}
+  @media(max-width:760px){.ritual{grid-template-columns:1fr}}
+
+  footer{text-align:center;padding:80px 24px 60px;color:var(--mist);font-size:13px}
+  footer .h2{margin-bottom:24px}
+  .fnote{margin-top:40px;font-size:12px;letter-spacing:.05em}
+</style>
+</head>
+<body>
+<div class="aura"><b class="a1"></b><b class="a2"></b><b class="a3"></b></div>
+
+<nav>
+  <div class="brand"><span class="dot"></span>Boba Night</div>
+  <div class="navlinks">
+    <a href="#finder">Finder</a>
+    <a href="#ritual">The Ritual</a>
+    <a href="#finder" class="navcta">Find boba near me</a>
+  </div>
+</nav>
+
+<header>
+  <div class="kicker">Southern California · After Dark</div>
+  <h1>Boba, soft as a<br><em>cheese foam cloud</em></h1>
+  <p class="sub">Pearl-lit tea rooms across SoCal, sorted by how close they sit to wherever you are tonight. Rowland Heights, Cypress, and everywhere the milk tea runs late.</p>
+  <div class="heroctas">
+    <button class="btn btn-primary" onclick="document.getElementById('finder').scrollIntoView()">Find boba near me</button>
+    <button class="btn btn-ghost" onclick="document.getElementById('ritual').scrollIntoView()">See the ritual</button>
+  </div>
+
+  <div class="cupwrap">
+    <div class="cup"></div>
+    <div class="foam" id="foam"></div>
+    <div class="steam">warm · whipped · dreamy</div>
+  </div>
+</header>
+
+<section id="finder" class="wrap">
+  <div class="finderhead">
+    <div>
+      <div class="eyebrow">Neighborhood Finder</div>
+      <div class="h2">Closest cups to <em>you</em>, right now</div>
+    </div>
+    <p class="lead">Pick your corner of SoCal. We float the nearest tea rooms to the top, sorted by walking distance.</p>
+  </div>
+
+  <div class="chips" id="chips"></div>
+  <div class="shops" id="shops"></div>
+</section>
+
+<section id="ritual" class="wrap">
+  <div class="ritual">
+    <div>
+      <div class="eyebrow">The Ritual</div>
+      <div class="h2">Four minutes to a <em>perfect</em> pour</div>
+      <p class="lead">Cheese foam is not a topping. It is the finish. Here is how the good rooms build it after dark.</p>
+      <div class="rituals">
+        <div class="ritem"><span>01</span><div><b>Brew slow, brew dark</b><p>Assam and oolong steeped long enough to hold their ground under cream.</p></div></div>
+        <div class="ritem"><span>02</span><div><b>Whip the foam cold</b><p>Cream cheese, sea salt, a whisper of sugar, whipped until it holds a cloud.</p></div></div>
+        <div class="ritem"><span>03</span><div><b>Sink the pearls</b><p>Tapioca cooked to order, still warm, resting at the bottom like river stones.</p></div></div>
+        <div class="ritem"><span>04</span><div><b>Sip at an angle</b><p>Tilt, do not stir. Let the salted cloud meet the tea on the way down.</p></div></div>
+      </div>
+    </div>
+    <div class="cloudart" id="cloudart"></div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="eyebrow">Open late tonight</div>
+  <div class="h2">The pearls are waiting.</div>
+  <button class="btn btn-primary" onclick="document.getElementById('finder').scrollIntoView()">Find boba near me</button>
+  <div class="fnote">Boba Night · A SoCal after-dark boba guide · Sample listings shown for concept</div>
+</footer>
+
+<script>
+  // ---- foam bubbles in the hero cup ----
+  const foam=document.getElementById('foam');
+  const F=28;
+  for(let i=0;i<F;i++){
+    const b=document.createElement('b');
+    const s=14+Math.random()*44;
+    b.style.width=b.style.height=s+'px';
+    b.style.left=(Math.random()*100)+'%';
+    b.style.top=(6+Math.random()*30)+'%';
+    b.style.animationDelay=(-Math.random()*6)+'s';
+    b.style.opacity=.6+Math.random()*.4;
+    foam.appendChild(b);
+  }
+  // sinking pearls
+  for(let i=0;i<7;i++){
+    const p=document.createElement('div');
+    p.className='pearl';
+    p.style.left=(24+Math.random()*52)+'%';
+    p.style.bottom=(10+Math.random()*14)+'%';
+    p.style.animationDelay=(-Math.random()*5)+'s';
+    foam.appendChild(p);
+  }
+  // cloud art blobs
+  const ca=document.getElementById('cloudart');
+  const cols=['#f7e9d8','#b46bd6','#c5a46d','#f4efe7'];
+  for(let i=0;i<9;i++){
+    const b=document.createElement('b');
+    const s=80+Math.random()*140;
+    b.style.width=b.style.height=s+'px';
+    b.style.left=(Math.random()*80)+'%';
+    b.style.top=(Math.random()*70)+'%';
+    b.style.background=cols[i%cols.length];
+    b.style.animationDelay=(-Math.random()*8)+'s';
+    ca.appendChild(b);
+  }
+
+  // ---- neighborhood finder data ----
+  const AREAS=['Rowland Heights','Cypress','Irvine','Arcadia','San Gabriel'];
+  const SHOPS=[
+    {n:'Tastea',area:'Rowland Heights',t:['Cheese foam','House brew'],d:0.3,feat:true},
+    {n:'Sunright Tea Studio',area:'Rowland Heights',t:['Brown sugar','Open late'],d:0.7},
+    {n:'Wanpo Tea Shop',area:'Rowland Heights',t:['Oolong','Cheese foam'],d:1.1},
+    {n:'Meet Fresh',area:'Rowland Heights',t:['Taro','Dessert'],d:1.4},
+    {n:'85C Bakery',area:'Cypress',t:['Sea salt','Bakery'],d:0.5},
+    {n:'Sharetea',area:'Cypress',t:['Classic','Cheese foam'],d:0.9,feat:true},
+    {n:'7 Leaves Cafe',area:'Cypress',t:['Creamy','Drive-thru'],d:1.3},
+    {n:'Feng Cha',area:'Irvine',t:['Cheese foam','Fruit tea'],d:0.4,feat:true},
+    {n:'Boba Guys',area:'Irvine',t:['Organic','House almond'],d:0.8},
+    {n:'Tiger Sugar',area:'Irvine',t:['Brown sugar','Signature'],d:1.2},
+    {n:'Half & Half',area:'Arcadia',t:['Fresh milk','Cheese foam'],d:0.6},
+    {n:'Xing Fu Tang',area:'Arcadia',t:['Boba wok','Brown sugar'],d:1.0,feat:true},
+    {n:'Kung Fu Tea',area:'Arcadia',t:['Punch','Slush'],d:1.5},
+    {n:'85C Bakery',area:'San Gabriel',t:['Sea salt','Bakery'],d:0.4},
+    {n:'Sunright Tea Studio',area:'San Gabriel',t:['Brown sugar','Open late'],d:0.9,feat:true},
+    {n:'Meet Fresh',area:'San Gabriel',t:['Taro','Dessert'],d:1.3},
+  ];
+
+  const chipsEl=document.getElementById('chips');
+  const shopsEl=document.getElementById('shops');
+  let active=AREAS[0];
+
+  AREAS.forEach(a=>{
+    const c=document.createElement('button');
+    c.className='chip'+(a===active?' on':'');
+    c.textContent=a;
+    c.onclick=()=>{active=a;[...chipsEl.children].forEach(x=>x.classList.toggle('on',x.textContent===a));render();};
+    chipsEl.appendChild(c);
+  });
+
+  function render(){
+    const list=SHOPS.filter(s=>s.area===active).sort((a,b)=>a.d-b.d);
+    shopsEl.innerHTML='';
+    if(!list.length){shopsEl.innerHTML='<div class="empty">No rooms open here tonight.</div>';return;}
+    list.forEach((s,i)=>{
+      const el=document.createElement('div');
+      el.className='card'+(s.feat?' feat':'');
+      el.style.animationDelay=(i*0.06)+'s';
+      const tags=s.t.map((t,j)=>`<span class="ctag${s.feat&&j===0?' p':''}">${t}</span>`).join('');
+      const walk=Math.round(s.d*20);
+      el.innerHTML=`
+        <div class="cname">${s.n}</div>
+        <div class="cmeta">${s.area}${s.feat?' · Featured tonight':''}</div>
+        <div class="ctags">${tags}</div>
+        <div class="dist">
+          <div><b>${s.d.toFixed(1)} mi</b> <span>· about ${walk} min walk</span></div>
+          <div class="go">View room</div>
+        </div>`;
+      shopsEl.appendChild(el);
+    });
+  }
+  render();
+</script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Boba Night — After Dark in Southern California</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --obsidian:#0B0C0E; --pearl:#F4EFE7; --gold:#C5A46D; --jade:#123F35; --orchid:#b46bd6;
+    --glass:rgba(244,239,231,.055); --glass-line:rgba(244,239,231,.14);
+    --ease:cubic-bezier(.19,1,.22,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--obsidian); color:var(--pearl);
+    font-family:'Inter',sans-serif; line-height:1.55; overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ambient glow field behind the glass */
+  .field{position:fixed; inset:0; z-index:-2; overflow:hidden}
+  .orb{position:absolute; border-radius:50%; filter:blur(90px); opacity:.55; will-change:transform}
+  .orb.a{width:46vw;height:46vw;background:var(--jade); top:-12vw; left:-8vw}
+  .orb.b{width:38vw;height:38vw;background:var(--gold); bottom:-14vw; right:-6vw; opacity:.28}
+  .orb.c{width:30vw;height:30vw;background:var(--orchid); top:38%; left:50%; opacity:.22}
+  .grain{position:fixed; inset:0; z-index:-1; opacity:.05; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  /* ---- glass primitive ---- */
+  .glass{
+    background:var(--glass); border:1px solid var(--glass-line);
+    -webkit-backdrop-filter:blur(22px) saturate(150%); backdrop-filter:blur(22px) saturate(150%);
+    border-radius:22px; box-shadow:0 30px 80px -40px rgba(0,0,0,.9), inset 0 1px 0 rgba(244,239,231,.08);
+  }
+
+  /* ---- nav ---- */
+  nav{position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:50;
+    width:calc(100% - 32px); max-width:1180px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 14px 12px 22px; border-radius:60px;}
+  .brand{font-family:'Fraunces',serif; font-weight:600; font-size:19px; letter-spacing:.2px; display:flex; align-items:center; gap:10px}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold)}
+  .navlinks{display:flex; gap:26px; font-size:14px; color:rgba(244,239,231,.7)}
+  .navlinks a{color:inherit; text-decoration:none; transition:color .3s}
+  .navlinks a:hover{color:var(--pearl)}
+  .nav-cta{font-size:13.5px; font-weight:500; padding:10px 18px; border-radius:60px;
+    background:var(--pearl); color:var(--obsidian); text-decoration:none; white-space:nowrap;
+    transition:transform .3s var(--ease)}
+  .nav-cta:hover{transform:translateY(-2px)}
+  @media(max-width:760px){.navlinks{display:none}}
+
+  /* ---- hero ---- */
+  header{min-height:100vh; display:flex; align-items:center; padding:120px 0 60px; position:relative}
+  .eyebrow{display:inline-flex; align-items:center; gap:9px; font-size:12.5px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--gold); margin-bottom:26px}
+  .eyebrow::before{content:''; width:26px; height:1px; background:var(--gold)}
+  h1{font-family:'Fraunces',serif; font-weight:500; line-height:1.02;
+    font-size:clamp(46px,8vw,90px); letter-spacing:-.02em; margin-bottom:24px}
+  h1 em{font-style:italic; color:var(--gold)}
+  .lede{font-size:clamp(16px,2vw,19px); color:rgba(244,239,231,.72); max-width:520px; margin-bottom:38px}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
+  .btn-primary{font-size:15px; font-weight:500; padding:16px 28px; border-radius:60px;
+    background:var(--gold); color:var(--obsidian); border:none; cursor:pointer; text-decoration:none;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease); box-shadow:0 12px 40px -12px rgba(197,164,109,.6)}
+  .btn-primary:hover{transform:translateY(-3px); box-shadow:0 22px 50px -12px rgba(197,164,109,.75)}
+  .btn-ghost{font-size:15px; padding:16px 26px; border-radius:60px; color:var(--pearl); text-decoration:none;
+    border:1px solid var(--glass-line); transition:background .3s}
+  .btn-ghost:hover{background:var(--glass)}
+
+  .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:50px; align-items:center; width:100%}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr; gap:36px}}
+
+  /* floating glass "now pouring" card */
+  .pour{padding:26px; display:flex; flex-direction:column; gap:18px}
+  .pour-head{display:flex; align-items:center; justify-content:space-between}
+  .pour-head span{font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:rgba(244,239,231,.6)}
+  .live{display:flex; align-items:center; gap:7px; font-size:12px; color:var(--pearl)}
+  .live i{width:7px;height:7px;border-radius:50%;background:#5fd08a;box-shadow:0 0 10px #5fd08a;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .pour-row{display:flex; align-items:center; gap:14px; padding:12px; border-radius:14px; transition:background .3s}
+  .pour-row:hover{background:rgba(244,239,231,.045)}
+  .thumb{width:46px;height:46px;border-radius:12px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:18px;color:var(--obsidian)}
+  .pour-row .name{font-weight:500;font-size:15px}
+  .pour-row .meta{font-size:12.5px;color:rgba(244,239,231,.55)}
+  .pour-row .dist{margin-left:auto;font-size:13px;color:var(--gold);font-variant-numeric:tabular-nums}
+
+  /* ---- section shell ---- */
+  section{padding:90px 0; position:relative}
+  .kicker{font-size:12.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:14px}
+  .h2{font-family:'Fraunces',serif; font-weight:500; font-size:clamp(30px,4.5vw,46px); letter-spacing:-.015em; line-height:1.05}
+  .sec-head{max-width:640px; margin-bottom:42px}
+  .sec-head p{color:rgba(244,239,231,.7); margin-top:16px; font-size:16px}
+
+  /* ---- proximity finder ---- */
+  .finder{padding:34px; display:grid; grid-template-columns:280px 1fr; gap:34px}
+  @media(max-width:820px){.finder{grid-template-columns:1fr; gap:26px}}
+  .finder h3{font-family:'Fraunces',serif; font-weight:500; font-size:22px; margin-bottom:6px}
+  .finder .sub{font-size:13.5px; color:rgba(244,239,231,.6); margin-bottom:22px}
+  .chips{display:flex; flex-wrap:wrap; gap:10px}
+  .chip{font-size:13.5px; padding:9px 15px; border-radius:60px; cursor:pointer;
+    border:1px solid var(--glass-line); background:transparent; color:rgba(244,239,231,.8);
+    transition:all .3s var(--ease); font-family:inherit}
+  .chip:hover{border-color:var(--gold); color:var(--pearl)}
+  .chip.active{background:var(--gold); color:var(--obsidian); border-color:var(--gold); font-weight:500}
+  .results{display:flex; flex-direction:column; gap:12px}
+  .result{display:flex; align-items:center; gap:16px; padding:16px 18px; border-radius:16px;
+    background:rgba(244,239,231,.03); border:1px solid rgba(244,239,231,.07);
+    transition:transform .4s var(--ease), background .3s; animation:rise .5s var(--ease) both}
+  .result:hover{transform:translateX(6px); background:rgba(244,239,231,.06)}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .result .idx{font-family:'Fraunces',serif; font-size:15px; color:var(--gold); width:22px}
+  .result .info{flex:1}
+  .result .info .name{font-weight:500; font-size:16px}
+  .result .info .tags{font-size:12.5px; color:rgba(244,239,231,.55); margin-top:2px}
+  .result .miles{text-align:right; font-variant-numeric:tabular-nums}
+  .result .miles .num{font-family:'Fraunces',serif; font-size:20px; color:var(--pearl)}
+  .result .miles .unit{font-size:11px; color:rgba(244,239,231,.5); letter-spacing:.1em; text-transform:uppercase}
+  .feat{border-color:rgba(180,107,214,.4)}
+  .feat .tag-pill{color:var(--orchid)}
+
+  /* ---- featured trio ---- */
+  .trio{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+  @media(max-width:820px){.trio{grid-template-columns:1fr}}
+  .card{padding:0; overflow:hidden; position:relative; transition:transform .5s var(--ease)}
+  .card:hover{transform:translateY(-8px)}
+  .card .top{height:150px; display:flex; align-items:flex-end; padding:20px; position:relative}
+  .card .badge{position:absolute; top:16px; left:16px; font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; padding:6px 12px; border-radius:60px;
+    background:rgba(11,12,14,.55); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px)}
+  .card .body{padding:20px 22px 26px}
+  .card .body h4{font-family:'Fraunces',serif; font-weight:500; font-size:21px; margin-bottom:6px}
+  .card .body p{font-size:13.5px; color:rgba(244,239,231,.62); margin-bottom:16px}
+  .card .row{display:flex; align-items:center; justify-content:space-between; font-size:13px}
+  .card .row .where{color:rgba(244,239,231,.7)}
+  .card .row .open{color:#5fd08a; display:flex; align-items:center; gap:6px}
+  .card .row .open i{width:6px;height:6px;border-radius:50%;background:#5fd08a}
+
+  footer{padding:70px 0 50px; text-align:center; border-top:1px solid rgba(244,239,231,.07); margin-top:40px}
+  footer .h2{margin-bottom:22px}
+  .foot-note{margin-top:44px; font-size:12.5px; color:rgba(244,239,231,.4)}
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .9s var(--ease), transform .9s var(--ease)}
+  .reveal.in{opacity:1; transform:none}
+</style>
+</head>
+<body>
+  <div class="field">
+    <div class="orb a" id="o1"></div>
+    <div class="orb b" id="o2"></div>
+    <div class="orb c" id="o3"></div>
+  </div>
+  <div class="grain"></div>
+
+  <nav class="glass">
+    <div class="brand"><span class="dot"></span>Boba Night</div>
+    <div class="navlinks">
+      <a href="#finder">Near me</a>
+      <a href="#featured">Featured</a>
+      <a href="#">Open late</a>
+    </div>
+    <a href="#finder" class="nav-cta">Find boba near me</a>
+  </nav>
+
+  <header>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Southern California, after dark</span>
+        <h1>The night is<br><em>young and sweet.</em></h1>
+        <p class="lede">A quiet, curated way to find the boba worth leaving the house for. Tell us where you are and we pull the closest pours to you, from Rowland Heights to the coast.</p>
+        <div class="hero-actions">
+          <a href="#finder" class="btn-primary">Find boba near me</a>
+          <a href="#featured" class="btn-ghost">See tonight's featured</a>
+        </div>
+      </div>
+      <div class="pour glass">
+        <div class="pour-head">
+          <span>Now pouring near you</span>
+          <span class="live"><i></i>Live</span>
+        </div>
+        <div class="pour-row">
+          <div class="thumb" style="background:var(--gold)">T</div>
+          <div><div class="name">Tastea</div><div class="meta">Rowland Heights · Brown sugar boba</div></div>
+          <div class="dist">0.6 mi</div>
+        </div>
+        <div class="pour-row">
+          <div class="thumb" style="background:var(--jade);color:var(--pearl)">S</div>
+          <div><div class="name">Sunright Tea Studio</div><div class="meta">Open until 1 AM</div></div>
+          <div class="dist">1.2 mi</div>
+        </div>
+        <div class="pour-row">
+          <div class="thumb" style="background:var(--orchid)">X</div>
+          <div><div class="name">Xing Fu Tang</div><div class="meta">Stir-fried brown sugar</div></div>
+          <div class="dist">1.9 mi</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="finder">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="kicker">Proximity finder</div>
+        <div class="h2">Pick your corner of SoCal.</div>
+        <p>We already know your city. Tap a neighborhood and the list re-sorts by how close each shop actually is, closest first.</p>
+      </div>
+      <div class="finder glass reveal">
+        <div>
+          <h3>Where are you tonight?</h3>
+          <div class="sub">Choose a Southern California city to start.</div>
+          <div class="chips" id="chips">
+            <button class="chip active" data-city="Rowland Heights">Rowland Heights</button>
+            <button class="chip" data-city="Cypress">Cypress</button>
+            <button class="chip" data-city="Irvine">Irvine</button>
+            <button class="chip" data-city="Arcadia">Arcadia</button>
+            <button class="chip" data-city="Cerritos">Cerritos</button>
+          </div>
+        </div>
+        <div class="results" id="results"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="kicker">Tonight's featured</div>
+        <div class="h2">Three worth the drive.</div>
+        <p>Hand-picked pours for the after-dark crowd. No rankings, no noise, just places we would go tonight.</p>
+      </div>
+      <div class="trio">
+        <div class="card glass reveal">
+          <div class="top" style="background:linear-gradient(135deg,#123F35,#1d6b57)">
+            <span class="badge" style="color:var(--gold)">House pour</span>
+          </div>
+          <div class="body">
+            <h4>Sunright Tea Studio</h4>
+            <p>Cheese foam done with restraint, and the last table stays open past midnight.</p>
+            <div class="row"><span class="where">Rowland Heights</span><span class="open"><i></i>Open now</span></div>
+          </div>
+        </div>
+        <div class="card glass reveal">
+          <div class="top" style="background:linear-gradient(135deg,#5b3b7a,#b46bd6)">
+            <span class="badge" style="color:var(--orchid)">Featured</span>
+          </div>
+          <div class="body">
+            <h4>Xing Fu Tang</h4>
+            <p>Brown sugar boba stir-fried to order. Loud, theatrical, worth the wait.</p>
+            <div class="row"><span class="where">Cerritos</span><span class="open"><i></i>Open now</span></div>
+          </div>
+        </div>
+        <div class="card glass reveal">
+          <div class="top" style="background:linear-gradient(135deg,#7a5a2c,#C5A46D)">
+            <span class="badge" style="color:var(--obsidian)">Late night</span>
+          </div>
+          <div class="body">
+            <h4>Half &amp; Half</h4>
+            <p>The dependable one. Classic milk tea, big cups, calm room to end the night.</p>
+            <div class="row"><span class="where">Irvine</span><span class="open"><i></i>Open now</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="h2 reveal">Your night, one cup away.</div>
+      <a href="#finder" class="btn-primary reveal">Find boba near me</a>
+      <div class="foot-note">Boba Night · Southern California · Sample shops shown for concept preview only.</div>
+    </div>
+  </footer>
+
+<script>
+  // ---- proximity finder data (concept sample) ----
+  const DATA = {
+    "Rowland Heights":[
+      {n:"Tastea",t:"Brown sugar boba",m:0.6},
+      {n:"Sunright Tea Studio",t:"Cheese foam · open late",m:1.2,f:true},
+      {n:"Wanpo Tea Shop",t:"Roasted oolong",m:2.4},
+      {n:"85C Bakery Cafe",t:"Sea salt coffee",m:3.1}
+    ],
+    "Cypress":[
+      {n:"7 Leaves Cafe",t:"House milk tea",m:0.9},
+      {n:"Feng Cha",t:"Cheese foam series",m:1.7,f:true},
+      {n:"Kung Fu Tea",t:"Classic bubble tea",m:2.2},
+      {n:"Tiger Sugar",t:"Brown sugar boba",m:3.4}
+    ],
+    "Irvine":[
+      {n:"Boba Guys",t:"Organic milk tea",m:0.8},
+      {n:"Half & Half",t:"Big-cup milk tea",m:1.5,f:true},
+      {n:"Meet Fresh",t:"Taro · grass jelly",m:2.0},
+      {n:"Sharetea",t:"Winter melon tea",m:2.9}
+    ],
+    "Arcadia":[
+      {n:"Meet Fresh",t:"Taro paste · herbal",m:0.7},
+      {n:"85C Bakery Cafe",t:"Sea salt green",m:1.3,f:true},
+      {n:"Wanpo Tea Shop",t:"Roasted oolong",m:2.1},
+      {n:"Tiger Sugar",t:"Brown sugar boba",m:3.0}
+    ],
+    "Cerritos":[
+      {n:"Xing Fu Tang",t:"Stir-fried brown sugar",m:0.5,f:true},
+      {n:"Sharetea",t:"Winter melon tea",m:1.4},
+      {n:"Kung Fu Tea",t:"Classic bubble tea",m:2.3},
+      {n:"Boba Guys",t:"Organic milk tea",m:3.2}
+    ]
+  };
+  const results = document.getElementById('results');
+  function render(city){
+    const list = DATA[city].slice().sort((a,b)=>a.m-b.m);
+    results.innerHTML = list.map((s,i)=>`
+      <div class="result ${s.f?'feat':''}" style="animation-delay:${i*70}ms">
+        <div class="idx">${String(i+1).padStart(2,'0')}</div>
+        <div class="info">
+          <div class="name">${s.n}</div>
+          <div class="tags ${s.f?'tag-pill':''}">${s.f?'Featured tonight · ':''}${s.t}</div>
+        </div>
+        <div class="miles"><div class="num">${s.m.toFixed(1)}</div><div class="unit">mi away</div></div>
+      </div>`).join('');
+  }
+  document.getElementById('chips').addEventListener('click', e=>{
+    const b = e.target.closest('.chip'); if(!b) return;
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    b.classList.add('active');
+    render(b.dataset.city);
+  });
+  render('Rowland Heights');
+
+  // ---- ambient orbs drift with pointer for glass depth ----
+  const orbs = [
+    {el:document.getElementById('o1'),d:26},
+    {el:document.getElementById('o2'),d:-34},
+    {el:document.getElementById('o3'),d:18}
+  ];
+  let tx=0,ty=0,cx=0,cy=0;
+  window.addEventListener('pointermove', e=>{
+    tx=(e.clientX/window.innerWidth-.5); ty=(e.clientY/window.innerHeight-.5);
+  });
+  (function loop(){
+    cx += (tx-cx)*.05; cy += (ty-cy)*.05;
+    orbs.forEach(o=>o.el.style.transform=`translate(${cx*o.d}px,${cy*o.d}px)`);
+    requestAnimationFrame(loop);
+  })();
+
+  // ---- reveal on scroll ----
+  const io = new IntersectionObserver(es=>es.forEach(en=>{
+    if(en.isIntersecting){en.target.classList.add('in'); io.unobserve(en.target);}
+  }),{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Boba Night — Build Your Cup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --obsidian:#0B0C0E; --pearl:#F4EFE7; --gold:#C5A46D; --jade:#123F35; --orchid:#b46bd6;
+    --ink-2:#15171b; --line:rgba(244,239,231,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--obsidian); color:var(--pearl);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  .serif{font-family:'Fraunces',Georgia,serif}
+  a{color:inherit;text-decoration:none}
+  .eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:500}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(14px);background:rgba(11,12,14,.72);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{font-family:'Fraunces',serif;font-weight:600;font-size:20px;letter-spacing:.02em;display:flex;align-items:center;gap:9px}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold)}
+  .navlinks{display:flex;gap:30px;font-size:13px;color:rgba(244,239,231,.7)}
+  .navlinks a:hover{color:var(--pearl)}
+  .navcta{border:1px solid var(--line);border-radius:999px;padding:9px 17px;font-size:13px;font-weight:500;transition:.25s}
+  .navcta:hover{background:var(--pearl);color:var(--obsidian)}
+  @media(max-width:760px){.navlinks{display:none}}
+
+  /* HERO */
+  .hero{position:relative;padding:64px 0 40px}
+  .glow{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+  .glow::before{content:"";position:absolute;top:-160px;right:-120px;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle,rgba(180,107,214,.18),transparent 62%);filter:blur(10px)}
+  .glow::after{content:"";position:absolute;bottom:-220px;left:-140px;width:560px;height:560px;border-radius:50%;
+    background:radial-gradient(circle,rgba(197,164,109,.14),transparent 60%)}
+  .herogrid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  @media(max-width:900px){.herogrid{grid-template-columns:1fr;gap:34px}}
+  h1.serif{font-weight:500;font-size:clamp(40px,6.4vw,74px);line-height:.98;letter-spacing:-.02em;margin:18px 0 20px}
+  h1 .amber{font-style:italic;color:var(--gold)}
+  .lede{font-size:16px;color:rgba(244,239,231,.72);max-width:440px;margin-bottom:26px}
+
+  /* CONTROLS */
+  .panel{border:1px solid var(--line);border-radius:20px;padding:22px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0))}
+  .ctl{margin-bottom:18px}
+  .ctl:last-child{margin-bottom:0}
+  .ctl label{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(244,239,231,.62);margin-bottom:10px}
+  .ctl label b{color:var(--pearl);font-weight:600}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;
+    background:linear-gradient(90deg,var(--gold) var(--p,50%),rgba(244,239,231,.14) var(--p,50%));outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;
+    background:var(--pearl);border:3px solid var(--gold);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.5)}
+  input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--pearl);border:3px solid var(--gold);cursor:pointer}
+  .toppings{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;color:rgba(244,239,231,.72);
+    cursor:pointer;transition:.2s;user-select:none;display:flex;align-items:center;gap:7px}
+  .chip .swatch{width:9px;height:9px;border-radius:50%;background:currentColor;opacity:.55}
+  .chip[aria-pressed=true]{background:var(--pearl);color:var(--obsidian);border-color:var(--pearl)}
+  .chip[aria-pressed=true] .swatch{opacity:1}
+
+  /* CUP STAGE */
+  .stage{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .cup-svg{width:min(300px,74vw);height:auto;filter:drop-shadow(0 40px 60px rgba(0,0,0,.55))}
+  .readout{margin-top:22px;text-align:center}
+  .buildname{font-family:'Fraunces',serif;font-size:24px;font-weight:500}
+  .buildmeta{font-size:12.5px;color:rgba(244,239,231,.6);margin-top:4px;letter-spacing:.02em}
+  .btn-primary{display:inline-block;margin-top:18px;background:var(--gold);color:var(--obsidian);font-weight:600;
+    font-size:14px;padding:13px 24px;border-radius:999px;border:none;cursor:pointer;transition:.22s;letter-spacing:.01em}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(197,164,109,.32)}
+
+  /* SECTION: matches */
+  section{padding:70px 0;border-top:1px solid var(--line)}
+  .sechead{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:30px;flex-wrap:wrap}
+  .sechead h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,4vw,42px);letter-spacing:-.01em;line-height:1.02}
+  .sechead p{font-size:14px;color:rgba(244,239,231,.6);max-width:320px}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:820px){.cards{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:18px;padding:22px;background:var(--ink-2);position:relative;overflow:hidden;transition:.28s}
+  .card:hover{transform:translateY(-4px);border-color:rgba(197,164,109,.45)}
+  .card .rank{font-family:'Fraunces',serif;font-size:14px;color:var(--gold)}
+  .card h3{font-family:'Fraunces',serif;font-weight:500;font-size:23px;margin:12px 0 4px}
+  .card .loc{font-size:12.5px;color:rgba(244,239,231,.55);letter-spacing:.04em;text-transform:uppercase}
+  .card .match{margin-top:16px;font-size:13px;color:rgba(244,239,231,.72);border-top:1px solid var(--line);padding-top:14px}
+  .card .match b{color:var(--gold);font-weight:600}
+  .card.feat{background:linear-gradient(180deg,rgba(180,107,214,.14),var(--ink-2))}
+  .card.feat .rank{color:var(--orchid)}
+  .tag{position:absolute;top:16px;right:16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--orchid);border:1px solid rgba(180,107,214,.4);border-radius:999px;padding:4px 9px}
+
+  /* SECTION: near me */
+  .near{background:radial-gradient(120% 120% at 50% 0%,rgba(18,63,53,.28),transparent 60%)}
+  .cities{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .citychip{border:1px solid var(--line);border-radius:12px;padding:14px 18px;cursor:pointer;transition:.2s;min-width:150px}
+  .citychip:hover,.citychip.on{background:var(--jade);border-color:rgba(197,164,109,.4)}
+  .citychip .c{font-family:'Fraunces',serif;font-size:18px}
+  .citychip .n{font-size:12px;color:rgba(244,239,231,.55);margin-top:2px}
+  .nearline{margin-top:26px;font-size:15px;color:rgba(244,239,231,.75)}
+  .nearline b{color:var(--pearl)}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;font-size:12.5px;color:rgba(244,239,231,.45);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <div class="brand"><span class="dot"></span>Boba Night</div>
+  <div class="navlinks"><a href="#build">Build</a><a href="#matches">Tonight's matches</a><a href="#near">Near you</a></div>
+  <a class="navcta" href="#near">Find boba near me</a>
+</div></nav>
+
+<header class="hero" id="build">
+  <div class="glow"></div>
+  <div class="wrap herogrid">
+    <div>
+      <span class="eyebrow">Southern California, after dark</span>
+      <h1 class="serif">Build the cup,<br>then <span class="amber">meet its match.</span></h1>
+      <p class="lede">Set your sweetness, dial the ice, choose your toppings. We render your cup in real time, then point you to the shops that pour it best tonight.</p>
+      <div class="panel">
+        <div class="ctl">
+          <label>Sweetness <b id="swVal">50%</b></label>
+          <input id="sweet" type="range" min="0" max="100" value="50" />
+        </div>
+        <div class="ctl">
+          <label>Ice <b id="iceVal">Regular</b></label>
+          <input id="ice" type="range" min="0" max="100" value="50" />
+        </div>
+        <div class="ctl">
+          <label>Toppings</label>
+          <div class="toppings" id="toppings">
+            <button class="chip" data-top="pearls" aria-pressed="true" style="color:#3a2a1c"><span class="swatch"></span>Tapioca pearls</button>
+            <button class="chip" data-top="foam" aria-pressed="false" style="color:#e8d6b0"><span class="swatch"></span>Cheese foam</button>
+            <button class="chip" data-top="popping" aria-pressed="false" style="color:#b46bd6"><span class="swatch"></span>Popping boba</button>
+            <button class="chip" data-top="jelly" aria-pressed="false" style="color:#123f35"><span class="swatch"></span>Grass jelly</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage">
+      <svg class="cup-svg" viewBox="0 0 220 300" role="img" aria-label="Your custom boba cup">
+        <defs>
+          <clipPath id="cupClip"><path d="M46 70 L174 70 L160 268 Q158 282 144 282 L76 282 Q62 282 60 268 Z"/></clipPath>
+          <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#ffffff" stop-opacity=".10"/>
+            <stop offset=".5" stop-color="#ffffff" stop-opacity=".02"/>
+            <stop offset="1" stop-color="#ffffff" stop-opacity=".08"/>
+          </linearGradient>
+        </defs>
+
+        <!-- lid + straw -->
+        <rect x="102" y="8" width="16" height="66" rx="7" fill="#C5A46D"/>
+        <ellipse cx="110" cy="66" rx="72" ry="12" fill="#101317"/>
+        <ellipse cx="110" cy="66" rx="72" ry="12" fill="none" stroke="#C5A46D" stroke-opacity=".5" stroke-width="1.5"/>
+
+        <!-- contents clipped to cup -->
+        <g clip-path="url(#cupClip)">
+          <rect id="liquid" x="40" y="120" width="140" height="170" fill="#d8b98a"/>
+          <g id="jellyLayer" opacity="0"></g>
+          <g id="pearlLayer"></g>
+          <g id="popLayer"></g>
+          <rect id="foam" x="40" y="70" width="140" height="0" fill="#f3e6c9"/>
+          <g id="iceLayer"></g>
+        </g>
+
+        <!-- glass outline -->
+        <path d="M46 70 L174 70 L160 268 Q158 282 144 282 L76 282 Q62 282 60 268 Z" fill="url(#glass)" stroke="#F4EFE7" stroke-opacity=".28" stroke-width="2"/>
+      </svg>
+
+      <div class="readout">
+        <div class="buildname serif" id="buildName">The Classic</div>
+        <div class="buildmeta" id="buildMeta">50% sweet · regular ice · tapioca pearls</div>
+        <button class="btn-primary" onclick="document.getElementById('matches').scrollIntoView()">See shops that pour this</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="matches"><div class="wrap">
+  <div class="sechead">
+    <div><span class="eyebrow">Tonight's matches</span><h2 class="serif">Poured to your build.</h2></div>
+    <p>Ranked by how close their signature cup sits to yours, and who is still open late.</p>
+  </div>
+  <div class="cards">
+    <div class="card feat"><span class="tag">Featured</span>
+      <div class="rank">01</div><h3 class="serif">Sunright Tea Studio</h3><div class="loc">Rowland Heights</div>
+      <div class="match"><b>96% match</b> · brown sugar boba built for exactly your sweetness. Open until 1 AM.</div>
+    </div>
+    <div class="card">
+      <div class="rank">02</div><h3 class="serif">Tastea</h3><div class="loc">Rowland Heights</div>
+      <div class="match"><b>91% match</b> · dials ice and sweetness to the percent, pearls always fresh.</div>
+    </div>
+    <div class="card">
+      <div class="rank">03</div><h3 class="serif">Wanpo Tea Shop</h3><div class="loc">Hacienda Heights</div>
+      <div class="match"><b>88% match</b> · cheese foam done right if you cap your cup.</div>
+    </div>
+  </div>
+</div></section>
+
+<section id="near" class="near"><div class="wrap">
+  <div class="sechead">
+    <div><span class="eyebrow">Near you</span><h2 class="serif">Start where you are.</h2></div>
+    <p>Pick your SoCal spot. We sort the closest shops that still make your exact build.</p>
+  </div>
+  <div class="cities" id="cities">
+    <div class="citychip on" data-city="Rowland Heights" data-n="11"><div class="c serif">Rowland Heights</div><div class="n">11 shops nearby</div></div>
+    <div class="citychip" data-city="Cypress" data-n="7"><div class="c serif">Cypress</div><div class="n">7 shops nearby</div></div>
+    <div class="citychip" data-city="Irvine" data-n="14"><div class="c serif">Irvine</div><div class="n">14 shops nearby</div></div>
+    <div class="citychip" data-city="Arcadia" data-n="9"><div class="c serif">Arcadia</div><div class="n">9 shops nearby</div></div>
+    <div class="citychip" data-city="San Gabriel" data-n="12"><div class="c serif">San Gabriel</div><div class="n">12 shops nearby</div></div>
+  </div>
+  <p class="nearline" id="nearLine">Showing <b>11 shops</b> around <b>Rowland Heights</b>, closest first, matched to your cup.</p>
+</div></section>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;width:100%">
+  <span>Boba Night · Southern California</span>
+  <span>Built after dark</span>
+</div></footer>
+
+<script>
+(function(){
+  var sweet=document.getElementById('sweet'), ice=document.getElementById('ice');
+  var swVal=document.getElementById('swVal'), iceVal=document.getElementById('iceVal');
+  var liquid=document.getElementById('liquid'), foam=document.getElementById('foam');
+  var pearlLayer=document.getElementById('pearlLayer'), popLayer=document.getElementById('popLayer');
+  var jellyLayer=document.getElementById('jellyLayer'), iceLayer=document.getElementById('iceLayer');
+  var buildName=document.getElementById('buildName'), buildMeta=document.getElementById('buildMeta');
+  var tops={pearls:true,foam:false,popping:false,jelly:false};
+
+  function lerp(a,b,t){return a+(b-a)*t;}
+  function mix(c1,c2,t){return 'rgb('+Math.round(lerp(c1[0],c2[0],t))+','+Math.round(lerp(c1[1],c2[1],t))+','+Math.round(lerp(c1[2],c2[2],t))+')';}
+
+  function iceLabel(v){return v<25?'Light ice':v<60?'Regular':v<85?'Extra ice':'Snow';}
+
+  function render(){
+    var s=+sweet.value, iv=+ice.value;
+    sweet.style.setProperty('--p',s+'%'); ice.style.setProperty('--p',iv+'%');
+    swVal.textContent=s+'%'; iceVal.textContent=iceLabel(iv);
+
+    // liquid color: pale milk tea -> deep brown sugar as sweetness rises; lighten with ice
+    var base=mix([230,214,183],[122,78,38], s/100);
+    // apply ice lightening
+    var lightened=mix(base.match(/\d+/g).map(Number),[244,239,231], (iv/100)*0.28);
+    liquid.setAttribute('fill', lightened);
+
+    // foam cap
+    if(tops.foam){ foam.setAttribute('y',82); foam.setAttribute('height',26); }
+    else { foam.setAttribute('height',0); }
+
+    // pearls
+    pearlLayer.innerHTML='';
+    if(tops.pearls){
+      var cols=[62,82,102,122,142,162], rows=[262,248,234];
+      var pc = s>60 ? '#2a1a0f' : '#3a2a1c';
+      rows.forEach(function(y,ri){ cols.forEach(function(x,ci){
+        if((ri+ci)%2===0 || ri===0){
+          pearlLayer.innerHTML+='<circle cx="'+(x+(ri%2?7:0))+'" cy="'+y+'" r="7.5" fill="'+pc+'"/>';
+        }});});
+    }
+    // popping boba (orchid) floats mid
+    popLayer.innerHTML='';
+    if(tops.popping){
+      var px=[70,100,132,158,88,148], py=[210,224,206,220,236,238];
+      for(var i=0;i<px.length;i++){ popLayer.innerHTML+='<circle cx="'+px[i]+'" cy="'+py[i]+'" r="5.5" fill="#b46bd6" opacity=".9"/>'; }
+    }
+    // grass jelly band
+    if(tops.jelly){ jellyLayer.setAttribute('opacity','1'); jellyLayer.innerHTML='<rect x="40" y="255" width="140" height="30" fill="#0d2a23"/>'; }
+    else { jellyLayer.setAttribute('opacity','0'); jellyLayer.innerHTML=''; }
+
+    // ice cubes scale with ice value
+    iceLayer.innerHTML='';
+    var n=Math.round(iv/20); // 0..5
+    var spots=[[80,150],[120,140],[150,168],[92,178],[135,190]];
+    for(var k=0;k<n && k<spots.length;k++){
+      var x=spots[k][0], y=spots[k][1];
+      iceLayer.innerHTML+='<rect x="'+x+'" y="'+y+'" width="20" height="20" rx="4" transform="rotate('+(k*18-20)+' '+(x+10)+' '+(y+10)+')" fill="#ffffff" opacity=".22" stroke="#fff" stroke-opacity=".3"/>';
+    }
+
+    // name + meta
+    var name='The Classic';
+    if(s>=75 && tops.pearls) name='Brown Sugar Deep Cut';
+    else if(s<=20) name='The Clean Steep';
+    else if(tops.foam && tops.pearls) name='The Full Pour';
+    else if(tops.popping) name='Neon Nightcap';
+    else if(tops.jelly) name='The Herbalist';
+    else if(iv>=85) name='The Snowfall';
+    buildName.textContent=name;
+
+    var picked=[]; if(tops.pearls)picked.push('tapioca pearls'); if(tops.foam)picked.push('cheese foam');
+    if(tops.popping)picked.push('popping boba'); if(tops.jelly)picked.push('grass jelly');
+    buildMeta.textContent=s+'% sweet · '+iceLabel(iv).toLowerCase()+' · '+(picked.length?picked.join(' + '):'no toppings');
+  }
+
+  sweet.addEventListener('input',render);
+  ice.addEventListener('input',render);
+  document.getElementById('toppings').addEventListener('click',function(e){
+    var b=e.target.closest('.chip'); if(!b)return;
+    var t=b.dataset.top; tops[t]=!tops[t];
+    b.setAttribute('aria-pressed', tops[t]?'true':'false');
+    render();
+  });
+
+  // near-me city selector
+  var line=document.getElementById('nearLine');
+  document.getElementById('cities').addEventListener('click',function(e){
+    var c=e.target.closest('.citychip'); if(!c)return;
+    document.querySelectorAll('.citychip').forEach(function(x){x.classList.remove('on');});
+    c.classList.add('on');
+    line.innerHTML='Showing <b>'+c.dataset.n+' shops</b> around <b>'+c.dataset.city+'</b>, closest first, matched to your cup.';
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

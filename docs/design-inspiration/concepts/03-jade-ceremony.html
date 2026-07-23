@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Boba Night — Jade Tea Ceremony</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --obsidian:#0B0C0E;
+    --pearl:#F4EFE7;
+    --gold:#C5A46D;
+    --jade:#123F35;
+    --jade-deep:#0C2A24;
+    --matcha:#7C9A72;
+    --matcha-soft:#A9BF9A;
+    --cream:#EFEAE0;
+    --ink:#26302B;
+    --line:rgba(18,63,53,0.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    line-height:1.6;
+  }
+  ::selection{background:var(--matcha-soft);color:var(--jade-deep)}
+
+  /* soft grain / texture wash */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
+    background:
+      radial-gradient(120% 80% at 78% 12%, rgba(124,154,114,0.10), transparent 55%),
+      radial-gradient(90% 70% at 15% 90%, rgba(18,63,53,0.06), transparent 60%);
+    mix-blend-mode:multiply;
+  }
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;position:relative;z-index:2}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:20;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 28px;
+    backdrop-filter:blur(6px);
+    transition:background .6s ease, padding .6s ease;
+  }
+  nav.scrolled{background:rgba(239,234,224,0.82);padding:14px 28px;border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-weight:400;font-size:19px;letter-spacing:.02em;color:var(--jade-deep)}
+  .seal{width:26px;height:26px;border-radius:50%;border:1px solid var(--jade);position:relative;display:grid;place-items:center}
+  .seal::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--matcha)}
+  .navlinks{display:flex;gap:30px;align-items:center}
+  .navlinks a{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;opacity:.72;transition:opacity .4s}
+  .navlinks a:hover{opacity:1}
+  .navcta{border:1px solid var(--jade);border-radius:999px;padding:9px 18px !important;color:var(--jade-deep) !important;opacity:1 !important;transition:background .5s,color .5s}
+  .navcta:hover{background:var(--jade-deep);color:var(--pearl) !important}
+  @media(max-width:720px){.navlinks a:not(.navcta){display:none}}
+
+  /* HERO */
+  header{
+    min-height:100vh;display:flex;align-items:center;position:relative;padding-top:120px;padding-bottom:80px;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;width:100%}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:20px}}
+  .kicker{
+    display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--jade);opacity:0;
+    animation:rise 1.1s .2s ease forwards;
+  }
+  .kicker span{width:34px;height:1px;background:var(--gold)}
+  h1{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(46px,8vw,104px);line-height:.98;letter-spacing:-.02em;color:var(--jade-deep);
+    margin:26px 0 0;
+  }
+  h1 em{font-style:italic;color:var(--matcha);font-weight:300}
+  h1 .ln{display:block;opacity:0;animation:rise 1.2s ease forwards}
+  h1 .ln:nth-child(1){animation-delay:.35s}
+  h1 .ln:nth-child(2){animation-delay:.5s}
+  h1 .ln:nth-child(3){animation-delay:.65s}
+  .lede{max-width:440px;margin:30px 0 34px;font-weight:300;font-size:17px;color:var(--ink);opacity:0;animation:rise 1.2s .85s ease forwards}
+  .hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;opacity:0;animation:rise 1.2s 1s ease forwards}
+  .btn-primary{
+    background:var(--jade-deep);color:var(--pearl);border:none;border-radius:999px;
+    padding:16px 30px;font-family:'Inter',sans-serif;font-size:14px;letter-spacing:.04em;cursor:pointer;
+    transition:transform .5s cubic-bezier(.22,1,.36,1),background .5s;
+  }
+  .btn-primary:hover{background:var(--jade);transform:translateY(-2px)}
+  .btn-ghost{background:none;border:none;color:var(--jade-deep);font-size:14px;letter-spacing:.04em;cursor:pointer;position:relative;padding:4px 0}
+  .btn-ghost::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1px;background:var(--jade);transform:scaleX(0);transform-origin:left;transition:transform .5s}
+  .btn-ghost:hover::after{transform:scaleX(1)}
+
+  /* Hero ceremony bowl (animated) */
+  .bowl-stage{position:relative;height:420px;display:grid;place-items:center;opacity:0;animation:rise 1.4s .6s ease forwards}
+  @media(max-width:860px){.bowl-stage{height:300px;margin-top:10px}}
+  .halo{position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle at 50% 40%, rgba(169,191,154,.55), rgba(124,154,114,.15) 55%, transparent 72%);filter:blur(2px);animation:breathe 7s ease-in-out infinite}
+  @media(max-width:860px){.halo{width:250px;height:250px}}
+  .bowl{position:relative;width:220px;height:130px;z-index:2}
+  @media(max-width:860px){.bowl{width:170px;height:100px}}
+  .bowl .cup{
+    position:absolute;bottom:0;left:0;right:0;height:118px;
+    background:linear-gradient(180deg,#EDE7DB,#DCD3C2);
+    border-radius:0 0 110px 110px / 0 0 92px 92px;
+    box-shadow:inset 0 -22px 34px rgba(18,63,53,.16), 0 26px 40px -18px rgba(12,42,36,.4);
+  }
+  .bowl .tea{
+    position:absolute;top:14px;left:16px;right:16px;height:26px;border-radius:50%;
+    background:radial-gradient(circle at 45% 40%, var(--matcha-soft), var(--matcha) 70%, var(--jade) 105%);
+    box-shadow:inset 0 3px 6px rgba(255,255,255,.35);
+  }
+  .bowl .rim{position:absolute;top:10px;left:12px;right:12px;height:34px;border-radius:50%;border:2px solid rgba(18,63,53,.14)}
+  .steam{position:absolute;bottom:120px;left:50%;width:8px;height:60px;transform:translateX(-50%);z-index:1}
+  .steam i{position:absolute;left:0;bottom:0;width:6px;height:6px;border-radius:50%;background:rgba(124,154,114,.5);filter:blur(1px);animation:steam 4.5s linear infinite}
+  .steam i:nth-child(2){left:-16px;animation-delay:1.4s;animation-duration:5.2s}
+  .steam i:nth-child(3){left:16px;animation-delay:2.6s;animation-duration:5.8s}
+  /* floating pearls */
+  .pearl-dot{position:absolute;border-radius:50%;background:var(--jade-deep);opacity:.5;z-index:3;animation:float 9s ease-in-out infinite}
+
+  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes breathe{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.08);opacity:1}}
+  @keyframes steam{0%{transform:translateY(0) scale(1);opacity:0}20%{opacity:.7}100%{transform:translateY(-70px) scale(2.4);opacity:0}}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+  /* SECTION shared */
+  section{padding:120px 0;position:relative}
+  .eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--jade);display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .eyebrow span{width:30px;height:1px;background:var(--gold)}
+  .sec-title{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(32px,4.6vw,56px);line-height:1.02;letter-spacing:-.015em;color:var(--jade-deep)}
+  .sec-title em{font-style:italic;color:var(--matcha)}
+
+  /* FINDER — signature interaction 1 */
+  .finder{background:var(--jade-deep);color:var(--pearl);border-radius:34px;padding:56px 46px 50px;position:relative;overflow:hidden}
+  @media(max-width:640px){.finder{padding:40px 26px}}
+  .finder::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(124,154,114,.28),transparent 68%)}
+  .finder .eyebrow{color:var(--matcha-soft)}
+  .finder .eyebrow span{background:var(--gold)}
+  .finder h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,4.4vw,50px);color:var(--pearl);letter-spacing:-.015em;position:relative;z-index:2}
+  .finder h2 em{font-style:italic;color:var(--matcha-soft)}
+  .finder p.sub{color:rgba(244,239,231,.7);font-weight:300;max-width:430px;margin:16px 0 34px;position:relative;z-index:2}
+  .city-row{display:flex;flex-wrap:wrap;gap:11px;position:relative;z-index:2;margin-bottom:34px}
+  .chip{
+    border:1px solid rgba(197,164,109,.42);background:rgba(244,239,231,.04);color:var(--pearl);
+    padding:11px 18px;border-radius:999px;font-size:13.5px;letter-spacing:.02em;cursor:pointer;
+    transition:all .45s cubic-bezier(.22,1,.36,1);
+  }
+  .chip:hover{border-color:var(--gold)}
+  .chip.active{background:var(--gold);color:var(--jade-deep);border-color:var(--gold)}
+  .result{position:relative;z-index:2;border-top:1px solid rgba(197,164,109,.28);padding-top:28px;min-height:96px}
+  .result .city-name{font-family:'Fraunces',serif;font-size:22px;color:var(--matcha-soft);margin-bottom:16px;opacity:0;transform:translateY(10px);transition:.6s}
+  .result.show .city-name{opacity:1;transform:none}
+  .shoplist{display:grid;gap:2px}
+  .shop{
+    display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:15px 2px;
+    border-bottom:1px solid rgba(244,239,231,.08);
+    opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s;
+  }
+  .result.show .shop{opacity:1;transform:none}
+  .result.show .shop:nth-child(1){transition-delay:.05s}
+  .result.show .shop:nth-child(2){transition-delay:.14s}
+  .result.show .shop:nth-child(3){transition-delay:.23s}
+  .shop .nm{font-family:'Fraunces',serif;font-size:19px;font-weight:400;color:var(--pearl)}
+  .shop .meta{font-size:12.5px;color:rgba(244,239,231,.55);letter-spacing:.02em;font-weight:300}
+  .shop .dist{font-size:13px;color:var(--gold);white-space:nowrap;letter-spacing:.04em}
+
+  /* RITUAL steps — signature section 2 */
+  .ritual-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:60px;flex-wrap:wrap}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border-top:1px solid var(--line)}
+  @media(max-width:760px){.steps{grid-template-columns:1fr}}
+  .step{
+    padding:38px 30px 42px;border-bottom:1px solid var(--line);position:relative;cursor:default;
+    transition:background .6s ease;
+  }
+  .step:not(:last-child){border-right:1px solid var(--line)}
+  @media(max-width:760px){.step:not(:last-child){border-right:none}}
+  .step:hover{background:rgba(124,154,114,.08)}
+  .step .no{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--gold);letter-spacing:.05em}
+  .step .glyph{width:46px;height:46px;border-radius:50%;border:1px solid var(--jade);margin:22px 0 20px;display:grid;place-items:center;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+  .step:hover .glyph{transform:rotate(90deg)}
+  .step .glyph i{display:block;width:14px;height:14px;border-radius:50%;background:var(--matcha)}
+  .step h3{font-family:'Fraunces',serif;font-weight:400;font-size:23px;color:var(--jade-deep);margin-bottom:10px;letter-spacing:-.01em}
+  .step p{font-weight:300;font-size:14.5px;color:var(--ink);opacity:.82}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity 1.1s cubic-bezier(.22,1,.36,1),transform 1.1s cubic-bezier(.22,1,.36,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* quiet quote strip */
+  .quiet{text-align:center;padding:110px 0}
+  .quiet blockquote{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:clamp(24px,3.4vw,38px);line-height:1.3;color:var(--jade-deep);max-width:760px;margin:0 auto}
+  .quiet .attr{margin-top:26px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--jade);opacity:.7}
+
+  /* FOOTER */
+  footer{background:var(--jade-deep);color:var(--pearl);padding:70px 0 46px;position:relative;z-index:2}
+  .foot-top{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;padding-bottom:44px;border-bottom:1px solid rgba(197,164,109,.25)}
+  .foot-top h4{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(26px,3.6vw,40px);letter-spacing:-.01em;max-width:440px}
+  .foot-top h4 em{font-style:italic;color:var(--matcha-soft)}
+  .foot-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:28px;font-size:12.5px;letter-spacing:.04em;color:rgba(244,239,231,.55)}
+  .foot-links{display:flex;gap:26px}
+  .foot-links a{color:rgba(244,239,231,.7);text-decoration:none;transition:color .4s}
+  .foot-links a:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand"><span class="seal"></span> Boba Night</div>
+  <div class="navlinks">
+    <a href="#finder">Finder</a>
+    <a href="#ritual">The Ritual</a>
+    <a href="#finder" class="navcta">Find boba near me</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker"><span></span> Southern California, after dark</div>
+      <h1>
+        <span class="ln">A quiet place</span>
+        <span class="ln">for a <em>slow</em></span>
+        <span class="ln">cup of tea.</span>
+      </h1>
+      <p class="lede">Boba Night is a calm way to find your next cup. No noise, no ratings shouting for attention. Only the shops worth sitting with, near where you already are.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('finder').scrollIntoView()">Find boba near me</button>
+        <button class="btn-ghost" onclick="document.getElementById('ritual').scrollIntoView()">See the ritual</button>
+      </div>
+    </div>
+    <div class="bowl-stage">
+      <div class="halo"></div>
+      <div class="bowl">
+        <div class="steam"><i></i><i></i><i></i></div>
+        <div class="cup"><div class="rim"></div><div class="tea"></div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- FINDER : signature interaction -->
+<section id="finder">
+  <div class="wrap reveal">
+    <div class="finder">
+      <div class="eyebrow"><span></span> Near you now</div>
+      <h2>Choose your corner of <em>SoCal</em>.</h2>
+      <p class="sub">We already know your city. Tap where you are and settle in. The three closest cups appear, sorted by how short the walk is.</p>
+      <div class="city-row" id="cityRow">
+        <button class="chip active" data-city="rowland">Rowland Heights</button>
+        <button class="chip" data-city="cypress">Cypress</button>
+        <button class="chip" data-city="arcadia">Arcadia</button>
+        <button class="chip" data-city="irvine">Irvine</button>
+        <button class="chip" data-city="ktown">Koreatown</button>
+      </div>
+      <div class="result show" id="result"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RITUAL : signature section 2 -->
+<section id="ritual">
+  <div class="wrap">
+    <div class="ritual-head reveal">
+      <div>
+        <div class="eyebrow"><span></span> The house way</div>
+        <h2 class="sec-title">Three steps, <em>unhurried</em>.</h2>
+      </div>
+      <p style="max-width:320px;font-weight:300;color:var(--ink);opacity:.8">Every good cup is a small ceremony. This is how we keep the night calm from the first sip to the last pearl.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="no">i.</div>
+        <div class="glyph"><i></i></div>
+        <h3>Steep</h3>
+        <p>Pick a neighborhood, not a rating. We surface a handful of places where the tea is fresh and the room is quiet enough to hear yourself.</p>
+      </div>
+      <div class="step">
+        <div class="no">ii.</div>
+        <div class="glyph"><i></i></div>
+        <h3>Pour</h3>
+        <p>Open a shop and see the honest details. Hours, the walk from where you stand, and the one drink people come back for.</p>
+      </div>
+      <div class="step">
+        <div class="no">iii.</div>
+        <div class="glyph"><i></i></div>
+        <h3>Sit</h3>
+        <p>Save the corner for later or set out now. No account, no clutter. Just you and a warm cup waiting nearby.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quiet">
+  <div class="wrap reveal">
+    <blockquote>The best cup is the one close enough to walk to, quiet enough to stay for.</blockquote>
+    <div class="attr">Boba Night — Jade Tea Ceremony</div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <h4>Find your <em>slow</em> cup somewhere in Southern California tonight.</h4>
+      <button class="btn-primary" onclick="document.getElementById('finder').scrollIntoView()">Find boba near me</button>
+    </div>
+    <div class="foot-bottom">
+      <div class="brand" style="color:var(--pearl)"><span class="seal"></span> Boba Night</div>
+      <div class="foot-links">
+        <a href="#finder">Finder</a>
+        <a href="#ritual">The Ritual</a>
+        <a href="#">Cities</a>
+      </div>
+      <div>Southern California only, for now.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav scroll state
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+
+  // scroll reveals
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.18});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // FINDER data + interaction
+  const DATA={
+    rowland:{label:'Rowland Heights',shops:[
+      {nm:'Tastea',note:'House matcha, quiet booths',dist:'4 min walk'},
+      {nm:'Sunright Tea Studio',note:'Brûléed cheese foam',dist:'9 min walk'},
+      {nm:'Meet Fresh',note:'Warm taro, late tables',dist:'12 min walk'}
+    ]},
+    cypress:{label:'Cypress',shops:[
+      {nm:'7 Leaves',note:'Sea cream, unsweet green',dist:'5 min walk'},
+      {nm:'Sharetea',note:'Classic pearl milk',dist:'8 min walk'},
+      {nm:'Half & Half',note:'Fresh milk, low sugar',dist:'14 min walk'}
+    ]},
+    arcadia:{label:'Arcadia',shops:[
+      {nm:'Wanpo',note:'Roasted oolong, calm room',dist:'3 min walk'},
+      {nm:'85C Bakery',note:'Sea salt coffee, late',dist:'7 min walk'},
+      {nm:'Tiger Sugar',note:'Brown sugar, slow pour',dist:'11 min walk'}
+    ]},
+    irvine:{label:'Irvine',shops:[
+      {nm:'Boba Guys',note:'Single-origin milk tea',dist:'6 min walk'},
+      {nm:'Feng Cha',note:'Cheese foam matcha',dist:'10 min walk'},
+      {nm:'Kung Fu Tea',note:'Punch cards, quiet patio',dist:'13 min walk'}
+    ]},
+    ktown:{label:'Koreatown',shops:[
+      {nm:'Xing Fu Tang',note:'Stir-fried brown sugar',dist:'2 min walk'},
+      {nm:'Sharetea',note:'Open past midnight',dist:'8 min walk'},
+      {nm:'Sunright Tea Studio',note:'Booths, low light',dist:'12 min walk'}
+    ]}
+  };
+  const result=document.getElementById('result');
+  function render(key){
+    const d=DATA[key];
+    result.classList.remove('show');
+    setTimeout(()=>{
+      result.innerHTML='<div class="city-name">Closest to you in '+d.label+'</div>'+
+        '<div class="shoplist">'+d.shops.map(s=>
+          '<div class="shop"><div><div class="nm">'+s.nm+'</div><div class="meta">'+s.note+'</div></div><div class="dist">'+s.dist+'</div></div>'
+        ).join('')+'</div>';
+      requestAnimationFrame(()=>result.classList.add('show'));
+    },160);
+  }
+  document.getElementById('cityRow').addEventListener('click',(e)=>{
+    const b=e.target.closest('.chip'); if(!b)return;
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    b.classList.add('active');
+    render(b.dataset.city);
+  });
+  render('rowland');
+
+  // scatter a few floating pearls in the hero
+  const stage=document.querySelector('.bowl-stage');
+  [[18,30,7],[80,44,5],[62,18,6],[30,72,5]].forEach(([x,y,s],i)=>{
+    const p=document.createElement('div');
+    p.className='pearl-dot';
+    p.style.cssText=`width:${s}px;height:${s}px;left:${x}%;top:${y}%;animation-delay:${i*1.3}s`;
+    stage.appendChild(p);
+  });
+</script>
+</body>
+</html>

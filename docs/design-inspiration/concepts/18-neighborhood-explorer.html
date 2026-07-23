@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Boba Night — Neighborhood Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --obsidian:#0B0C0E; --pearl:#F4EFE7; --gold:#C5A46D; --jade:#123F35; --orchid:#b46bd6;
+    --ink2:#131418; --line:rgba(244,239,231,.12); --mut:rgba(244,239,231,.58);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--obsidian); color:var(--pearl);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  .serif{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-.01em}
+  .eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+    background:rgba(11,12,14,.72);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:20px;font-weight:600}
+  .dot{width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold)}
+  .nav-links{display:flex;gap:30px;font-size:14px;color:var(--mut)}
+  .nav-links a{color:inherit;text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--pearl)}
+  .nav-cta{border:1px solid var(--gold);color:var(--gold);padding:9px 18px;border-radius:100px;
+    font-size:13px;font-weight:600;background:none;cursor:pointer;transition:all .25s}
+  .nav-cta:hover{background:var(--gold);color:var(--obsidian)}
+  @media(max-width:760px){.nav-links{display:none}}
+
+  /* HERO */
+  .hero{position:relative;padding:88px 0 72px;overflow:hidden}
+  .hero::before{content:"";position:absolute;top:-30%;right:-10%;width:640px;height:640px;
+    background:radial-gradient(circle,rgba(18,63,53,.55),transparent 62%);filter:blur(20px);z-index:0}
+  .hero::after{content:"";position:absolute;bottom:-40%;left:-12%;width:520px;height:520px;
+    background:radial-gradient(circle,rgba(197,164,109,.16),transparent 64%);filter:blur(10px);z-index:0}
+  .hero-in{position:relative;z-index:2;max-width:820px}
+  .hero h1{font-size:clamp(46px,8vw,92px);line-height:.98;font-weight:600;letter-spacing:-.02em;margin:22px 0 24px}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero p{font-size:clamp(16px,2vw,19px);color:var(--mut);max-width:540px;margin-bottom:34px}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn-primary{background:var(--pearl);color:var(--obsidian);border:none;padding:15px 26px;border-radius:100px;
+    font-size:15px;font-weight:600;cursor:pointer;transition:transform .2s,box-shadow .2s;font-family:inherit}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(244,239,231,.18)}
+  .stat-strip{display:flex;gap:34px;margin-top:52px;flex-wrap:wrap}
+  .stat b{font-family:'Fraunces',serif;font-size:30px;font-weight:600;display:block}
+  .stat span{font-size:12.5px;color:var(--mut);letter-spacing:.04em}
+  .stat b.gold{color:var(--gold)}
+
+  /* EXPLORER — signature section 1 */
+  section{padding:78px 0}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:38px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(30px,4.5vw,46px);font-weight:600;letter-spacing:-.02em;max-width:560px}
+  .sec-head p{color:var(--mut);font-size:15px;max-width:320px}
+
+  .explorer{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:start}
+  @media(max-width:900px){.explorer{grid-template-columns:1fr}}
+
+  .hoods{display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--line)}
+  .hood{display:flex;align-items:center;gap:20px;padding:22px 6px;border-bottom:1px solid var(--line);
+    cursor:pointer;transition:padding-left .3s,background .3s;position:relative}
+  .hood::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);
+    transform:scaleY(0);transition:transform .3s;transform-origin:top}
+  .hood:hover,.hood.on{padding-left:20px;background:linear-gradient(90deg,rgba(197,164,109,.06),transparent)}
+  .hood:hover::before,.hood.on::before{transform:scaleY(1)}
+  .hood .idx{font-family:'Fraunces',serif;font-size:13px;color:var(--mut);width:26px}
+  .hood .nm{flex:1}
+  .hood .nm b{font-family:'Fraunces',serif;font-size:24px;font-weight:600;display:block}
+  .hood .nm span{font-size:12.5px;color:var(--mut)}
+  .hood .cnt{font-family:'Fraunces',serif;font-size:15px;color:var(--gold);text-align:right}
+  .hood .cnt small{display:block;font-family:'Inter';font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--mut)}
+  .hood.feat .nm b{color:var(--orchid)}
+
+  /* map panel */
+  .panel{position:sticky;top:96px;background:var(--ink2);border:1px solid var(--line);border-radius:20px;
+    padding:28px;overflow:hidden}
+  .panel .p-eye{margin-bottom:14px}
+  .panel h3{font-family:'Fraunces',serif;font-size:34px;font-weight:600;line-height:1;margin-bottom:6px}
+  .panel .p-sub{color:var(--mut);font-size:13.5px;margin-bottom:22px}
+  .p-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+  .p-tags span{font-size:12px;padding:6px 12px;border:1px solid var(--line);border-radius:100px;color:var(--pearl)}
+  .p-shops{display:flex;flex-direction:column;gap:0}
+  .p-shop{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-top:1px solid var(--line);font-size:14px}
+  .p-shop:last-child{border-bottom:1px solid var(--line)}
+  .p-shop em{font-style:normal;color:var(--mut);font-size:12px}
+  .p-shop .go{color:var(--gold);font-size:12.5px;font-weight:600}
+  .map-orb{position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;
+    background:radial-gradient(circle,rgba(180,107,214,.3),transparent 65%);pointer-events:none}
+
+  /* MOOD — signature section 2 */
+  .mood-sec{background:linear-gradient(180deg,transparent,rgba(18,63,53,.14),transparent)}
+  .moods{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:820px){.moods{grid-template-columns:1fr}}
+  .mood{position:relative;border:1px solid var(--line);border-radius:18px;padding:30px 26px;min-height:220px;
+    display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;
+    transition:transform .3s,border-color .3s;background:var(--ink2)}
+  .mood:hover{transform:translateY(-5px);border-color:var(--gold)}
+  .mood .glow{position:absolute;inset:0;opacity:.5;pointer-events:none}
+  .m1 .glow{background:radial-gradient(circle at 80% 10%,rgba(197,164,109,.22),transparent 55%)}
+  .m2 .glow{background:radial-gradient(circle at 80% 10%,rgba(18,63,53,.5),transparent 55%)}
+  .m3 .glow{background:radial-gradient(circle at 80% 10%,rgba(180,107,214,.24),transparent 55%)}
+  .mood .m-top{position:relative;z-index:1}
+  .mood .m-num{font-family:'Fraunces',serif;font-size:13px;color:var(--mut)}
+  .mood h4{font-family:'Fraunces',serif;font-size:27px;font-weight:600;margin:14px 0 8px;position:relative;z-index:1}
+  .mood p{font-size:13.5px;color:var(--mut);position:relative;z-index:1}
+  .mood .m-link{font-size:13px;color:var(--gold);font-weight:600;position:relative;z-index:1;margin-top:16px}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:44px 0 60px;margin-top:20px}
+  .foot-in{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .foot-in p{color:var(--mut);font-size:13px}
+  .foot-brand{font-family:'Fraunces',serif;font-size:18px;font-weight:600}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <div class="brand"><span class="dot"></span>Boba Night</div>
+    <div class="nav-links">
+      <a href="#explore">Neighborhoods</a>
+      <a href="#moods">Tonight</a>
+      <a href="#">Open late</a>
+    </div>
+    <button class="nav-cta">Find boba near me</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <span class="eyebrow">Southern California, after dark</span>
+    <h1 class="serif">Every neighborhood<br>has a <em>boba soul</em>.</h1>
+    <p>Skip the endless directory. Start with where you are. The 626, Orange County, Convoy, and the rest of SoCal, each with its own crowd, its own late-night ritual.</p>
+    <div class="hero-actions">
+      <button class="btn-primary">Explore my neighborhood</button>
+      <button class="nav-cta">Browse open late</button>
+    </div>
+    <div class="stat-strip">
+      <div class="stat"><b class="gold">7</b><span>SoCal regions mapped</span></div>
+      <div class="stat"><b>240+</b><span>shops in the guide</span></div>
+      <div class="stat"><b>Til 1AM</b><span>open-late picks</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="explore">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="serif">Pick a corner of SoCal.</h2>
+      <p>Each region has a personality. Tap one to see who is pouring and what the night feels like there.</p>
+    </div>
+
+    <div class="explorer">
+      <div class="hoods" id="hoodList">
+        <div class="hood on" data-h="0">
+          <span class="idx serif">01</span>
+          <div class="nm"><b>The 626</b><span>Rowland Heights, Arcadia, San Gabriel</span></div>
+          <div class="cnt serif">68<small>shops</small></div>
+        </div>
+        <div class="hood" data-h="1">
+          <span class="idx serif">02</span>
+          <div class="nm"><b>Orange County</b><span>Irvine, Garden Grove, Fullerton</span></div>
+          <div class="cnt serif">54<small>shops</small></div>
+        </div>
+        <div class="hood feat" data-h="2">
+          <span class="idx serif">03</span>
+          <div class="nm"><b>Convoy</b><span>San Diego's tea district</span></div>
+          <div class="cnt serif">31<small>shops</small></div>
+        </div>
+        <div class="hood" data-h="3">
+          <span class="idx serif">04</span>
+          <div class="nm"><b>The 714 Coast</b><span>Cypress, Cerritos, Buena Park</span></div>
+          <div class="cnt serif">42<small>shops</small></div>
+        </div>
+        <div class="hood" data-h="4">
+          <span class="idx serif">05</span>
+          <div class="nm"><b>DTLA &amp; Koreatown</b><span>Late nights downtown</span></div>
+          <div class="cnt serif">37<small>shops</small></div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel">
+        <div class="map-orb"></div>
+        <span class="eyebrow p-eye" id="pEye">Now exploring</span>
+        <h3 class="serif" id="pName">The 626</h3>
+        <p class="p-sub" id="pSub">The original San Gabriel Valley boba belt. Loud, packed, open past midnight.</p>
+        <div class="p-tags" id="pTags"></div>
+        <div class="p-shops" id="pShops"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="moods" class="mood-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="serif">What is tonight, really?</h2>
+      <p>Same neighborhood, different energy. Filter the map by the mood you actually want.</p>
+    </div>
+    <div class="moods">
+      <div class="mood m1">
+        <div class="glow"></div>
+        <div class="m-top"><span class="m-num serif">01</span></div>
+        <div>
+          <h4 class="serif">Study til close</h4>
+          <p>Quiet corners, real seating, and outlets. The shops that let you stay past your third refill.</p>
+          <div class="m-link">See quiet spots</div>
+        </div>
+      </div>
+      <div class="mood m2">
+        <div class="glow"></div>
+        <div class="m-top"><span class="m-num serif">02</span></div>
+        <div>
+          <h4 class="serif">First date pours</h4>
+          <p>Dim lighting, a menu worth talking about, and a walkable block for after. Low pressure, high charm.</p>
+          <div class="m-link">See date spots</div>
+        </div>
+      </div>
+      <div class="mood m3">
+        <div class="glow"></div>
+        <div class="m-top"><span class="m-num serif">03</span></div>
+        <div>
+          <h4 class="serif">Midnight run</h4>
+          <p>You know the feeling. The shops still lit at 12:40 when everywhere else is dark.</p>
+          <div class="m-link">See open late</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div class="foot-brand">Boba Night<span style="color:var(--gold)">.</span></div>
+    <p>A Southern California boba guide, built for the night crowd.</p>
+  </div>
+</footer>
+
+<script>
+  const DATA = [
+    {eye:"Now exploring", name:"The 626", sub:"The original San Gabriel Valley boba belt. Loud, packed, open past midnight.",
+     tags:["Late night","Dessert cafes","Boba OGs"],
+     shops:[["Tastea","Rowland Heights"],["Sunright Tea Studio","Arcadia"],["Meet Fresh","San Gabriel"],["85C Bakery","Hacienda Heights"]]},
+    {eye:"Now exploring", name:"Orange County", sub:"Sprawled and suburban, but the tea game runs deep from Irvine to Fullerton.",
+     tags:["Plaza culture","Newer chains","Big menus"],
+     shops:[["Feng Cha","Irvine"],["Tiger Sugar","Garden Grove"],["7 Leaves","Fullerton"],["Half & Half","Costa Mesa"]]},
+    {eye:"Featured region", name:"Convoy", sub:"San Diego's tea district, packed into a few electric blocks of Kearny Mesa.",
+     tags:["Walkable","Featured","Night market feel"],
+     shops:[["Wanpo Tea Shop","Convoy St"],["Xing Fu Tang","Kearny Mesa"],["Sharetea","Convoy St"],["Tiger Sugar","Convoy St"]]},
+    {eye:"Now exploring", name:"The 714 Coast", sub:"Cypress to Cerritos, the quiet workhorse of SoCal boba. Reliable, roomy, easy parking.",
+     tags:["Roomy seating","Family spots","Study friendly"],
+     shops:[["Kung Fu Tea","Cypress"],["Sharetea","Cerritos"],["Boba Guys","Buena Park"],["Meet Fresh","Cerritos"]]},
+    {eye:"Now exploring", name:"DTLA & Koreatown", sub:"Downtown and K-town after hours. Where a boba run turns into a whole night out.",
+     tags:["Open latest","Nightlife","Rooftop energy"],
+     shops:[["Boba Guys","Little Tokyo"],["Wanpo","Koreatown"],["Xing Fu Tang","DTLA"],["Sunright Tea Studio","K-town"]]}
+  ];
+
+  const eyeEl=document.getElementById('pEye');
+  const nameEl=document.getElementById('pName');
+  const subEl=document.getElementById('pSub');
+  const tagsEl=document.getElementById('pTags');
+  const shopsEl=document.getElementById('pShops');
+  const orb=document.querySelector('.map-orb');
+
+  function render(i){
+    const d=DATA[i];
+    eyeEl.textContent=d.eye;
+    nameEl.textContent=d.name;
+    subEl.textContent=d.sub;
+    nameEl.style.color = (i===2)? 'var(--orchid)' : 'var(--pearl)';
+    tagsEl.innerHTML=d.tags.map(t=>`<span>${t}</span>`).join('');
+    shopsEl.innerHTML=d.shops.map(s=>
+      `<div class="p-shop"><div>${s[0]} <em>&middot; ${s[1]}</em></div><span class="go">View</span></div>`).join('');
+    // little animated flourish
+    orb.style.opacity=0;
+    requestAnimationFrame(()=>{orb.style.transition='opacity .5s';orb.style.opacity=1;});
+  }
+
+  document.querySelectorAll('.hood').forEach(h=>{
+    h.addEventListener('click',()=>{
+      document.querySelectorAll('.hood').forEach(x=>x.classList.remove('on'));
+      h.classList.add('on');
+      render(+h.dataset.h);
+    });
+  });
+
+  render(0);
+</script>
+</body>
+</html>

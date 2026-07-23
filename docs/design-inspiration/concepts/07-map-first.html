@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Boba Night — Map First</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --obsidian:#0B0C0E; --pearl:#F4EFE7; --gold:#C5A46D; --jade:#123F35;
+    --orchid:#b46bd6; --line:rgba(244,239,231,.10); --muted:rgba(244,239,231,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--obsidian); color:var(--pearl);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  .wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+  a{color:inherit;text-decoration:none}
+  .serif{font-family:'Fraunces',serif}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(14px);
+    background:rgba(11,12,14,.72);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:'Fraunces',serif;font-weight:600;font-size:20px;letter-spacing:.3px}
+  .brand span{color:var(--gold)}
+  .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--orchid);
+    margin-left:2px;box-shadow:0 0 10px var(--orchid)}
+  .nav-links{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+  .nav-links a:hover{color:var(--pearl)}
+  .nav-cta{border:1px solid var(--gold);color:var(--gold);padding:9px 16px;border-radius:999px;
+    font-size:13px;font-weight:500;transition:.25s}
+  .nav-cta:hover{background:var(--gold);color:var(--obsidian)}
+  @media(max-width:760px){.nav-links{display:none}}
+
+  /* HERO */
+  .hero{padding:46px 0 30px}
+  .eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);
+    display:flex;align-items:center;gap:10px;margin-bottom:18px}
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--gold)}
+  h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(40px,7vw,74px);
+    line-height:.98;letter-spacing:-.02em;max-width:14ch}
+  h1 em{font-style:italic;color:var(--gold)}
+  .lead{color:var(--muted);font-size:17px;max-width:46ch;margin-top:20px}
+
+  /* MAP LAYOUT */
+  .stage{display:grid;grid-template-columns:1.35fr .95fr;gap:22px;margin-top:34px;
+    align-items:stretch}
+  @media(max-width:900px){.stage{grid-template-columns:1fr}}
+
+  .mapcard{position:relative;border:1px solid var(--line);border-radius:20px;overflow:hidden;
+    background:radial-gradient(120% 90% at 30% 0%,rgba(18,63,53,.35),transparent 60%),#0d0f11;
+    min-height:460px}
+  .mapcard svg{display:block;width:100%;height:100%}
+  .grid-l{stroke:rgba(244,239,231,.05);stroke-width:1}
+  .coast{fill:none;stroke:rgba(197,164,109,.35);stroke-width:1.4;stroke-dasharray:2 6}
+  .fwy{fill:none;stroke:rgba(244,239,231,.10);stroke-width:2}
+  .land{fill:rgba(18,63,53,.14)}
+
+  .pin{cursor:pointer;transition:transform .3s}
+  .pin .halo{fill:var(--gold);opacity:.0;transition:opacity .3s}
+  .pin .core{fill:var(--gold);stroke:var(--obsidian);stroke-width:1.4}
+  .pin.feat .core{fill:var(--orchid)}
+  .pin.feat .halo{fill:var(--orchid)}
+  .pin.active .halo{opacity:.28;animation:pulse 1.8s ease-out infinite}
+  .pin.active .core{transform-box:fill-box;transform-origin:center}
+  @keyframes pulse{0%{transform:scale(1);opacity:.35}70%{transform:scale(2.4);opacity:0}100%{opacity:0}}
+  .youpin circle{fill:#fff}
+  .youpin .ring{fill:none;stroke:#fff;stroke-width:1.5;opacity:.6;animation:pulse 2s ease-out infinite;
+    transform-box:fill-box;transform-origin:center}
+  .youlabel{fill:var(--pearl);font-family:'Inter';font-size:11px;font-weight:600}
+
+  .maptop{position:absolute;top:16px;left:16px;right:16px;display:flex;gap:10px;
+    align-items:center;flex-wrap:wrap;z-index:5}
+  .chip{font-size:12px;color:var(--muted);background:rgba(11,12,14,.7);border:1px solid var(--line);
+    padding:7px 13px;border-radius:999px}
+  .chip b{color:var(--pearl);font-weight:600}
+  .locsel{margin-left:auto;position:relative}
+  .locbtn{display:flex;align-items:center;gap:8px;background:rgba(11,12,14,.82);
+    border:1px solid var(--gold);color:var(--pearl);padding:8px 14px;border-radius:999px;
+    font-size:13px;font-weight:500;cursor:pointer}
+  .locbtn .cur{color:var(--gold)}
+  .locmenu{position:absolute;top:44px;right:0;background:#101214;border:1px solid var(--line);
+    border-radius:14px;padding:6px;min-width:190px;display:none;z-index:20;
+    box-shadow:0 24px 60px rgba(0,0,0,.6)}
+  .locmenu.open{display:block}
+  .locmenu button{display:block;width:100%;text-align:left;background:none;border:none;
+    color:var(--pearl);font-family:inherit;font-size:14px;padding:10px 12px;border-radius:9px;cursor:pointer}
+  .locmenu button:hover{background:rgba(197,164,109,.14);color:var(--gold)}
+
+  /* LIST */
+  .listcard{border:1px solid var(--line);border-radius:20px;background:#0d0f11;
+    display:flex;flex-direction:column;overflow:hidden}
+  .listhead{padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+  .listhead .k{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+  .listhead .v{font-family:'Fraunces',serif;font-size:22px;margin-top:4px}
+  .listhead .v em{font-style:italic;color:var(--gold)}
+  .list{overflow-y:auto;max-height:520px}
+  .row{display:flex;gap:14px;align-items:center;padding:15px 20px;border-bottom:1px solid var(--line);
+    cursor:pointer;transition:background .2s}
+  .row:hover,.row.active{background:rgba(197,164,109,.08)}
+  .rank{font-family:'Fraunces',serif;font-size:15px;color:var(--muted);width:22px;flex:none}
+  .row.active .rank{color:var(--gold)}
+  .rinfo{flex:1;min-width:0}
+  .rname{font-weight:600;font-size:15px;display:flex;align-items:center;gap:8px}
+  .tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orchid);
+    border:1px solid rgba(180,107,214,.5);padding:2px 7px;border-radius:999px}
+  .rmeta{font-size:12.5px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;
+    text-overflow:ellipsis}
+  .rdist{text-align:right;flex:none}
+  .rdist b{font-family:'Fraunces',serif;font-size:19px;color:var(--pearl);display:block;line-height:1}
+  .rdist span{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .row.active .rdist b{color:var(--gold)}
+
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+  .btn{padding:14px 24px;border-radius:999px;font-size:15px;font-weight:600;cursor:pointer;
+    border:1px solid transparent;transition:.25s;font-family:inherit}
+  .btn-p{background:var(--gold);color:var(--obsidian)}
+  .btn-p:hover{background:#d8bb87}
+  .btn-s{background:none;border-color:var(--line);color:var(--pearl)}
+  .btn-s:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* SECTION 2 — NEIGHBORHOODS */
+  .sec{padding:70px 0 30px}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;
+    border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:26px}
+  .sec-head h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(26px,4vw,40px);
+    letter-spacing:-.01em}
+  .sec-head h2 em{font-style:italic;color:var(--gold)}
+  .sec-head p{color:var(--muted);font-size:14px;max-width:32ch}
+  .hoods{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:820px){.hoods{grid-template-columns:repeat(2,1fr)}}
+  .hood{position:relative;border:1px solid var(--line);border-radius:16px;padding:22px 18px;
+    overflow:hidden;cursor:pointer;transition:.3s;min-height:150px;display:flex;flex-direction:column;
+    justify-content:flex-end;background:#0d0f11}
+  .hood:hover{border-color:var(--gold);transform:translateY(-4px)}
+  .hood .glow{position:absolute;inset:0;background:radial-gradient(80% 70% at 70% 10%,
+    rgba(197,164,109,.22),transparent 60%);opacity:0;transition:.3s}
+  .hood:hover .glow{opacity:1}
+  .hood .n{font-size:12px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase}
+  .hood .t{font-family:'Fraunces',serif;font-size:21px;margin-top:6px;position:relative}
+  .hood .c{font-size:13px;color:var(--muted);margin-top:4px;position:relative}
+
+  /* SECTION 3 — OPEN LATE STRIP */
+  .late{margin:60px 0 30px;border:1px solid var(--line);border-radius:22px;overflow:hidden;
+    background:linear-gradient(120deg,rgba(18,63,53,.35),#0d0f11 55%)}
+  .late-in{padding:40px 34px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+  @media(max-width:760px){.late-in{grid-template-columns:1fr}}
+  .late .k{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--orchid)}
+  .late h3{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(26px,4vw,38px);
+    margin-top:12px;line-height:1.05;max-width:16ch}
+  .late p{color:var(--muted);font-size:15px;margin-top:14px;max-width:44ch}
+  .clockwrap{display:flex;align-items:center;gap:20px}
+  .clock{width:118px;height:118px}
+  .clock circle{fill:none;stroke:var(--line);stroke-width:2}
+  .clock .prog{stroke:var(--gold);stroke-linecap:round;transition:.4s}
+  .clock text{fill:var(--pearl);font-family:'Fraunces';font-size:22px;text-anchor:middle}
+
+  footer{border-top:1px solid var(--line);margin-top:70px;padding:30px 0;color:var(--muted);
+    font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <div class="brand">Boba <span>Night</span><span class="dot"></span></div>
+  <div class="nav-links">
+    <a href="#map">The Map</a>
+    <a href="#hoods">Neighborhoods</a>
+    <a href="#late">Open Late</a>
+  </div>
+  <a class="nav-cta" href="#map">Find boba near me</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Southern California · After dark</div>
+  <h1 class="serif">The map is the <em>menu</em>.</h1>
+  <p class="lead">Drop your neighborhood and the nearest pours light up first. Built for the nights you are already in Rowland Heights, Cypress, or Arcadia and just need the closest cup.</p>
+
+  <div class="stage" id="map">
+    <!-- MAP -->
+    <div class="mapcard">
+      <div class="maptop">
+        <div class="chip"><b id="shopCount">13</b> shops mapped</div>
+        <div class="chip">Sorted by <b>distance</b></div>
+        <div class="locsel">
+          <button class="locbtn" id="locBtn">Near <span class="cur" id="curLoc">Rowland Heights</span></button>
+          <div class="locmenu" id="locMenu"></div>
+        </div>
+      </div>
+      <svg viewBox="0 0 640 480" preserveAspectRatio="xMidYMid slice" id="mapSvg">
+        <defs></defs>
+        <g id="gridg"></g>
+        <path class="land" d="M40,150 C160,120 300,110 430,150 C540,185 600,240 610,320 L610,470 L40,470 Z"/>
+        <path class="coast" d="M40,150 C160,120 300,110 430,150 C540,185 600,240 610,320"/>
+        <path class="fwy" d="M60,300 C200,250 380,270 600,210"/>
+        <path class="fwy" d="M150,470 C170,340 250,250 470,150"/>
+        <path class="fwy" d="M420,470 C440,360 500,300 600,300"/>
+        <g id="pins"></g>
+        <g id="youLayer"></g>
+      </svg>
+    </div>
+
+    <!-- LIST -->
+    <div class="listcard">
+      <div class="listhead">
+        <div class="k">Closest to you</div>
+        <div class="v serif">Nearest <em>pours</em> tonight</div>
+      </div>
+      <div class="list" id="list"></div>
+    </div>
+  </div>
+
+  <div class="cta-row">
+    <button class="btn btn-p" id="nearestBtn">Take me to the closest cup</button>
+    <a class="btn btn-s" href="#hoods">Browse by neighborhood</a>
+  </div>
+</div></header>
+
+<!-- NEIGHBORHOODS -->
+<section class="sec" id="hoods"><div class="wrap">
+  <div class="sec-head">
+    <h2 class="serif">Pick a <em>pocket</em> of SoCal</h2>
+    <p>Each pin belongs to a scene. Tap a neighborhood to recenter the map above.</p>
+  </div>
+  <div class="hoods" id="hoodGrid"></div>
+</div></section>
+
+<!-- OPEN LATE -->
+<section id="late"><div class="wrap"><div class="late"><div class="late-in">
+  <div>
+    <div class="k">The night shift</div>
+    <h3 class="serif">Nine spots still pouring past 10 PM.</h3>
+    <p>When the kitchens close and the parking lots empty out, these counters keep the ice going. The clock counts what is still open right now.</p>
+    <button class="btn btn-p" style="margin-top:22px" id="lateBtn">Show what is open now</button>
+  </div>
+  <div class="clockwrap">
+    <svg class="clock" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="52"/>
+      <circle class="prog" id="clockProg" cx="60" cy="60" r="52"
+        stroke-dasharray="327" stroke-dashoffset="90" transform="rotate(-90 60 60)"/>
+      <text x="60" y="68" id="clockNum">9</text>
+    </svg>
+    <div><div class="k" style="color:var(--gold)">Open late</div>
+      <div class="serif" style="font-size:15px;margin-top:6px;color:var(--muted)">Counters still lit</div></div>
+  </div>
+</div></div></div></section>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:12px">
+  <div class="brand">Boba <span style="color:var(--gold)">Night</span></div>
+  <div>Southern California only, for now. Made for late cravings.</div>
+</div></footer>
+
+<script>
+  // ---- DATA ----
+  var shops = [
+    {n:"Tastea", c:"Rowland Heights", lat:33.976, lng:-117.905, note:"House milk tea, open late", feat:true},
+    {n:"Sunright Tea Studio", c:"Rowland Heights", lat:33.972, lng:-117.900, note:"Brown sugar boba, brulee tops"},
+    {n:"Meet Fresh", c:"Hacienda Heights", lat:33.990, lng:-117.970, note:"Taro, grass jelly, hot bowls"},
+    {n:"Wanpo Tea Shop", c:"San Gabriel", lat:34.090, lng:-118.090, note:"Oolong forward, quiet counter"},
+    {n:"Xing Fu Tang", c:"Alhambra", lat:34.095, lng:-118.127, note:"Hand-stirred sugar boba"},
+    {n:"Sharetea", c:"Arcadia", lat:34.139, lng:-118.035, note:"Classic menu, reliable pour"},
+    {n:"Kung Fu Tea", c:"Fullerton", lat:33.870, lng:-117.925, note:"Punch cards, campus crowd"},
+    {n:"Half & Half", c:"Cerritos", lat:33.861, lng:-118.052, note:"Silky milk tea, big cups"},
+    {n:"Feng Cha", c:"Buena Park", lat:33.856, lng:-117.998, note:"Cheese foam, fruit teas", feat:true},
+    {n:"7 Leaves Cafe", c:"Garden Grove", lat:33.786, lng:-117.960, note:"Drive-thru, smooth teas"},
+    {n:"Tiger Sugar", c:"Cerritos", lat:33.868, lng:-118.041, note:"Tiger stripe brown sugar"},
+    {n:"85C Bakery", c:"Irvine", lat:33.680, lng:-117.826, note:"Sea salt coffee, bakery combo"},
+    {n:"Boba Guys", c:"Downtown LA", lat:34.045, lng:-118.255, note:"Single-origin, minimalist"}
+  ];
+  var locs = [
+    {n:"Rowland Heights", lat:33.976, lng:-117.905},
+    {n:"Cypress", lat:33.817, lng:-118.037},
+    {n:"Arcadia", lat:34.139, lng:-118.035},
+    {n:"Alhambra", lat:34.095, lng:-118.127},
+    {n:"Irvine", lat:33.684, lng:-117.826},
+    {n:"Downtown LA", lat:34.045, lng:-118.255}
+  ];
+
+  // projection box
+  var minLng=-118.35, maxLng=-117.70, minLat=33.60, maxLat=34.22;
+  var W=640, H=480, PADX=40, PADY=60;
+  function px(lng){return PADX + (lng-minLng)/(maxLng-minLng)*(W-2*PADX);}
+  function py(lat){return PADY + (maxLat-lat)/(maxLat-minLat)*(H-2*PADY);}
+  function dist(a,b){ // rough miles via equirectangular
+    var x=(a.lng-b.lng)*Math.cos((a.lat+b.lat)/2*Math.PI/180);
+    var y=(a.lat-b.lat);
+    return Math.sqrt(x*x+y*y)*69.0;
+  }
+
+  var current = locs[0];
+  var pinsG = document.getElementById('pins');
+  var youLayer = document.getElementById('youLayer');
+  var listEl = document.getElementById('list');
+  var svgNS="http://www.w3.org/2000/svg";
+
+  // grid lines
+  var gg=document.getElementById('gridg');
+  for(var gx=0;gx<=8;gx++){var l=document.createElementNS(svgNS,'line');
+    l.setAttribute('class','grid-l');l.setAttribute('x1',gx*80);l.setAttribute('y1',0);
+    l.setAttribute('x2',gx*80);l.setAttribute('y2',480);gg.appendChild(l);}
+  for(var gy=0;gy<=6;gy++){var l2=document.createElementNS(svgNS,'line');
+    l2.setAttribute('class','grid-l');l2.setAttribute('x1',0);l2.setAttribute('y1',gy*80);
+    l2.setAttribute('x2',640);l2.setAttribute('y2',gy*80);gg.appendChild(l2);}
+
+  document.getElementById('shopCount').textContent = shops.length;
+
+  // build pins once
+  shops.forEach(function(s,i){
+    var g=document.createElementNS(svgNS,'g');
+    g.setAttribute('class','pin'+(s.feat?' feat':''));
+    g.setAttribute('transform','translate('+px(s.lng).toFixed(1)+','+py(s.lat).toFixed(1)+')');
+    g.dataset.i=i;
+    var halo=document.createElementNS(svgNS,'circle');
+    halo.setAttribute('class','halo');halo.setAttribute('r',9);
+    var core=document.createElementNS(svgNS,'circle');
+    core.setAttribute('class','core');core.setAttribute('r',5);
+    g.appendChild(halo);g.appendChild(core);
+    g.addEventListener('mouseenter',function(){highlight(i);});
+    g.addEventListener('click',function(){highlight(i);scrollRow(i);});
+    pinsG.appendChild(g);
+    s._el=g;
+  });
+
+  function render(){
+    // distances + sort
+    shops.forEach(function(s){s._d=dist(s,current);});
+    var order = shops.slice().sort(function(a,b){return a._d-b._d;});
+
+    // you-pin
+    youLayer.innerHTML='';
+    var yg=document.createElementNS(svgNS,'g');
+    yg.setAttribute('class','youpin');
+    yg.setAttribute('transform','translate('+px(current.lng).toFixed(1)+','+py(current.lat).toFixed(1)+')');
+    var ring=document.createElementNS(svgNS,'circle');
+    ring.setAttribute('class','ring');ring.setAttribute('r',12);
+    var c=document.createElementNS(svgNS,'circle');c.setAttribute('r',4);
+    var t=document.createElementNS(svgNS,'text');
+    t.setAttribute('class','youlabel');t.setAttribute('x',10);t.setAttribute('y',-8);
+    t.textContent='You · '+current.n;
+    yg.appendChild(ring);yg.appendChild(c);yg.appendChild(t);
+    youLayer.appendChild(yg);
+
+    // list
+    listEl.innerHTML='';
+    order.forEach(function(s,rank){
+      var realIdx = shops.indexOf(s);
+      var row=document.createElement('div');
+      row.className='row';row.dataset.i=realIdx;
+      row.innerHTML='<div class="rank">'+(rank+1)+'</div>'+
+        '<div class="rinfo"><div class="rname">'+s.n+
+          (s.feat?'<span class="tag">Featured</span>':'')+'</div>'+
+          '<div class="rmeta">'+s.c+' · '+s.note+'</div></div>'+
+        '<div class="rdist"><b>'+s._d.toFixed(1)+'</b><span>miles</span></div>';
+      row.addEventListener('mouseenter',function(){highlight(realIdx);});
+      row.addEventListener('click',function(){highlight(realIdx);flyPin(realIdx);});
+      listEl.appendChild(row);
+      s._row=row;
+    });
+    highlight(shops.indexOf(order[0]));
+  }
+
+  var activeI=-1;
+  function highlight(i){
+    if(activeI>-1){
+      shops[activeI]._el.classList.remove('active');
+      if(shops[activeI]._row) shops[activeI]._row.classList.remove('active');
+    }
+    activeI=i;
+    shops[i]._el.classList.add('active');
+    if(shops[i]._row) shops[i]._row.classList.add('active');
+  }
+  function scrollRow(i){ if(shops[i]._row) shops[i]._row.scrollIntoView({block:'nearest',behavior:'smooth'}); }
+  function flyPin(i){
+    var el=shops[i]._el;
+    el.setAttribute('transform', el.getAttribute('transform')); // noop keep
+    document.querySelector('.mapcard').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  // location menu
+  var menu=document.getElementById('locMenu');
+  locs.forEach(function(l){
+    var b=document.createElement('button');b.textContent=l.n;
+    b.addEventListener('click',function(){
+      current=l;document.getElementById('curLoc').textContent=l.n;
+      menu.classList.remove('open');render();
+    });
+    menu.appendChild(b);
+  });
+  document.getElementById('locBtn').addEventListener('click',function(e){
+    e.stopPropagation();menu.classList.toggle('open');
+  });
+  document.addEventListener('click',function(){menu.classList.remove('open');});
+
+  document.getElementById('nearestBtn').addEventListener('click',function(){
+    var order=shops.slice().sort(function(a,b){return a._d-b._d;});
+    var i=shops.indexOf(order[0]);highlight(i);scrollRow(i);
+    document.getElementById('map').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // neighborhoods
+  var hoodGrid=document.getElementById('hoodGrid');
+  var hoods=[
+    {n:"San Gabriel Valley",t:"626 nights",c:"Dense, late, legendary"},
+    {n:"Rowland Heights",t:"The strip",c:"Where the crawl starts"},
+    {n:"Orange County",t:"Coast pours",c:"Drive-thru energy"},
+    {n:"Cerritos",t:"Mall row",c:"Tiger Sugar country"}
+  ];
+  var hoodLoc=["Alhambra","Rowland Heights","Irvine","Cypress"];
+  hoods.forEach(function(h,k){
+    var d=document.createElement('div');d.className='hood';
+    d.innerHTML='<div class="glow"></div><div class="n">'+h.n+'</div>'+
+      '<div class="t serif">'+h.t+'</div><div class="c">'+h.c+'</div>';
+    d.addEventListener('click',function(){
+      var target=locs.filter(function(l){return l.n===hoodLoc[k];})[0];
+      if(target){current=target;document.getElementById('curLoc').textContent=target.n;render();}
+      document.getElementById('map').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    hoodGrid.appendChild(d);
+  });
+
+  // open-late clock ticks 9 -> counts down slots for feel
+  var lateN=9;
+  document.getElementById('lateBtn').addEventListener('click',function(){
+    document.getElementById('map').scrollIntoView({behavior:'smooth',block:'start'});
+    highlight(0);scrollRow(0);
+  });
+
+  render();
+</script>
+</body>
+</html>

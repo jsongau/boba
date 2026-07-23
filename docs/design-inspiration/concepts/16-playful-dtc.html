@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Boba Night — SoCal boba, after dark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --obsidian:#0B0C0E; --pearl:#F4EFE7; --gold:#C5A46D;
+    --jade:#123F35; --orchid:#b46bd6; --ink:#15171b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--obsidian);color:var(--pearl);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:'Fraunces',serif;line-height:.92;letter-spacing:-.02em}
+
+  /* NAV */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+  .logo{font-family:'Fraunces',serif;font-weight:900;font-size:22px;letter-spacing:-.02em}
+  .logo b{color:var(--gold)}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--orchid);margin-left:2px;box-shadow:0 0 14px var(--orchid)}
+  .navlink{font-weight:500;font-size:14px;opacity:.75}
+  .pill{border:1.5px solid var(--gold);color:var(--gold);padding:9px 18px;border-radius:100px;font-weight:700;font-size:13px;transition:.25s}
+  .pill:hover{background:var(--gold);color:var(--obsidian)}
+
+  /* HERO */
+  .hero{position:relative;padding:34px 0 66px}
+  .kick{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);background:rgba(197,164,109,.1);border:1px solid rgba(197,164,109,.3);padding:7px 15px;border-radius:100px}
+  .hero h1{font-size:clamp(58px,13vw,164px);font-weight:900;margin:26px 0 0;letter-spacing:-.035em}
+  .hero h1 .out{-webkit-text-stroke:2px var(--pearl);color:transparent}
+  .hero h1 .fill{color:var(--orchid);font-style:italic}
+  .hero .sub{max-width:520px;margin:28px 0 0;font-size:18px;line-height:1.55;color:rgba(244,239,231,.72)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+  .btn{font-weight:700;font-size:15px;padding:16px 26px;border-radius:100px;transition:transform .2s,box-shadow .2s;cursor:pointer;border:none}
+  .btn-gold{background:var(--gold);color:var(--obsidian);box-shadow:0 10px 40px -12px var(--gold)}
+  .btn-gold:hover{transform:translateY(-3px)}
+  .btn-ghost{background:transparent;color:var(--pearl);border:1.5px solid rgba(244,239,231,.25)}
+  .btn-ghost:hover{border-color:var(--pearl)}
+
+  /* floating cup blobs */
+  .blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.9;pointer-events:none;z-index:-1}
+  .cup{position:absolute;right:-10px;top:8%;width:min(46vw,430px);aspect-ratio:.82;z-index:-1}
+  .cup .body{position:absolute;inset:0;background:linear-gradient(180deg,rgba(180,107,214,.32),rgba(18,63,53,.55));border:1.5px solid rgba(244,239,231,.14);border-radius:26px 26px 60px 60px;backdrop-filter:blur(6px)}
+  .cup .lid{position:absolute;left:-4%;right:-4%;top:-5%;height:14%;background:var(--gold);border-radius:14px;box-shadow:0 8px 30px -6px var(--gold)}
+  .pearl-b{position:absolute;bottom:6%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a2b45,#0c0910)}
+  @media(max-width:820px){.cup{opacity:.5;top:auto;bottom:-6%;right:-18%}}
+
+  .marquee{border-top:1px solid rgba(244,239,231,.12);border-bottom:1px solid rgba(244,239,231,.12);overflow:hidden;white-space:nowrap;padding:16px 0;margin-top:20px}
+  .marquee div{display:inline-block;animation:slide 26s linear infinite}
+  .marquee span{font-family:'Fraunces',serif;font-weight:600;font-size:22px;padding:0 26px;opacity:.6}
+  .marquee span b{color:var(--gold)}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* FINDER */
+  section{padding:78px 0}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .h2{font-size:clamp(38px,6vw,68px);font-weight:900;margin:14px 0 8px}
+  .lede{color:rgba(244,239,231,.66);max-width:560px;font-size:17px;line-height:1.5}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 6px}
+  .chip{font-weight:700;font-size:14px;padding:11px 20px;border-radius:100px;border:1.5px solid rgba(244,239,231,.2);background:transparent;color:var(--pearl);cursor:pointer;transition:.2s}
+  .chip:hover{border-color:var(--gold)}
+  .chip.on{background:var(--pearl);color:var(--obsidian);border-color:var(--pearl)}
+  .results{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:16px;margin-top:30px}
+  .card{background:linear-gradient(160deg,var(--ink),#0d0e11);border:1px solid rgba(244,239,231,.09);border-radius:20px;padding:22px;position:relative;overflow:hidden;transition:transform .25s,border-color .25s}
+  .card:hover{transform:translateY(-5px);border-color:rgba(197,164,109,.45)}
+  .card .rank{font-family:'Fraunces',serif;font-weight:900;font-size:15px;color:var(--gold)}
+  .card h3{font-size:26px;font-weight:600;margin:12px 0 4px}
+  .card .area{font-size:13px;color:rgba(244,239,231,.55);font-weight:500}
+  .dist{display:inline-block;margin-top:16px;font-weight:700;font-size:13px;color:var(--orchid);background:rgba(180,107,214,.12);padding:6px 13px;border-radius:100px}
+  .feat{position:absolute;top:16px;right:16px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orchid);border:1px solid rgba(180,107,214,.4);padding:4px 9px;border-radius:100px}
+  .empty{opacity:.5;font-style:italic;grid-column:1/-1;padding:20px 0}
+
+  /* FLAVORS block */
+  .flavors{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px}
+  .fl{border-radius:22px;padding:30px 24px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .3s}
+  .fl:hover{transform:scale(1.02) rotate(-.6deg)}
+  .fl h3{font-size:30px;font-weight:900}
+  .fl p{font-size:14px;font-weight:500;line-height:1.4;margin-top:8px}
+  .fl .num{font-family:'Fraunces',serif;font-weight:900;font-size:40px;opacity:.35}
+  .fl.a{background:var(--jade);color:var(--pearl)}
+  .fl.b{background:var(--gold);color:var(--obsidian)}
+  .fl.c{background:var(--orchid);color:var(--obsidian)}
+  @media(max-width:720px){.flavors{grid-template-columns:1fr}}
+
+  footer{border-top:1px solid rgba(244,239,231,.1);padding:40px 0;text-align:center;color:rgba(244,239,231,.45);font-size:13px}
+  footer b{color:var(--gold);font-family:'Fraunces',serif}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <div class="logo">Boba<b>Night</b><span class="dot"></span></div>
+    <div style="display:flex;align-items:center;gap:26px">
+      <a class="navlink" href="#finder">Near me</a>
+      <a class="navlink" href="#flavors">The flavors</a>
+      <a class="pill" href="#finder">Find boba near me</a>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="cup" aria-hidden="true">
+    <div class="lid"></div>
+    <div class="body"></div>
+    <div class="pearl-b" style="left:16%;width:20%;aspect-ratio:1"></div>
+    <div class="pearl-b" style="left:44%;width:24%;aspect-ratio:1;bottom:3%"></div>
+    <div class="pearl-b" style="left:70%;width:18%;aspect-ratio:1;bottom:9%"></div>
+  </div>
+  <div class="wrap">
+    <span class="kick"><span class="dot" style="margin:0"></span> Open late across SoCal</span>
+    <h1><span class="out">CHASE</span><br>THE <span class="fill">boba.</span></h1>
+    <p class="sub">The after-dark way to find your next cup. Tell us where you are, we point you at the closest legendary pour. No directory energy, just the good stuff.</p>
+    <div class="cta-row">
+      <button class="btn btn-gold" onclick="document.getElementById('finder').scrollIntoView()">Find boba near me</button>
+      <a class="btn btn-ghost" href="#flavors">Browse the flavors</a>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div>
+    <span>Tastea</span><span>85C Bakery</span><span><b>Sunright Tea Studio</b></span><span>Xing Fu Tang</span><span>Meet Fresh</span><span>Tiger Sugar</span><span>7 Leaves</span><span>Feng Cha</span><span>Wanpo</span>
+    <span>Tastea</span><span>85C Bakery</span><span><b>Sunright Tea Studio</b></span><span>Xing Fu Tang</span><span>Meet Fresh</span><span>Tiger Sugar</span><span>7 Leaves</span><span>Feng Cha</span><span>Wanpo</span>
+  </div>
+</div>
+
+<!-- FINDER -->
+<section id="finder">
+  <div class="wrap">
+    <span class="eyebrow">The proximity engine</span>
+    <h2 class="h2">Pick your spot.<br>We rank the closest.</h2>
+    <p class="lede">Tap where you are tonight. We sort SoCal shops by how far they are from you, closest first.</p>
+    <div class="chips" id="chips"></div>
+    <div class="results" id="results"></div>
+  </div>
+</section>
+
+<!-- FLAVORS -->
+<section id="flavors" style="padding-top:20px">
+  <div class="wrap">
+    <span class="eyebrow">Why Boba Night</span>
+    <h2 class="h2">Not a Yelp list.<br>A night out.</h2>
+    <div class="flavors">
+      <div class="fl a"><span class="num">01</span><div><h3>Closest, always</h3><p>Sorted by real distance from your neighborhood. Less scrolling, more sipping.</p></div></div>
+      <div class="fl b"><span class="num">02</span><div><h3>Open past dark</h3><p>We surface the shops still pouring when the sun is long gone.</p></div></div>
+      <div class="fl c"><span class="num">03</span><div><h3>SoCal only</h3><p>Every spot is a place you can actually drive to tonight. No filler.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><b>Boba Night</b> — Southern California, after dark. Sample shops shown for demo.</div>
+</footer>
+
+<script>
+  // Areas the user can be in, with a set of shops + their distance from that area.
+  const AREAS = {
+    "Rowland Heights": [
+      {n:"Tastea", a:"Rowland Heights", d:0.4, f:true},
+      {n:"Sunright Tea Studio", a:"Rowland Heights", d:0.9},
+      {n:"85C Bakery Cafe", a:"Hacienda Heights", d:2.1},
+      {n:"Meet Fresh", a:"Diamond Bar", d:3.6},
+      {n:"Wanpo Tea Shop", a:"Walnut", d:4.0},
+    ],
+    "Cypress": [
+      {n:"7 Leaves Cafe", a:"Cypress", d:0.6, f:true},
+      {n:"Sharetea", a:"Buena Park", d:2.3},
+      {n:"Kung Fu Tea", a:"Cerritos", d:3.1},
+      {n:"Tiger Sugar", a:"Garden Grove", d:4.5},
+      {n:"Half & Half", a:"Cerritos", d:4.9},
+    ],
+    "Irvine": [
+      {n:"Feng Cha", a:"Irvine", d:0.7, f:true},
+      {n:"Sunright Tea Studio", a:"Irvine", d:1.2},
+      {n:"Xing Fu Tang", a:"Tustin", d:3.4},
+      {n:"7 Leaves Cafe", a:"Irvine", d:1.8},
+      {n:"Boba Guys", a:"Costa Mesa", d:6.2},
+    ],
+    "Downtown LA": [
+      {n:"Boba Guys", a:"Arts District", d:0.5, f:true},
+      {n:"Xing Fu Tang", a:"Downtown LA", d:1.0},
+      {n:"Half & Half", a:"Koreatown", d:3.3},
+      {n:"85C Bakery Cafe", a:"Chinatown", d:2.8},
+      {n:"Tiger Sugar", a:"Koreatown", d:3.9},
+    ],
+    "Cerritos": [
+      {n:"Kung Fu Tea", a:"Cerritos", d:0.3, f:true},
+      {n:"Half & Half", a:"Cerritos", d:0.8},
+      {n:"Sharetea", a:"Artesia", d:1.9},
+      {n:"7 Leaves Cafe", a:"Cypress", d:3.7},
+      {n:"Meet Fresh", a:"Buena Park", d:4.4},
+    ],
+  };
+
+  const chips = document.getElementById('chips');
+  const results = document.getElementById('results');
+  const keys = Object.keys(AREAS);
+
+  function render(area){
+    const list = [...AREAS[area]].sort((a,b)=>a.d-b.d);
+    results.innerHTML = list.map((s,i)=>`
+      <div class="card">
+        ${s.f?'<span class="feat">Featured</span>':''}
+        <div class="rank">No. ${String(i+1).padStart(2,'0')}</div>
+        <h3>${s.n}</h3>
+        <div class="area">${s.a}</div>
+        <span class="dist">${s.d.toFixed(1)} mi from you</span>
+      </div>`).join('');
+    [...chips.children].forEach(c=>c.classList.toggle('on', c.dataset.k===area));
+  }
+
+  keys.forEach((k,i)=>{
+    const b=document.createElement('button');
+    b.className='chip'+(i===0?' on':'');
+    b.textContent=k;
+    b.dataset.k=k;
+    b.onclick=()=>render(k);
+    chips.appendChild(b);
+  });
+  render(keys[0]);
+</script>
+</body>
+</html>

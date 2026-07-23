@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Boba Night — After Dark Lounge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --obsidian:#0B0C0E;
+    --pearl:#F4EFE7;
+    --gold:#C5A46D;
+    --jade:#123F35;
+    --orchid:#b46bd6;
+    --ink-2:#131417;
+    --line:rgba(197,164,109,.16);
+    --pearl-dim:rgba(244,239,231,.56);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--obsidian);
+    color:var(--pearl);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    line-height:1.5;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  a{color:inherit;text-decoration:none}
+  .serif{font-family:'Fraunces',serif}
+
+  /* ambient glow layer */
+  .glow{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .glow::before,.glow::after{content:"";position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+  .glow::before{width:520px;height:520px;background:radial-gradient(circle,rgba(197,164,109,.5),transparent 65%);top:-140px;left:-80px}
+  .glow::after{width:600px;height:600px;background:radial-gradient(circle,rgba(18,63,53,.7),transparent 65%);bottom:-180px;right:-120px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(11,12,14,.6);border-bottom:1px solid var(--line)}
+  .navrow{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-size:19px;font-weight:600;letter-spacing:.3px}
+  .dot{width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px 2px rgba(197,164,109,.8);animation:pulse 2.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.82)}}
+  .navlinks{display:flex;gap:30px;font-size:14px;color:var(--pearl-dim)}
+  .navlinks a{transition:color .25s}
+  .navlinks a:hover{color:var(--pearl)}
+  .status{display:flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  @media(max-width:760px){.navlinks{display:none}}
+
+  /* hero */
+  header{position:relative;z-index:1;padding:88px 0 70px}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:26px}
+  .eyebrow .line{width:38px;height:1px;background:var(--gold);opacity:.6}
+  h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(48px,9vw,116px);line-height:.94;letter-spacing:-.02em}
+  h1 .em{font-style:italic;color:var(--gold)}
+  .lede{margin-top:28px;max-width:520px;font-size:17px;color:var(--pearl-dim)}
+  .cta-row{margin-top:38px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:100px;font-size:15px;font-weight:500;border:1px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .3s,background .3s}
+  .btn-gold{background:var(--gold);color:var(--obsidian);box-shadow:0 0 0 rgba(197,164,109,0)}
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 40px -12px rgba(197,164,109,.7)}
+  .btn-ghost{border-color:var(--line);color:var(--pearl)}
+  .btn-ghost:hover{border-color:var(--gold);background:rgba(197,164,109,.06)}
+  .hero-meta{margin-top:56px;display:flex;gap:40px;flex-wrap:wrap;color:var(--pearl-dim);font-size:13px}
+  .hero-meta b{display:block;font-family:'Fraunces',serif;font-size:26px;color:var(--pearl);font-weight:500;margin-bottom:3px}
+
+  /* open-late marquee ticker */
+  .ticker{position:relative;z-index:1;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;background:linear-gradient(90deg,rgba(18,63,53,.18),transparent 40%,transparent 60%,rgba(197,164,109,.1))}
+  .track{display:flex;gap:52px;white-space:nowrap;width:max-content;animation:scroll 32s linear infinite}
+  .track span{font-family:'Fraunces',serif;font-size:22px;color:var(--pearl-dim);display:inline-flex;align-items:center;gap:52px}
+  .track span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+  .ticker:hover .track{animation-play-state:paused}
+
+  /* section shared */
+  section{position:relative;z-index:1;padding:96px 0}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:44px}
+  .sec-head h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(30px,5vw,52px);line-height:1;letter-spacing:-.01em}
+  .sec-head p{max-width:320px;color:var(--pearl-dim);font-size:14.5px}
+  .kicker{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+
+  /* signature 1: open-late finder — interactive time slider */
+  .finder{background:var(--ink-2);border:1px solid var(--line);border-radius:24px;padding:38px;display:grid;grid-template-columns:1.1fr 1fr;gap:44px}
+  @media(max-width:820px){.finder{grid-template-columns:1fr;padding:26px}}
+  .clock{font-family:'Fraunces',serif;font-size:clamp(44px,8vw,72px);color:var(--gold);line-height:1;letter-spacing:-.01em}
+  .clock small{font-size:18px;color:var(--pearl-dim);margin-left:8px}
+  .slider-lab{display:flex;justify-content:space-between;font-size:12px;color:var(--pearl-dim);margin:28px 0 10px}
+  input[type=range]{-webkit-appearance:none;width:100%;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--jade));outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--pearl);border:3px solid var(--gold);cursor:pointer;box-shadow:0 0 16px rgba(197,164,109,.7)}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--pearl);border:3px solid var(--gold);cursor:pointer}
+  .hint{margin-top:22px;font-size:13.5px;color:var(--pearl-dim)}
+  .hint b{color:var(--pearl)}
+  .open-list{display:flex;flex-direction:column;gap:12px}
+  .oitem{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border:1px solid var(--line);border-radius:14px;transition:.3s;opacity:.32}
+  .oitem.on{opacity:1;border-color:rgba(197,164,109,.5);background:rgba(197,164,109,.05)}
+  .oitem .nm{font-family:'Fraunces',serif;font-size:17px}
+  .oitem .ct{font-size:12px;color:var(--pearl-dim)}
+  .oitem .cl{font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+  .oitem.on .cl{color:var(--gold)}
+  .oitem .cl.closed{color:rgba(244,239,231,.35)}
+
+  /* signature 2: featured lounge cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:820px){.cards{grid-template-columns:1fr}}
+  .card{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;transition:transform .4s,border-color .4s;isolation:isolate}
+  .card::before{content:"";position:absolute;inset:0;z-index:-2;transition:transform .6s}
+  .c1::before{background:radial-gradient(120% 90% at 30% 20%,rgba(197,164,109,.5),transparent),linear-gradient(180deg,#1a1204,#0B0C0E)}
+  .c2::before{background:radial-gradient(120% 90% at 70% 20%,rgba(18,63,53,.85),transparent),linear-gradient(180deg,#08130f,#0B0C0E)}
+  .c3::before{background:radial-gradient(120% 90% at 40% 15%,rgba(180,107,214,.55),transparent),linear-gradient(180deg,#160a1c,#0B0C0E)}
+  .card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 40%,rgba(11,12,14,.78))}
+  .card:hover{transform:translateY(-6px);border-color:rgba(197,164,109,.5)}
+  .card:hover::before{transform:scale(1.08)}
+  .badge{position:absolute;top:18px;left:18px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;padding:6px 12px;border-radius:100px;background:rgba(11,12,14,.55);border:1px solid var(--line);backdrop-filter:blur(6px)}
+  .badge.feat{color:var(--orchid);border-color:rgba(180,107,214,.45)}
+  .card h3{font-family:'Fraunces',serif;font-weight:500;font-size:24px;margin-bottom:6px}
+  .card .loc{font-size:13px;color:var(--pearl-dim);margin-bottom:14px}
+  .card .tags{display:flex;gap:8px;flex-wrap:wrap}
+  .tag{font-size:11px;color:var(--gold);border:1px solid var(--line);padding:4px 10px;border-radius:100px}
+  .late{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--gold);margin-bottom:12px}
+  .late .d{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+
+  /* footer */
+  footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:56px 0 44px;text-align:center}
+  footer .big{font-family:'Fraunces',serif;font-size:clamp(30px,6vw,60px);font-weight:500;letter-spacing:-.01em;margin-bottom:26px}
+  footer .fmeta{color:var(--pearl-dim);font-size:13px;letter-spacing:.04em}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="glow"></div>
+
+<nav>
+  <div class="wrap navrow">
+    <a class="brand" href="#"><span class="dot"></span>Boba Night</a>
+    <div class="navlinks">
+      <a href="#open">Open late</a>
+      <a href="#featured">Featured lounges</a>
+      <a href="#find">The map</a>
+    </div>
+    <div class="status"><span class="dot"></span>Open now</div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <span class="eyebrow"><span class="line"></span>Southern California, after dark</span>
+    <h1>The night is<br>young. So is<br>your <span class="em">craving.</span></h1>
+    <p class="lede">A hand-picked lounge of SoCal boba worth staying up for. We track who is still pouring while the rest of the city sleeps.</p>
+    <div class="cta-row">
+      <button class="btn btn-gold" onclick="document.getElementById('open').scrollIntoView()">Find boba open now</button>
+      <a class="btn btn-ghost" href="#featured">Browse the lounge</a>
+    </div>
+    <div class="hero-meta">
+      <div><b>212</b>shops across SoCal</div>
+      <div><b>1am</b>latest pour tonight</div>
+      <div><b>7</b>cities, one nightcap</div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker">
+  <div class="track">
+    <span>Open past midnight<span></span></span>
+    <span>Rowland Heights<span></span></span>
+    <span>Last call 1am<span></span></span>
+    <span>Cypress<span></span></span>
+    <span>Brown sugar, still warm<span></span></span>
+    <span>Fullerton<span></span></span>
+    <span>Open past midnight<span></span></span>
+    <span>Rowland Heights<span></span></span>
+    <span>Last call 1am<span></span></span>
+    <span>Cypress<span></span></span>
+    <span>Brown sugar, still warm<span></span></span>
+    <span>Fullerton<span></span></span>
+  </div>
+</div>
+
+<!-- SIGNATURE 1 -->
+<section id="open">
+  <div class="wrap reveal">
+    <div class="sec-head">
+      <div>
+        <div class="kicker">The night shift</div>
+        <h2>Who is still pouring</h2>
+      </div>
+      <p>Drag through the hours. We light up the lounges taking your order at that exact time.</p>
+    </div>
+    <div class="finder">
+      <div>
+        <div class="clock"><span id="clockNum">11:00</span><small id="ampm">PM</small></div>
+        <div class="slider-lab"><span>8 PM</span><span>2 AM</span></div>
+        <input id="timeSlider" type="range" min="20" max="26" value="23" step="1" />
+        <p class="hint"><b id="openCount">3 lounges</b> pouring at this hour. The later you go, the shorter the list.</p>
+      </div>
+      <div class="open-list" id="openList">
+        <div class="oitem" data-close="26"><div><div class="nm">Sunright Tea Studio</div><div class="ct">Rowland Heights</div></div><div class="cl">Open</div></div>
+        <div class="oitem" data-close="25"><div><div class="nm">Tastea</div><div class="ct">Cypress</div></div><div class="cl">Open</div></div>
+        <div class="oitem" data-close="24"><div><div class="nm">Half &amp; Half</div><div class="ct">Fullerton</div></div><div class="cl">Open</div></div>
+        <div class="oitem" data-close="23"><div><div class="nm">Feng Cha</div><div class="ct">Diamond Bar</div></div><div class="cl">Open</div></div>
+        <div class="oitem" data-close="22"><div><div class="nm">Meet Fresh</div><div class="ct">Irvine</div></div><div class="cl">Open</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNATURE 2 -->
+<section id="featured">
+  <div class="wrap reveal">
+    <div class="sec-head">
+      <div>
+        <div class="kicker">Tonight's booking</div>
+        <h2>Featured lounges</h2>
+      </div>
+      <p>Three rooms we would send a friend to at 11pm without a second thought.</p>
+    </div>
+    <div class="cards">
+      <a class="card c1" href="#">
+        <span class="badge">House pour</span>
+        <div class="late"><span class="d"></span>Open until 1 AM</div>
+        <h3>Tastea</h3>
+        <div class="loc">Rowland Heights</div>
+        <div class="tags"><span class="tag">Brown sugar</span><span class="tag">Booth seating</span></div>
+      </a>
+      <a class="card c2" href="#">
+        <span class="badge">Late crowd</span>
+        <div class="late"><span class="d"></span>Open until 12 AM</div>
+        <h3>Sunright Tea Studio</h3>
+        <div class="loc">Cypress</div>
+        <div class="tags"><span class="tag">Cheese foam</span><span class="tag">Study late</span></div>
+      </a>
+      <a class="card c3" href="#">
+        <span class="badge feat">Editor's pick</span>
+        <div class="late"><span class="d"></span>Open until 12:30 AM</div>
+        <h3>Feng Cha</h3>
+        <div class="loc">Fullerton</div>
+        <div class="tags"><span class="tag">Oat milk</span><span class="tag">Neon room</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer id="find">
+  <div class="wrap reveal">
+    <div class="big serif">Last call is a state of mind.</div>
+    <button class="btn btn-gold" onclick="document.getElementById('open').scrollIntoView()">Find boba near me</button>
+    <p class="fmeta" style="margin-top:32px">Boba Night — a Southern California after-dark guide. Sample lounges shown for concept only.</p>
+  </div>
+</footer>
+
+<script>
+  // Signature 1: time-of-night finder
+  var slider = document.getElementById('timeSlider');
+  var clockNum = document.getElementById('clockNum');
+  var ampm = document.getElementById('ampm');
+  var openCount = document.getElementById('openCount');
+  var items = Array.prototype.slice.call(document.querySelectorAll('#openList .oitem'));
+
+  function fmt(h){
+    var hr = h % 24;
+    var suffix = hr >= 12 ? 'AM' : 'AM'; // handled below
+    var disp = hr;
+    var mer;
+    if(hr === 0){disp = 12; mer = 'AM';}
+    else if(hr < 12){disp = hr; mer = (hr >= 0 && hr < 12) ? (hr===0?'AM':'PM') : 'PM';}
+    // simplify: our range is 20..26 (8pm..2am)
+    if(h >= 24){disp = h - 24; mer = 'AM'; if(disp===0)disp=12;}
+    else if(h === 12){disp = 12; mer = 'PM';}
+    else if(h > 12){disp = h - 12; mer = 'PM';}
+    else {disp = h; mer = 'PM';}
+    return {disp:disp, mer:mer};
+  }
+
+  function render(){
+    var h = parseInt(slider.value, 10);
+    var f = fmt(h);
+    clockNum.textContent = f.disp + ':00';
+    ampm.textContent = f.mer;
+    var open = 0;
+    items.forEach(function(it){
+      var close = parseInt(it.getAttribute('data-close'), 10);
+      var lbl = it.querySelector('.cl');
+      if(h < close){
+        it.classList.add('on');
+        lbl.textContent = 'Open';
+        lbl.classList.remove('closed');
+        open++;
+      } else {
+        it.classList.remove('on');
+        lbl.textContent = 'Last call';
+        lbl.classList.add('closed');
+      }
+    });
+    openCount.textContent = open + (open === 1 ? ' lounge' : ' lounges');
+  }
+  slider.addEventListener('input', render);
+  render();
+
+  // scroll reveal
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.16});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>
