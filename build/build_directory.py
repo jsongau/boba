@@ -1,13 +1,42 @@
-<!doctype html>
+#!/usr/bin/env python3
+# Builds /directory/ — the live, market-aware shop directory.
+# Baked for crawlers: all 172 city links with counts, grouped by county.
+# Live for humans: 1,117 shops fetched from niteboba_finder at view time.
+import json, html, os
+
+CITIES = json.load(open(os.path.join(os.path.dirname(__file__), 'cities.json')))
+e = html.escape
+CA = sum(x[3] for x in CITIES if x[0] != 'Clark')
+LV = sum(x[3] for x in CITIES if x[0] == 'Clark')
+TOTAL = CA + LV
+COUNTY_LABEL = {"Los Angeles": "Los Angeles County", "Orange": "Orange County", "San Diego": "San Diego County",
+                "Riverside": "Riverside County", "San Bernardino": "San Bernardino County",
+                "Ventura": "Ventura County", "Imperial": "Imperial County", "Clark": "Las Vegas Valley"}
+ORDER = ["Los Angeles", "Orange", "San Diego", "Riverside", "San Bernardino", "Ventura", "Imperial", "Clark"]
+
+def city_href(county, cs):
+    return ("/boba/nv/%s/" if county == "Clark" else "/boba/ca/%s/") % cs
+
+groups = ""
+for county in ORDER:
+    rows = [x for x in CITIES if x[0] == county]
+    if not rows: continue
+    total = sum(x[3] for x in rows)
+    links = "".join('<a href="%s">%s<b>%d</b></a>' % (city_href(county, cs), e(c), n) for _, c, cs, n in rows)
+    groups += ('<details class="cty"%s><summary><span>%s</span><i>%d shops · %d cities</i></summary>'
+               '<div class="ctyl">%s</div></details>\n'
+               % (' open' if county in ("Los Angeles", "Clark") else '', e(COUNTY_LABEL[county]), total, len(rows), links))
+
+page = '''<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Boba Shop Directory — Southern California &amp; Las Vegas | Boba Night</title>
-<meta name="description" content="Every boba shop Boba Night tracks: 998 across Southern California and 119 in the Las Vegas Valley, with live hours, Google ratings, and pages for each shop.">
+<meta name="description" content="Every boba shop Boba Night tracks: __CA__ across Southern California and __LV__ in the Las Vegas Valley, with live hours, Google ratings, and pages for each shop.">
 <link rel="canonical" href="https://www.bobanight.com/directory/">
 <meta property="og:title" content="The Boba Night Directory">
-<meta property="og:description" content="1117 boba shops, hours checked, nothing paid to be here.">
+<meta property="og:description" content="__TOTAL__ boba shops, hours checked, nothing paid to be here.">
 <meta property="og:image" content="https://www.bobanight.com/og-card.png">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -102,7 +131,7 @@ select.dso{height:38px;border-radius:10px;border:1px solid var(--line);backgroun
 @media(max-width:820px){.dw{padding-top:118px}.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr 1fr;gap:8px}.stat{padding:12px}.stat .n{font-size:24px}}
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"CollectionPage","name":"Boba Night Directory","url":"https://www.bobanight.com/directory/","description":"1117 boba shops across Southern California and the Las Vegas Valley with checked hours and Google ratings.","breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.bobanight.com/"},{"@type":"ListItem","position":2,"name":"Directory","item":"https://www.bobanight.com/directory/"}]}}
+{"@context":"https://schema.org","@type":"CollectionPage","name":"Boba Night Directory","url":"https://www.bobanight.com/directory/","description":"__TOTAL__ boba shops across Southern California and the Las Vegas Valley with checked hours and Google ratings.","breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.bobanight.com/"},{"@type":"ListItem","position":2,"name":"Directory","item":"https://www.bobanight.com/directory/"}]}}
 </script>
 </head>
 <body>
@@ -111,15 +140,15 @@ select.dso{height:38px;border-radius:10px;border:1px solid var(--line);backgroun
   <section>
     <p class="kick">The directory</p>
     <h1>Every shop, every city, <i>one room</i>.</h1>
-    <p class="lede"><b>998 boba shops</b> across Southern California and <b>119</b> in the Las Vegas Valley — live hours, Google ratings as reported, and a page for every shop. Nothing here paid to be listed.</p>
+    <p class="lede"><b>__CA__ boba shops</b> across Southern California and <b>__LV__</b> in the Las Vegas Valley — live hours, Google ratings as reported, and a page for every shop. Nothing here paid to be listed.</p>
     <div class="stats" aria-label="Live counts">
       <div class="stat jade"><div class="n" id="stOpen"><span class="ld"></span></div><div class="l">Open right now</div></div>
       <div class="stat"><div class="n" id="stLate"><span class="ld"></span></div><div class="l">Pouring past 11 PM</div></div>
       <div class="stat"><div class="n" id="stTop"><span class="ld"></span></div><div class="l">Rated 4.5★ or higher</div></div>
     </div>
     <div class="mrow" id="mktRow" role="group" aria-label="Market">
-      <button class="mchip" data-m="sc" aria-pressed="true">Southern California<b>998</b></button>
-      <button class="mchip" data-m="lv" aria-pressed="false">Las Vegas<b>119</b></button>
+      <button class="mchip" data-m="sc" aria-pressed="true">Southern California<b>__CA__</b></button>
+      <button class="mchip" data-m="lv" aria-pressed="false">Las Vegas<b>__LV__</b></button>
     </div>
   </section>
 
@@ -150,16 +179,8 @@ select.dso{height:38px;border-radius:10px;border:1px solid var(--line);backgroun
 
   <section class="sx" aria-label="Cities">
     <p class="kick">By city</p>
-    <h2>Boba by city, 172 cities strong.</h2>
-<details class="cty" open><summary><span>Los Angeles County</span><i>628 shops · 76 cities</i></summary><div class="ctyl"><a href="/boba/ca/los-angeles/">Los Angeles<b>187</b></a><a href="/boba/ca/san-gabriel/">San Gabriel<b>37</b></a><a href="/boba/ca/rowland-heights/">Rowland Heights<b>34</b></a><a href="/boba/ca/pasadena/">Pasadena<b>27</b></a><a href="/boba/ca/arcadia/">Arcadia<b>20</b></a><a href="/boba/ca/torrance/">Torrance<b>19</b></a><a href="/boba/ca/monterey-park/">Monterey Park<b>17</b></a><a href="/boba/ca/long-beach/">Long Beach<b>14</b></a><a href="/boba/ca/alhambra/">Alhambra<b>13</b></a><a href="/boba/ca/rosemead/">Rosemead<b>12</b></a><a href="/boba/ca/cerritos/">Cerritos<b>11</b></a><a href="/boba/ca/glendale/">Glendale<b>11</b></a><a href="/boba/ca/temple-city/">Temple City<b>10</b></a><a href="/boba/ca/covina/">Covina<b>9</b></a><a href="/boba/ca/diamond-bar/">Diamond Bar<b>9</b></a><a href="/boba/ca/el-monte/">El Monte<b>9</b></a><a href="/boba/ca/burbank/">Burbank<b>8</b></a><a href="/boba/ca/gardena/">Gardena<b>8</b></a><a href="/boba/ca/lakewood/">Lakewood<b>8</b></a><a href="/boba/ca/walnut/">Walnut<b>8</b></a><a href="/boba/ca/carson/">Carson<b>6</b></a><a href="/boba/ca/hollywood/">Hollywood<b>6</b></a><a href="/boba/ca/santa-monica/">Santa Monica<b>6</b></a><a href="/boba/ca/artesia/">Artesia<b>5</b></a><a href="/boba/ca/city-of-industry/">City of Industry<b>5</b></a><a href="/boba/ca/huntington-park/">Huntington Park<b>5</b></a><a href="/boba/ca/monrovia/">Monrovia<b>5</b></a><a href="/boba/ca/norwalk/">Norwalk<b>5</b></a><a href="/boba/ca/palmdale/">Palmdale<b>5</b></a><a href="/boba/ca/pomona/">Pomona<b>5</b></a><a href="/boba/ca/santa-clarita/">Santa Clarita<b>5</b></a><a href="/boba/ca/west-covina/">West Covina<b>5</b></a><a href="/boba/ca/baldwin-park/">Baldwin Park<b>4</b></a><a href="/boba/ca/downey/">Downey<b>4</b></a><a href="/boba/ca/glendora/">Glendora<b>4</b></a><a href="/boba/ca/lancaster/">Lancaster<b>4</b></a><a href="/boba/ca/redondo-beach/">Redondo Beach<b>4</b></a><a href="/boba/ca/south-gate/">South Gate<b>4</b></a><a href="/boba/ca/whittier/">Whittier<b>4</b></a><a href="/boba/ca/azusa/">Azusa<b>3</b></a><a href="/boba/ca/claremont/">Claremont<b>3</b></a><a href="/boba/ca/culver-city/">Culver City<b>3</b></a><a href="/boba/ca/el-segundo/">El Segundo<b>3</b></a><a href="/boba/ca/hacienda-heights/">Hacienda Heights<b>3</b></a><a href="/boba/ca/hawthorne/">Hawthorne<b>3</b></a><a href="/boba/ca/la-mirada/">La Mirada<b>3</b></a><a href="/boba/ca/la-verne/">La Verne<b>3</b></a><a href="/boba/ca/montebello/">Montebello<b>3</b></a><a href="/boba/ca/pico-rivera/">Pico Rivera<b>3</b></a><a href="/boba/ca/agoura-hills/">Agoura Hills<b>2</b></a><a href="/boba/ca/bellflower/">Bellflower<b>2</b></a><a href="/boba/ca/commerce/">Commerce<b>2</b></a><a href="/boba/ca/la-ca-ada-flintridge/">La Cañada Flintridge<b>2</b></a><a href="/boba/ca/lomita/">Lomita<b>2</b></a><a href="/boba/ca/rolling-hills-estates/">Rolling Hills Estates<b>2</b></a><a href="/boba/ca/san-dimas/">San Dimas<b>2</b></a><a href="/boba/ca/san-marino/">San Marino<b>2</b></a><a href="/boba/ca/westlake-village/">Westlake Village<b>2</b></a><a href="/boba/ca/avalon/">Avalon<b>1</b></a><a href="/boba/ca/bell/">Bell<b>1</b></a><a href="/boba/ca/beverly-hills/">Beverly Hills<b>1</b></a><a href="/boba/ca/calabasas/">Calabasas<b>1</b></a><a href="/boba/ca/cudahy/">Cudahy<b>1</b></a><a href="/boba/ca/duarte/">Duarte<b>1</b></a><a href="/boba/ca/inglewood/">Inglewood<b>1</b></a><a href="/boba/ca/la-crescenta-montrose/">La Crescenta-Montrose<b>1</b></a><a href="/boba/ca/la-puente/">La Puente<b>1</b></a><a href="/boba/ca/lynwood/">Lynwood<b>1</b></a><a href="/boba/ca/paramount/">Paramount<b>1</b></a><a href="/boba/ca/san-fernando/">San Fernando<b>1</b></a><a href="/boba/ca/santa-fe-springs/">Santa Fe Springs<b>1</b></a><a href="/boba/ca/sierra-madre/">Sierra Madre<b>1</b></a><a href="/boba/ca/signal-hill/">Signal Hill<b>1</b></a><a href="/boba/ca/south-el-monte/">South El Monte<b>1</b></a><a href="/boba/ca/south-pasadena/">South Pasadena<b>1</b></a><a href="/boba/ca/stevenson-ranch/">Stevenson Ranch<b>1</b></a></div></details>
-<details class="cty"><summary><span>Orange County</span><i>127 shops · 29 cities</i></summary><div class="ctyl"><a href="/boba/ca/irvine/">Irvine<b>17</b></a><a href="/boba/ca/westminster/">Westminster<b>14</b></a><a href="/boba/ca/garden-grove/">Garden Grove<b>11</b></a><a href="/boba/ca/fullerton/">Fullerton<b>9</b></a><a href="/boba/ca/cypress/">Cypress<b>6</b></a><a href="/boba/ca/anaheim/">Anaheim<b>5</b></a><a href="/boba/ca/buena-park/">Buena Park<b>5</b></a><a href="/boba/ca/costa-mesa/">Costa Mesa<b>5</b></a><a href="/boba/ca/lake-forest/">Lake Forest<b>5</b></a><a href="/boba/ca/mission-viejo/">Mission Viejo<b>5</b></a><a href="/boba/ca/orange/">Orange<b>5</b></a><a href="/boba/ca/santa-ana/">Santa Ana<b>5</b></a><a href="/boba/ca/fountain-valley/">Fountain Valley<b>4</b></a><a href="/boba/ca/huntington-beach/">Huntington Beach<b>4</b></a><a href="/boba/ca/brea/">Brea<b>3</b></a><a href="/boba/ca/tustin/">Tustin<b>3</b></a><a href="/boba/ca/yorba-linda/">Yorba Linda<b>3</b></a><a href="/boba/ca/la-habra/">La Habra<b>2</b></a><a href="/boba/ca/la-palma/">La Palma<b>2</b></a><a href="/boba/ca/laguna-niguel/">Laguna Niguel<b>2</b></a><a href="/boba/ca/placentia/">Placentia<b>2</b></a><a href="/boba/ca/rancho-santa-margarita/">Rancho Santa Margarita<b>2</b></a><a href="/boba/ca/stanton/">Stanton<b>2</b></a><a href="/boba/ca/aliso-viejo/">Aliso Viejo<b>1</b></a><a href="/boba/ca/dana-point/">Dana Point<b>1</b></a><a href="/boba/ca/laguna-hills/">Laguna Hills<b>1</b></a><a href="/boba/ca/san-clemente/">San Clemente<b>1</b></a><a href="/boba/ca/san-juan-capistrano/">San Juan Capistrano<b>1</b></a><a href="/boba/ca/seal-beach/">Seal Beach<b>1</b></a></div></details>
-<details class="cty"><summary><span>San Diego County</span><i>71 shops · 13 cities</i></summary><div class="ctyl"><a href="/boba/ca/san-diego/">San Diego<b>28</b></a><a href="/boba/ca/carlsbad/">Carlsbad<b>5</b></a><a href="/boba/ca/chula-vista/">Chula Vista<b>5</b></a><a href="/boba/ca/escondido/">Escondido<b>5</b></a><a href="/boba/ca/national-city/">National City<b>5</b></a><a href="/boba/ca/san-marcos/">San Marcos<b>5</b></a><a href="/boba/ca/oceanside/">Oceanside<b>4</b></a><a href="/boba/ca/vista/">Vista<b>4</b></a><a href="/boba/ca/el-cajon/">El Cajon<b>3</b></a><a href="/boba/ca/santee/">Santee<b>3</b></a><a href="/boba/ca/poway/">Poway<b>2</b></a><a href="/boba/ca/bonita/">Bonita<b>1</b></a><a href="/boba/ca/la-mesa/">La Mesa<b>1</b></a></div></details>
-<details class="cty"><summary><span>Riverside County</span><i>69 shops · 20 cities</i></summary><div class="ctyl"><a href="/boba/ca/riverside/">Riverside<b>9</b></a><a href="/boba/ca/corona/">Corona<b>5</b></a><a href="/boba/ca/eastvale/">Eastvale<b>5</b></a><a href="/boba/ca/menifee/">Menifee<b>5</b></a><a href="/boba/ca/murrieta/">Murrieta<b>5</b></a><a href="/boba/ca/palm-desert/">Palm Desert<b>5</b></a><a href="/boba/ca/temecula/">Temecula<b>5</b></a><a href="/boba/ca/lake-elsinore/">Lake Elsinore<b>4</b></a><a href="/boba/ca/moreno-valley/">Moreno Valley<b>4</b></a><a href="/boba/ca/indio/">Indio<b>3</b></a><a href="/boba/ca/la-quinta/">La Quinta<b>3</b></a><a href="/boba/ca/wildomar/">Wildomar<b>3</b></a><a href="/boba/ca/banning/">Banning<b>2</b></a><a href="/boba/ca/cathedral-city/">Cathedral City<b>2</b></a><a href="/boba/ca/hemet/">Hemet<b>2</b></a><a href="/boba/ca/norco/">Norco<b>2</b></a><a href="/boba/ca/perris/">Perris<b>2</b></a><a href="/boba/ca/beaumont/">Beaumont<b>1</b></a><a href="/boba/ca/desert-hot-springs/">Desert Hot Springs<b>1</b></a><a href="/boba/ca/palm-springs/">Palm Springs<b>1</b></a></div></details>
-<details class="cty"><summary><span>San Bernardino County</span><i>73 shops · 22 cities</i></summary><div class="ctyl"><a href="/boba/ca/chino/">Chino<b>5</b></a><a href="/boba/ca/chino-hills/">Chino Hills<b>5</b></a><a href="/boba/ca/fontana/">Fontana<b>5</b></a><a href="/boba/ca/ontario/">Ontario<b>5</b></a><a href="/boba/ca/rancho-cucamonga/">Rancho Cucamonga<b>5</b></a><a href="/boba/ca/redlands/">Redlands<b>5</b></a><a href="/boba/ca/rialto/">Rialto<b>5</b></a><a href="/boba/ca/upland/">Upland<b>5</b></a><a href="/boba/ca/victorville/">Victorville<b>5</b></a><a href="/boba/ca/montclair/">Montclair<b>4</b></a><a href="/boba/ca/apple-valley/">Apple Valley<b>3</b></a><a href="/boba/ca/hesperia/">Hesperia<b>3</b></a><a href="/boba/ca/loma-linda/">Loma Linda<b>3</b></a><a href="/boba/ca/san-bernardino/">San Bernardino<b>3</b></a><a href="/boba/ca/yucaipa/">Yucaipa<b>3</b></a><a href="/boba/ca/colton/">Colton<b>2</b></a><a href="/boba/ca/highland/">Highland<b>2</b></a><a href="/boba/ca/barstow/">Barstow<b>1</b></a><a href="/boba/ca/big-bear-lake/">Big Bear Lake<b>1</b></a><a href="/boba/ca/grand-terrace/">Grand Terrace<b>1</b></a><a href="/boba/ca/twentynine-palms/">Twentynine Palms<b>1</b></a><a href="/boba/ca/yucca-valley/">Yucca Valley<b>1</b></a></div></details>
-<details class="cty"><summary><span>Ventura County</span><i>28 shops · 8 cities</i></summary><div class="ctyl"><a href="/boba/ca/oxnard/">Oxnard<b>5</b></a><a href="/boba/ca/simi-valley/">Simi Valley<b>5</b></a><a href="/boba/ca/thousand-oaks/">Thousand Oaks<b>5</b></a><a href="/boba/ca/ventura/">Ventura<b>5</b></a><a href="/boba/ca/camarillo/">Camarillo<b>4</b></a><a href="/boba/ca/moorpark/">Moorpark<b>2</b></a><a href="/boba/ca/ojai/">Ojai<b>1</b></a><a href="/boba/ca/port-hueneme/">Port Hueneme<b>1</b></a></div></details>
-<details class="cty"><summary><span>Imperial County</span><i>2 shops · 1 cities</i></summary><div class="ctyl"><a href="/boba/ca/el-centro/">El Centro<b>2</b></a></div></details>
-<details class="cty" open><summary><span>Las Vegas Valley</span><i>119 shops · 3 cities</i></summary><div class="ctyl"><a href="/boba/nv/las-vegas/">Las Vegas<b>99</b></a><a href="/boba/nv/henderson/">Henderson<b>15</b></a><a href="/boba/nv/north-las-vegas/">North Las Vegas<b>5</b></a></div></details>
-
+    <h2>Boba by city, __NCITIES__ cities strong.</h2>
+__GROUPS__
   </section>
 </main>
 <div id="bn-footer"></div>
@@ -171,7 +192,7 @@ select.dso{height:38px;border-radius:10px;border:1px solid var(--line);backgroun
 var ROWS=[],VIEW=[],page=0,PER=24;
 var F={m:'sc',open:false,orig:false,q:'',sort:'rv'};
 try{if(localStorage.getItem('bn_market')==='lv')F.m='lv';}catch(e){}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;"}[c];});}
 function laNow(){try{var f=new Intl.DateTimeFormat("en-US",{timeZone:"America/Los_Angeles",weekday:"short",hour:"2-digit",minute:"2-digit",hour12:false});
   var p={};f.formatToParts(new Date()).forEach(function(x){p[x.type]=x.value;});
   return {day:{Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[p.weekday],mins:(+p.hour%24)*60+(+p.minute)};}
@@ -255,3 +276,10 @@ fetch('https://hfvbeqlefwwjlrbyxpbj.supabase.co/rest/v1/niteboba_finder?select=s
 </script>
 </body>
 </html>
+'''
+page = (page.replace('__CA__', str(CA)).replace('__LV__', str(LV)).replace('__TOTAL__', str(TOTAL))
+        .replace('__NCITIES__', str(len(CITIES))).replace('__GROUPS__', groups))
+out = os.path.join(os.path.dirname(__file__), '..', 'prod', 'directory')
+os.makedirs(out, exist_ok=True)
+open(os.path.join(out, 'index.html'), 'w').write(page)
+print('directory built:', len(page), 'bytes ·', CA, 'CA +', LV, 'LV ·', len(CITIES), 'cities baked')
