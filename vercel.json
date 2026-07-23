@@ -19,16 +19,6 @@
       "source": "/how-we-make-money/",
       "destination": "/",
       "permanent": true
-    },
-    {
-      "source": "/area/las-vegas",
-      "destination": "/las-vegas/",
-      "permanent": true
-    },
-    {
-      "source": "/area/las-vegas/",
-      "destination": "/las-vegas/",
-      "permanent": true
     }
   ],
   "headers": [
