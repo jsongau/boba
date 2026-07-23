@@ -396,3 +396,42 @@ body.bn-lock{overflow:hidden}
 .bn-mktrib button{background:none;border:0;color:#8a6a55;font-size:16px;cursor:pointer;padding:2px 6px;line-height:1}
 .bn-mktrib button:hover{color:#F4DDA2}
 @media(max-width:560px){.bn-mktrib span{display:none}}
+
+/* ===== Night-Market Charms: bottom bar icon system (2026-07-23) ===== */
+@media(max-width:1079px){
+  .bn-bottombar{padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));position:fixed}
+  .bn-bb{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+    min-height:44px;justify-content:center;text-decoration:none;color:rgba(197,164,109,.55);
+    font:600 10.5px/1 "Inter Tight",sans-serif;letter-spacing:.04em;
+    touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  .bn-bb .ch{width:23px;height:23px;transition:transform 400ms cubic-bezier(.3,.7,.4,1.5),filter 220ms ease-out,color .2s}
+  .bn-bb .acc{transition:transform 300ms cubic-bezier(.3,.7,.4,1.5),opacity .25s;transform-origin:center;opacity:.55}
+  .bn-bb span{transition:color .2s,opacity .2s}
+  /* press: fast squash down, springy release (the "haptic" read) */
+  .bn-bb:active .ch{transform:scale(.88,.94) translateY(1px);transition:transform 50ms linear}
+  /* pencil / pointer hover pre-light (real on Apple Pencil hover, harmless elsewhere) */
+  @media(hover:hover){
+    .bn-bb:hover{color:#F4DDA2}
+    .bn-bb:hover .ch{transform:translateY(-2px);
+      filter:drop-shadow(0 0 2px rgba(244,221,162,.9)) drop-shadow(0 0 8px rgba(197,164,109,.55)) drop-shadow(0 0 18px rgba(197,164,109,.25))}
+    .bn-bb:hover .acc{opacity:1}
+  }
+  .bn-bb.pen-hover::after{content:"";position:absolute;top:2px;right:22%;width:5px;height:5px;border-radius:50%;
+    background:#ff2f6d;box-shadow:0 0 8px #ff2f6d;animation:penPulse 1.2s ease-in-out infinite}
+  @keyframes penPulse{50%{opacity:.35;transform:scale(.8)}}
+  /* active page: lit charm, gem pop, label gold, aria-current drives it */
+  .bn-bb[aria-current="page"]{color:#F4DDA2}
+  .bn-bb[aria-current="page"] .acc{opacity:1;fill:rgba(255,47,109,.85);stroke:#ff2f6d;animation:gemPop .5s cubic-bezier(.3,.7,.4,1.5)}
+  @keyframes gemPop{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+  .bn-bb[aria-current="page"] .ch{filter:drop-shadow(0 0 6px rgba(244,221,162,.45))}
+  /* sliding pill indicator: transform-only, no layout shift */
+  .bn-bbpill{position:absolute;z-index:0;top:7px;left:0;width:25%;height:44px;border-radius:16px;
+    background:rgba(197,164,109,.13);border:1px solid rgba(197,164,109,.35);
+    opacity:0;transition:transform 400ms cubic-bezier(.2,.64,.48,1.12),opacity .25s;pointer-events:none}
+  .bn-bbpill.on{opacity:1}
+  @media(prefers-reduced-motion:reduce){
+    .bn-bb .ch,.bn-bb .acc,.bn-bbpill{transition:none;animation:none}
+    .bn-bb[aria-current="page"] .acc{animation:none}
+    .bn-bb.pen-hover::after{animation:none}
+  }
+}

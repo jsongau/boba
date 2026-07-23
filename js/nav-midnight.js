@@ -434,3 +434,36 @@ if(!LV&&(location.pathname==="/"||/\/index\.html$/.test(location.pathname))){
   }
 }
 })();
+
+
+/* ===== Night-Market Charms: active tab, pill, pencil hover, press feedback (2026-07-23) ===== */
+(function(){
+"use strict";
+function init(){
+  var bar=document.querySelector(".bn-bottombar");
+  if(!bar||bar.__chm)return !!bar;
+  bar.__chm=1;
+  var tabs=[].slice.call(bar.querySelectorAll(".bn-bb"));
+  var pill=bar.querySelector(".bn-bbpill");
+  var path=location.pathname;
+  var idx=-1;
+  if(path.indexOf("/account")===0)idx=0;
+  else if(path.indexOf("/directory")===0)idx=1;
+  else if(path.indexOf("/near-me")===0||path.indexOf("/nearby")===0)idx=2;
+  if(idx>-1&&tabs[idx]){
+    tabs[idx].setAttribute("aria-current","page");
+    if(pill){pill.style.transform="translateX("+(idx*100)+"%)";
+      requestAnimationFrame(function(){pill.classList.add("on");});}
+  }
+  tabs.forEach(function(t){
+    t.addEventListener("pointerover",function(e){if(e.pointerType==="pen")t.classList.add("pen-hover");});
+    t.addEventListener("pointerout",function(){t.classList.remove("pen-hover");});
+    t.addEventListener("pointerdown",function(){
+      if("vibrate" in navigator){try{navigator.vibrate(8);}catch(e){}}
+    });
+  });
+  return true;
+}
+var n=0,t=setInterval(function(){if(init()||++n>12)clearInterval(t);},350);
+init();
+})();

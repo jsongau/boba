@@ -5,109 +5,135 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Your account · Boba Night</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="https://www.bobanight.com/account/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --obsidian:#0B0C0E; --surface:#17191D; --surface2:#1e2126;
-  --line:rgba(197,164,109,.22); --line2:rgba(197,164,109,.4);
-  --champagne:#C5A46D; --gilt:#F4DDA2; --neon:#ff2f6d;
-  --ink:#EDE7DA; --mute:#a49b88;
-}
+:root{--obsidian:#0B0C0E;--surface:#16130d;--surface2:#101013;--line:rgba(197,164,109,.28);--line2:rgba(197,164,109,.5);
+  --champagne:#C5A46D;--gilt:#F4DDA2;--neon:#ff2f6d;--ink:#f2e9da;--mute:#a49b88}
 *{box-sizing:border-box}
 html,body{margin:0}
-body{
-  background:radial-gradient(1200px 700px at 70% -10%,rgba(92,44,134,.18),transparent 60%),var(--obsidian);
-  color:var(--ink); font-family:"Inter Tight",system-ui,-apple-system,sans-serif;
-  min-height:100vh; line-height:1.5;
-}
+body{background:radial-gradient(1100px 640px at 72% -12%,rgba(92,44,134,.16),transparent 60%),var(--obsidian);
+  color:var(--ink);font-family:"Inter",system-ui,-apple-system,sans-serif;min-height:100vh;line-height:1.55}
 a{color:var(--gilt)}
-.top{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line)}
-.brand{font-family:"Fraunces",Georgia,serif;font-size:1.4rem;font-weight:600;letter-spacing:.01em;color:var(--ink);text-decoration:none}
+.top{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line)}
+.brand{font-family:"Fraunces",Georgia,serif;font-size:1.35rem;font-weight:600;color:var(--ink);text-decoration:none}
 .brand em{font-style:normal;color:var(--neon)}
-.top a.back{font-size:.9rem;color:var(--mute);text-decoration:none}
+.top a.back{font-size:.88rem;color:var(--mute);text-decoration:none}
 .top a.back:hover{color:var(--gilt)}
-.wrap{max-width:560px;margin:0 auto;padding:56px 22px 90px}
-.card{background:linear-gradient(180deg,var(--surface),var(--surface2));border:1px solid var(--line);border-radius:6px;padding:34px 30px}
-.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;color:var(--champagne);margin:0 0 12px}
-h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:2rem;line-height:1.1;margin:0 0 10px}
+.wrap{max-width:520px;margin:0 auto;padding:46px 20px calc(70px + env(safe-area-inset-bottom,0px))}
+.card{background:linear-gradient(180deg,var(--surface),var(--surface2));border:1px solid var(--line);border-radius:18px;
+  padding:30px 26px;box-shadow:0 40px 90px -40px rgba(0,0,0,.9)}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.68rem;font-weight:600;color:var(--champagne);margin:0 0 12px}
+h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.85rem;line-height:1.12;margin:0 0 10px;text-wrap:balance}
 h1 em{font-style:italic;color:var(--gilt)}
-.sub{color:var(--mute);margin:0 0 26px;font-size:1rem}
-label{display:block;font-size:.82rem;letter-spacing:.02em;color:var(--champagne);margin:0 0 7px}
-input[type=email],input[type=text]{
-  width:100%;height:48px;padding:0 14px;background:#0d0f12;border:1px solid var(--line2);border-radius:4px;
-  color:var(--ink);font:inherit;font-size:1rem;outline:none;transition:border-color .15s
-}
-input:focus{border-color:var(--gilt)}
+.sub{color:var(--mute);margin:0 0 22px;font-size:.95rem}
+/* mode tabs */
+.mtabs{position:relative;display:grid;grid-template-columns:1fr 1fr;background:#0c0d10;border:1px solid var(--line);
+  border-radius:99px;padding:3px;margin:0 0 22px}
+.mtabs .ind{position:absolute;top:3px;left:3px;width:calc(50% - 3px);height:calc(100% - 6px);border-radius:99px;
+  background:linear-gradient(180deg,#fbf3e4,#ecd9b8);box-shadow:0 1px 3px rgba(0,0,0,.5),0 0 8px 1px rgba(197,164,109,.3);
+  transition:transform 340ms cubic-bezier(.22,1,.36,1)}
+.mtabs[data-m="up"] .ind{transform:translateX(100%)}
+.mtabs button{position:relative;z-index:1;background:none;border:0;height:40px;border-radius:99px;cursor:pointer;
+  font:600 .88rem "Inter",sans-serif;color:rgba(242,233,218,.6);transition:color .2s .08s}
+.mtabs button[aria-pressed="true"]{color:#0B0C0E}
+label{display:block;font-size:.78rem;letter-spacing:.03em;font-weight:600;color:var(--champagne);margin:14px 0 6px}
+input[type=email],input[type=text],input[type=password]{width:100%;height:48px;padding:0 14px;background:#0c0d10;
+  border:1px solid var(--line2);border-radius:12px;color:var(--ink);font:inherit;font-size:1rem;outline:none;transition:border-color .15s,box-shadow .15s}
+input:focus{border-color:var(--gilt);box-shadow:0 0 0 3px rgba(244,221,162,.14)}
 .code-in{letter-spacing:.5em;font-size:1.3rem;text-align:center;font-weight:600}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;height:48px;margin-top:16px;
-  background:var(--neon);color:#fff;border:0;border-radius:4px;font:inherit;font-weight:600;font-size:1rem;cursor:pointer;
-  transition:filter .15s,transform .06s
-}
-.btn:hover{filter:brightness(1.08)} .btn:active{transform:translateY(1px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;height:50px;margin-top:18px;
+  background:linear-gradient(180deg,#ff5d8b,var(--neon) 55%,#d61c53);color:#fff;border:0;border-radius:13px;
+  font:600 1rem "Inter",sans-serif;cursor:pointer;transition:filter .15s,transform .06s;
+  box-shadow:0 12px 28px -10px rgba(255,47,109,.7),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn:hover{filter:brightness(1.07)} .btn:active{transform:translateY(1px)}
 .btn[disabled]{opacity:.55;cursor:not-allowed;filter:none}
-.btn.ghost{background:transparent;border:1px solid var(--line2);color:var(--ink)}
+.btn.ghost{background:transparent;border:1px solid var(--line2);color:var(--ink);box-shadow:none}
 .btn.ghost:hover{border-color:var(--gilt);filter:none}
-.row-links{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:.85rem}
+.btn.google{background:#fdf7ec;color:#1c1207;box-shadow:0 10px 24px -12px rgba(197,164,109,.8),inset 0 1px 0 #fff}
+.btn.google:hover{filter:brightness(1.02)}
+.btn.google svg{width:18px;height:18px;flex:0 0 auto}
+.or{display:flex;align-items:center;gap:12px;margin:20px 0 2px;color:var(--mute);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.row-links{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:.84rem;flex-wrap:wrap;gap:8px}
 .row-links a,.linkbtn{color:var(--mute);text-decoration:none;background:none;border:0;font:inherit;cursor:pointer;padding:0}
 .row-links a:hover,.linkbtn:hover{color:var(--gilt)}
-.msg{margin-top:16px;font-size:.9rem;padding:10px 12px;border-radius:4px;display:none}
-.msg.err{display:block;background:rgba(255,47,109,.12);border:1px solid rgba(255,47,109,.4);color:#ffb9cc}
-.msg.ok{display:block;background:rgba(197,164,109,.12);border:1px solid var(--line2);color:var(--gilt)}
+.msg{margin-top:16px;font-size:.9rem;padding:10px 13px;border-radius:10px;display:none}
+.msg.err{display:block;background:rgba(255,47,109,.1);border:1px solid rgba(255,47,109,.4);color:#ffb9cc}
+.msg.ok{display:block;background:rgba(197,164,109,.1);border:1px solid var(--line2);color:var(--gilt)}
 .hide{display:none!important}
 .me{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.me .dot{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gilt),var(--champagne));color:#20160a;display:grid;place-items:center;font-weight:700;font-family:"Fraunces",serif}
+.me .dot{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gilt),var(--champagne));
+  color:#20160a;display:grid;place-items:center;font-weight:700;font-family:"Fraunces",serif;font-size:1.1rem}
 .me .who{font-size:.95rem}.me .who b{display:block;color:var(--ink)}.me .who span{color:var(--mute);font-size:.85rem}
-.sec-h{display:flex;align-items:baseline;justify-content:space-between;margin:30px 0 12px}
-.sec-h h2{font-family:"Fraunces",serif;font-weight:600;font-size:1.25rem;margin:0}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;margin:28px 0 10px}
+.sec-h h2{font-family:"Fraunces",serif;font-weight:600;font-size:1.2rem;margin:0}
 .sec-h .count{color:var(--mute);font-size:.85rem}
-.fav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 14px;border:1px solid var(--line);border-radius:4px;margin-bottom:8px;background:#0d0f12}
+.fav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 15px;border:1px solid var(--line);
+  border-radius:12px;margin-bottom:8px;background:#0c0d10}
 .fav .fn{font-weight:600}.fav .fw{color:var(--mute);font-size:.85rem;margin-top:2px}
 .fav a.fn{color:var(--ink);text-decoration:none}.fav a.fn:hover{color:var(--gilt)}
 .fav .rm{background:none;border:0;color:var(--mute);cursor:pointer;font:inherit;font-size:.82rem}
 .fav .rm:hover{color:var(--neon)}
-.empty{color:var(--mute);border:1px dashed var(--line2);border-radius:4px;padding:20px;text-align:center;font-size:.92rem}
-.empty a{color:var(--gilt)}
-.handle-row{display:flex;gap:8px;margin-bottom:6px}.handle-row input{height:44px}.handle-row .btn{width:auto;margin:0;padding:0 16px;height:44px}
-.foot{color:var(--mute);font-size:.78rem;text-align:center;margin-top:26px;line-height:1.6}
+.empty{color:var(--mute);border:1px dashed var(--line2);border-radius:12px;padding:20px;text-align:center;font-size:.92rem}
+.handle-row{display:flex;gap:8px;margin-bottom:6px}.handle-row input{height:44px}.handle-row .btn{width:auto;margin:0;padding:0 16px;height:44px;box-shadow:none;background:linear-gradient(180deg,#e8c98e,var(--champagne) 55%,#a9854e);color:#1c1207}
+.foot{color:var(--mute);font-size:.76rem;text-align:center;margin-top:24px;line-height:1.6}
 .spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-3px}
 @keyframes sp{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 <header class="top">
-  <a class="brand" href="https://www.bobanight.com/">Boba <em>Night</em></a>
-  <a class="back" href="https://www.bobanight.com/nearby/">Find boba near you</a>
+  <a class="brand" href="/">Boba <em>Night</em></a>
+  <a class="back" href="/directory/">Find boba near you</a>
 </header>
 
 <main class="wrap">
-  <div class="card" id="boot"><p class="sub" style="margin:0">Loading your account… <span class="spin"></span></p></div>
+  <div class="card" id="boot"><p class="sub" style="margin:0">Opening your account&hellip; <span class="spin"></span></p></div>
 
   <!-- SIGNED OUT -->
   <div class="card hide" id="signin">
     <p class="eyebrow">Boba Night account</p>
-    <h1 id="si-h1">Save the spots <em>worth the drive.</em></h1>
-    <p class="sub" id="si-sub">Sign in and your saved shops follow you to any phone or laptop, so you won't lose your list when you switch devices. We send a one-time code, no password to remember.</p>
+    <h1>Save the spots <em>worth the drive.</em></h1>
+    <p class="sub">Your saved shops follow you to any phone or laptop. One account, both markets.</p>
 
-    <div id="step-email">
+    <button class="btn google" id="google" type="button">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.5l6.7-6.7C35.6 2.4 30.2 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6C12.3 13.2 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.4 28.7a14.5 14.5 0 0 1 0-9.4l-7.8-6a24 24 0 0 0 0 21.5l7.8-6.1z"/><path fill="#34A853" d="M24 48c6.2 0 11.4-2 15.2-5.6l-7.5-5.8c-2 1.4-4.6 2.2-7.7 2.2-6.3 0-11.7-3.7-13.6-9l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+      Continue with Google
+    </button>
+
+    <div class="or"><span>or with email</span></div>
+
+    <div class="mtabs" id="mtabs" data-m="in" role="group" aria-label="Sign in or create account">
+      <span class="ind" aria-hidden="true"></span>
+      <button type="button" data-m="in" aria-pressed="true">Sign in</button>
+      <button type="button" data-m="up" aria-pressed="false">Create account</button>
+    </div>
+
+    <div id="step-pass">
       <label for="email">Email</label>
       <input type="email" id="email" autocomplete="email" placeholder="you@email.com" inputmode="email">
-      <button class="btn" id="send-code">Send me a code</button>
+      <label for="pass">Password</label>
+      <input type="password" id="pass" autocomplete="current-password" placeholder="••••••••">
+      <button class="btn" id="go-pass">Sign in</button>
+      <div class="row-links">
+        <button class="linkbtn" id="use-code">Email me a code instead</button>
+        <button class="linkbtn" id="forgot">Forgot password?</button>
+      </div>
     </div>
 
     <div id="step-code" class="hide">
       <label for="code">Enter the 6-digit code sent to <b id="code-to"></b></label>
-      <input type="text" id="code" class="code-in" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••">
+      <input type="text" id="code" class="code-in" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;">
       <button class="btn" id="verify">Verify &amp; sign in</button>
       <div class="row-links">
         <button class="linkbtn" id="resend">Resend code</button>
-        <button class="linkbtn" id="change-email">Use a different email</button>
+        <button class="linkbtn" id="back-pass">Back to password</button>
       </div>
     </div>
 
@@ -118,11 +144,11 @@ input:focus{border-color:var(--gilt)}
   <div class="card hide" id="account">
     <p class="eyebrow">Your account</p>
     <div class="me">
-      <div class="dot" id="avatar">·</div>
+      <div class="dot" id="avatar">&middot;</div>
       <div class="who"><b id="who-name">Signed in</b><span id="who-email"></span></div>
     </div>
 
-    <div class="sec-h" style="margin-top:22px"><h2>Display name</h2></div>
+    <div class="sec-h" style="margin-top:20px"><h2>Display name</h2></div>
     <div class="handle-row">
       <input type="text" id="handle" maxlength="40" placeholder="How your name shows (optional)">
       <button class="btn" id="save-handle">Save</button>
@@ -131,14 +157,14 @@ input:focus{border-color:var(--gilt)}
     <div class="sec-h"><h2>Saved spots</h2><span class="count" id="fav-count"></span></div>
     <div id="fav-list"></div>
 
-    <button class="btn ghost" id="signout" style="margin-top:26px">Sign out</button>
+    <button class="btn ghost" id="signout" style="margin-top:24px">Sign out</button>
     <div class="msg" id="ac-msg"></div>
   </div>
 
-  <p class="foot">Boba Night · Southern California. Your saved spots are private to your account. We only store your email and the shops you keep.</p>
+  <p class="foot">Boba Night &middot; SoCal &amp; Las Vegas. Your saved spots are private to your account. We store your email and the shops you keep, nothing else.</p>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script>
 (function(){
   "use strict";
@@ -146,25 +172,67 @@ input:focus{border-color:var(--gilt)}
   var KEY="sb_publishable_0Y-o-QD73luyTYUcjWRWzQ_7b9ogFLs";
   var BB_KEY="niteboba_blackbook_v1", MIG_KEY="niteboba_bb_migrated_v1";
   var $=function(id){return document.getElementById(id);};
-  var email="", sb=null;
+  var email="", sb=null, mode="in";
 
   function show(which){["boot","signin","account"].forEach(function(id){$(id).classList.toggle("hide",id!==which);});}
   function msg(el,text,kind){el.className="msg "+(kind||"err");el.textContent=text;}
   function clearMsg(el){el.className="msg";el.textContent="";}
   function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
   function busy(btn,on,label){if(on){btn.dataset.t=btn.innerHTML;btn.innerHTML='<span class="spin"></span>';btn.disabled=true;}else{btn.innerHTML=btn.dataset.t||label;btn.disabled=false;}}
+  function validEmail(v){return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);}
 
-  // ---- sign in (email OTP) ----
-  function sendCode(btn){
+  /* mode tabs */
+  function setMode(m){
+    mode=m;
+    $("mtabs").setAttribute("data-m",m);
+    $("mtabs").querySelectorAll("button").forEach(function(b){b.setAttribute("aria-pressed",String(b.getAttribute("data-m")===m));});
+    $("go-pass").textContent=m==="up"?"Create my account":"Sign in";
+    $("pass").setAttribute("autocomplete",m==="up"?"new-password":"current-password");
+    clearMsg($("si-msg"));
+  }
+
+  /* password auth */
+  function goPass(btn){
     email=($("email").value||"").trim();
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg($("si-msg"),"That email doesn't look right — check the spelling.");return;}
+    var pass=$("pass").value||"";
+    if(!validEmail(email)){msg($("si-msg"),"That email doesn't look right — check the spelling.");return;}
+    if(pass.length<8){msg($("si-msg"),"Passwords are 8 characters or more.");return;}
     clearMsg($("si-msg"));busy(btn,true);
+    if(mode==="up"){
+      sb.auth.signUp({email:email,password:pass}).then(function(r){
+        busy(btn,false,"Create my account");
+        if(r.error){msg($("si-msg"),/registered/i.test(r.error.message)?"That email already has an account — switch to Sign in.":r.error.message);return;}
+        if(r.data&&r.data.session){afterSignIn();return;}
+        msg($("si-msg"),"Almost in — we sent a confirmation link to "+email+". Tap it, then come back and sign in.","ok");
+      });
+    }else{
+      sb.auth.signInWithPassword({email:email,password:pass}).then(function(r){
+        if(r.error){busy(btn,false,"Sign in");
+          msg($("si-msg"),/invalid/i.test(r.error.message)?"Email or password didn't match. Try again, or use a code instead.":r.error.message);return;}
+        afterSignIn();
+      });
+    }
+  }
+
+  /* google */
+  function goGoogle(btn){
+    busy(btn,true);
+    sb.auth.signInWithOAuth({provider:"google",options:{redirectTo:location.origin+"/account/"}}).then(function(r){
+      if(r.error){busy(btn,false,'Continue with Google');
+        msg($("si-msg"),"Google sign-in isn't switched on yet. Use email below — everything else works.");}
+    });
+  }
+
+  /* email code (passwordless) */
+  function sendCode(){
+    email=($("email").value||"").trim();
+    if(!validEmail(email)){msg($("si-msg"),"Type your email above first, then ask for the code.");return;}
+    clearMsg($("si-msg"));
     sb.auth.signInWithOtp({email:email,options:{shouldCreateUser:true}}).then(function(r){
-      busy(btn,false,"Send me a code");
       if(r.error){msg($("si-msg"),r.error.message.indexOf("rate")>-1?"Too many tries — wait a minute, then resend.":r.error.message);return;}
       $("code-to").textContent=email;
-      $("step-email").classList.add("hide");$("step-code").classList.remove("hide");
-      msg($("si-msg"),"Code sent. It can take a moment to arrive — check spam too.","ok");
+      $("step-pass").classList.add("hide");$("step-code").classList.remove("hide");
+      msg($("si-msg"),"Code sent. It can take a moment — check spam too.","ok");
       $("code").focus();
     });
   }
@@ -177,15 +245,22 @@ input:focus{border-color:var(--gilt)}
       afterSignIn();
     });
   }
+  function forgot(){
+    email=($("email").value||"").trim();
+    if(!validEmail(email)){msg($("si-msg"),"Type your email above, then tap Forgot password.");return;}
+    sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+"/account/"}).then(function(r){
+      if(r.error){msg($("si-msg"),r.error.message);return;}
+      msg($("si-msg"),"Reset link sent to "+email+".","ok");
+    });
+  }
 
-  // ---- signed-in ----
+  /* signed-in (unchanged core) */
   function afterSignIn(){
     show("boot");
     sb.auth.getUser().then(function(r){
       var u=r.data&&r.data.user; if(!u){show("signin");return;}
       $("who-email").textContent=u.email;
       $("avatar").textContent=(u.email||"·").charAt(0).toUpperCase();
-      // ensure profile row, load handle
       sb.from("boba_profiles").upsert({id:u.id},{onConflict:"id"}).then(function(){
         sb.from("boba_profiles").select("handle").eq("id",u.id).maybeSingle().then(function(pr){
           var h=pr.data&&pr.data.handle; if(h){$("handle").value=h;$("who-name").textContent=h;}
@@ -195,7 +270,6 @@ input:focus{border-color:var(--gilt)}
       show("account");
     });
   }
-
   function migrateBlackBook(uid){
     return new Promise(function(res){
       if(localStorage.getItem(MIG_KEY)){res();return;}
@@ -210,12 +284,11 @@ input:focus{border-color:var(--gilt)}
       });
     });
   }
-
   function loadFavs(uid){
     sb.from("boba_favorites").select("id,shop_slug,shop_name,shop_where,shop_url").eq("user_id",uid).order("created_at",{ascending:false}).then(function(r){
       var list=$("fav-list"),rows=r.data||[];
       $("fav-count").textContent=rows.length?rows.length+(rows.length===1?" spot":" spots"):"";
-      if(!rows.length){list.innerHTML='<div class="empty">No saved spots yet. Open the <a href="https://www.bobanight.com/nearby/">finder</a>, keep the shops you like, and they\'ll wait for you here.</div>';return;}
+      if(!rows.length){list.innerHTML='<div class="empty">No saved spots yet. Open the <a href="/directory/">directory</a>, keep the shops you like, and they\'ll wait for you here.</div>';return;}
       list.innerHTML=rows.map(function(f){
         var nm=f.shop_name||f.shop_slug;
         var name=f.shop_url?'<a class="fn" href="'+esc(f.shop_url)+'">'+esc(nm)+"</a>":'<span class="fn">'+esc(nm)+"</span>";
@@ -229,34 +302,36 @@ input:focus{border-color:var(--gilt)}
     });
   }
 
-  // ---- wire ----
   function wire(){
-  $("send-code").addEventListener("click",function(){sendCode(this);});
-  $("email").addEventListener("keydown",function(e){if(e.key==="Enter")sendCode($("send-code"));});
-  $("verify").addEventListener("click",function(){verify(this);});
-  $("code").addEventListener("keydown",function(e){if(e.key==="Enter")verify($("verify"));});
-  $("resend").addEventListener("click",function(){sendCode($("send-code"));});
-  $("change-email").addEventListener("click",function(){$("step-code").classList.add("hide");$("step-email").classList.remove("hide");clearMsg($("si-msg"));$("email").focus();});
-  $("save-handle").addEventListener("click",function(){
-    var btn=this,h=($("handle").value||"").trim();
-    sb.auth.getUser().then(function(r){
-      var u=r.data&&r.data.user; if(!u)return;
-      busy(btn,true);
-      sb.from("boba_profiles").upsert({id:u.id,handle:h||null},{onConflict:"id"}).then(function(res){
-        busy(btn,false,"Save");
-        if(res.error){msg($("ac-msg"),"Couldn't save that name. Try again.");return;}
-        $("who-name").textContent=h||"Signed in";msg($("ac-msg"),"Saved.","ok");setTimeout(function(){clearMsg($("ac-msg"));},1800);
+    $("mtabs").addEventListener("click",function(e){var b=e.target.closest("button[data-m]");if(b)setMode(b.getAttribute("data-m"));});
+    $("go-pass").addEventListener("click",function(){goPass(this);});
+    $("pass").addEventListener("keydown",function(e){if(e.key==="Enter")goPass($("go-pass"));});
+    $("google").addEventListener("click",function(){goGoogle(this);});
+    $("use-code").addEventListener("click",sendCode);
+    $("forgot").addEventListener("click",forgot);
+    $("verify").addEventListener("click",function(){verify(this);});
+    $("code").addEventListener("keydown",function(e){if(e.key==="Enter")verify($("verify"));});
+    $("resend").addEventListener("click",sendCode);
+    $("back-pass").addEventListener("click",function(){$("step-code").classList.add("hide");$("step-pass").classList.remove("hide");clearMsg($("si-msg"));});
+    $("save-handle").addEventListener("click",function(){
+      var btn=this,h=($("handle").value||"").trim();
+      sb.auth.getUser().then(function(r){
+        var u=r.data&&r.data.user; if(!u)return;
+        busy(btn,true);
+        sb.from("boba_profiles").upsert({id:u.id,handle:h||null},{onConflict:"id"}).then(function(res){
+          busy(btn,false,"Save");
+          if(res.error){msg($("ac-msg"),"Couldn't save that name. Try again.");return;}
+          $("who-name").textContent=h||"Signed in";msg($("ac-msg"),"Saved.","ok");setTimeout(function(){clearMsg($("ac-msg"));},1800);
+        });
       });
     });
-  });
-  $("signout").addEventListener("click",function(){sb.auth.signOut().then(function(){location.reload();});});
+    $("signout").addEventListener("click",function(){sb.auth.signOut().then(function(){location.reload();});});
   }
 
-  // ---- boot ----
   function start(){
     if(!window.supabase||!window.supabase.createClient){
       show("signin");
-      var mb=$("send-code"); if(mb)mb.disabled=true;
+      var mb=$("go-pass"); if(mb)mb.disabled=true;
       msg($("si-msg"),"Sign-in didn't finish loading — check your connection and refresh the page.");
       return;
     }
@@ -264,14 +339,20 @@ input:focus{border-color:var(--gilt)}
     wire();
     var booted=false;
     function fallbackSignin(){if(!booted){booted=true;show("signin");}}
-    var bootTimer=setTimeout(fallbackSignin,3500); // never hang on a slow/blocked connection
+    var bootTimer=setTimeout(fallbackSignin,3500);
     sb.auth.getSession().then(function(r){
       clearTimeout(bootTimer);
       if(booted)return; booted=true;
       if(r.data&&r.data.session){afterSignIn();}else{show("signin");}
     }).catch(function(){clearTimeout(bootTimer);fallbackSignin();});
   }
-  if(document.readyState!=="loading")start(); else document.addEventListener("DOMContentLoaded",start);
+  function boot(){
+    if(window.supabase&&window.supabase.createClient){start();return;}
+    var s=document.querySelector('script[src*="supabase-js"]');
+    if(s){s.addEventListener("load",start);s.addEventListener("error",start);}
+    setTimeout(start,4000);
+  }
+  if(document.readyState!=="loading")boot(); else document.addEventListener("DOMContentLoaded",boot);
 })();
 </script>
 </body>
